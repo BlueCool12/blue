@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+
+// 전역 스타일 초기화
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Noto Sans KR", serif;
+  font-optical-sizing: auto;
+  background-color: #f5f5f5; // 기본 배경 색상
+}
