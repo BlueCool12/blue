@@ -1,50 +1,36 @@
-# React + TypeScript + Vite
+![Last Commit](https://img.shields.io/github/last-commit/BlueCool12/blue)
+![Repo Size](https://img.shields.io/github/repo-size/BlueCool12/blue)
+![License](https://img.shields.io/github/license/BlueCool12/blue)
+![Stars](https://img.shields.io/github/stars/BlueCool12/blue?style=social)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# 📝 나만의 블로그
 
-Currently, two official plugins are available:
+이 프로젝트는 **React**, **TypeScript**, **styled-components**를 기반으로 제작한 **개인 블로그**입니다.  
+다크모드, 반응형 레이아웃, 라우팅 기능이 포함되어 있으며, 추후 블로그 포스팅 기능도 확장 예정입니다.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🔧 기술 스택
 
-## Expanding the ESLint configuration
+- ⚛️ React – 사용자 인터페이스 라이브러리  
+- 🟦 TypeScript – 정적 타입 지원  
+- 💅 styled-components – CSS-in-JS 스타일링  
+- 🌗 다크모드 – localStorage를 활용한 테마 전환 기능  
+- 🔀 React Router v6 – 페이지 라우팅 처리
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## 🌗 다크모드
 
-- Configure the top-level `parserOptions` property like this:
+- 테마 상태는 localStorage에 저장되어 브라우저 새로고침 후에도 유지됩니다.
+- styled-components의 ThemeProvider를 통해 전체 스타일에 적용됩니다.
+- Header 컴포넌트에서 아이콘 버튼을 눌러 테마를 전환할 수 있습니다.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## 🚀 향후 계획
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+- ✏️ Markdown 기반 포스트 작성 기능
+- 🔍 검색 및 카테고리 필터 기능
+- 🗂 태그 및 포스트 분류
+- 📱 모바일 최적화 강화
+- 📝 관리자 전용 글쓰기 페이지
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## 💬 라이선스
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+본 프로젝트는 개인 용도로 개발되었습니다.
+별도의 명시가 없는 한, 상업적 사용은 허용되지 않습니다.
