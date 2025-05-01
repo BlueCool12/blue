@@ -1,9 +1,8 @@
 ![Last Commit](https://img.shields.io/github/last-commit/BlueCool12/blue)
 ![Repo Size](https://img.shields.io/github/repo-size/BlueCool12/blue)
-![License](https://img.shields.io/github/license/BlueCool12/blue)
-![Stars](https://img.shields.io/github/stars/BlueCool12/blue?style=social)
+![License: MIT](https://img.shields.io/github/license/BlueCool12/blue)
 
-# 📝 나만의 블로그
+# 📝 개인 블로그
 
 이 프로젝트는 **React**, **TypeScript**, **styled-components**를 기반으로 제작한 **개인 블로그**입니다.  
 다크모드, 반응형 레이아웃, 라우팅 기능이 포함되어 있으며, 추후 블로그 포스팅 기능도 확장 예정입니다.
@@ -32,5 +31,4 @@
 
 ## 💬 라이선스
 
-본 프로젝트는 개인 용도로 개발되었습니다.
-별도의 명시가 없는 한, 상업적 사용은 허용되지 않습니다.
+본 프로젝트는 개인 용도로 개발되었습니다. 별도의 명시가 없는 한, 상업적 사용은 허용되지 않습니다.
