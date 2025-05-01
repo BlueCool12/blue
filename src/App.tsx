@@ -1,21 +1,32 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import './App.scss'
-import Home from './pages/Home'
-import About from './pages/\bAbout'
-import NotFound from './pages/NotFound'
-import Header from './components/Header'
+import { BrowserRouter } from 'react-router-dom'
+import { ThemeProvider } from 'styled-components'
+import { darkTheme, lightTheme } from './styles/theme'
+import { GlobalStyle } from './styles/globalStyle'
+import ThemeRoutes from './routes'
+import { ThemeProviderWithState, useThemeMode } from './contexts/ThemeContext'
+import { memo } from 'react'
+
+function ThemeWrapperComponent() {
+    const { themeMode } = useThemeMode();
+
+    return (
+        <ThemeProvider theme={themeMode === 'light' ? lightTheme : darkTheme}>
+            <GlobalStyle />
+            <BrowserRouter>
+                <ThemeRoutes />
+            </BrowserRouter>
+        </ThemeProvider>
+    )
+}
+
+const ThemeWrapper = memo(ThemeWrapperComponent);
 
 function App() {
 
     return (
-        <Router>
-            <Header />
-            <Routes>
-                <Route path='/' element={<Home />} />                
-                <Route path='/about' element={<About />} />
-                <Route path='*' element={<NotFound />} />
-            </Routes>
-        </Router>
+        <ThemeProviderWithState>
+            <ThemeWrapper />
+        </ThemeProviderWithState>
     )
 }
 
