@@ -3,12 +3,21 @@ import { Link } from 'react-router-dom';
 import './Header.scss';
 import NavBar from './NavBar';
 import LoginModal from './LoginModal';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { logout } from '../store/authSlice';
 
 const Header: React.FC = () => {
 
     const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
     const [isOffcanvasOpen, setIsOffcanvasOpen] = useState(false);
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+
+    const isAuthenticated = useAppSelector((state) => !!state.auth.token);
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        document.documentElement.setAttribute('data-theme', theme);
+    }, [theme]);
 
     const toggleTheme = () => {
         const newTheme = theme === "light" ? "dark" : "light";
@@ -21,28 +30,33 @@ const Header: React.FC = () => {
         setIsOffcanvasOpen(!isOffcanvasOpen);
     };
 
-    useEffect(() => {
-        document.documentElement.setAttribute("data-theme", theme);
-    }, [theme]);
-
     return (
-        <header className="header">
-            <div className='header-container'>                
+        <header className='header'>
+            <div className='header-container'>
 
                 {/* 네비게이션 */}
                 <NavBar />
 
                 {/* 로고 */}
                 <Link to="/">
-                    <img className='logo' src='/main_logo.png'></img>
+                    <img className='logo' src='/main_logo.png' alt='사이트 로고'></img>
                 </Link>
 
                 {/* 관리자 모드 버튼 */}
-                <button className='admin-button' onClick={() => setIsLoginModalOpen(true)}>
-                    <span className="material-symbols-rounded">
-                        person
-                    </span>
-                </button>
+                {!isAuthenticated ? (
+                    <button className='admin-button' aria-label='로그인' onClick={() => setIsLoginModalOpen(true)}>
+                        <span className="material-symbols-rounded">
+                            person
+                        </span>
+                    </button>
+                ) : (
+                    <button className='admin-button' aria-label='로그아웃' onClick={() => dispatch(logout())}>
+                        <span className="material-symbols-rounded">
+                            logout
+                        </span>
+                    </button>
+                )}
+
 
                 {/* 다크 모드 토글 */}
                 <button onClick={toggleTheme} className="theme-toggle">
