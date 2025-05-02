@@ -25,7 +25,7 @@ const MobileMenu = ({ onClose }: Props) => {
             </S.MobileLogo>
 
             <S.MobileNav>
-                <li><Link to='/About' onClick={onClose}>ABOUT</Link></li>
+                <li><Link to='/about' onClick={onClose}>ABOUT</Link></li>
                 <li>POSTS</li>
                 <li>GUESTBOOK</li>
             </S.MobileNav>

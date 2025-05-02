@@ -1,16 +1,17 @@
 import styled from "styled-components";
-import Header from "../components/Header";
+import { Header } from "../components/Header";
+import { Footer } from "../components/Footer";
+import { Outlet } from "react-router-dom";
 
-type Props = {
-    children: React.ReactNode;
-};
-
-export const MainLayout = ({ children }: Props) => {
+export const MainLayout = () => {
 
     return (
         <LayoutWrapper>
             <Header />
-            <Content>{children}</Content>
+            <Content>
+                <Outlet />
+            </Content>
+            <Footer />
         </LayoutWrapper>
     );
 };
@@ -23,15 +24,16 @@ const LayoutWrapper = styled.div`
 
 const Content = styled.main`
     flex: 1;
-    padding-top: ${({ theme }) => theme.layout.headerHeight.desktop}px; /* 헤더가 fixed이므로 위쪽 여백 */
+    padding-top: ${({ theme }) => theme.layout.headerHeight.desktop}px;
+    padding-bottom: ${({ theme }) => theme.layout.footerHeight.desktop}px;
 
     @media (max-width: 768px) {
         padding-top: ${({ theme }) => theme.layout.headerHeight.mobile}px;
+        padding-bottom: ${({ theme }) => theme.layout.footerHeight.mobile}px;
     }
 
     padding-left: 16px;
-    padding-right: 16px;
-    padding-bottom: 40px;
-    max-width: 800px;
+    padding-right: 16px;    
+    max-width: 960px;
     margin: 0 auto;
 `;

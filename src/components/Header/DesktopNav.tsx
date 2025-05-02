@@ -7,13 +7,13 @@ const DesktopNav = () => {
         <S.DesktopNav>
             <ul>
                 <S.NavItem>
-                    <Link to='/About'>ABOUT</Link>
+                    <Link to='/about'>ABOUT</Link>
                 </S.NavItem>
                 <S.NavItem>
-                    <Link to='/Posts'>POSTS</Link>
+                    <Link to='/posts'>POSTS</Link>
                 </S.NavItem>
                 <S.NavItem>
-                    <Link to='/Guestbooks'>GUESTBOOK</Link>
+                    <Link to='/guestbooks'>GUESTBOOK</Link>
                 </S.NavItem>
             </ul>
         </S.DesktopNav>

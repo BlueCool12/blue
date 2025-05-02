@@ -6,18 +6,10 @@ import { MainLayout } from '../layouts/MainLayout';
 export const MainRoutes = (): RouteObject[] => [
     {
         path: '/',
-        element: (
-            <MainLayout>
-                <Home />
-            </MainLayout>
-        ),
-    },
-    {
-        path: '/about',
-        element: (
-            <MainLayout>
-                <About />
-            </MainLayout>
-        ),
+        element: <MainLayout />,
+        children: [
+            { path: '', element: <Home />, },
+            { path: 'about', element: <About /> },
+        ],
     },
 ];

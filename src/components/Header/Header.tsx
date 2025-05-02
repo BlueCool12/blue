@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { HeaderWrapper, HeaderInner, Logo, Icons, MobileMenuToggle } from './index.styles';
+import { HeaderWrapper, HeaderInner, Logo, Icons, MobileMenuToggle } from './Header.styles';
 import mainLogo from '../../assets/images/logo/big.png';
 import mainLogo_dark from '../../assets/images/logo/big_dark.png';
 import DesktopNav from './DesktopNav';
@@ -7,7 +7,7 @@ import MobileMenu from './MobileMenu';
 import { useThemeMode } from '../../contexts/ThemeContext';
 import { Link } from 'react-router-dom';
 
-const Header: React.FC = () => {
+export const Header: React.FC = () => {
 
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -46,5 +46,3 @@ const Header: React.FC = () => {
         </>
     );
 };
-
-export default Header;
