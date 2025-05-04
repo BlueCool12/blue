@@ -25,7 +25,9 @@ export const Aside = styled.aside`
     }
 `;
 
-export const ProjectItem = styled.button<{ isActive: boolean }>`    
+export const ProjectItem = styled.button.withConfig({
+    shouldForwardProp: (prop) => prop !== 'isActive',
+}) <{ isActive: boolean }>`    
     cursor: pointer;    
 
     font-size: 16px;

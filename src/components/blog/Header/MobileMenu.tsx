@@ -1,7 +1,7 @@
 import * as S from './MobileMenu.styles';
-import menuLogo from '../../assets/images/logo/small.png';
-import menuLogo_dark from '../../assets/images/logo/small_dark.png';
-import { useThemeMode } from '../../contexts/ThemeContext';
+import menuLogo from '../../../assets/images/logo/small.png';
+import menuLogo_dark from '../../../assets/images/logo/small_dark.png';
+import { useThemeMode } from '../../../contexts/ThemeContext';
 import { Link } from 'react-router-dom';
 
 interface Props {

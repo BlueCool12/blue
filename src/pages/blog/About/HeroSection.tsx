@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import BlueCool from '../../assets/images/BlueCool1.png';
+import BlueCool from '../../../assets/images/BlueCool1.png';
 
 export const HeroSection = () => {
 

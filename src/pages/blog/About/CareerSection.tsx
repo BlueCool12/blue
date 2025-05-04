@@ -48,7 +48,9 @@ const VerticalLine = styled.div`
     transform: translateX(-50%);    
 `;
 
-const Dot = styled.div<{ isLast: boolean }>`
+const Dot = styled.div.withConfig({
+    shouldForwardProp: (prop) => prop !== 'isLast',
+}) <{ isLast: boolean }>`
     width: 12px;
     height: 12px;
     background-color: ${({ theme }) => theme.linkHoverColor};
@@ -64,7 +66,9 @@ const Dot = styled.div<{ isLast: boolean }>`
     border: 2px solid ${({ theme }) => theme.linkHoverColor};
 `;
 
-const Content = styled.div<{ isLeft: boolean }>`    
+const Content = styled.div.withConfig({
+    shouldForwardProp: (prop) => prop !== 'isLeft',
+}) <{ isLeft: boolean }>`    
     display: flex;
     flex-direction: column;
     text-align: ${({ isLeft }) => (isLeft ? 'right' : 'left')};

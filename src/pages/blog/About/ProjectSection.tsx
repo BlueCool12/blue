@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import imgae from '../../assets/images/BlueCool1.png';
+import imgae from '../../../assets/images/BlueCool1.png';
 import { Article, Aside, ProjectArea, ProjectItem } from "./ProjectSection.styles";
 
 const projects = [
