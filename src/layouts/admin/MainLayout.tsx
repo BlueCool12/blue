@@ -7,8 +7,7 @@ export const MainLayout = () => {
       <Header>BlueCool12</Header>
       <Body>
         <Sidebar>
-          <NavItem to="/admin">대시보드</NavItem>
-          <NavItem to="/admin/posts">게시물 관리</NavItem>
+          <NavItem to="/admin">대시보드</NavItem>          
           <NavItem to="/admin/write">글 작성</NavItem>
         </Sidebar>
         <Main>

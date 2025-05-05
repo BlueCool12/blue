@@ -1,6 +1,8 @@
 import { RouteObject } from 'react-router-dom';
-import { About } from '../pages/blog/About';
 import { MainLayout } from '../layouts/blog/MainLayout';
+
+import { About } from '../pages/blog/About';
+
 import { NotFound } from '../pages/blog/NotFound';
 
 export const MainRoutes = (): RouteObject[] => [

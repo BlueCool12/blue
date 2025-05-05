@@ -4,7 +4,7 @@ export const Home = () => {
 
     return (
         <>
-            123
+            Dashboard
         </>
     );
 }

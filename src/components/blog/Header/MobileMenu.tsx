@@ -26,8 +26,8 @@ const MobileMenu = ({ onClose }: Props) => {
 
             <S.MobileNav>
                 <li><Link to='/about' onClick={onClose}>ABOUT</Link></li>
-                <li>POSTS</li>
-                <li>GUESTBOOK</li>
+                <li><Link to='/posts' onClick={onClose}>POSTS</Link></li>
+                <li><Link to='/guestbooks' onClick={onClose}>GUESTBOOK</Link></li>
             </S.MobileNav>
         </S.MobileMenu >
     );

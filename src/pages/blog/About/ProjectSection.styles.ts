@@ -104,3 +104,18 @@ export const Article = styled.article`
         white-space: normal;
     }
 `;
+
+export const ImageWrapper = styled.figure`
+    margin: 24px 0;
+    width: 100%;    
+
+    border: 1px solid ${({ theme }) => theme.textColor};
+    border-radius: 12px;    
+
+    img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 12px;        
+    }
+`;

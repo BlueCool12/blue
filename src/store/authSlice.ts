@@ -5,12 +5,12 @@ import { adminLogin } from "../services/authService";
 export const loginAdmin = createAsyncThunk(
     "auth/login",
     async (
-        { accountId, password }: { accountId: string; password: string },
+        { username, password }: { username: string; password: string },
         { rejectWithValue }
     ) => {
         try {
-            const token = await adminLogin(accountId, password);
-            return token;
+            await adminLogin({ username, password });
+            return true;
         } catch (error: any) {
             return rejectWithValue(error.message || "로그인 실패");
         }
@@ -18,13 +18,13 @@ export const loginAdmin = createAsyncThunk(
 
 // ✅ 초기 상태 정의
 interface AuthState {
-    token: string | null;
+    isAuthenticated: boolean;
     loading: boolean;
     error: string | null;
 }
 
 const initialState: AuthState = {
-    token: localStorage.getItem("token"),
+    isAuthenticated: false,
     loading: false,
     error: null,
 };
@@ -35,8 +35,7 @@ const authSlice = createSlice({
     initialState,
     reducers: {
         logout: (state) => {
-            state.token = null;
-            localStorage.removeItem("token");
+            state.isAuthenticated = false;
         },
         clearError: (state) => {
             state.error = null;
@@ -48,9 +47,9 @@ const authSlice = createSlice({
                 state.loading = true;
                 state.error = null;
             })
-            .addCase(loginAdmin.fulfilled, (state, action) => {
+            .addCase(loginAdmin.fulfilled, (state) => {
                 state.loading = false;
-                state.token = action.payload;
+                state.isAuthenticated = true;
                 state.error = null;
             })
             .addCase(loginAdmin.rejected, (state, action) => {
@@ -61,5 +60,5 @@ const authSlice = createSlice({
 });
 
 export const { logout, clearError } = authSlice.actions;
-export const selectIsAuthenticated = (state: { auth: AuthState }) => !!state.auth.token;
+export const selectIsAuthenticated = (state: { auth: AuthState }) => state.auth.isAuthenticated;
 export default authSlice.reducer;

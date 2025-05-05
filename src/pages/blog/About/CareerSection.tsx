@@ -3,8 +3,8 @@ import styled from "styled-components";
 export const CareerSection = () => {
 
     const careers = [
-        { date: '2024.03 ~ 2024.08', title: '중앙정보처리학원' },
         { date: '2025.03 ~ 2025.05', title: '바로연' },
+        { date: '2024.03 ~ 2024.08', title: '중앙정보처리학원' },
     ];
 
     return (

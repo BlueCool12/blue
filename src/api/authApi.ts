@@ -1,15 +1,10 @@
 import api from "./axiosInstance";
 
 interface LoginRequest {
-    accountId: string;
+    username: string;
     password: string;
 }
 
-interface LoginResponse {
-    token: string;
-}
-
-export const login = async ({ accountId, password }: LoginRequest): Promise<LoginResponse> => {
-    const reponse = await api.post("/auth/login", { accountId, password });
-    return reponse.data;
+export const login = async ({ username, password }: LoginRequest): Promise<void> => {
+    await api.post("/auth/login", { username, password });
 };

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Editor from "../../../components/admin/editor/Editor";
+import Editor from "../../../components/admin/Editor/Editor";
 import { OutlineButton } from '../../../components/common/OutlineButton';
 
 export const Write = () => {

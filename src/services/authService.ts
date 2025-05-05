@@ -1,9 +1,10 @@
 import { login } from "../api/authApi";
 
-export const adminLogin = async (accountId: string, password: string): Promise<string> => {
-    const data = await login({ accountId, password });
+interface LoginRequest {
+    username: string;
+    password: string;
+}
 
-    localStorage.setItem("token", data.token);
-
-    return data.token;
+export const adminLogin = async ({ username, password }: LoginRequest): Promise<void> => {
+    await login({ username, password });
 };
