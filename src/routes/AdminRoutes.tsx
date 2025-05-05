@@ -17,9 +17,9 @@ export const AdminRoutes = (): RouteObject[] => [
     {
         path: '/admin',
         element: (
-            // <PrivateRoute>
+            <PrivateRoute>
                 <MainLayout />
-            // </PrivateRoute>
+            </PrivateRoute>
         ),
         children: [
             { path: '', element: <Home /> },
