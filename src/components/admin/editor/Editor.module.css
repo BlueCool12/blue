@@ -8,7 +8,7 @@
 }
 
 .main-container {
-    font-family: 'Lato';
+    font-family: 'Noto Sans KR';
     width: 100%;
     margin-left: auto;
     margin-right: auto;
@@ -16,9 +16,9 @@
 
 /* 글자 폰트, 라인 높이 */
 .ck-content {
-    font-family: 'Lato';
+    font-family: 'Noto Sans KR';    
     line-height: 1.6;
-    word-break: break-word;
+    word-break: break-word;    
 }
 
 /* 에디터 전체 너비 조절 */
@@ -30,6 +30,7 @@
 /* 에디터 전체 높이 조절 */
 :global(.ck-editor__editable) {
     height: 60vh;    
+    color: #000;
     overflow-y: auto;
 }
 
