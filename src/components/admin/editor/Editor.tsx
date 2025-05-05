@@ -6,88 +6,22 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import {
-	ClassicEditor,
-	Alignment,
-	Autoformat,
-	AutoImage,
-	AutoLink,
-	Autosave,
-	BlockQuote,
-	Bold,
-	Bookmark,
-	Code,
-	CodeBlock,
-	Emoji,
-	Essentials,
-	FindAndReplace,
-	FontBackgroundColor,
-	FontColor,
-	FontFamily,
-	FontSize,
-	FullPage,
-	Fullscreen,
-	GeneralHtmlSupport,
-	Heading,
-	Highlight,
-	HorizontalLine,
-	HtmlComment,
-	HtmlEmbed,
-	ImageBlock,
-	ImageCaption,
-	ImageEditing,
-	ImageInline,
-	ImageInsert,
-	ImageInsertViaUrl,
-	ImageResize,
-	ImageStyle,
-	ImageTextAlternative,
-	ImageToolbar,
-	ImageUpload,
-	ImageUtils,
-	Indent,
-	IndentBlock,
-	Italic,
-	Link,
-	LinkImage,
-	List,
-	ListProperties,
-	Markdown,
-	MediaEmbed,
-	Mention,
-	PageBreak,
-	Paragraph,
-	PasteFromMarkdownExperimental,
-	PasteFromOffice,
-	PlainTableOutput,
-	RemoveFormat,
-	ShowBlocks,
-	SimpleUploadAdapter,
-	SourceEditing,
-	SpecialCharacters,
-	SpecialCharactersArrows,
-	SpecialCharactersCurrency,
-	SpecialCharactersEssentials,
-	SpecialCharactersLatin,
-	SpecialCharactersMathematical,
-	SpecialCharactersText,
-	Strikethrough,
-	Style,
-	Subscript,
-	Superscript,
-	Table,
-	TableCaption,
-	TableCellProperties,
-	TableColumnResize,
-	TableLayout,
-	TableProperties,
-	TableToolbar,
-	TextPartLanguage,
-	TextTransformation,
-	Title,
-	TodoList,
-	Underline,
-	WordCount,
-	HeadingOption
+	ClassicEditor, Alignment, Autoformat, AutoImage, AutoLink,
+	Autosave, BlockQuote, Bold, Bookmark, Code,
+	CodeBlock, Emoji, Essentials, FindAndReplace, FontBackgroundColor,
+	FontColor, FontFamily, FontSize, FullPage, Fullscreen,
+	GeneralHtmlSupport, Heading, Highlight, HorizontalLine, HtmlComment,
+	HtmlEmbed, ImageBlock, ImageCaption, ImageEditing, ImageInline,
+	ImageInsert, ImageInsertViaUrl, ImageResize, ImageStyle, ImageTextAlternative,
+	ImageToolbar, ImageUpload, ImageUtils, Indent, IndentBlock,
+	Italic, Link, LinkImage, List, ListProperties,
+	Markdown, MediaEmbed, Mention, PageBreak, Paragraph,
+	PasteFromMarkdownExperimental, PasteFromOffice, PlainTableOutput, RemoveFormat, ShowBlocks,
+	SimpleUploadAdapter, SourceEditing, SpecialCharacters, SpecialCharactersArrows, SpecialCharactersCurrency,
+	SpecialCharactersEssentials, SpecialCharactersLatin, SpecialCharactersMathematical, SpecialCharactersText, Strikethrough,
+	Style, Subscript, Superscript, Table, TableCaption,
+	TableCellProperties, TableColumnResize, TableLayout, TableProperties, TableToolbar,
+	TextPartLanguage, TextTransformation, TodoList, Underline, HeadingOption
 } from 'ckeditor5';
 
 import translations from 'ckeditor5/translations/ko.js';
@@ -96,15 +30,18 @@ import 'ckeditor5/ckeditor5.css';
 
 import styles from './Editor.module.css';
 
+interface EditorProps {
+	onChange: (data: string) => void;
+}
+
 /**
  * Create a free account with a trial: https://portal.ckeditor.com/checkout?plan=free
  */
 const LICENSE_KEY = 'GPL'; // or <YOUR_LICENSE_KEY>.
 
-export default function Editor() {
+export const Editor = ({ onChange }: EditorProps) => {
 	const editorContainerRef = useRef<HTMLDivElement>(null);
 	const editorRef = useRef<HTMLDivElement>(null);
-	const editorWordCountRef = useRef<HTMLDivElement>(null);
 	const editorMenuBarRef = useRef<HTMLDivElement>(null);
 	const [isLayoutReady, setIsLayoutReady] = useState(false);
 
@@ -148,16 +85,16 @@ export default function Editor() {
 				SpecialCharactersLatin, SpecialCharactersMathematical, SpecialCharactersText, Strikethrough, Style,
 				Subscript, Superscript, Table, TableCaption, TableCellProperties,
 				TableColumnResize, TableLayout, TableProperties, TableToolbar, TextPartLanguage,
-				TextTransformation, Title, TodoList, Underline, WordCount
+				TextTransformation, TodoList, Underline
 			],
 			simpleUpload: {
 				uploadUrl: '',
 				headers: {
-					
+
 				},
 			},
 			fontFamily: {
-				supportAllValues: true
+				supportAllValues: true,
 			},
 			fontSize: {
 				options: [10, 12, 14, 'default', 18, 20, 22],
@@ -169,7 +106,6 @@ export default function Editor() {
 						'editor-container',
 						'editor-container_classic-editor',
 						'editor-container_include-style',
-						'editor-container_include-word-count',
 						'editor-container_include-fullscreen',
 						'main-container'
 					)
@@ -231,18 +167,13 @@ export default function Editor() {
 			},
 			image: {
 				toolbar: [
-					'toggleImageCaption',
-					'imageTextAlternative',
-					'|',
-					'imageStyle:inline',
-					'imageStyle:wrapText',
-					'imageStyle:breakText',
-					'|',
+					'toggleImageCaption', 'imageTextAlternative', '|',
+					'imageStyle:inline', 'imageStyle:wrapText', 'imageStyle:breakText', '|',
 					'resizeImage'
 				]
 			},
 			initialData:
-				'제목을 입력해주세요',
+				'',
 			language: 'ko',
 			licenseKey: LICENSE_KEY,
 			link: {
@@ -278,19 +209,14 @@ export default function Editor() {
 			menuBar: {
 				isVisible: true
 			},
-			placeholder: '여기에 내용을 입력하거나 붙여넣으세요.',
+			placeholder: '',
 			style: {
 				definitions: [
 					{
 						name: 'Article category',
 						element: 'h3',
 						classes: ['category']
-					},
-					{
-						name: 'Title',
-						element: 'h2',
-						classes: ['document-title']
-					},
+					},					
 					{
 						name: 'Subtitle',
 						element: 'h3',
@@ -337,7 +263,6 @@ export default function Editor() {
 					styles['editor-container'],
 					styles['editor-container_classic-editor'],
 					styles['editor-container_include-style'],
-					styles['editor-container_include-word-count'],
 					styles['editor-container_include-fullscreen']
 				].join(' ')}
 				ref={editorContainerRef}
@@ -347,11 +272,6 @@ export default function Editor() {
 						{editorConfig && (
 							<CKEditor
 								onReady={(editor) => {
-									const wordCount = editor.plugins.get('WordCount');
-
-									if (editorWordCountRef.current) {
-										editorWordCountRef.current?.appendChild(wordCount.wordCountContainer);
-									}
 
 									const menuBarElement = editor.ui.view.menuBarView?.element;
 
@@ -360,9 +280,6 @@ export default function Editor() {
 									}
 								}}
 								onAfterDestroy={() => {
-									if (editorWordCountRef.current) {
-										Array.from(editorWordCountRef.current.children).forEach(child => child.remove());
-									}
 
 									if (editorMenuBarRef.current) {
 										Array.from(editorMenuBarRef.current.children).forEach(child => child.remove());
@@ -370,11 +287,14 @@ export default function Editor() {
 								}}
 								editor={ClassicEditor}
 								config={editorConfig}
+								onChange={(_, editor) => {
+									const data = editor.getData();
+									onChange(data);
+								}}
 							/>
 						)}
 					</div>
 				</div>
-				<div className={styles["editor_container__word-count"]} ref={editorWordCountRef}></div>
 			</div>
 		</div>
 	);
