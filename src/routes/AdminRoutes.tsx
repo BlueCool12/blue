@@ -1,11 +1,12 @@
+import { lazy } from "react";
 import { RouteObject } from "react-router-dom";
 
 import { PrivateRoute } from "../components/admin/PrivateRoute";
 import { MainLayout } from "../layouts/admin/MainLayout";
 
-import { Login } from "../pages/admin/Login";
-import { Home } from "../pages/admin/Home";
-import { Write } from "../pages/admin/Write";
+const Login = lazy(() => import('../pages/admin/Login/Login'));
+const Home = lazy(() => import('../pages/admin/Home'));
+const Write = lazy(() => import('../pages/admin/Write/Write'));
 
 
 

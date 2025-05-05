@@ -2,8 +2,8 @@ import { useState } from "react";
 
 import { Article, Aside, ImageWrapper, ProjectArea, ProjectItem } from "./ProjectSection.styles";
 
-import tourstoryImage from '../../../assets/images/projects/tourstory_1280_720.png';
-import bluecoolImage from '../../../assets/images/projects/bluecool_1280_720.png';
+import tourstoryImage from '../../../assets/images/projects/tourstory_1280_720.webp';
+import bluecoolImage from '../../../assets/images/projects/bluecool_1280_720.webp';
 
 const projects = [
     {

@@ -3,7 +3,7 @@ import { Editor } from "../../../components/admin/Editor";
 import { OutlineButton } from '../../../components/common/OutlineButton';
 import { useState } from "react";
 
-export const Write = () => {
+const Write = () => {
 
     const [post, setPost] = useState({
         title: '',
@@ -47,6 +47,8 @@ export const Write = () => {
         </>
     );
 };
+
+export default Write;
 
 const EditorWrapper = styled.div`
     display: flex;
