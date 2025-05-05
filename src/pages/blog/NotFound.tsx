@@ -4,7 +4,7 @@ import styled from "styled-components";
 import ErrorImg from '../../assets/images/BlueCoolError.png';
 import { OutlineButton } from "../../components/common/OutlineButton";
 
-export const NotFound = () => {
+const NotFound = () => {
 
     const navigate = useNavigate();
 
@@ -18,7 +18,7 @@ export const NotFound = () => {
 
                 <Description>페이지를 찾을 수 없습니다</Description>
 
-                <ActionNav>                    
+                <ActionNav>
                     <OutlineButton type="button" icon="home" label="메인 페이지" onClick={() => navigate('/')}></OutlineButton>
                     <OutlineButton type="button" icon="history" label="이전 페이지" onClick={() => navigate(-1)}></OutlineButton>
                 </ActionNav>
@@ -28,6 +28,8 @@ export const NotFound = () => {
         </>
     );
 }
+
+export default NotFound;
 
 const NotFoundMain = styled.main`
     display: flex;

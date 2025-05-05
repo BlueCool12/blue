@@ -7,7 +7,7 @@ import { RootState } from "../../../store/store";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { useNavigate } from "react-router-dom";
 
-export const Login = () => {
+const Login = () => {
     const navigate = useNavigate();
 
     const dispatch = useAppDispatch();
@@ -60,6 +60,8 @@ export const Login = () => {
         </>
     );
 };
+
+export default Login;
 
 const LoginWrapper = styled.div`
     display: flex;

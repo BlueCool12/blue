@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { Header } from "../../components/blog/Header";
 import { Footer } from "../../components/blog/Footer";
 import { Outlet } from "react-router-dom";
+import { LoadingSpinner } from "../../components/common/LoadingSpinner";
+import { Suspense } from "react";
 
 export const MainLayout = () => {
 
@@ -9,7 +11,9 @@ export const MainLayout = () => {
         <LayoutWrapper>
             <Header />
             <Content>
-                <Outlet />
+                <Suspense fallback={<LoadingSpinner />}>
+                    <Outlet />
+                </Suspense>
             </Content>
             <Footer />
         </LayoutWrapper>

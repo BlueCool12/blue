@@ -1,9 +1,10 @@
+import { lazy } from 'react';
 import { RouteObject } from 'react-router-dom';
 import { MainLayout } from '../layouts/blog/MainLayout';
 
-import { About } from '../pages/blog/About';
+const About = lazy(() => import('../pages/blog/About/About'));
 
-import { NotFound } from '../pages/blog/NotFound';
+const NotFound = lazy(() => import('../pages/blog/NotFound'));
 
 export const MainRoutes = (): RouteObject[] => [
     {
