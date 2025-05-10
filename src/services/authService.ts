@@ -1,4 +1,4 @@
-import { login } from "../api/authApi";
+import { getAuth, login } from "../api/authApi";
 
 interface LoginRequest {
     username: string;
@@ -8,3 +8,7 @@ interface LoginRequest {
 export const adminLogin = async ({ username, password }: LoginRequest): Promise<void> => {
     await login({ username, password });
 };
+
+export const checkAuth = async (): Promise<void> => {
+    await getAuth();
+}

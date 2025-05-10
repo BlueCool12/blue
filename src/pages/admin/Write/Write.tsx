@@ -1,7 +1,11 @@
-import styled from "styled-components";
+import { useState } from "react";
+
 import { Editor } from "../../../components/admin/Editor";
 import { OutlineButton } from '../../../components/common/OutlineButton';
-import { useState } from "react";
+
+import { postApi } from "../../../api/admin/postApi";
+
+import styled from "styled-components";
 
 const Write = () => {
 
@@ -9,12 +13,18 @@ const Write = () => {
         title: '',
         content: '',
         category: '',
+        isPublic: true,
     });
 
-    const handleSave = () => {
-        console.log(post.category);
-        console.log(post.title);
-        console.log(post.content);
+    const handleSave = async () => {
+        try {
+            const result = await postApi.createPost(post);
+            console.log("등록 성공", post.content);
+            // 성공 후 로직
+        } catch (error) {
+            console.error("등록 실패", error);
+            // 실패 후 로직
+        }
     };
 
     return (
@@ -27,16 +37,27 @@ const Write = () => {
                             onChange={(e) => setPost((prev) => ({ ...prev, category: e.target.value }))}
                         >
                             <option value="">선택하세요</option>
-                            <option value="기술">기술</option>
-                            <option value="일상">일상</option>
+                            <option value="Java">Java</option>
+                            <option value="React">React</option>
                         </Select>
                         <TitleInput
                             value={post.title}
                             onChange={(e) => setPost((prev) => ({ ...prev, title: e.target.value }))}
                         />
+
+                        <CheckboxLabel>
+                            <input
+                                type="checkbox"
+                                checked={post.isPublic}
+                                onChange={(e) => setPost((prev) => ({ ...prev, isPublic: e.target.checked }))}
+                            />
+                            공개
+                        </CheckboxLabel>
                     </CategoryRow>
 
-                    <Editor onChange={(value) => setPost((prev) => ({ ...prev, content: value }))} />
+                    <Editor onChange={(value) => {
+                        setPost((prev) => ({ ...prev, content: value }))
+                    }} />
 
                     <ButtonRow>
                         <OutlineButton type="button" label="임시 저장" />
@@ -73,7 +94,8 @@ const Form = styled.div`
 
 const CategoryRow = styled.div`
     display: flex;    
-    gap: 4px;
+    gap: 8px;
+    align-items: center;    
 `;
 
 const Select = styled.select`    
@@ -89,6 +111,20 @@ const TitleInput = styled.input`
     border-radius: 6px;
     border: 1px solid ${({ theme }) => theme.borderColor};
     width: 100%;
+`;
+
+const CheckboxLabel = styled.label`        
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    
+    font-size: 16px;        
+    white-space: nowrap;
+
+    input[type="checkbox"] {
+        transform: scale(1.2);
+        margin: 0;        
+    }
 `;
 
 const ButtonRow = styled.div`

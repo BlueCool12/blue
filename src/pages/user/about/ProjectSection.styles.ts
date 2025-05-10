@@ -33,16 +33,16 @@ export const ProjectItem = styled.button.withConfig({
     font-size: 16px;
 
     color: ${({ isActive, theme }) =>
-        isActive ? theme.linkHoverColor : theme.textColor};
+        isActive ? theme.themeColor8 : theme.textColor};
 
     span {
         display: inline-block;
-        border-bottom: ${({ isActive, theme }) => isActive ? `2px solid ${theme.linkHoverColor}` : 'none'};
-        transition: border-bottom 0.2s ease;
+        border-bottom: ${({ isActive, theme }) => isActive ? `2px solid ${theme.themeColor8}` : 'none'};
+        transition: border-bottom 0.3s ease;
     } 
 
     &:hover {
-        color: ${({ theme }) => theme.linkHoverColor};
+        color: ${({ theme }) => theme.themeColor8};
     }
 `;
 
@@ -58,7 +58,8 @@ export const Article = styled.article`
         padding: 12px;
         text-align: center;
         border: ${({ theme }) => `1px solid ${theme.borderColor}`};
-        background-color: ${({ theme }) => theme.selectionBg};
+        background-color: ${({ theme }) => theme.themeColor9};
+        color: ${({ theme }) => theme.themeColor1}
     }
 
     p { 
@@ -109,7 +110,7 @@ export const ImageWrapper = styled.figure`
     margin: 24px 0;
     width: 100%;    
 
-    border: 1px solid ${({ theme }) => theme.textColor};
+    border: 1px solid ${({ theme }) => theme.borderColor};
     border-radius: 12px;    
 
     img {
