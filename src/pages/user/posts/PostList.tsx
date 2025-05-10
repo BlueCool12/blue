@@ -19,6 +19,10 @@ const PostList = () => {
         return <LoadingSpinner />
     }
 
+    if (error) {
+        return <div>에러 발생</div>
+    }
+
     return (
         <PostListSection>
             <PostListWrapper>

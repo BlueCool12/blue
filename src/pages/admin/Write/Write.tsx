@@ -19,7 +19,7 @@ const Write = () => {
     const handleSave = async () => {
         try {
             const result = await postApi.createPost(post);
-            console.log("등록 성공", post.content);
+            console.log("등록 성공", result);
             // 성공 후 로직
         } catch (error) {
             console.error("등록 실패", error);
