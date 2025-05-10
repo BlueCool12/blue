@@ -57,7 +57,8 @@ const Body = styled.div`
 const Sidebar = styled.nav`
     width: 240px;
     min-width: 240px;
-    background-color: ${({ theme }) => theme.cardBg};
+    background-color: ${({ theme }) => theme.footerBg};
+    color: ${({ theme }) => theme.footerTextColor};
     padding: 20px;
     border-right: 1px solid ${({ theme }) => theme.borderColor};
     overflow-y: auto;
@@ -71,7 +72,7 @@ const NavItem = styled(Link)`
     font-weight: 500;
 
     &:hover {
-        color: ${({ theme }) => theme.linkHoverColor || '#a48253'};
+        color: ${({ theme }) => theme.linkHoverColor};
     }
 `;
 
@@ -79,7 +80,7 @@ const Main = styled.main`
     flex: 1;
     overflow-y: auto;
     padding: 24px;
-    background-color: ${({ theme }) => theme.backgroundColor};
+    background-color: ${({ theme }) => theme.bgColor};
     color: ${({ theme }) => theme.textColor};
     box-sizing: border-box;
     min-width: 0;

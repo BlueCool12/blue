@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const CareerSection = () => {
 
     const careers = [
-        { date: '2025.03 ~ 2025.05', title: '바로연' },
+        { date: '2025.03 ~ Now', title: '바로연' },
         { date: '2024.03 ~ 2024.08', title: '중앙정보처리학원' },
     ];
 
@@ -44,7 +44,7 @@ const VerticalLine = styled.div`
     left: 50%;
     width: 2px;
     height: 100%;
-    background-color: ${({ theme }) => theme.linkHoverColor};
+    background-color: ${({ theme }) => theme.themeColor5};
     transform: translateX(-50%);    
 `;
 
@@ -53,7 +53,7 @@ const Dot = styled.div.withConfig({
 }) <{ isLast: boolean }>`
     width: 12px;
     height: 12px;
-    background-color: ${({ theme }) => theme.linkHoverColor};
+    background-color: ${({ theme }) => theme.bgColor};
     border-radius: 50%;
     position: absolute;
     top: 50%;
@@ -61,9 +61,9 @@ const Dot = styled.div.withConfig({
     transform: translateX(-50%) translateY(-50%);
     z-index: 1;
 
-    background-color: ${({ isLast, theme }) => isLast ? theme.backgroundColor : theme.linkHoverColor};
+    background-color: ${({ isLast, theme }) => isLast ? theme.bgColor : theme.themeColor5};
 
-    border: 2px solid ${({ theme }) => theme.linkHoverColor};
+    border: 2px solid ${({ theme }) => theme.themeColor5};
 `;
 
 const Content = styled.div.withConfig({

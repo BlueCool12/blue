@@ -15,13 +15,13 @@ import {
 	ImageInsert, ImageInsertViaUrl, ImageResize, ImageStyle, ImageTextAlternative,
 	ImageToolbar, ImageUpload, ImageUtils, Indent, IndentBlock,
 	Italic, Link, LinkImage, List, ListProperties,
-	Markdown, MediaEmbed, Mention, PageBreak, Paragraph,
-	PasteFromMarkdownExperimental, PasteFromOffice, PlainTableOutput, RemoveFormat, ShowBlocks,
-	SimpleUploadAdapter, SourceEditing, SpecialCharacters, SpecialCharactersArrows, SpecialCharactersCurrency,
-	SpecialCharactersEssentials, SpecialCharactersLatin, SpecialCharactersMathematical, SpecialCharactersText, Strikethrough,
-	Style, Subscript, Superscript, Table, TableCaption,
-	TableCellProperties, TableColumnResize, TableLayout, TableProperties, TableToolbar,
-	TextPartLanguage, TextTransformation, TodoList, Underline, HeadingOption
+	MediaEmbed, Mention, PageBreak, Paragraph, PasteFromMarkdownExperimental,
+	PasteFromOffice, PlainTableOutput, RemoveFormat, ShowBlocks, SimpleUploadAdapter,
+	SourceEditing, SpecialCharacters, SpecialCharactersArrows, SpecialCharactersCurrency, SpecialCharactersEssentials,
+	SpecialCharactersLatin, SpecialCharactersMathematical, SpecialCharactersText, Strikethrough, Style,
+	Subscript, Superscript, Table, TableCaption, TableCellProperties,
+	TableColumnResize, TableLayout, TableProperties, TableToolbar, TextPartLanguage,
+	TextTransformation, TodoList, Underline, HeadingOption
 } from 'ckeditor5';
 
 import translations from 'ckeditor5/translations/ko.js';
@@ -78,14 +78,14 @@ export const Editor = ({ onChange }: EditorProps) => {
 				ImageBlock, ImageCaption, ImageEditing, ImageInline, ImageInsert,
 				ImageInsertViaUrl, ImageResize, ImageStyle, ImageTextAlternative, ImageToolbar,
 				ImageUpload, ImageUtils, Indent, IndentBlock, Italic,
-				Link, LinkImage, List, ListProperties, Markdown,
-				MediaEmbed, Mention, PageBreak, Paragraph, PasteFromMarkdownExperimental,
-				PasteFromOffice, PlainTableOutput, RemoveFormat, ShowBlocks, SimpleUploadAdapter,
-				SourceEditing, SpecialCharacters, SpecialCharactersArrows, SpecialCharactersCurrency, SpecialCharactersEssentials,
-				SpecialCharactersLatin, SpecialCharactersMathematical, SpecialCharactersText, Strikethrough, Style,
-				Subscript, Superscript, Table, TableCaption, TableCellProperties,
-				TableColumnResize, TableLayout, TableProperties, TableToolbar, TextPartLanguage,
-				TextTransformation, TodoList, Underline
+				Link, LinkImage, List, ListProperties, MediaEmbed,
+				Mention, PageBreak, Paragraph, PasteFromMarkdownExperimental, PasteFromOffice,
+				PlainTableOutput, RemoveFormat, ShowBlocks, SimpleUploadAdapter, SourceEditing,
+				SpecialCharacters, SpecialCharactersArrows, SpecialCharactersCurrency, SpecialCharactersEssentials, SpecialCharactersLatin,
+				SpecialCharactersMathematical, SpecialCharactersText, Strikethrough, Style, Subscript,
+				Superscript, Table, TableCaption, TableCellProperties, TableColumnResize,
+				TableLayout, TableProperties, TableToolbar, TextPartLanguage, TextTransformation,
+				TodoList, Underline
 			],
 			simpleUpload: {
 				uploadUrl: '',
@@ -216,7 +216,7 @@ export const Editor = ({ onChange }: EditorProps) => {
 						name: 'Article category',
 						element: 'h3',
 						classes: ['category']
-					},					
+					},
 					{
 						name: 'Subtitle',
 						element: 'h3',
@@ -289,6 +289,7 @@ export const Editor = ({ onChange }: EditorProps) => {
 								config={editorConfig}
 								onChange={(_, editor) => {
 									const data = editor.getData();
+									console.log(data);
 									onChange(data);
 								}}
 							/>

@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { adminLogin } from "../services/authService";
+import { adminLogin, checkAuth } from "../services/authService";
 
 // 비동기 로그인 처리
 export const loginAdmin = createAsyncThunk(
@@ -15,6 +15,18 @@ export const loginAdmin = createAsyncThunk(
             return rejectWithValue(error.message || "로그인 실패");
         }
     });
+
+export const verifyAuth = createAsyncThunk(
+    "auth/checkAuth",
+    async (_, { rejectWithValue }) => {
+        try {
+            await checkAuth();
+            return true;
+        } catch (error: any) {
+            return rejectWithValue("인증 실패")
+        }
+    }
+);
 
 // ✅ 초기 상태 정의
 interface AuthState {
@@ -55,6 +67,13 @@ const authSlice = createSlice({
             .addCase(loginAdmin.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload as string;
+            })
+            
+            .addCase(verifyAuth.fulfilled, (state) => {
+                state.isAuthenticated = true;
+            })
+            .addCase(verifyAuth.rejected, (state) => {
+                state.isAuthenticated = false;
             });
     },
 });

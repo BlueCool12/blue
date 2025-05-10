@@ -1,7 +1,9 @@
 export interface ThemeType {
-    
-    backgroundColor: string;
+
+    bgColor: string;
+    contrastBgColor: string;
     textColor: string;
+    contrastTextColor: string;
     headerBg: string;
     headerTextColor: string;
     footerBg: string;
@@ -12,7 +14,20 @@ export interface ThemeType {
     selectionBg: string;
     selectionText: string;
     cardBg: string;
+    btnBg: string;
+    btnColor: string;
+    btnHoverColor: string;
     linkHoverColor: string;
+
+    themeColor1: string;
+    themeColor2: string;
+    themeColor3: string;
+    themeColor4: string;
+    themeColor5: string;
+    themeColor6: string;
+    themeColor7: string;
+    themeColor8: string;
+    themeColor9: string;
 
     layout: {
 
@@ -29,8 +44,10 @@ export interface ThemeType {
 }
 
 export const lightTheme: ThemeType = {
-    backgroundColor: '#f9fafb',
+    bgColor: '#f8f9fa',
+    contrastBgColor: '#212529',
     textColor: '#212529',
+    contrastTextColor: '#f8f9fa',
     headerBg: '#ffffff',
     headerTextColor: '#212529',
     footerBg: '#ffffff',
@@ -38,10 +55,23 @@ export const lightTheme: ThemeType = {
     mobileMenuBg: '#e8f1fa',
     mobileMenuTextColor: '#1565c0',
     borderColor: '#e0e0e0',
-    selectionBg: '#bcdffb',
-    selectionText: '#1c1c1c',
-    cardBg: 'fff',
+    selectionBg: '#AEE1F9',
+    selectionText: '#0D1B2A',
+    cardBg: '#ffffff',
+    btnBg: '#0D1B2A',
+    btnColor: '#ffffff',    
+    btnHoverColor: '#13293D',
     linkHoverColor: '#0d6efd',
+
+    themeColor1: '#E6F7FB',
+    themeColor2: '#D2F0F8',
+    themeColor3: '#BEE9F4',
+    themeColor4: '#A9E2F0',
+    themeColor5: '#8BD0E8',
+    themeColor6: '#6DBEDC',
+    themeColor7: '#4FACC8',
+    themeColor8: '#328AA3',
+    themeColor9: '#145B6F',
 
     layout: {
         headerHeight: {
@@ -56,8 +86,10 @@ export const lightTheme: ThemeType = {
 };
 
 export const darkTheme: ThemeType = {
-    backgroundColor: '#121212',
+    bgColor: '#121212',
+    contrastBgColor: '#121212',
     textColor: '#e0e0e0',
+    contrastTextColor: '#e0e0e0',
     headerBg: '#1f1f1f',
     headerTextColor: '#f1f1f1',
     footerBg: '#1f1f1f',
@@ -65,10 +97,23 @@ export const darkTheme: ThemeType = {
     mobileMenuBg: '#0a192f',
     mobileMenuTextColor: '#ffffff',
     borderColor: '#2c2c2c',
-    selectionBg: '#3b6ea5',
+    selectionBg: '#2DAEEA',
     selectionText: '#ffffff',
     cardBg: '#1e1e1e',
+    btnBg: '#0D1B2A',
+    btnColor: '#EDEDED',
+    btnHoverColor: '#13293D',
     linkHoverColor: '#4dabf7',
+
+    themeColor1: '#E6F7FB',
+    themeColor2: '#D2F0F8',
+    themeColor3: '#BEE9F4',
+    themeColor4: '#A9E2F0',
+    themeColor5: '#8BD0E8',
+    themeColor6: '#6DBEDC',
+    themeColor7: '#4FACC8',
+    themeColor8: '#328AA3',
+    themeColor9: '#145B6F',
 
     layout: {
         headerHeight: {

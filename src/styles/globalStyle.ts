@@ -12,7 +12,7 @@ export const GlobalStyle = createGlobalStyle`
   html, body {
     height: 100%;
     font-family: 'Noto Sans KR', sans-serif;
-    background-color: ${({ theme }) => theme.backgroundColor};
+    background-color: ${({ theme }) => theme.bgColor};
     color: ${({ theme }) => theme.textColor};
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
@@ -40,7 +40,7 @@ export const GlobalStyle = createGlobalStyle`
     transition: color 0.2s;
 
     &:hover {
-      color: ${({ theme }) => theme.linkHoverColor || '#3498db'};
+      color: ${({ theme }) => theme.linkHoverColor};
     }
   }
 
@@ -62,8 +62,8 @@ export const GlobalStyle = createGlobalStyle`
 
   /* 텍스트 선택 시 색상 */
   ::selection {
-    background: ${({ theme }) => theme.selectionBg || '#a0c4ff'};
-    color: ${({ theme }) => theme.selectionText || '#fff'};
+    background: ${({ theme }) => theme.selectionBg};
+    color: ${({ theme }) => theme.selectionText};
   }
 
   /* 이미지/비디오 반응형 */

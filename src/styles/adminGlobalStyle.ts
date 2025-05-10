@@ -8,7 +8,7 @@ export const AdminGlobalStyle = createGlobalStyle`
   html, body {
     margin: 0;
     padding: 0;    
-    background-color: ${({ theme }) => theme.backgroundColor};
+    background-color: ${({ theme }) => theme.bgColor};
     color: ${({ theme }) => theme.textColor};
     font-size: 16px;
   }

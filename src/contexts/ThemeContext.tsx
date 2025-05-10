@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { getInitialTheme } from "../utils/themeUtils";
 
 type ThemeMode = 'light' | 'dark';
 
@@ -10,35 +11,19 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProviderWithState: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const getPreferredTheme = (): ThemeMode => {
-        const saved = localStorage.getItem('theme') as ThemeMode | null;
-        if (saved) return saved;
 
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        return prefersDark ? 'dark' : 'light';
-    };
-
-    const [themeMode, setThemeMode] = useState<ThemeMode>(getPreferredTheme);
+    const [themeMode, setThemeMode] = useState<ThemeMode>(getInitialTheme);
 
     useEffect(() => {
-        localStorage.setItem('theme', themeMode);
-
-        const themeColor = themeMode === 'dark' ? '#121212' : '#ffffff';
-
-        const metaTag = document.querySelector('meta[name="theme-color"]');
-        if (metaTag) {
-            metaTag.setAttribute('content', themeColor);
-        } else {
-            const newMeta = document.createElement('meta');
-            newMeta.name = 'theme-color';
-            newMeta.content = themeColor;
-            document.head.appendChild(newMeta);
-        }
+        document.documentElement.setAttribute('data-theme', themeMode);
     }, [themeMode]);
 
     const toggleTheme = () => {
-        setThemeMode((prev) => (prev === 'light' ? 'dark' : 'light'));
-    };
+        const nextMode = themeMode === 'light' ? 'dark' : 'light';
+        setThemeMode(nextMode);
+        localStorage.setItem('theme', nextMode);
+        document.documentElement.setAttribute('data-theme', nextMode);
+    }
 
     return (
         <ThemeContext.Provider value={{ themeMode, toggleTheme }}>

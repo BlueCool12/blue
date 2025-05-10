@@ -5,15 +5,15 @@ const StyledOutlineButton = styled.button`
     gap: 1px;
     align-items: center;
     padding: 10px 20px;
-    border: 1px solid ${({ theme }) => theme.textColor};
+    border: 1px solid ${({ theme }) => theme.borderColor};
     border-radius: 8px;
     color: ${({ theme }) => theme.textColor};
     transition: background-color 0.3s;
     font-size: 14px;
 
     &:hover {
-        background-color: ${({ theme }) => theme.textColor};
-        color: ${({ theme }) => theme.backgroundColor};
+        background-color: ${({ theme }) => theme.contrastBgColor};
+        color: ${({ theme }) => theme.contrastTextColor};
     }
 `;
 

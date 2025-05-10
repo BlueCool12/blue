@@ -80,6 +80,7 @@ const Form = styled.form`
     text-align: center;
     background-color: ${({ theme }) => theme.cardBg};
     border-radius: 18px;
+    border: 1px solid ${({ theme }) => theme.borderColor};
 
     input {
         padding: 10px;
@@ -91,12 +92,12 @@ const Form = styled.form`
         cursor: pointer;
         padding: 10px;
         font-weight: bold;
-        color: ${({ theme }) => theme.backgroundColor};
-        background-color: ${({ theme }) => theme.textColor};
+        background-color: ${({ theme }) => theme.btnBg};
+        color: ${({ theme }) => theme.btnColor};
         transition: background-color 0.3s;
 
         &:hover {
-            background-color: ${({ theme }) => theme.selectionBg};
+            background-color: ${({ theme }) => theme.btnHoverColor};
         }
     }
 `;

@@ -32,7 +32,7 @@ export const IconLink = styled.a`
     display: inline-block;
     width: 24px;
     height: 24px;
-    transition: transform 0.2s ease;
+    transition: transform 0.3s ease;
 
     &:hover {
         transform: scale(1.1);
