@@ -29,8 +29,7 @@ const LayoutWrapper = styled.div`
 const Content = styled.main`
     flex: 1;
     width: 100%;
-    max-width: 800px;
-    min-width: 400px;
+    max-width: 800px;    
     margin: 0 auto;
     padding-left: 16px;
     padding-right: 16px;    
