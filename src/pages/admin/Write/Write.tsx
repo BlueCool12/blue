@@ -43,7 +43,7 @@ const Write = () => {
                             <option value="">선택하세요</option>
                             <option value="Java">Java</option>
                             <option value="React">React</option>
-                            <option value="React">BlueCool</option>
+                            <option value="BlueCool">BlueCool</option>
                         </Select>
                         <TitleInput
                             value={post.title}
