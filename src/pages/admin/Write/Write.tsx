@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { Editor } from "../../../components/admin/Editor";
 import { OutlineButton } from '../../../components/common/OutlineButton';
@@ -8,6 +9,8 @@ import { postApi } from "../../../api/admin/postApi";
 import styled from "styled-components";
 
 const Write = () => {
+
+    const navigate = useNavigate();
 
     const [post, setPost] = useState({
         title: '',
@@ -20,6 +23,7 @@ const Write = () => {
         try {
             const result = await postApi.createPost(post);
             console.log("등록 성공", result);
+            navigate('/admin');
             // 성공 후 로직
         } catch (error) {
             console.error("등록 실패", error);
@@ -39,6 +43,7 @@ const Write = () => {
                             <option value="">선택하세요</option>
                             <option value="Java">Java</option>
                             <option value="React">React</option>
+                            <option value="React">BlueCool</option>
                         </Select>
                         <TitleInput
                             value={post.title}

@@ -37,10 +37,10 @@ const NotFoundMain = styled.main`
     align-items: center;
     justify-content: center;
     text-align: center;    
-    height: ${({ theme }) => `calc(100vh - ${theme.layout.headerHeight.desktop}px - ${theme.layout.footerHeight.desktop}px)`};
+    height: 80vh;
 
     @media (max-width: 768px) {
-        height: ${({ theme }) => `calc(100vh - ${theme.layout.headerHeight.mobile}px - ${theme.layout.footerHeight.mobile}px)`};
+        height: 80vh;
     }
 `;
 
