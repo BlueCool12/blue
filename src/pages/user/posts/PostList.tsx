@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { loadPosts } from "../../../store/user/postSlice";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { LoadingSpinner } from "../../../components/common/LoadingSpinner";
+import Error from "../Error";
 
 
 const PostList = () => {
@@ -20,7 +21,7 @@ const PostList = () => {
     }
 
     if (error) {
-        return <div>에러 발생</div>
+        return <Error message={error} />
     }
 
     return (
