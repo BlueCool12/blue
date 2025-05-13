@@ -29,6 +29,8 @@ import translations from 'ckeditor5/translations/ko.js';
 import 'ckeditor5/ckeditor5.css';
 
 import styles from './Editor.module.css';
+import { useAppSelector } from '../../../store/hooks';
+import { selectToken } from '../../../store/authSlice';
 
 interface EditorProps {
 	onChange: (data: string) => void;
@@ -44,6 +46,8 @@ export const Editor = ({ onChange }: EditorProps) => {
 	const editorRef = useRef<HTMLDivElement>(null);
 	const editorMenuBarRef = useRef<HTMLDivElement>(null);
 	const [isLayoutReady, setIsLayoutReady] = useState(false);
+
+	const token = useAppSelector(selectToken);
 
 	useEffect(() => {
 		setIsLayoutReady(true);
@@ -88,10 +92,10 @@ export const Editor = ({ onChange }: EditorProps) => {
 				TodoList, Underline
 			],
 			simpleUpload: {
-				uploadUrl: '',
+				uploadUrl: 'http://localhost:8888/api/admin/posts/images',
 				headers: {
-
-				},
+					'Authorization': `Bearer ${token}`
+				}
 			},
 			fontFamily: {
 				supportAllValues: true,

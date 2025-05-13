@@ -5,8 +5,9 @@ interface LoginRequest {
     password: string;
 }
 
-export const login = async ({ username, password }: LoginRequest): Promise<void> => {
-    await api.post("/auth/login", { username, password });
+export const login = async ({ username, password }: LoginRequest): Promise<{ token: string }> => {
+    const response = await api.post("/auth/login", { username, password });    
+    return response.data;
 };
 
 export const getAuth = async (): Promise<any> => {

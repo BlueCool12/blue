@@ -9,8 +9,8 @@ export const loginAdmin = createAsyncThunk(
         { rejectWithValue }
     ) => {
         try {
-            await adminLogin({ username, password });
-            return true;
+            const token = await adminLogin({ username, password });
+            return token;
         } catch (error: any) {
             return rejectWithValue(error.message || "로그인 실패");
         }
@@ -31,12 +31,14 @@ export const verifyAuth = createAsyncThunk(
 // ✅ 초기 상태 정의
 interface AuthState {
     isAuthenticated: boolean;
+    token: string | null,
     loading: boolean;
     error: string | null;
 }
 
 const initialState: AuthState = {
     isAuthenticated: false,
+    token: null,
     loading: false,
     error: null,
 };
@@ -59,16 +61,17 @@ const authSlice = createSlice({
                 state.loading = true;
                 state.error = null;
             })
-            .addCase(loginAdmin.fulfilled, (state) => {
+            .addCase(loginAdmin.fulfilled, (state, action) => {
                 state.loading = false;
                 state.isAuthenticated = true;
+                state.token = action.payload as string;
                 state.error = null;
             })
             .addCase(loginAdmin.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload as string;
             })
-            
+
             .addCase(verifyAuth.fulfilled, (state) => {
                 state.isAuthenticated = true;
             })
@@ -80,4 +83,5 @@ const authSlice = createSlice({
 
 export const { logout, clearError } = authSlice.actions;
 export const selectIsAuthenticated = (state: { auth: AuthState }) => state.auth.isAuthenticated;
+export const selectToken = (state: { auth: AuthState }) => state.auth.token;
 export default authSlice.reducer;
