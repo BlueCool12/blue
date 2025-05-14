@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-import BlueCool from '../../../assets/images/BlueCoolLogin.png';
+import BlueCool from '../../assets/images/BlueCoolLogin.png';
 import { useEffect, useState } from "react";
-import { clearError, loginAdmin, selectIsAuthenticated } from "../../../store/authSlice";
-import { RootState } from "../../../store/store";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { clearError, loginAdmin, selectIsAuthenticated } from "../../store/authSlice";
+import { RootState } from "../../store/store";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {

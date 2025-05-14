@@ -10,7 +10,8 @@ export const MainLayout = () => {
             <Body>
                 <Sidebar>
                     <NavItem to="/admin">대시보드</NavItem>
-                    <NavItem to="/admin/write">글 작성</NavItem>
+                    <NavItem to="/admin/posts">글 목록</NavItem>
+                    <NavItem to="/admin/posts/write">글 작성</NavItem>                    
                 </Sidebar>
                 <Main>
                     <Suspense fallback={<LoadingSpinner />}>
