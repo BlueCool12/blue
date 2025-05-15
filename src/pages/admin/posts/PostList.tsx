@@ -40,7 +40,7 @@ const PostList = () => {
                         posts.map((post) => (
                             <Tr key={post.id}>
                                 <Td>{post.id}</Td>
-                                <Td>{post.title}</Td>
+                                <Td><Link to={`/admin/posts/${post.id}/edit`}>{post.title}</Link></Td>
                                 <Td>{post.category}</Td>
                                 <Td><Link to={`/posts/${post.slug}`}>{post.slug}</Link></Td>
                                 <Td>{post.isPublic ? 'O' : 'X'}</Td>

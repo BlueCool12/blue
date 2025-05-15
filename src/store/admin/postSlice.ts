@@ -1,10 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { postService } from "../../services/admin/postService";
-import { CreatePostPayload, PostListResponse } from "../../api/admin/postApi";
+import { CreatePostPayload, PostDetailResponse, PostListResponse } from "../../api/admin/postApi";
 
 interface PostState {
     postId: number | null;
     posts: PostListResponse[];
+    postDetail: PostDetailResponse | null;
     loading: boolean;
     error: string | null;
 }
@@ -12,6 +13,7 @@ interface PostState {
 const initialState: PostState = {
     postId: null,
     posts: [],
+    postDetail: null,
     loading: false,
     error: null,
 };
@@ -32,6 +34,21 @@ export const getPosts = createAsyncThunk<PostListResponse[]>(
     }
 );
 
+export const getPost = createAsyncThunk<PostDetailResponse, number>(
+    "admin/getPost",
+    async (id) => {
+        const result = await postService.getPost(id);
+        return result;
+    }
+);
+
+export const updatePost = createAsyncThunk<void, { id: number; payload: CreatePostPayload }>(
+    "admin/updatePost",
+    async ({ id, payload }) => {
+        await postService.updatePost(id, payload);
+    }
+);
+
 const postSlice = createSlice({
     name: "adminPost",
     initialState,
@@ -42,7 +59,7 @@ const postSlice = createSlice({
                 state.postId = action.payload;
             })
 
-            
+
             .addCase(getPosts.pending, (state) => {
                 state.loading = true;
                 state.error = null;
@@ -54,6 +71,33 @@ const postSlice = createSlice({
             .addCase(getPosts.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.error.message || "글 목록 불러오기 실패";
+            })
+
+
+            .addCase(getPost.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(getPost.fulfilled, (state, action) => {
+                state.postDetail = action.payload;
+                state.loading = false;
+            })
+            .addCase(getPost.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.error.message || "글 가져오기 실패";
+            })
+
+
+            .addCase(updatePost.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(updatePost.fulfilled, (state) => {
+                state.loading = false;
+            })
+            .addCase(updatePost.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.error.message || "글 수정 실패";
             });
     }
 });
