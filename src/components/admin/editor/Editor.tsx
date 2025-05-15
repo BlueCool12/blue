@@ -34,6 +34,7 @@ import { selectToken } from '../../../store/authSlice';
 
 interface EditorProps {
 	onChange: (data: string) => void;
+	initialData?: string;
 }
 
 /**
@@ -41,7 +42,7 @@ interface EditorProps {
  */
 const LICENSE_KEY = 'GPL'; // or <YOUR_LICENSE_KEY>.
 
-export const Editor = ({ onChange }: EditorProps) => {
+export const Editor = ({ onChange, initialData }: EditorProps) => {
 	const editorContainerRef = useRef<HTMLDivElement>(null);
 	const editorRef = useRef<HTMLDivElement>(null);
 	const editorMenuBarRef = useRef<HTMLDivElement>(null);
@@ -176,8 +177,6 @@ export const Editor = ({ onChange }: EditorProps) => {
 					'resizeImage'
 				]
 			},
-			initialData:
-				'',
 			language: 'ko',
 			licenseKey: LICENSE_KEY,
 			link: {
@@ -291,9 +290,9 @@ export const Editor = ({ onChange }: EditorProps) => {
 								}}
 								editor={ClassicEditor}
 								config={editorConfig}
+								data={initialData || ''}
 								onChange={(_, editor) => {
 									const data = editor.getData();
-									console.log(data);
 									onChange(data);
 								}}
 							/>
