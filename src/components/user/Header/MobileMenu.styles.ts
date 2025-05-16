@@ -36,12 +36,14 @@ export const MobileLogo = styled.div`
 
 export const MobileNav = styled.ul`
     list-style: none;
-    padding: 40px 0 20px;
-    text-align: center;
+    padding: 2rem 0;
+    text-align: center;    
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 
-    li {
-        margin-bottom: 8px;
-        font-size: 16px;
-        font-weight: 400;
+    li {        
+        font-size: 1rem;
+        font-weight: 600;
     }
 `;

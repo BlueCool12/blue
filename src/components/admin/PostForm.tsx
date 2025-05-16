@@ -40,7 +40,13 @@ export const PostForm = ({ initialData, onSubmit, mode = 'create' }: PostFormPro
                         >
                             <option value="">선택하세요</option>
                             <option value="Java">Java</option>
+                            <option value="JavaScript">JavaScript</option>
+                            <option value="TypeScript">TypeScript</option>
                             <option value="React">React</option>
+                            <option value="Spring">Spring</option>
+                            <option value="HTML">HTML</option>
+                            <option value="CSS">CSS</option>                            
+                            <option value="MarkDown">MarkDown</option>
                             <option value="BlueCool">BlueCool</option>
                         </Select>
                         <TitleInput

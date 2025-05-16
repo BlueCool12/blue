@@ -1,9 +1,14 @@
-import styled from "styled-components";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { useEffect } from "react";
-import { loadPostDetail } from "../../../store/user/postSlice";
+import { useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
+
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { loadPostDetail } from "../../../store/user/postSlice";
 import { LoadingSpinner } from "../../../components/common/LoadingSpinner";
+
+import hljs from "highlight.js";
+import "highlight.js/styles/atom-one-dark.css";
+import styled from "styled-components";
+
 
 
 const PostDetail = () => {
@@ -11,11 +16,25 @@ const PostDetail = () => {
     const dispatch = useAppDispatch();
     const { postDetail, loading, error } = useAppSelector((state: any) => state.userPost);
 
+    const contentRef = useRef<HTMLDivElement>(null);
+
     useEffect(() => {
         if (slug) {
             dispatch(loadPostDetail(slug));
         }
     }, [dispatch, slug]);
+
+    useEffect(() => {
+        if (contentRef.current && postDetail?.content) {
+            contentRef.current
+                .querySelectorAll("pre code")
+                .forEach((block) => {
+                    block.removeAttribute("data-highlighted");
+                    block.innerHTML = block.textContent ?? "";
+                    hljs.highlightElement(block as HTMLElement);
+                });
+        }
+    }, [postDetail?.content]);
 
     if (loading) {
         return <LoadingSpinner />
@@ -40,13 +59,20 @@ const PostDetail = () => {
                 <Title>{postDetail.title}</Title>
             </Header>
 
-            <Content dangerouslySetInnerHTML={{ __html: postDetail.content }} />
+            <Content ref={contentRef} dangerouslySetInnerHTML={{ __html: postDetail.content }} />
+
+
+
         </Article>
     );
 }
 
 const Article = styled.article`
-      padding: 1.5rem 1rem;
+    padding: 1.5rem 1rem;
+
+    @media (max-width: 768px) {
+        padding: 0.5rem;
+    }
 `;
 
 const Header = styled.header`
@@ -65,8 +91,12 @@ const Category = styled.span`
     color: ${({ theme }) => theme.themeColor1};
     padding: 0.3rem 0.6rem;
     border-radius: 9999px;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     font-weight: 700;
+
+    @media (max-width: 768px) {
+        font-size: 0.7rem;
+    }
 `;
 
 const Date = styled.time`
@@ -81,7 +111,42 @@ const Title = styled.h1`
 
 const Content = styled.div`
     font-size: 1rem;
-    padding: 1rem 0;
+    padding: 1rem 0.5rem;
+    line-height: 1.7 !important;    
+
+    pre {
+        overflow-x: auto;        
+    }    
+
+    code {
+        font-family: 'Fira Code', monospace;
+        border-radius: 0.5rem;
+        line-height: inherit;
+    }
+
+    ul, ol {
+        padding-left: 2.5rem;
+        margin: 0;
+    }
+
+    li {
+        margin: 0;        
+        line-height: inherit;
+    }
+
+    p {
+        margin: 0;
+        line-height: inherit;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        margin: 1rem 0;
+    }
+
+    img {
+        border-radius: 0.5rem;
+    }
+    
 `;
 
 export default PostDetail;

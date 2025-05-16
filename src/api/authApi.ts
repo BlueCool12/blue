@@ -10,6 +10,6 @@ export const login = async ({ username, password }: LoginRequest): Promise<{ tok
     return response.data;
 };
 
-export const getAuth = async (): Promise<any> => {
+export const getAuth = async (): Promise<any> => {    
     await api.get('/auth/me');
 };

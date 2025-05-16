@@ -51,7 +51,7 @@ const PostList = () => {
                         ))
                     ) : (
                         <tr>
-                            <EmptyTd colSpan={8} align="center">게시글이 없습니다.</EmptyTd>
+                            <EmptyTd colSpan={8}>게시글이 없습니다.</EmptyTd>
                         </tr>
                     )}
                 </tbody>

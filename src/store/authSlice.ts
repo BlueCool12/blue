@@ -31,6 +31,7 @@ export const verifyAuth = createAsyncThunk(
 // ✅ 초기 상태 정의
 interface AuthState {
     isAuthenticated: boolean;
+    authChecked: boolean;
     token: string | null,
     loading: boolean;
     error: string | null;
@@ -38,6 +39,7 @@ interface AuthState {
 
 const initialState: AuthState = {
     isAuthenticated: false,
+    authChecked: false,
     token: null,
     loading: false,
     error: null,
@@ -50,6 +52,9 @@ const authSlice = createSlice({
     reducers: {
         logout: (state) => {
             state.isAuthenticated = false;
+            state.authChecked = false;
+            state.token = null;
+            state.error = null;
         },
         clearError: (state) => {
             state.error = null;
@@ -64,6 +69,7 @@ const authSlice = createSlice({
             .addCase(loginAdmin.fulfilled, (state, action) => {
                 state.loading = false;
                 state.isAuthenticated = true;
+                state.authChecked = true;
                 state.token = action.payload as string;
                 state.error = null;
             })
@@ -74,9 +80,11 @@ const authSlice = createSlice({
 
             .addCase(verifyAuth.fulfilled, (state) => {
                 state.isAuthenticated = true;
+                state.authChecked = true;
             })
             .addCase(verifyAuth.rejected, (state) => {
                 state.isAuthenticated = false;
+                state.authChecked = true;
             });
     },
 });
