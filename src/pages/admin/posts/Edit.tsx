@@ -16,7 +16,7 @@ const Edit = () => {
 
         const getPost = async () => {
             try {
-                const result = await postApi.getPost(Number(id));
+                const result = await postApi.getPost(Number(id));                
                 setPostData({
                     title: result.title,
                     content: result.content,
@@ -33,7 +33,7 @@ const Edit = () => {
 
     const handleUpdate = (post: Post) => {
         if (!id) return;
-
+        
         dispatch(updatePost({ id: Number(id), payload: post }))
             .unwrap()
             .then(() => {

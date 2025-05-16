@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 import BlueCool from '../../assets/images/BlueCoolLogin.png';
-import { useEffect, useState } from "react";
-import { clearError, loginAdmin, selectIsAuthenticated } from "../../store/authSlice";
+import { useState } from "react";
+import { clearError, loginAdmin } from "../../store/authSlice";
 import { RootState } from "../../store/store";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +11,6 @@ const Login = () => {
     const navigate = useNavigate();
 
     const dispatch = useAppDispatch();
-    const isAuthenticated = useAppSelector(selectIsAuthenticated);
     const { loading, error } = useAppSelector((state: RootState) => state.auth);
 
     const [form, setForm] = useState({ username: '', password: '' });
@@ -23,14 +22,12 @@ const Login = () => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        dispatch(loginAdmin(form));
+        dispatch(loginAdmin(form))
+            .unwrap()
+            .then(() => {
+                navigate('/admin');
+            });
     };
-
-    useEffect(() => {
-        if (isAuthenticated) {
-            navigate("/admin");
-        }
-    }, [isAuthenticated, navigate]);
 
     return (
         <>

@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { LoadingSpinner } from '../../components/common/LoadingSpinner';
 
 export const MainLayout = () => {
+
     return (
         <Wrapper>
             <Header>BlueCool12</Header>
@@ -11,7 +12,7 @@ export const MainLayout = () => {
                 <Sidebar>
                     <NavItem to="/admin">대시보드</NavItem>
                     <NavItem to="/admin/posts">글 목록</NavItem>
-                    <NavItem to="/admin/posts/write">글 작성</NavItem>                    
+                    <NavItem to="/admin/posts/write">글 작성</NavItem>
                 </Sidebar>
                 <Main>
                     <Suspense fallback={<LoadingSpinner />}>
