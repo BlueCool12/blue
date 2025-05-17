@@ -39,7 +39,7 @@ const NotFoundMain = styled.main`
     align-items: center;
     justify-content: center;
     text-align: center;    
-    height: 80vh;    
+    height: 75vh;    
 `;
 
 const TitleSection = styled.section`

@@ -26,7 +26,7 @@ const Wrapper = styled.section`
     flex-direction: column;
     align-items: center;   
     justify-content: center;
-    height: 80vh;
+    height: 75vh;
     gap: 2rem;
     padding: 3rem 1rem;
     font-size: 1rem;

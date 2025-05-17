@@ -13,8 +13,8 @@ const Error = ({ message }: ErrorProps) => {
     const navigate = useNavigate();
 
     return (
-        <NotFoundMain>
-            
+        <ErrorMain>
+
             <TitleSection>
                 <ErrorImage src={ErrorImg} />
                 <Title>{message}</Title>
@@ -25,23 +25,19 @@ const Error = ({ message }: ErrorProps) => {
                 <OutlineButton type="button" icon="history" label="이전 페이지" onClick={() => navigate(-1)}></OutlineButton>
             </ActionNav>
 
-        </NotFoundMain>
+        </ErrorMain>
     );
 }
 
 export default Error;
 
-const NotFoundMain = styled.main`
+const ErrorMain = styled.main`
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;    
-    height: 80vh;
-
-    @media (max-width: 768px) {
-        height: 80vh;
-    }
+    height: 75vh;    
 `;
 
 const TitleSection = styled.section`

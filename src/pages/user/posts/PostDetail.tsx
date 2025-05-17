@@ -103,16 +103,20 @@ const PostDetail = () => {
 }
 
 const Article = styled.article`
-    padding: 1.5rem 1rem;
+    padding: 3rem 1rem;
+    margin-bottom: 3rem;
 
+    border-bottom: 2px solid ${({ theme }) => theme.borderColor};
+    
     @media (max-width: 768px) {
-        padding: 0.5rem;
+        padding: 2rem 0.5rem;
+        margin-bottom: 2rem;
     }
 `;
 
 const Header = styled.header`
     border-bottom: 2px solid ${({ theme }) => theme.borderColor};
-    padding: 1rem 0;
+    padding: 0 0 1rem;
 `;
 
 const Meta = styled.div`
@@ -145,40 +149,97 @@ const Title = styled.h1`
 `;
 
 const Content = styled.div`
-    font-size: 1rem;
-    padding: 1rem 0.5rem;
-    line-height: 1.7 !important;            
 
-    ul, ol {
-        padding-left: 2.5rem;
-        margin: 0;
-    }
+    /* CKEditor 설정 */
 
-    li {
-        margin: 0;        
-        line-height: inherit;
-    }
+    /* 전체 폰트 및 텍스트 */
+    padding: 1rem 0.1rem;
+    line-height: 1.6;
+    word-break: break-word;
 
-    p {
-        margin: 0;
-        line-height: inherit;
-    }
-
+    /* 제목 요소 */
     h1, h2, h3, h4, h5, h6 {
+        margin: 1.5rem 0 1rem;
+        font-weight: bold;
+    }
+    
+    /* 스타일 -> Marker (노란 배경) */
+    span.marker {
+        background: yellow;
+    }
+
+    /* 스타일 -> Spoiler (hover 시 보이게 됨) */
+    span.spoiler {
+        background: #000;
+        color: #000;
+        transition: color 0.3s ease;
+    }
+
+    span.spoiler:hover {
+        color: #fff;
+    }
+
+    /* 이미지 */
+    img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 1rem auto;
+        border-radius: 0.5rem;
+    }
+
+    /* 목록 */
+    ul, ol {
+        padding-left: 2rem;
         margin: 1rem 0;
     }
 
-    img {
-        border-radius: 0.5rem;
+    li {
+        margin-bottom: 0.5rem;
     }
 
-    pre code.hljs {        
-        padding: 1rem;
-        border-radius: 0.5rem;
-        font-family: 'Fira Code', monospace;
-        font-size: 1rem;        
+    /* 인용구 */
+    blockquote {
+        border-left: 4px solid ${({ theme }) => theme.borderColor};
+        background-color: ${({ theme }) => theme.cardBg};
+        padding: 0.75rem 1.25rem;
+        margin: 1.5rem 0;
+        font-style: italic;        
     }
-    
+
+    /* 링크 */
+    a {
+        text-decoration: underline;
+
+        &:hover {
+            color: ${({ theme }) => theme.linkHoverColor};            
+        }
+    }
+
+    /* 구분선 */
+    hr {
+        border: none;
+        border-top: 1px solid ${({ theme }) => theme.borderColor};
+        margin: 2rem 0;
+    }
+
+    /* 이미지 캡션 및 figure */
+    figure {
+        margin: 2rem 0;
+        text-align: center;
+    }
+
+    figcaption {
+        font-size: 0.9rem;
+        opacity: 0.7;
+        margin-top: 0.5rem;
+    }
+
+    /* 코드 블록 */
+    code {
+        border-radius: 0.5rem;
+    }    
+
 `;
 
 export default PostDetail;
