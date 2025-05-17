@@ -2,8 +2,11 @@ import { useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+
 import { loadPostDetail } from "../../../store/user/postSlice";
+
 import { LoadingSpinner } from "../../../components/common/LoadingSpinner";
+import Error from "../Error";
 
 import hljs from "highlight.js";
 import "highlight.js/styles/atom-one-dark.css";
@@ -41,7 +44,7 @@ const PostDetail = () => {
     }
 
     if (error) {
-        return <div>에러 발생</div>
+        return <Error message={error} />
     }
 
     if (!postDetail) {

@@ -91,9 +91,9 @@ export const lightTheme: ThemeType = {
 
 export const darkTheme: ThemeType = {
     bgColor: '#121212',
-    contrastBgColor: '#121212',
+    contrastBgColor: '#e0e0e0',
     textColor: '#e0e0e0',
-    contrastTextColor: '#e0e0e0',
+    contrastTextColor: '#121212',
     headerBg: '#1f1f1f',
     headerTextColor: '#f1f1f1',
     footerBg: '#1f1f1f',

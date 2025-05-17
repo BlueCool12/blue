@@ -1,8 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
 
-import ErrorImg from '../../assets/images/BlueCoolError.png';
 import { OutlineButton } from "../../components/common/OutlineButton";
+
+import styled from "styled-components";
+import ErrorImg from '../../assets/images/BlueCoolError.png';
 
 const NotFound = () => {
 
@@ -11,6 +12,7 @@ const NotFound = () => {
     return (
         <>
             <NotFoundMain>
+                
                 <TitleSection>
                     <Title>404</Title>
                     <ErrorImage src={ErrorImg} />
@@ -37,18 +39,14 @@ const NotFoundMain = styled.main`
     align-items: center;
     justify-content: center;
     text-align: center;    
-    height: 80vh;
-
-    @media (max-width: 768px) {
-        height: 80vh;
-    }
+    height: 80vh;    
 `;
 
 const TitleSection = styled.section`
     display: flex;
     align-items: center;
-    gap: 16px;
-    margin-bottom: 12px;
+    gap: 2rem;
+    margin-bottom: 1rem;
 
     @media (max-width: 768px) {
         display: block;
@@ -57,19 +55,32 @@ const TitleSection = styled.section`
 
 const Title = styled.h1`
     font-size: 6rem;    
+
+    @media (max-width: 768px) {
+        font-size: 4rem;
+    }
 `;
 
 const ErrorImage = styled.img`
-    width: 280px;    
+    width: 18rem;    
     height: auto;
+
+    @media (max-width: 768px) {
+        width: 15rem;
+    }
 `;
 
 const Description = styled.p`
-    font-size: 1.5rem;        
+    font-size: 1.5rem;
+    font-weight: 500;
+
+    @media (max-width: 768px) {
+        font-size: 1.2rem;
+    }
 `;
 
 const ActionNav = styled.nav`
     display: flex;
-    gap: 16px;
+    gap: 1rem;
     flex-wrap: wrap;    
 `;
