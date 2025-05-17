@@ -5,6 +5,7 @@ import { loadPosts } from "../../../store/user/postSlice";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { LoadingSpinner } from "../../../components/common/LoadingSpinner";
 import Error from "../Error";
+import { EmptyState } from "../../../components/user/EmptyState";
 
 
 const PostList = () => {
@@ -16,13 +17,9 @@ const PostList = () => {
         dispatch(loadPosts());
     }, [dispatch]);
 
-    if (loading) {
-        return <LoadingSpinner />
-    }
-
-    if (error) {
-        return <Error message={error} />
-    }
+    if (loading) { return <LoadingSpinner /> }
+    if (error) { return <Error message={error} /> }
+    if (posts.length === 0) return <EmptyState message="열심히 공부 중입니다..." />
 
     return (
         <PostListSection>

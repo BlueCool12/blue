@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-import ErrorImg from '../../assets/images/BlueCoolError.png';
+import ErrorImg from '../../assets/images/Error2.png';
 import { OutlineButton } from "../../components/common/OutlineButton";
 
 interface ErrorProps {
@@ -13,21 +13,19 @@ const Error = ({ message }: ErrorProps) => {
     const navigate = useNavigate();
 
     return (
-        <>
-            <NotFoundMain>
-                <TitleSection>
-                    <Title>{message}</Title>
-                    <ErrorImage src={ErrorImg} />
-                </TitleSection>
+        <NotFoundMain>
+            
+            <TitleSection>
+                <ErrorImage src={ErrorImg} />
+                <Title>{message}</Title>
+            </TitleSection>
 
-                <ActionNav>
-                    <OutlineButton type="button" icon="home" label="메인 페이지" onClick={() => navigate('/')}></OutlineButton>
-                    <OutlineButton type="button" icon="history" label="이전 페이지" onClick={() => navigate(-1)}></OutlineButton>
-                </ActionNav>
+            <ActionNav>
+                <OutlineButton type="button" icon="home" label="메인 페이지" onClick={() => navigate('/')}></OutlineButton>
+                <OutlineButton type="button" icon="history" label="이전 페이지" onClick={() => navigate(-1)}></OutlineButton>
+            </ActionNav>
 
-            </NotFoundMain>
-
-        </>
+        </NotFoundMain>
     );
 }
 
@@ -48,24 +46,22 @@ const NotFoundMain = styled.main`
 
 const TitleSection = styled.section`
     display: flex;
+    flex-direction: column;   
     align-items: center;
     gap: 16px;
-    margin-bottom: 3rem;
-
-    @media (max-width: 768px) {
-        display: block;
-    }
+    margin-bottom: 3rem;    
 `;
 
 const Title = styled.h1`
-    font-size: 2rem;    
+    font-size: 1.5rem;       
 `;
 
-const ErrorImage = styled.img`
-    width: 280px;    
+const ErrorImage = styled.img`    
+    width: 16rem;    
     height: auto;
 
     @media (max-width: 768px) {
+        width: 14rem;
         margin-top: 14px;
     }
 `;

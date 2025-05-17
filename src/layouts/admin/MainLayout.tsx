@@ -80,11 +80,10 @@ const NavItem = styled(Link)`
 
 const Main = styled.main`
     flex: 1;
-    overflow-y: auto;
+    overflow: auto;
     padding: 24px;
     background-color: ${({ theme }) => theme.bgColor};
     color: ${({ theme }) => theme.textColor};
     box-sizing: border-box;
-    min-width: 0;
-    width: 100%;
+    min-width: 0;    
 `;

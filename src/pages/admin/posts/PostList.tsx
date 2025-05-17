@@ -64,6 +64,7 @@ export default PostList;
 
 const Section = styled.section`
     padding: 1rem 5rem;
+    min-width: 1200px;
 `;
 
 const Title = styled.h1`
@@ -76,7 +77,7 @@ const Table = styled.table`
     border-collapse: collapse;
     margin-top: 20px;
     font-size: 14px;    
-    background-color: #ffffff;    
+    background-color: #ffffff;
 `;
 
 const Th = styled.th`
