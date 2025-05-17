@@ -200,11 +200,15 @@ const Content = styled.div`
 
     /* 인용구 */
     blockquote {
-        border-left: 4px solid ${({ theme }) => theme.borderColor};
+        border-left: 5px solid ${({ theme }) => theme.borderColor};
         background-color: ${({ theme }) => theme.cardBg};
         padding: 0.75rem 1.25rem;
         margin: 1.5rem 0;
-        font-style: italic;        
+        font-style: italic;    
+        
+        p {
+            margin: 0.5rem 0;
+        }
     }
 
     /* 링크 */
@@ -238,6 +242,7 @@ const Content = styled.div`
     /* 코드 블록 */
     code {
         border-radius: 0.5rem;
+        font-size: 1rem;
     }    
 
 `;
