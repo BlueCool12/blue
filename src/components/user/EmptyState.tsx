@@ -12,7 +12,7 @@ export const EmptyState = ({ message }: { message?: string }) => {
                 {message?.split("").map((char, idx) => char === " "
                     ? <span key={idx}>&nbsp;</span>
                     : (
-                        <WobbleChar key={idx} delay={idx * 0.12}>
+                        <WobbleChar key={idx} $delay={idx * 0.12}>
                             {char}
                         </WobbleChar>
                     ))}
@@ -63,10 +63,10 @@ const cry = keyframes`
   }
 `;
 
-const WobbleChar = styled.span<{ delay: number }>`
+const WobbleChar = styled.span<{ $delay: number }>`
   display: inline-block;
   animation: ${cry} 1.6s ease-in-out infinite;
-  animation-delay: ${({ delay }) => `${delay}s`};
+  animation-delay: ${({ $delay }) => `${$delay}s`};
 `
 
 const Message = styled.p`

@@ -15,9 +15,7 @@ export interface ThemeType {
     selectionText: string;
     cardBg: string;
     btnBg: string;
-    btnColor: string;
-    codeBg: string;
-    codeColor: string;
+    btnColor: string;    
     btnHoverColor: string;
     linkHoverColor: string;
 
@@ -61,9 +59,7 @@ export const lightTheme: ThemeType = {
     selectionText: '#0D1B2A',
     cardBg: '#ffffff',
     btnBg: '#0D1B2A',
-    btnColor: '#ffffff',
-    codeBg: '#f5f5f5',
-    codeColor: '#222',    
+    btnColor: '#ffffff',    
     btnHoverColor: '#13293D',
     linkHoverColor: '#0d6efd',
 
@@ -105,9 +101,7 @@ export const darkTheme: ThemeType = {
     selectionText: '#ffffff',
     cardBg: '#1e1e1e',
     btnBg: '#0D1B2A',
-    btnColor: '#EDEDED',
-    codeBg: '#1e1e1e',
-    codeColor: '#eee',
+    btnColor: '#EDEDED',    
     btnHoverColor: '#13293D',
     linkHoverColor: '#4dabf7',
 
