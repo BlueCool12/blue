@@ -3,6 +3,8 @@ import { RouteObject } from 'react-router-dom';
 
 import { MainLayout } from '../layouts/user/MainLayout';
 
+const Home = lazy(() => import('../pages/user/Home'));
+
 const About = lazy(() => import('../pages/user/about/About'));
 
 const PostList = lazy(() => import('../pages/user/posts/PostList'));
@@ -15,7 +17,7 @@ export const MainRoutes = (): RouteObject[] => [
         path: '/',
         element: <MainLayout />,
         children: [
-            { path: '', element: <About />, },
+            { path: '', element: <Home />, },
             { path: 'about', element: <About /> },
             { path: 'posts', element: <PostList /> },
             { path: 'posts/:slug', element: <PostDetail /> },
