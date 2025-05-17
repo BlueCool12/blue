@@ -15,14 +15,17 @@ export const ThemeProviderWithState: React.FC<{ children: React.ReactNode }> = (
     const [themeMode, setThemeMode] = useState<ThemeMode>(getInitialTheme);
 
     useEffect(() => {
-        document.documentElement.setAttribute('data-theme', themeMode);
+        if (themeMode === 'dark') {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
     }, [themeMode]);
 
     const toggleTheme = () => {
         const nextMode = themeMode === 'light' ? 'dark' : 'light';
         setThemeMode(nextMode);
         localStorage.setItem('theme', nextMode);
-        document.documentElement.setAttribute('data-theme', nextMode);
     }
 
     return (

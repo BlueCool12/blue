@@ -1,23 +1,26 @@
 import { useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 
+import { useThemeMode } from "../../../contexts/ThemeContext";
+
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 
 import { loadPostDetail } from "../../../store/user/postSlice";
 
 import { LoadingSpinner } from "../../../components/common/LoadingSpinner";
+import { EmptyState } from "../../../components/user/EmptyState";
 import Error from "../Error";
 
 import hljs from "highlight.js";
-import "highlight.js/styles/atom-one-dark.css";
+import 'highlight.js/styles/atom-one-dark.css';
+
 import styled from "styled-components";
-
-
 
 const PostDetail = () => {
     const { slug } = useParams<{ slug: string }>();
     const dispatch = useAppDispatch();
     const { postDetail, loading, error } = useAppSelector((state: any) => state.userPost);
+    const { themeMode } = useThemeMode();
 
     const contentRef = useRef<HTMLDivElement>(null);
 
@@ -28,28 +31,57 @@ const PostDetail = () => {
     }, [dispatch, slug]);
 
     useEffect(() => {
-        if (contentRef.current && postDetail?.content) {
-            contentRef.current
-                .querySelectorAll("pre code")
-                .forEach((block) => {
-                    block.removeAttribute("data-highlighted");
-                    block.innerHTML = block.textContent ?? "";
-                    hljs.highlightElement(block as HTMLElement);
-                });
-        }
-    }, [postDetail?.content]);
+        if (!contentRef.current || !postDetail?.content) return;
 
-    if (loading) {
-        return <LoadingSpinner />
-    }
+        const raf = requestAnimationFrame(() => {
+            const blocks = contentRef.current!.querySelectorAll("pre code");
+            blocks.forEach((block) => {
+                hljs.highlightElement(block as HTMLElement);
 
-    if (error) {
-        return <Error message={error} />
-    }
+                const parentPre = block.closest("pre");
+                if (!parentPre) return;
 
-    if (!postDetail) {
-        return <div>게시글 없음</div>
-    }
+                const wrapper = document.createElement("div");
+                wrapper.style.position = "relative";
+
+                parentPre.parentNode?.replaceChild(wrapper, parentPre);
+                wrapper.appendChild(parentPre);
+
+                const classList = block.className.split(" ");
+                const langClass = classList.find((cls) => cls.startsWith("language-"));
+                const lang = langClass?.replace("language-", "").toUpperCase();
+
+                if (lang) {
+                    const label = document.createElement("div");
+                    label.textContent = lang;
+                    label.style.cssText = `
+                        position: absolute;         
+                        top: 8px;
+                        right: 12px;
+                        font-size: 0.75rem;
+                        font-weight: 600;
+                        background: rgba(0, 0, 0, 0.6);
+                        color: #fff;
+                        padding: 2px 8px;
+                        border-radius: 6px;
+                        font-family: 'Noto Sans KR', sans-serif;
+                        letter-spacing: 0.5px;
+                        pointer-events: none;
+                        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+                    `;
+                    wrapper.appendChild(label);
+                }
+            });
+        });
+
+        return () => cancelAnimationFrame(raf);
+    }, [postDetail, themeMode]);
+
+    if (loading) return <LoadingSpinner />
+
+    if (error) return <Error message={error} />
+
+    if (!postDetail) return <EmptyState message="작성한 글이 없습니다..." />
 
     return (
         <Article>
@@ -115,17 +147,7 @@ const Title = styled.h1`
 const Content = styled.div`
     font-size: 1rem;
     padding: 1rem 0.5rem;
-    line-height: 1.7 !important;    
-
-    pre {
-        overflow-x: auto;        
-    }    
-
-    code {
-        font-family: 'Fira Code', monospace;
-        border-radius: 0.5rem;
-        line-height: inherit;
-    }
+    line-height: 1.7 !important;            
 
     ul, ol {
         padding-left: 2.5rem;
@@ -148,6 +170,13 @@ const Content = styled.div`
 
     img {
         border-radius: 0.5rem;
+    }
+
+    pre code.hljs {        
+        padding: 1rem;
+        border-radius: 0.5rem;
+        font-family: 'Fira Code', monospace;
+        font-size: 1rem;        
     }
     
 `;

@@ -14,6 +14,7 @@
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
 
+    // Google Ads 추가 시 변경 필요
     gtag('config', 'G-GHCGQG92ZD');
   </script>
 
@@ -23,14 +24,16 @@
       const saved = localStorage.getItem('theme');
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       const theme = saved || (prefersDark ? 'dark' : 'light');
-      document.documentElement.setAttribute('data-theme', theme);
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+      }
     })();
   </script>
 
   <!-- Google 폰트 및 아이콘 -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" />
-  
+
 </head>
 
 <body>
