@@ -31,8 +31,8 @@ import translations from 'ckeditor5/translations/ko.js';
 import 'ckeditor5/ckeditor5.css';
 
 import styles from './Editor.module.css';
-import { useAppSelector } from '@/store/hooks';
-import { selectToken } from '@/store/authSlice';
+import { useAppSelector } from '../../../store/hooks';
+import { selectToken } from '../../../store/authSlice';
 
 interface EditorProps {
 	onChange: (data: string) => void;
