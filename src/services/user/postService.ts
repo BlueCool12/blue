@@ -1,10 +1,18 @@
-import { postApi } from "../../api/user/postApi";
+import { postApi } from "@/api/user/postApi";
 
+interface PostDetail {
+    slug: string;
+    title: string;
+    category: string;
+    contentSummary: string;
+    createdAt: string;
+    content: string;
+}
 
 export const postService = {
     getAllPosts: async () => {
         const result = await postApi.getAllPosts();
-        return result.map((post: any) => ({
+        return result.map((post: PostDetail) => ({
             ...post,
             createdAt: formatDate(post.createdAt),
         }));

@@ -1,4 +1,4 @@
-import { getAuth, login } from "../api/authApi";
+import { getAuth, login } from "@/api/authApi";
 
 interface LoginRequest {
     username: string;

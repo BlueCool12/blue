@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { adminLogin, checkAuth } from "../services/authService";
+import { adminLogin, checkAuth } from "@/services/authService";
 
 // 비동기 로그인 처리
 export const loginAdmin = createAsyncThunk(
@@ -11,8 +11,11 @@ export const loginAdmin = createAsyncThunk(
         try {
             const token = await adminLogin({ username, password });
             return token;
-        } catch (error: any) {
-            return rejectWithValue(error.message || "로그인 실패");
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                return rejectWithValue(error.message)
+            }
+            return rejectWithValue("로그인 실패");
         }
     });
 
@@ -22,7 +25,8 @@ export const verifyAuth = createAsyncThunk(
         try {
             await checkAuth();
             return true;
-        } catch (error: any) {
+        } catch (error: unknown) {
+            console.error(error);
             return rejectWithValue("인증 실패")
         }
     }

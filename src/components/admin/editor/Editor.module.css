@@ -1,14 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
-@media print {
-    body {
+/* @media print {
+    :global(body) {
         margin: 0 !important;
     }
-}
+} */
 
 .main-container {
-    font-family: 'Noto Sans KR';
+    font-family: var(--font-noto), sans-serif;
     width: 100%;
     margin-left: auto;
     margin-right: auto;
@@ -16,23 +16,23 @@
 
 /* 글자 폰트, 라인 높이 */
 .ck-content {
-    font-family: 'Noto Sans KR';    
+    font-family: var(--font-noto), sans-serif;
     line-height: 1.6;
-    word-break: break-word;  
+    word-break: break-word;
 }
 
 /* 에디터 전체 너비 조절 */
-.editor-container_classic-editor .editor-container__editor {    
-    max-width: none;        
+.editor-container_classic-editor .editor-container__editor {
+    max-width: none;
     box-sizing: border-box;
 }
 
-/* 에디터 전체 높이 조절 */
-:global(.ck-editor__editable) {
-    height: 60vh;    
+/* 에디터 전체 높이 조절
+.ck-editor__editable {
+    height: 60vh;
     color: #000;
-    overflow-y: auto;            
-}
+    overflow-y: auto;
+} */
 
 .ck-content h3.category {
     font-family: 'Oswald';

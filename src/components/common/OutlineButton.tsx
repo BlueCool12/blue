@@ -4,22 +4,23 @@ const StyledOutlineButton = styled.button`
     display: flex;
     gap: 1px;
     align-items: center;
-    padding: 10px 20px;
-    border: 1px solid ${({ theme }) => theme.borderColor};
+    padding: 12px 20px;
+    border: 1px solid var(--border-color);
     border-radius: 8px;
-    color: ${({ theme }) => theme.textColor};
+    color: var(--text-color);
     transition: background-color 0.3s;
-    font-size: 14px;
+    font-size: 14px;    
+    cursor: pointer;
 
     &:hover {
-        background-color: ${({ theme }) => theme.contrastBgColor};
-        color: ${({ theme }) => theme.contrastTextColor};
-    }
+        background-color: var(--contrast-bg-color);
+        color: var(--contrast-text-color);
+    }    
 `;
 
 interface OutlineButtonProps {
     type?: 'button' | 'submit' | 'reset';
-    icon?: string;
+    icon?: React.ReactNode;
     label: string;
     onClick?: () => void;
 }
@@ -32,7 +33,7 @@ export const OutlineButton = ({ type = 'button', icon, label, onClick }: Outline
 
     return (
         <StyledOutlineButton onClick={handleClick} type={type}>
-            {icon && <span className="material-symbols-rounded">{icon}</span>}
+            {icon && icon}
             {label}
         </StyledOutlineButton>
     );

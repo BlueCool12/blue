@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { postService } from "../../services/admin/postService";
-import { CreatePostPayload, PostDetailResponse, PostListResponse } from "../../api/admin/postApi";
+import { postService } from "@/services/admin/postService";
+import { CreatePostPayload, PostDetailResponse, PostListResponse } from "@/api/admin/postApi";
 
 interface PostState {
     postId: number | null;

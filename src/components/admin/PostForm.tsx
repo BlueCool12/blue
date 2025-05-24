@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { OutlineButton } from "../common/OutlineButton";
-import { Editor } from "./Editor";
+import dynamic from "next/dynamic";
+
+const CKEditor = dynamic(() => import('@/components/admin/Editor/Editor'), {
+    ssr: false,
+});
 
 export interface Post {
     title: string;
@@ -18,7 +22,7 @@ interface PostFormProps {
 
 export const PostForm = ({ initialData, onSubmit, mode = 'create' }: PostFormProps) => {
 
-    const [post, setPost] = useState<Post>(initialData || {
+    const [post, setPost] = useState<Post>(() => initialData ?? {
         title: '',
         content: '',
         category: '',
@@ -45,7 +49,7 @@ export const PostForm = ({ initialData, onSubmit, mode = 'create' }: PostFormPro
                             <option value="React">React</option>
                             <option value="Spring">Spring</option>
                             <option value="HTML">HTML</option>
-                            <option value="CSS">CSS</option>                            
+                            <option value="CSS">CSS</option>
                             <option value="MarkDown">MarkDown</option>
                             <option value="BlueCool">BlueCool</option>
                         </Select>
@@ -64,7 +68,7 @@ export const PostForm = ({ initialData, onSubmit, mode = 'create' }: PostFormPro
                         </CheckboxLabel>
                     </CategoryRow>
 
-                    <Editor                        
+                    <CKEditor
                         initialData={post.content}
                         onChange={(value) => {
                             setPost((prev) => ({ ...prev, content: value }))
@@ -119,7 +123,7 @@ const TitleInput = styled.input`
     padding: 10px;
     font-size: 18px;
     border-radius: 6px;
-    border: 1px solid ${({ theme }) => theme.borderColor};
+    border: 1px solid var(--border-color);
     width: 100%;
 `;
 

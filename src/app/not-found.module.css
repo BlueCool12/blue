@@ -1,0 +1,64 @@
+.notfound__main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 90vh;
+}
+
+.notfound__title-section {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+    .notfound__title-section {
+        display: block;
+    }
+}
+
+.notfound__title {
+    font-size: 6rem;
+}
+
+@media (max-width: 768px) {
+    .notfound__title {
+        font-size: 4rem;
+        margin: 0;
+    }
+}
+
+.notfound__image-wrapper {
+    width: 18rem;
+}
+
+@media (max-width: 768px) {
+    .notfound__image-wrapper {
+        width: 15rem;
+    }
+}
+
+.notfound__image {
+    width: 100%;
+    height: auto;
+}
+
+.notfound__description {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .notfound__description {
+        font-size: 1.2rem;
+    }
+}
+
+.notfound__actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}

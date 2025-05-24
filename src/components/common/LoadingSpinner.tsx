@@ -1,3 +1,5 @@
+'use client';
+
 import styled, { keyframes } from "styled-components";
 
 
@@ -26,8 +28,8 @@ const spin = keyframes`
 const Spinner = styled.div`
     width: 48px;
     height: 48px;
-    border: 6px solid ${({ theme }) => theme.borderColor};
-    border-top: 6px solid ${({ theme }) => theme.textColor};
+    border: 6px solid var(--border-color);
+    border-top: 6px solid var(--text-color);
     border-radius: 50%;
     animation: ${spin} 1s linear infinite;
 `;

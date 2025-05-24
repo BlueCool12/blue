@@ -1,3 +1,5 @@
+'use client';
+
 /**
  * This configuration was generated using the CKEditor 5 Builder. You can modify it anytime using this link:
  * https://ckeditor.com/ckeditor-5/builder/#installation/NoJgNARCB0Cs0AYKQIwhAgbJkB2AnACz4iYIG6UDMCCIKxAHFSI/Qfc5odochAGsA9sgRhgKMGLGTJCALqQqAMwBGsRgBNVEeUA=
@@ -29,8 +31,8 @@ import translations from 'ckeditor5/translations/ko.js';
 import 'ckeditor5/ckeditor5.css';
 
 import styles from './Editor.module.css';
-import { useAppSelector } from '../../../store/hooks';
-import { selectToken } from '../../../store/authSlice';
+import { useAppSelector } from '@/store/hooks';
+import { selectToken } from '@/store/authSlice';
 
 interface EditorProps {
 	onChange: (data: string) => void;
@@ -42,7 +44,7 @@ interface EditorProps {
  */
 const LICENSE_KEY = 'GPL'; // or <YOUR_LICENSE_KEY>.
 
-export const Editor = ({ onChange, initialData }: EditorProps) => {
+const Editor = ({ onChange, initialData }: EditorProps) => {
 	const editorContainerRef = useRef<HTMLDivElement>(null);
 	const editorRef = useRef<HTMLDivElement>(null);
 	const editorMenuBarRef = useRef<HTMLDivElement>(null);
@@ -257,7 +259,7 @@ export const Editor = ({ onChange, initialData }: EditorProps) => {
 			},
 			translations: [translations]
 		};
-	}, [isLayoutReady]);
+	}, [isLayoutReady, token]);
 
 	return (
 		<div className={styles['main-container']}>
@@ -303,3 +305,5 @@ export const Editor = ({ onChange, initialData }: EditorProps) => {
 		</div>
 	);
 }
+
+export default Editor;

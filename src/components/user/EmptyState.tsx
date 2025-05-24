@@ -1,24 +1,24 @@
-import styled, { keyframes } from "styled-components";
+'use client';
 
-import emptyLogo from '../../assets/images/empty_org.png';
+import styled, { keyframes } from "styled-components";
 
 export const EmptyState = ({ message }: { message?: string }) => {
 
-    return (
+  return (
 
-        <Wrapper>
-            <Illustration src={emptyLogo} alt="글이 없을때의 일러스트" />
-            <Message>
-                {message?.split("").map((char, idx) => char === " "
-                    ? <span key={idx}>&nbsp;</span>
-                    : (
-                        <WobbleChar key={idx} $delay={idx * 0.12}>
-                            {char}
-                        </WobbleChar>
-                    ))}
-            </Message>
-        </Wrapper>
-    );
+    <Wrapper>
+      <Illustration src='/images/empty_org.png' alt="글이 없을때의 일러스트" />
+      <Message>
+        {message?.split("").map((char, idx) => char === " "
+          ? <span key={idx}>&nbsp;</span>
+          : (
+            <WobbleChar key={idx} $delay={idx * 0.12}>
+              {char}
+            </WobbleChar>
+          ))}
+      </Message>
+    </Wrapper>
+  );
 }
 
 const Wrapper = styled.section`    
@@ -30,7 +30,7 @@ const Wrapper = styled.section`
     gap: 2rem;
     padding: 3rem 1rem;
     font-size: 1rem;
-    color: ${({ theme }) => theme.textColor};
+    color: var(--text-color);
 `;
 
 const Illustration = styled.img`        
@@ -73,5 +73,5 @@ const Message = styled.p`
     font-size: 1.2rem;
     font-weight: 500;
     margin: 0;
-    color: ${({ theme }) => theme.textColor};    
+    color: var(--text-color);    
 `;
