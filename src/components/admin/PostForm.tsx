@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { OutlineButton } from "../common/OutlineButton";
 import dynamic from "next/dynamic";
 
-const CKEditor = dynamic(() => import('./Editor/Editor'), {
+const CKEditor = dynamic(() => import('./editor/Editor'), {
     ssr: false,
 });
 
