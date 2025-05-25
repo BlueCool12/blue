@@ -9,6 +9,37 @@ const notoSans = Noto_Sans_KR({
     display: 'swap',
 });
 
+export const metadata = {
+    title: {
+        default: 'BlueCool',
+        template: '%s | BlueCool',
+    },
+    description: 'BlueCool 공식 블로그 입니다.',
+    keywords: ['BlueCool', 'BlueCool12', '블루쿨'],
+    openGraph: {
+        title: 'BlueCool',
+        description: 'BlueCool 공식 블로그 입니다.',
+        url: 'https://pyomin.com',
+        type: 'website',
+        siteName: 'BlueCool',
+        images: [
+            {
+                url: 'https://pyomin.com/images/BlueCool1.png',
+                width: 600,
+                height: 600,
+                alt: 'BlueCool 대표 이미지',
+            },
+        ],
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'BlueCool',
+        description: 'BlueCool 공식 블로그 입니다.',
+        images: ['https://pyomin.com/images/BlueCool1.png'],
+    },
+    metadataBase: new URL('https://pyomin.com'),
+}
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="ko" suppressHydrationWarning className={notoSans.variable}>
