@@ -1,10 +1,13 @@
 export default function Head() {
     return (
         <>
-            <meta charSet="UTF-8" />
-            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            {/* 아이콘 */}
             <link rel="icon" href="/favicon.png" />
-            <title>BlueCool12</title>
+
+            {/* 테마 색상 (모바일 브라우저 바 색) */}
+            <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+            <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
+
         </>
     );
 }
