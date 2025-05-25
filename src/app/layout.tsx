@@ -19,12 +19,12 @@ export const metadata = {
     openGraph: {
         title: 'BlueCool',
         description: 'BlueCool 공식 블로그 입니다.',
-        url: 'https://pyomin.com',
+        url: 'https://www.pyomin.com',
         type: 'website',
         siteName: 'BlueCool',
         images: [
             {
-                url: 'https://pyomin.com/images/BlueCool1.png',
+                url: 'https://www.pyomin.com/images/BlueCool1.png',
                 width: 600,
                 height: 600,
                 alt: 'BlueCool 대표 이미지',
@@ -35,9 +35,9 @@ export const metadata = {
         card: 'summary_large_image',
         title: 'BlueCool',
         description: 'BlueCool 공식 블로그 입니다.',
-        images: ['https://pyomin.com/images/BlueCool1.png'],
+        images: ['https://www.pyomin.com/images/BlueCool1.png'],
     },
-    metadataBase: new URL('https://pyomin.com'),
+    metadataBase: new URL('https://www.pyomin.com'),
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -59,6 +59,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                                 gtag('js', new Date());
                                 gtag('config', 'G-GHCGQG92ZD');
                                 `,
+                    }}
+                />
+                {/* JSON-LD */}
+                <Script
+                    id="jsonld-website"
+                    type="application/ld+json"
+                    strategy="afterInteractive"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify({
+                            "@context": "https://schema.org",
+                            "@type": "WebSite",
+                            name: "BlueCool",
+                            url: "https://www.pyomin.com",
+                            description: "BlueCool 공식 블로그입니다.",
+                            inLanguage: "ko-KR"
+                        }),
                     }}
                 />
                 <Providers>{children}</Providers>
