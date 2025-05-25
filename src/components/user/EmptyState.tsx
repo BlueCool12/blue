@@ -1,77 +1,30 @@
-'use client';
-
-import styled, { keyframes } from "styled-components";
+import styles from './EmptyState.module.css';
+import Image from 'next/image';
 
 export const EmptyState = ({ message }: { message?: string }) => {
 
   return (
 
-    <Wrapper>
-      <Illustration src='/images/empty_org.png' alt="글이 없을때의 일러스트" />
-      <Message>
+    <section className={styles['empty-state']}>
+      <Image
+        src='/images/empty_org.png'
+        alt="글이 없을때의 일러스트"
+        className={styles['empty-state__illustration']}
+        width={320}
+        height={320}
+      />
+      <p className={styles['empty-state__message']}>
         {message?.split("").map((char, idx) => char === " "
           ? <span key={idx}>&nbsp;</span>
           : (
-            <WobbleChar key={idx} $delay={idx * 0.12}>
+            <span key={idx}
+              className={styles['empty-state__char']}
+              style={{ animationDelay: `${idx * 0.12}s` }}
+            >
               {char}
-            </WobbleChar>
+            </span>
           ))}
-      </Message>
-    </Wrapper>
+      </p>
+    </section>
   );
 }
-
-const Wrapper = styled.section`    
-    display: flex;
-    flex-direction: column;
-    align-items: center;   
-    justify-content: center;
-    height: 75vh;
-    gap: 2rem;
-    padding: 3rem 1rem;
-    font-size: 1rem;
-    color: var(--text-color);
-`;
-
-const Illustration = styled.img`        
-    border-radius: 100%;
-    width: 100%;
-    height: 100%;
-    max-width: 20rem;
-    max-height: 20rem;
-    aspect-ratio: 1/1;
-    object-fit: cover;        
-
-    @media (max-width: 768px) {
-        max-width: 15rem;
-        max-height: 15rem;
-    }
-`;
-
-const cry = keyframes`
-  0%, 100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  30% {
-    transform: translateY(2px) rotate(-1deg);
-    opacity: 0.6;
-  }
-  60% {
-    transform: translateY(-1px) rotate(1deg);
-    opacity: 0.85;
-  }
-`;
-
-const WobbleChar = styled.span<{ $delay: number }>`
-  display: inline-block;
-  animation: ${cry} 1.6s ease-in-out infinite;
-  animation-delay: ${({ $delay }) => `${$delay}s`};
-`
-
-const Message = styled.p`
-    font-size: 1.2rem;
-    font-weight: 500;
-    margin: 0;
-    color: var(--text-color);    
-`;

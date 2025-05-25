@@ -9,7 +9,6 @@ import { loadPostDetail } from "@/store/user/postSlice";
 
 import { LoadingSpinner } from "@/components/common/LoadingSpinner";
 import { EmptyState } from "@/components/user/EmptyState";
-import Error from "@/app/error";
 
 import hljs from "highlight.js";
 import 'highlight.js/styles/atom-one-dark.css';
@@ -79,7 +78,7 @@ const PostDetail = () => {
 
     if (loading) return <LoadingSpinner />
 
-    if (error) return Error
+    if (error) throw error;
 
     if (!postDetail) return <EmptyState message="작성한 글이 없습니다..." />
 

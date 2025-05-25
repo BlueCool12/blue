@@ -6,7 +6,6 @@ import styled from "styled-components";
 import { loadPosts } from "@/store/user/postSlice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { LoadingSpinner } from "@/components/common/LoadingSpinner";
-import Error from "@/app/error";
 import { EmptyState } from "@/components/user/EmptyState";
 import { RootState } from "@/store/store";
 
@@ -28,7 +27,7 @@ export default function PostList() {
     }, [dispatch]);
 
     if (loading) { return <LoadingSpinner /> }
-    if (error) { return Error }
+    if (error) throw error;
     if (posts.length === 0) return <EmptyState message="열심히 공부 중입니다..." />
 
     return (

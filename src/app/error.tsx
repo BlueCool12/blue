@@ -8,12 +8,13 @@ import styled from "styled-components";
 import Image from "next/image";
 import { MdOutlineHome, MdOutlineHistory } from 'react-icons/md';
 
-interface ErrorProps {
+export default function Error({
+    error,
+    reset
+}: {
     error: Error;
     reset: () => void;
-}
-
-export default function GlobalError({ error }: ErrorProps) {
+}) {
 
     const router = useRouter();
 
@@ -33,7 +34,7 @@ export default function GlobalError({ error }: ErrorProps) {
 
             <ActionNav>
                 <OutlineButton type="button" icon={<MdOutlineHome size={24} />} label="메인 페이지" onClick={() => router.push('/')}></OutlineButton>
-                <OutlineButton type="button" icon={<MdOutlineHistory size={24} />} label="이전 페이지" onClick={() => router.back()}></OutlineButton>
+                <OutlineButton type="button" icon={<MdOutlineHistory size={24} />} label="다시 시도" onClick={reset}></OutlineButton>
             </ActionNav>
 
         </ErrorMain>
@@ -46,7 +47,7 @@ const ErrorMain = styled.main`
     align-items: center;
     justify-content: center;
     text-align: center;    
-    height: 90vh;    
+    height: 100vh;
 `;
 
 const TitleSection = styled.section`
