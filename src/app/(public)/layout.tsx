@@ -1,22 +1,23 @@
 import '@/app/globals.css';
-
 import styles from "./layout.module.css";
+
+import { Suspense } from "react";
+
 import { Header } from "@/components/user/Header";
 import { Footer } from "@/components/user/Footer";
 import { LoadingSpinner } from "@/components/common/LoadingSpinner";
-import { Suspense } from "react";
 
 export default function UserMainLayout({ children }: { children: React.ReactNode }) {
 
     return (
-        <div className={styles.layoutWrapper}>
+        <>
             <Header />
-            <main className={styles.content}>
+            <div className={styles.content}>
                 <Suspense fallback={<LoadingSpinner />}>
                     {children}
                 </Suspense>
-            </main>
+            </div>
             <Footer />
-        </div>
+        </>
     );
 };

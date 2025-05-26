@@ -7,6 +7,7 @@ export const Footer = () => {
             <footer className={styles.footer}>
                 <div className={styles['footer__content']}>
                     <div className={styles['footer__icon-wrapper']}>
+
                         <a
                             className={styles['footer__icon-link']}
                             href="https://github.com/BlueCool12"
@@ -29,6 +30,7 @@ export const Footer = () => {
                             </svg>
                         </a>
                     </div>
+                    
                     <p className={styles['footer__text']}>© 2025 BlueCool12 All rights reserved.</p>
                 </div>
             </footer >

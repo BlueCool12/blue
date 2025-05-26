@@ -1,13 +1,13 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import styles from './Header.module.css';
+import clsx from 'clsx';
 
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useTheme } from 'next-themes';
-import clsx from 'clsx';
 
-import styles from './Header.module.css';
 import { MdOutlineDarkMode, MdOutlineLightMode, MdOutlineMenu, MdOutlineClose } from 'react-icons/md';
 
 export const Header: React.FC = () => {
@@ -24,21 +24,22 @@ export const Header: React.FC = () => {
         <>
             <header className={styles.header}>
                 <div className={styles['header__inner']}>
-                    <div className={styles['header__logo']}>
-                        <Link href='/'>
-                            <Image
-                                src={
-                                    theme === 'light'
-                                        ? '/images/logo/big.png'
-                                        : '/images/logo/big_dark.png'
-                                }
-                                alt="Logo"
-                                width={52}
-                                height={39}
-                                priority
-                            />
-                        </Link>
-                    </div>
+
+
+                    <Link href='/'>
+                        <Image
+                            src={
+                                theme === 'light'
+                                    ? '/images/logo/big_org.png'
+                                    : '/images/logo/big_dark_org.png'
+                            }
+                            alt="헤더 로고"
+                            width={theme === 'light' ? 50 : 74}
+                            height={theme === 'light' ? 40 : 40}
+                            priority
+                        />
+                    </Link>
+
 
                     {/* PC 네비바 */}
                     <nav className={styles['desktop-nav']}>
@@ -64,35 +65,40 @@ export const Header: React.FC = () => {
                                 <MdOutlineLightMode size={24} />
                             )}
                         </div>
-                        <div
+
+                        <MdOutlineMenu
+                            size={24}
                             className={styles['header__menu-toggle']}
                             onClick={() => setIsMobileMenuOpen(true)}
-                        >
-                            <MdOutlineMenu size={24} />
-                        </div>
+                        />
+
                     </div>
+
                 </div>
             </header>
 
             {isMobileMenuOpen && (
                 <div className={clsx(styles['mobile-menu'])}>
-                    <div className={styles['mobile-menu__header']}>
-                        <span style={{ cursor: 'pointer' }} onClick={() => setIsMobileMenuOpen(false)}>
-                            <MdOutlineClose size={24} />
-                        </span>
-                    </div>
 
-                    <div className={styles['mobile-menu__logo']}>
-                        <Image
-                            src={
-                                theme === 'light'
-                                    ? '/images/logo/small.png'
-                                    : '/images/logo/small_dark.png'
-                            }
-                            alt='Logo'
-                            width={31}
-                            height={36}
-                            priority
+                    <div className={styles['mobile-menu__header']}>
+
+                        <div className={styles['mobile-menu__logo']}>
+                            <Image
+                                src={
+                                    theme === 'light'
+                                        ? '/images/logo/small.png'
+                                        : '/images/logo/small_dark.png'
+                                }
+                                alt='Logo'
+                                width={31}
+                                height={36}
+                                priority
+                            />
+                        </div> 
+
+                        <MdOutlineClose
+                            size={24}
+                            onClick={() => setIsMobileMenuOpen(false)}
                         />
                     </div>
 
