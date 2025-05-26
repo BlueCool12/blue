@@ -1,11 +1,12 @@
 'use client';
 
 import styles from './page.module.css';
-
-import { MdOutlineMail, MdOutlineDescription, MdOutlineTravelExplore, MdOutlineRocketLaunch } from 'react-icons/md';
 import clsx from 'clsx';
+
 import { useState } from 'react';
 import Image from 'next/image';
+
+import { MdOutlineMail, MdOutlineDescription, MdOutlineTravelExplore, MdOutlineRocketLaunch } from 'react-icons/md';
 
 const careers = [
     { date: '2025.03 ~ Now', title: '바로연' },
@@ -15,20 +16,23 @@ const careers = [
 const projects = [
     {
         title: 'BlueCool',
-        description: '개인 블로그 프로젝트',
+        subtitle: '개인 블로그 프로젝트',
+        description: '- 다크모드 구현',
         image: '/images/projects/bluecool_1280_720.webp',
         link: 'https://www.pyomin.com',
         stack: [
             { name: 'Java', color: '#f89820' },
             { name: 'Spring', color: '#6db33f' },
             { name: 'Postgresql', color: '#336791' },
-            { name: 'React', color: '#61dafb' },
             { name: 'TypeScript', color: '#3178c6' },
+            { name: 'React', color: '#61dafb' },
+            { name: 'Next.js', color: '#000000' },
             { name: 'Styled', color: '#db7093' },
         ]
     },
     {
         title: 'Tourstory',
+        subtitle: '종합 여행 플랫폼 프로젝트',
         description: '종합 여행 플랫폼 프로젝트',
         image: '/images/projects/tourstory_1280_720.webp',
         link: 'https://tourstory.pyomin.com',
@@ -48,7 +52,7 @@ const About = () => {
     const project = projects[selectedProject];
 
     return (
-        <>
+        <main className={styles['main-wrapper']}>
             {/* Hero Section */}
             <section className={styles['hero-section']}>
                 <div className={styles['hero-section__card']}>
@@ -69,9 +73,10 @@ const About = () => {
                         <Image
                             src='/images/BlueCool1.png'
                             alt="BlueCool12 마스코트 이미지"
-                            width={185}
+                            width={160}
                             height={160}
                             className={styles['hero-section__mascot']}
+                            priority
                         />
                     </div>
                 </div>
@@ -117,8 +122,15 @@ const About = () => {
 
                 <article className={styles['project-section__article']}>
                     <h2>{project.title}</h2>
-                    <p>
+
+                    <div className={styles['project-section__subtitle-wrapper']}>
                         <MdOutlineDescription size={24} />
+                        <h3>
+                            {project.subtitle}
+                        </h3>
+                    </div>
+
+                    <p>
                         {project.description}
                     </p>
 
@@ -133,9 +145,13 @@ const About = () => {
                     </figure>
 
                     {project.link && (
-                        <section aria-label="프로젝트 웹 링크" style={{ margin: "12px 0" }}>
+                        <section aria-label="프로젝트 웹 링크" className={styles['project-section__link']}>
                             <h4><MdOutlineTravelExplore size={24} />Web</h4>
-                            <a href={project.link} target="_blank" rel="noopener noreferrer">
+                            <a
+                                href={project.link}
+                                target="_blank"
+                                rel="noopener noreferrer"                                
+                            >
                                 {project.link}
                             </a>
                         </section>
@@ -156,9 +172,10 @@ const About = () => {
                     </section>
 
                 </article>
+
             </section>
             {/* Project Area */}
-        </>
+        </main>
     );
 };
 
