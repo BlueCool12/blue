@@ -1,5 +1,8 @@
 'use client';
 
+import './global.css';
+import '@/components/admin/editor/ckeditor.css';
+
 import { ReactNode, Suspense } from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
@@ -27,7 +30,7 @@ export default function MainLayout({ children }: { children: ReactNode }) {
 const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: calc(100vh - 64px);
     overflow: hidden;
 `;
 

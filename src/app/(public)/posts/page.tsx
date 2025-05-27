@@ -1,13 +1,16 @@
 'use client';
 
+import styled from "styled-components";
+
 import { useEffect } from "react";
 import Link from "next/link";
-import styled from "styled-components";
+
+import { RootState } from "@/store/store";
 import { loadPosts } from "@/store/user/postSlice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { LoadingSpinner } from "@/components/common/LoadingSpinner";
+
 import { EmptyState } from "@/components/user/EmptyState";
-import { RootState } from "@/store/store";
+import { LoadingSpinner } from "@/components/common/LoadingSpinner";
 
 export default function PostList() {
 

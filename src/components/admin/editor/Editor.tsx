@@ -30,7 +30,6 @@ import translations from 'ckeditor5/translations/ko.js';
 
 import 'ckeditor5/ckeditor5.css';
 
-import styles from './Editor.module.css';
 import { useAppSelector } from '../../../store/hooks';
 import { selectToken } from '../../../store/authSlice';
 
@@ -262,18 +261,18 @@ const Editor = ({ onChange, initialData }: EditorProps) => {
 	}, [isLayoutReady, token]);
 
 	return (
-		<div className={styles['main-container']}>
+		<div className='main-container'>
 			<div
 				className={[
-					styles['editor-container'],
-					styles['editor-container_classic-editor'],
-					styles['editor-container_include-style'],
-					styles['editor-container_include-fullscreen']
+					'editor-container',
+					'editor-container_classic-editor',
+					'editor-container_include-style',
+					'editor-container_include-fullscreen'
 				].join(' ')}
 				ref={editorContainerRef}
 			>
-				<div className={styles['editor-container__editor']}>
-					<div ref={editorRef}>
+				<div className='editor-container__editor'>
+					<div ref={editorRef} className='editor-main'>
 						{editorConfig && (
 							<CKEditor
 								onReady={(editor) => {

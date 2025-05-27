@@ -1,22 +1,23 @@
 'use client';
 
+import hljs from "highlight.js";
+import 'highlight.js/styles/atom-one-dark.css';
+import styled from "styled-components";
+
 import { useEffect, useRef } from "react";
 import { useParams } from "next/navigation";
 
+import { RootState } from "@/store/store";
+import { loadPostDetail } from "@/store/user/postSlice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 
-import { loadPostDetail } from "@/store/user/postSlice";
-
-import { LoadingSpinner } from "@/components/common/LoadingSpinner";
 import { EmptyState } from "@/components/user/EmptyState";
+import { LoadingSpinner } from "@/components/common/LoadingSpinner";
 
-import hljs from "highlight.js";
-import 'highlight.js/styles/atom-one-dark.css';
 
-import styled from "styled-components";
-import { RootState } from "@/store/store";
 
 const PostDetail = () => {
+
     const { slug } = useParams<{ slug: string }>();
     const dispatch = useAppDispatch();
     const { postDetail, loading, error } = useAppSelector((state: RootState) => state.userPost);
@@ -77,10 +78,8 @@ const PostDetail = () => {
     }, [postDetail]);
 
     if (loading) return <LoadingSpinner />
-
     if (error) throw error;
-
-    if (!postDetail) return <EmptyState message="작성한 글이 없습니다..." />
+    if (!postDetail) return <EmptyState message="작성한 글이 없습니다..." />    
 
     return (
         <Article>
@@ -94,9 +93,6 @@ const PostDetail = () => {
             </Header>
 
             <Content ref={contentRef} dangerouslySetInnerHTML={{ __html: postDetail.content }} />
-
-
-
         </Article>
     );
 }

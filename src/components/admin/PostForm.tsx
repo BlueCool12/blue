@@ -98,7 +98,7 @@ const EditorWrapper = styled.div`
 const Form = styled.div`
     width: 100%;    
     max-width: 720px;
-    min-width: 320px;
+    min-width: 320px;    
     margin: 0 auto;
     box-sizing: border-box;
     display: flex;

@@ -3,13 +3,15 @@
 import styled from "styled-components";
 
 import { useState } from "react";
-import { clearError, loginAdmin } from "@/store/authSlice";
-import { RootState } from "@/store/store";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
+import { RootState } from "@/store/store";
+import { clearError, loginAdmin } from "@/store/authSlice";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+
 const Login = () => {
+
     const router = useRouter();
     const dispatch = useAppDispatch();
     const { loading, error } = useAppSelector((state: RootState) => state.auth);
@@ -41,6 +43,7 @@ const Login = () => {
                         alt="Logo"
                         width={100}
                         height={100}
+                        style={{ alignSelf: 'center', marginBottom: '1.5rem' }}
                     />
                     <input
                         type="text"
@@ -71,18 +74,18 @@ export default Login;
 const LoginWrapper = styled.div`
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;    
+    
+    height: 100%;
 `;
 
 const Form = styled.form`
     display: flex;
-    flex-direction: column;
+    flex-direction: column;    
     gap: 16px;    
     width: 100%;
-    max-width: 450px;
-    padding: 30px 70px 70px;
-    text-align: center;
+    max-width: 300px;
+    padding: 8rem 4rem 4rem;
+    text-align: center;    
     background-color: var(--card-bg);
     border-radius: 18px;
     border: 1px solid var(--border-color);
@@ -96,6 +99,7 @@ const Form = styled.form`
     button {
         cursor: pointer;
         padding: 10px;
+        margin-top: 1rem;
         font-weight: bold;
         background-color: var(--btn-bg);
         color: var(--btn-color);
