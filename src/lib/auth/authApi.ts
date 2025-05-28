@@ -1,4 +1,4 @@
-import api from "./axiosInstance";
+import api from "../api/axiosInstance";
 
 interface LoginRequest {
     username: string;

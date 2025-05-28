@@ -1,0 +1,154 @@
+.article {
+    padding: 3rem 1rem;
+    margin-bottom: 3rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+@media (max-width: 768px) {
+    .article {
+        padding: 2rem 0.5rem;
+        margin-bottom: 2rem;
+    }
+}
+
+.header {
+    border-bottom: 2px solid var(--border-color);
+    padding: 0 0 1rem;
+}
+
+.meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.category {
+    background: var(--theme-color-9);
+    color: var(--theme-color-1);
+    padding: 0.3rem 0.6rem;
+    border-radius: 9999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+
+
+}
+
+@media (max-width: 768px) {
+    .category {
+        font-size: 0.7rem;
+    }
+}
+
+.date {
+    font-size: 1rem;
+    opacity: 0.8;
+}
+
+.title {
+    font-size: 2rem;
+    padding: 1.5rem 0;
+}
+
+/* CKEditor 설정 */
+.content {
+    /* 전체 폰트 및 텍스트 */
+    padding: 1rem 0.1rem;
+    line-height: 1.6;
+    word-break: break-word;
+}
+
+/* 제목 요소 */
+.content h1,
+.content h2,
+.content h3,
+.content h4,
+.content h5,
+.content h6 {
+    margin: 1.5rem 0 1rem;
+    font-weight: bold;
+}
+
+/* 스타일 -> Marker (노란 배경) */
+.content span.marker {
+    background: yellow;
+}
+
+/* 스타일 -> Spoiler (hover 시 보이게 됨) */
+.content span.spoiler {
+    background: #000;
+    color: #000;
+    transition: color 0.3s ease;
+}
+
+.content span.spoiler:hover {
+    color: #fff;
+}
+
+/* 이미지 */
+.content img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1rem auto;
+    border-radius: 0.5rem;
+}
+
+/* 목록 */
+.content ul,
+.content ol {
+    padding-left: 2rem;
+    margin: 1rem 0;
+}
+
+.content li {
+    margin-bottom: 0.5rem;
+}
+
+/* 인용구 */
+.content blockquote {
+    border-left: 5px solid var(--border-color);
+    background-color: var(--card-bg);
+    padding: 0.75rem 1.25rem;
+    margin: 1.5rem 0;
+    font-style: italic;
+}
+
+.content blockquote p {
+    margin: 0.5rem 0;
+}
+
+/* 링크 */
+.content a {
+    text-decoration: underline;
+}
+
+.content a:hover {
+    color: var(--link-hover-color);
+}
+
+/* 구분선 */
+.content hr {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: 2rem 0;
+}
+
+/* 이미지 캡션 및 figure */
+.content figure {
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.content figcaption {
+    font-size: 0.9rem;
+    opacity: 0.7;
+    margin-top: 0.5rem;
+}
+
+/* 코드 블록 */
+.content pre {
+    overflow: auto;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    font-size: 1rem;
+}
