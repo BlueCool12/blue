@@ -1,7 +1,6 @@
-import type { IConfig } from "next-sitemap";
-
-const config: IConfig = {
-    siteUrl: 'https://www.pyomin.com',
+/** @type {import('next-sitemap').IConfig} */
+const config = {
+    siteUrl: 'https://bluecool.pyomin.com',
     generateRobotsTxt: true,
     sitemapSize: 5000,
     changefreq: 'daily',
@@ -17,4 +16,4 @@ const config: IConfig = {
     },
 };
 
-export default config;
+module.exports = config;

@@ -1,13 +1,24 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-export function middleware(req: NextRequest) {
-    const token = req.cookies.get('token')?.value;
-
+export async function middleware(req: NextRequest) {
     const url = req.nextUrl.clone();
 
     if (url.pathname.startsWith('/admin') && url.pathname !== '/admin/login') {
-        if (!token) {
+
+        try {
+            const response = await fetch(`https://bluecool.pyomin.com/api/auth/me`, {
+                method: 'GET',
+                headers: {
+                    cookie: req.headers.get('cookie') || '',
+                },
+            });
+
+            if (!response.ok) {
+                url.pathname = '/admin/login';
+                return NextResponse.redirect(url);
+            }
+        } catch (err) {
             url.pathname = '/admin/login';
             return NextResponse.redirect(url);
         }
