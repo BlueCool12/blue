@@ -16,6 +16,7 @@ export async function highlightCodeBlocksWithShiki(html: string): Promise<string
             theme: 'github-dark', // 원하는 테마로 변경 가능
         });
 
+        // 현재 언어 표시
         const wrapped = `
             <div style="position: relative; margin: 1rem 0; border-radius: 0.5rem; background: #0d1117;">
             <div style="
