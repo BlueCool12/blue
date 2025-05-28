@@ -1,6 +1,7 @@
 .content {    
-    width: 100%;    
+    width: 100%;
     max-width: 800px;    
+    min-height: 100vh;
     margin: 0 auto;
     padding-left: 16px;
     padding-right: 16px;
@@ -9,8 +10,9 @@
 }
 
 @media (max-width: 768px) {
-    .content {
+    .content {        
         max-width: 100%;
+        min-height: 100vh;
         padding-top: 64px;
         padding-bottom: 56px;
     }

@@ -4,12 +4,13 @@
     justify-content: center;
     align-items: center;
     gap: 2rem;
-    height: 100%;
+    height: calc(100vh - 304px);
 }
 
 @media (max-width: 768px) {
     .wrapper {
         gap: 1.5rem;
+        height: calc(100vh - 240px);
     }
 }
 
