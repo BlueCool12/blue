@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useRouter } from "next/navigation";
-import { postApi } from "@/api/admin/postApi";
+import { postApi } from "@/lib/api/admin/postApi";
 import { Post, PostForm } from "../../../../../components/admin/PostForm";
 
 const Write = () => {

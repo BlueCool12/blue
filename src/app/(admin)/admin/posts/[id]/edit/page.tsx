@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Post, PostForm } from "@/components/admin/PostForm";
-import { postApi } from "@/api/admin/postApi";
+import { postApi } from "@/lib/api/admin/postApi";
 import { useAppDispatch } from "@/store/hooks";
 import { updatePost } from "@/store/admin/postSlice";
 

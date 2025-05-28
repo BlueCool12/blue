@@ -1,4 +1,6 @@
-import { postApi } from "@/api/user/postApi";
+import { postApi } from "@/lib/api/user/postApi";
+import { getPostBySlug } from "@/lib/server/post";
+import { highlightCodeBlocksWithShiki } from "@/lib/utils/highlight";
 
 interface PostDetail {
     slug: string;
@@ -19,9 +21,11 @@ export const postService = {
     },
 
     getPostBySlug: async (slug: string) => {
-        const post = await postApi.getPostBySlug(slug);
+        const post = await getPostBySlug(slug);
+        const highlightedContent = await highlightCodeBlocksWithShiki(post.content);
         return {
             ...post,
+            content: highlightedContent,
             createdAt: formatDate(post.createdAt),
         };
     }
