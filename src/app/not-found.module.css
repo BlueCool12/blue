@@ -4,8 +4,7 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    /* body margin만큼 제거 */
-    height: calc(100vh - 16px);
+    height: 100%;
 }
 
 .notfound__title-section {

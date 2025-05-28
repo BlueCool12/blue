@@ -47,7 +47,7 @@ const ErrorMain = styled.main`
     align-items: center;
     justify-content: center;
     text-align: center;    
-    height: 100vh;
+    height: 100%;
 `;
 
 const TitleSection = styled.section`
