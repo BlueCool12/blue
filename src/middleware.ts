@@ -18,7 +18,7 @@ export async function middleware(req: NextRequest) {
                 url.pathname = '/admin/login';
                 return NextResponse.redirect(url);
             }
-        } catch (err) {
+        } catch {
             url.pathname = '/admin/login';
             return NextResponse.redirect(url);
         }
