@@ -17,7 +17,10 @@ const projects = [
     {
         title: 'BlueCool',
         subtitle: '개인 블로그 프로젝트',
-        description: '- 다크모드 구현',
+        description:
+            '관리자 페이지가 있는 개인 블로그를 기획하였습니다.\n\n' +
+            '다크모드 구현 및 SEO 최적화를 위해 리액트만으로 개발하던 프로젝트를 Next.js로 마이그레이션 하였습니다.\n\n' +
+            'JWT 토큰을 이용한 Spring Security 구성 및 CKEditor를 사용한 글 작성 및 파일 업로드 기능을 구현하였습니다.',
         image: '/images/projects/bluecool_1280_720.webp',
         link: 'https://www.pyomin.com',
         stack: [
@@ -33,7 +36,10 @@ const projects = [
     {
         title: 'Tourstory',
         subtitle: '종합 여행 플랫폼 프로젝트',
-        description: '종합 여행 플랫폼 프로젝트',
+        description:
+            '여행 일정을 계획하고 숙소 예약, 원데이 클래스 예약, 여행 패키지 상품 예약 및 여행 게시판과 미니게임이 가능한 종합 여행 플랫폼을 기획하였습니다.\n\n' +
+            '숙소 예약 기능은 에어비앤비를 참고하였으며 라이브러리를 사용하지 않고 자바스크립트로 달력을 구현하였고 Polling 방식을 이용한 알림기능도 구현하였습니다.\n\n' +
+            '외부 API로는 카카오 지도, 로그인, 결제와 Chart.js를 사용하였습니다.',
         image: '/images/projects/tourstory_1280_720.webp',
         link: 'https://tourstory.pyomin.com',
         stack: [
@@ -130,7 +136,7 @@ const About = () => {
                         </h3>
                     </div>
 
-                    <p>
+                    <p className={styles['project-section__description']}>
                         {project.description}
                     </p>
 
@@ -150,7 +156,7 @@ const About = () => {
                             <a
                                 href={project.link}
                                 target="_blank"
-                                rel="noopener noreferrer"                                
+                                rel="noopener noreferrer"
                             >
                                 {project.link}
                             </a>

@@ -254,6 +254,8 @@
 .project-section__article p {            
     margin: 1rem;
     font-size: 1rem;
+    font-weight: 300;
+    white-space: pre-line;    
 }
 
 .project-section__article h4 {
