@@ -22,7 +22,7 @@ export async function generateMetadata(
     };
 }
 
-export default async function PostDetail({ params }: { params: Awaited<{ slug: string }> }) {
+export default async function PostDetail({ params }: { params: { slug: string } }) {
 
     const post = await postService.getPostBySlug(params.slug);
 
