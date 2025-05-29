@@ -4,5 +4,6 @@ export async function getPostBySlug(slug: string) {
         cache: 'no-store',
     });
     if (!response.ok) throw new Error('게시글이 존재하지 않습니다.');
-    return response.json();
+    const data = await response.json();
+    return data;
 }

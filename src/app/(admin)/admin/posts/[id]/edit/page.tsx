@@ -1,22 +1,21 @@
 'use client';
 
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Post, PostForm } from "@/components/admin/PostForm";
 import { postApi } from "@/lib/api/admin/postApi";
 import { useAppDispatch } from "@/store/hooks";
 import { updatePost } from "@/store/admin/postSlice";
 
-interface EditPageProps {
-    params: Promise<{ id: string }>;
-}
+const Edit = () => {
 
-const Edit = ({ params }: EditPageProps) => {
-    const unwrappedParams = React.use(params);
-    const { id } = unwrappedParams;
+    const pathname = usePathname();
     const router = useRouter();
-    const [postData, setPostData] = useState<Post | undefined>(undefined);
     const dispatch = useAppDispatch();
+
+    const id = pathname.split('/').at(-2); // '/admin/posts/[id]/edit' → id 추출
+
+    const [postData, setPostData] = useState<Post | undefined>(undefined);
 
     useEffect(() => {
         if (!id) return;
