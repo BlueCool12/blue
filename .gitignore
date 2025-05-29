@@ -32,4 +32,7 @@ dist-ssr
 # next.js 빌드
 .next/
 
-# git actions 테스트1
+# SEO 관련 파일
+/public/robots.txt
+/public/sitemap.xml
+/public/sitemap-*.xml

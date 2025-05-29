@@ -1,9 +1,0 @@
-# *
-User-agent: *
-Allow: /
-
-# Host
-Host: https://bluecool.pyomin.com
-
-# Sitemaps
-Sitemap: https://bluecool.pyomin.com/sitemap.xml
