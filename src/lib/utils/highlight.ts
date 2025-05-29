@@ -1,7 +1,7 @@
 import { codeToHtml } from "shiki";
 
 export async function highlightCodeBlocksWithShiki(html: string): Promise<string> {
-    const regex = /<pre><code class="language-(\w+)">([\s\S]*?)<\/code><\/pre>/g;
+    const regex = /<pre><code class="language-([\w-+]+)">([\s\S]*?)<\/code><\/pre>/g;
 
     const matches = [...html.matchAll(regex)];
 

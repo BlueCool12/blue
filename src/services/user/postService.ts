@@ -1,6 +1,7 @@
 import { postApi } from "@/lib/api/user/postApi";
-import { getPostBySlug as fetchPostBySlug } from "@/lib/server/post";
+import { fetchPostBySlug } from "@/lib/server/post";
 import { highlightCodeBlocksWithShiki } from "@/lib/utils/highlight";
+import { notFound } from "next/navigation";
 
 interface PostDetail {
     slug: string;
@@ -21,14 +22,18 @@ export const postService = {
     },
 
     getPostBySlug: async (slug: string) => {
-        const post = await fetchPostBySlug(slug);
-        const highlightedContent = await highlightCodeBlocksWithShiki(post.content);
-        return {
-            ...post,
-            content: highlightedContent,
-            createdAt: formatDate(post.createdAt),
-        };
-    },
+        try {
+            const post = await fetchPostBySlug(slug);
+            const highlightedContent = await highlightCodeBlocksWithShiki(post.content);
+            return {
+                ...post,
+                content: highlightedContent,
+                createdAt: formatDate(post.createdAt),
+            };
+        } catch {
+            notFound();
+        }
+    }
 };
 
 function formatDate(isoDate: string): string {
