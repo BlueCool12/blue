@@ -2,21 +2,18 @@ import styles from './page.module.css';
 
 import { Metadata } from 'next';
 import { postService } from '@/services/user/postService';
+import { notFound } from 'next/navigation';
 
-export async function generateMetadata({
-    params
-}: {
-    params: { slug: string }
-}
-): Promise<Metadata> {
-    const post = await postService.getPostBySlug(params.slug);
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function generateMetadata(props: any): Promise<Metadata> {
+    const post = await postService.getPostBySlug(props?.params?.slug);
 
     return {
         title: post.title,
         openGraph: {
             title: post.title,
             type: 'article',
-            url: `https://www.pyomin.com/posts/${params.slug}`,
+            url: `https://www.pyomin.com/posts/${props?.params?.slug}`,
         },
         twitter: {
             card: 'summary_large_image',
@@ -25,9 +22,10 @@ export async function generateMetadata({
     };
 }
 
-export default async function Page({ params }: { params: { slug: string } }) {
-
-    const post = await postService.getPostBySlug(params.slug);
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default async function PostDetail(props: any) {
+    const post = await postService.getPostBySlug(props?.params?.slug);
+    if (!post) notFound();
 
     return (
         <article className={styles.article}>
