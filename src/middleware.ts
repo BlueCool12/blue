@@ -4,8 +4,7 @@ import type { NextRequest } from "next/server";
 export async function middleware(req: NextRequest) {
     const url = req.nextUrl.clone();
 
-    if (url.pathname.startsWith('/admin') && url.pathname !== '/admin/login') {
-
+    if (url.pathname !== '/admin/login') {
         try {
             const response = await fetch(`https://bluecool.pyomin.com/api/auth/me`, {
                 method: 'GET',
