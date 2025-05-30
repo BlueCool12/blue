@@ -10,8 +10,7 @@ interface PageProps {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
     const { slug: rawSlug } = await params;
-    const slug = decodeURIComponent(rawSlug);
-    console.log('2: ', slug);
+    const slug = decodeURIComponent(rawSlug);    
     const post = await postService.getPostBySlug(slug);
 
     return {
@@ -30,8 +29,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function PostDetail({ params }: PageProps) {
     const { slug: rawSlug } = await params;
-    const slug = decodeURIComponent(rawSlug);
-    console.log('1: ', slug);
+    const slug = decodeURIComponent(rawSlug);    
     const post = await postService.getPostBySlug(slug);
     if (!post) notFound();
 
