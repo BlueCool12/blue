@@ -28,6 +28,7 @@ const Login = () => {
 
         try {
             await dispatch(loginAdmin(form)).unwrap();
+            console.log('✅ 로그인 및 인증 성공 → 페이지 이동 시도');
             router.push('/admin');
         } catch (error) {
             console.error('로그인 실패: ', error);
@@ -37,7 +38,7 @@ const Login = () => {
     return (
         <>
             <LoginWrapper>
-                <Form onSubmit={handleSubmit}>
+                <Form>
                     <Image
                         src='/images/BlueCoolLogin.png'
                         alt="Logo"
@@ -61,7 +62,7 @@ const Login = () => {
                         onChange={handleChange}
                         required
                     />
-                    <button type="submit" disabled={loading}>로그인</button>
+                    <button type="button" onClick={handleSubmit} disabled={loading}>로그인</button>
                     {error && <p style={{ color: 'red' }}>{error}</p>}
                 </Form>
             </LoginWrapper>
