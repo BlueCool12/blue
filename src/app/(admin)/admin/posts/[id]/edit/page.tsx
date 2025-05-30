@@ -1,7 +1,6 @@
-import dynamic from "next/dynamic";
+'use client';
 
-
-const Edit = dynamic(() => import('@/components/admin/EditPostPage'), { ssr: false });
+import Edit from '@/components/admin/EditPostPage';
 
 export default function Page() {
     return <Edit />;
