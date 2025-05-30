@@ -29,8 +29,8 @@ const Login = () => {
         try {
             await dispatch(loginAdmin(form)).unwrap();
             router.push('/admin');
-        } catch {
-
+        } catch (error) {
+            console.error('로그인 실패: ', error);
         }
     };
 

@@ -4,16 +4,20 @@ import { Metadata } from 'next';
 import { postService } from '@/services/user/postService';
 import { notFound } from 'next/navigation';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function generateMetadata(props: any): Promise<Metadata> {
-    const post = await postService.getPostBySlug(props?.params?.slug);
+interface PageProps {
+    params: Promise<{ slug: string }>;
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+    const { slug } = await params;
+    const post = await postService.getPostBySlug(slug);
 
     return {
         title: post.title,
         openGraph: {
             title: post.title,
             type: 'article',
-            url: `https://www.pyomin.com/posts/${props?.params?.slug}`,
+            url: `https://www.pyomin.com/posts/${slug}`,
         },
         twitter: {
             card: 'summary_large_image',
@@ -22,9 +26,9 @@ export async function generateMetadata(props: any): Promise<Metadata> {
     };
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default async function PostDetail(props: any) {
-    const post = await postService.getPostBySlug(props?.params?.slug);
+export default async function PostDetail({ params }: PageProps) {
+    const { slug } = await params;
+    const post = await postService.getPostBySlug(slug);
     if (!post) notFound();
 
     return (

@@ -10,6 +10,7 @@ export const loginAdmin = createAsyncThunk(
     ) => {
         try {
             const token = await adminLogin({ username, password });
+            await checkAuth();
             return token;
         } catch (error: unknown) {
             if (error instanceof Error) {
