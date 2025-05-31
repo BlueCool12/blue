@@ -5,14 +5,7 @@ export async function fetchPostBySlug(slug: string) {
 
     const baseUrl = isServer
         ? process.env.INTERNAL_API_BASE_URL
-        : 'http://localhost:8888/api';
-
-    if (isServer) {
-        console.log('📡 [SERVER] baseUrl:', baseUrl);
-        console.log('📡 [SERVER] ENV:', process.env.INTERNAL_API_BASE_URL);
-    } else {
-        console.log('📡 [CLIENT] baseUrl:', baseUrl);
-    }
+        : 'http://localhost:8888/api';    
 
     const url = `${baseUrl}/user/posts/${slug}`;
 
