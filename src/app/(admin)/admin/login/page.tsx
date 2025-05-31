@@ -3,7 +3,6 @@
 import styled from "styled-components";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 import { RootState } from "@/store/store";
@@ -11,8 +10,7 @@ import { clearError, loginAdmin } from "@/lib/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 
 const Login = () => {
-
-    const router = useRouter();
+    
     const dispatch = useAppDispatch();
     const { loading, error } = useAppSelector((state: RootState) => state.auth);
 
