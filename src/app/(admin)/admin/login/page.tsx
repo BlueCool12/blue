@@ -28,8 +28,7 @@ const Login = () => {
 
         try {
             await dispatch(loginAdmin(form)).unwrap();
-            console.log('✅ 로그인 및 인증 성공 → 페이지 이동 시도');
-            router.push('/admin');
+            window.location.href = '/admin';
         } catch (error) {
             console.error('로그인 실패: ', error);
         }
