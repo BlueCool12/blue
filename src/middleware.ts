@@ -2,13 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 
 
 export function middleware(req: NextRequest) {
-    const path = req.nextUrl.pathname;
+    const { pathname } = req.nextUrl;
+    const token = req.cookies.get('token')?.value;
 
-    const cookieHeader = req.headers.get('cookie') || '';
-    const tokenMatch = cookieHeader.match(/token=([^;]*)/);
-    const token = tokenMatch?.[1];
-
-    if (!token && path.startsWith('/admin') && path !== '/admin/login') {
+    if (!token && pathname.startsWith('/admin') && pathname !== '/admin/login') {
         const loginUrl = req.nextUrl.clone();
         loginUrl.pathname = '/admin/login';
         return NextResponse.redirect(loginUrl);
