@@ -19,7 +19,7 @@ const projects = [
         subtitle: '개인 블로그 프로젝트',
         description:
             '관리자 페이지가 있는 개인 블로그를 기획하였습니다.\n\n' +
-            '다크모드 구현 및 SEO 최적화를 위해 리액트만으로 개발하던 프로젝트를 Next.js로 마이그레이션 하였습니다.\n\n' +
+            '다크모드 구현 및 기존 리액트 프로젝트를 SEO 최적화를 위해 Next.js로 마이그레이션 하였습니다.\n\n' +
             'JWT 토큰을 이용한 Spring Security 구성 및 CKEditor를 사용한 글 작성 및 파일 업로드 기능을 구현하였습니다.',
         image: '/images/projects/bluecool_1280_720.webp',
         link: 'https://www.pyomin.com',
