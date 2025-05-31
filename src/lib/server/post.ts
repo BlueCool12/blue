@@ -7,13 +7,6 @@ export async function fetchPostBySlug(slug: string) {
         ? process.env.INTERNAL_API_BASE_URL
         : 'https://bluecool.pyomin.com/api';
 
-    if (isServer) {
-        console.log('📡 [SERVER] baseUrl:', baseUrl);
-        console.log('📡 [SERVER] ENV:', process.env.INTERNAL_API_BASE_URL);
-    } else {
-        console.log('📡 [CLIENT] baseUrl:', baseUrl);
-    }
-
     const url = `${baseUrl}/user/posts/${slug}`;
 
     const response = await fetch(url, {
