@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { adminLogin, checkAuth } from "@/services/authService";
+import { adminLogin, checkAuth } from "@/lib/auth/authService";
 
 // 비동기 로그인 처리
 export const loginAdmin = createAsyncThunk(
@@ -9,8 +9,7 @@ export const loginAdmin = createAsyncThunk(
         { rejectWithValue }
     ) => {
         try {
-            const token = await adminLogin({ username, password });
-            await checkAuth();
+            const token = await adminLogin({ username, password });            
             return token;
         } catch (error: unknown) {
             if (error instanceof Error) {
