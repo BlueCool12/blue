@@ -9,13 +9,13 @@
 
 .main-container {
     font-family: var(--font-noto), sans-serif;
-    width: 100%;    
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
 }
 
 /* 글자 폰트, 라인 높이 */
-.ck-content {    
+.ck-content {
     font-family: var(--font-noto), sans-serif;
     line-height: 1.6;
     word-break: break-word;
@@ -24,7 +24,7 @@
 /* 에디터 전체 너비 조절 */
 .editor-container_classic-editor .editor-container__editor {
     max-width: none;
-    box-sizing: border-box;    
+    box-sizing: border-box;
 }
 
 /* 에디터 전체 높이 조절 */
@@ -60,6 +60,14 @@
     margin: 0 0 1em;
     font-weight: bold;
     padding: 0;
+}
+
+.ck-content blockquote {
+    border-left: 5px solid var(--border-color);
+    background-color: var(--card-bg);
+    padding: 0.75rem 1.25rem;
+    margin: 1.5rem 0;
+    font-style: italic;
 }
 
 .ck-content p.info-box {
