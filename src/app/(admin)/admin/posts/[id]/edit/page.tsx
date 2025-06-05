@@ -2,10 +2,14 @@
 
 import React, { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { Post, PostForm } from "@/components/admin/PostForm";
+
+import { PostForm } from "@/components/admin/PostForm";
 import { postApi } from "@/lib/api/admin/postApi";
+
 import { useAppDispatch } from "@/store/hooks";
 import { updatePost } from "@/store/admin/postSlice";
+
+import type { PostFormValues } from "@/types/post";
 
 const Edit = () => {
 
@@ -15,7 +19,7 @@ const Edit = () => {
 
     const id = pathname.split('/').at(-2); // '/admin/posts/[id]/edit' → id 추출
 
-    const [postData, setPostData] = useState<Post | undefined>(undefined);
+    const [postData, setPostData] = useState<PostFormValues | undefined>(undefined);
 
     useEffect(() => {
         if (!id) return;
@@ -37,7 +41,7 @@ const Edit = () => {
         getPost();
     }, [id]);
 
-    const handleUpdate = (post: Post) => {
+    const handleUpdate = (post: PostFormValues) => {
         if (!id) return;
 
         dispatch(updatePost({ id: Number(id), payload: post }))

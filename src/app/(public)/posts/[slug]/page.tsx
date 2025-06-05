@@ -1,8 +1,9 @@
 import styles from './page.module.css';
 
 import { Metadata } from 'next';
-import { postService } from '@/services/user/postService';
 import { notFound } from 'next/navigation';
+
+import { postService } from '@/services/user/postService';
 
 interface PageProps {
     params: Promise<{ slug: string }>;

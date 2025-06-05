@@ -2,14 +2,17 @@
 
 import React from 'react';
 import { useRouter } from "next/navigation";
+
 import { postApi } from "@/lib/api/admin/postApi";
-import { Post, PostForm } from "../../../../../components/admin/PostForm";
+import { PostForm } from "@/components/admin/PostForm";
+
+import type { PostFormValues } from '@/types/post';
 
 const Write = () => {
 
     const router = useRouter();
 
-    const handleCreate = async (post: Post) => {
+    const handleCreate = async (post: PostFormValues) => {
         try {
             const result = await postApi.createPost(post);
             console.log("등록 성공", result);

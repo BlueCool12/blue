@@ -1,16 +1,11 @@
-import { postApi } from "@/lib/api/user/postApi";
-import { fetchPostBySlug } from "@/lib/server/post";
 import { highlightCodeBlocksWithShiki } from "@/lib/utils/highlight";
+
 import { notFound } from "next/navigation";
 
-interface PostDetail {
-    slug: string;
-    title: string;
-    category: string;
-    contentSummary: string;
-    createdAt: string;
-    content: string;
-}
+import { postApi } from "@/lib/api/user/postApi";
+import { fetchPostBySlug } from "@/lib/server/post";
+
+import type { PostDetail } from "@/types/post";
 
 export const postService = {
     getAllPosts: async () => {

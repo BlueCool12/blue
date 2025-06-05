@@ -4,9 +4,10 @@ import styles from './Header.module.css';
 import clsx from 'clsx';
 
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useTheme } from 'next-themes';
+
 
 import { MdOutlineDarkMode, MdOutlineLightMode, MdOutlineMenu, MdOutlineClose } from 'react-icons/md';
 

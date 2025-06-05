@@ -2,9 +2,11 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
+
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { verifyAuth } from "@/lib/auth/authSlice";
+
 import { LoadingSpinner } from "../common/LoadingSpinner";
-import { verifyAuth } from "../../lib/auth/authSlice";
 
 export default function AuthGuard({ children }: { children: React.ReactNode }) {
     const router = useRouter();

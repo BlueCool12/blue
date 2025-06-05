@@ -10,7 +10,7 @@ export async function fetchPostBySlug(slug: string) {
     const url = `${baseUrl}/user/posts/${slug}`;
 
     const response = await fetch(url, {
-        cache: 'force-cache',
+        cache: 'no-store',
     });
 
     if (!response.ok) throw new Error('게시글이 존재하지 않습니다.');

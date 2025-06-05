@@ -1,9 +1,6 @@
 import { getAuth, login } from "@/lib/auth/authApi";
 
-interface LoginRequest {
-    username: string;
-    password: string;
-}
+import type { LoginRequest } from "./auth.api";
 
 export const adminLogin = async ({ username, password }: LoginRequest): Promise<string> => {
     const { token } = await login({ username, password });

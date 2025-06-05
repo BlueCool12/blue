@@ -1,11 +1,11 @@
 'use client'
 
+import styled from "styled-components";
+
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 import { OutlineButton } from "@/components/common/OutlineButton";
-
-import styled from "styled-components";
-import Image from "next/image";
 import { MdOutlineHome, MdOutlineHistory } from 'react-icons/md';
 
 export default function Error({

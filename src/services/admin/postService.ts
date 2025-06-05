@@ -1,4 +1,6 @@
-import { CreatePostPayload, PostDetailResponse, PostListResponse, postApi } from "@/lib/api/admin/postApi";
+import { postApi } from "@/lib/api/admin/postApi";
+
+import type { CreatePostPayload, PostListResponse, PostDetailResponse } from "@/types/post";
 
 const formatDate = (isoDateString: string) => {
     return isoDateString.split("T")[0];

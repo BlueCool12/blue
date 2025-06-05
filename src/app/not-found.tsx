@@ -1,11 +1,11 @@
 'use client'
 
+import styles from './not-found.module.css';
+
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 import { OutlineButton } from "@/components/common/OutlineButton";
-
-import Image from "next/image";
-import styles from './not-found.module.css';
 import { MdOutlineHome, MdOutlineHistory } from 'react-icons/md';
 
 export default function NotFound() {

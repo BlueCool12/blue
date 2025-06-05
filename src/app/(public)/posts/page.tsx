@@ -12,15 +12,9 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { EmptyState } from "@/components/user/EmptyState";
 import { LoadingSpinner } from "@/components/common/LoadingSpinner";
 
-export default function PostList() {
+import type { Post } from "@/types/post";
 
-    interface Post {
-        slug: string;
-        title: string;
-        category: string;
-        contentSummary: string;
-        createdAt: string;
-    }
+export default function PostList() {
 
     const dispatch = useAppDispatch();
     const { posts, loading, error } = useAppSelector((state: RootState) => state.userPost);

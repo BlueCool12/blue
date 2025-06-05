@@ -1,4 +1,5 @@
 import styles from './EmptyState.module.css';
+
 import Image from 'next/image';
 
 export const EmptyState = ({ message }: { message?: string }) => {

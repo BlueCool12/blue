@@ -1,11 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+
 import { postService } from "@/services/user/postService";
-import { Post, postDetail } from "@/types/post";
+
+import { Post, PostDetail } from "@/types/post";
 
 
 interface PostListState {
     posts: Post[];
-    postDetail: postDetail | null;
+    postDetail: PostDetail | null;
     loading: boolean;
     error: string | null;
 }

@@ -1,28 +1,24 @@
-import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { OutlineButton } from "../common/OutlineButton";
+
+import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
+
+import type { PostFormValues } from "@/types/post";
 
 const CKEditor = dynamic(() => import('./editor/Editor'), {
     ssr: false,
 });
 
-export interface Post {
-    title: string;
-    content: string;
-    category: string;
-    isPublic: boolean;
-}
-
 interface PostFormProps {
-    initialData?: Post;
-    onSubmit: (post: Post) => void;
+    initialData?: PostFormValues;
+    onSubmit: (post: PostFormValues) => void;
     mode?: 'create' | 'edit';
 }
 
 export const PostForm = ({ initialData, onSubmit, mode = 'create' }: PostFormProps) => {
 
-    const [post, setPost] = useState<Post>(() => initialData ?? {
+    const [post, setPost] = useState<PostFormValues>(() => initialData ?? {
         title: '',
         content: '',
         category: '',
