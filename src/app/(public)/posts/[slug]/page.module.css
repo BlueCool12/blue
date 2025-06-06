@@ -96,7 +96,7 @@
 /* 목록 */
 .content ul,
 .content ol {
-    padding-left: 2rem;
+    padding-left: 1rem;
     margin: 1rem 0;
 }
 
