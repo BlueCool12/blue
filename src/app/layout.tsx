@@ -24,9 +24,9 @@ export const metadata = {
         siteName: 'BlueCool',
         images: [
             {
-                url: 'https://www.pyomin.com/images/BlueCool1.png',
-                width: 600,
-                height: 600,
+                url: 'https://www.pyomin.com/images/og_image_resize.png',
+                width: 1200,
+                height: 630,
                 alt: 'BlueCool 대표 이미지',
             },
         ],
@@ -35,7 +35,7 @@ export const metadata = {
         card: 'summary_large_image',
         title: 'BlueCool',
         description: 'BlueCool 공식 블로그 입니다.',
-        images: ['https://www.pyomin.com/images/BlueCool1.png'],
+        images: ['https://www.pyomin.com/images/og_image_resize.png'],
     },
     metadataBase: new URL('https://www.pyomin.com'),
 }
