@@ -1,5 +1,7 @@
 import { Noto_Sans_KR } from 'next/font/google';
+import { Metadata } from 'next';
 import Script from 'next/script';
+
 import { Providers } from './providers';
 
 const notoSans = Noto_Sans_KR({
@@ -9,7 +11,7 @@ const notoSans = Noto_Sans_KR({
     display: 'swap',
 });
 
-export const metadata = {
+export const metadata: Metadata = {
     title: {
         default: 'BlueCool',
         template: '%s | BlueCool',
@@ -19,9 +21,10 @@ export const metadata = {
     openGraph: {
         title: 'BlueCool',
         description: 'BlueCool 공식 블로그 입니다.',
-        url: 'https://www.pyomin.com',
-        type: 'website',
         siteName: 'BlueCool',
+        url: 'https://www.pyomin.com',
+        locale: 'ko_KR',
+        type: 'website',
         images: [
             {
                 url: 'https://www.pyomin.com/images/og_image_resize.png',

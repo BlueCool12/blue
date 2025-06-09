@@ -6,11 +6,14 @@ import { useEffect, useRef, useState } from 'react';
 import { useTheme } from 'next-themes';
 import Image from 'next/image';
 
+import { LoadingSpinner } from '@/components/common/LoadingSpinner';
+
 export default function GuestbookPage() {
 
     const ref = useRef<HTMLDivElement>(null);
     const { theme } = useTheme();
     const [mounted, setMounted] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     const scrollToComments = () => {
         window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
@@ -22,6 +25,8 @@ export default function GuestbookPage() {
 
     useEffect(() => {
         if (!mounted || !ref.current) return;
+
+        setIsLoading(true);
 
         ref.current.innerHTML = '';
 
@@ -43,6 +48,8 @@ export default function GuestbookPage() {
 
         script.setAttribute('theme', appliedTheme);
 
+        script.onload = () => setIsLoading(false);
+
         ref.current?.appendChild(script);
     }, [theme, mounted]);
 
@@ -58,6 +65,11 @@ export default function GuestbookPage() {
                 priority
             />
             <button className={styles.button} onClick={scrollToComments}>✍️ 방명록 남기러 가기</button>
+
+            {isLoading && (
+                <LoadingSpinner />
+            )}
+
             <div ref={ref} />
         </main>
     );
