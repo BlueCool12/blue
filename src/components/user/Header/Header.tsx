@@ -14,11 +14,13 @@ import { MdOutlineDarkMode, MdOutlineLightMode, MdOutlineMenu, MdOutlineClose } 
 export const Header: React.FC = () => {
 
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-    const { theme, setTheme } = useTheme();
-
+    const { theme, resolvedTheme, setTheme } = useTheme();
     const [mounted, setMounted] = useState(false);
-    useEffect(() => setMounted(true), []);
+
+    useEffect(() => {
+        setMounted(true)
+    }, []);
+
     if (!mounted) return null;
 
     return (
@@ -30,13 +32,13 @@ export const Header: React.FC = () => {
                     <Link href='/'>
                         <Image
                             src={
-                                theme === 'light'
+                                resolvedTheme === 'light'
                                     ? '/images/logo/big_org.png'
                                     : '/images/logo/big_dark_org.png'
                             }
                             alt="헤더 로고"
-                            width={theme === 'light' ? 50 : 74}
-                            height={theme === 'light' ? 40 : 40}
+                            width={resolvedTheme === 'light' ? 50 : 74}
+                            height={40}
                             priority
                         />
                     </Link>
@@ -60,7 +62,7 @@ export const Header: React.FC = () => {
 
                     <div className={styles['header__icons']}>
                         <div onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
-                            {theme === 'light' ? (
+                            {resolvedTheme === 'light' ? (
                                 <MdOutlineDarkMode size={24} />
                             ) : (
                                 <MdOutlineLightMode size={24} />
@@ -86,16 +88,16 @@ export const Header: React.FC = () => {
                         <div className={styles['mobile-menu__logo']}>
                             <Image
                                 src={
-                                    theme === 'light'
+                                    resolvedTheme === 'light'
                                         ? '/images/logo/small.png'
                                         : '/images/logo/small_dark.png'
                                 }
-                                alt='Logo'
+                                alt='모바일 메뉴 로고'
                                 width={31}
                                 height={36}
                                 priority
                             />
-                        </div> 
+                        </div>
 
                         <MdOutlineClose
                             size={24}
