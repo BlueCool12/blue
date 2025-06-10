@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 
 import { EmptyState } from "@/components/user/EmptyState";
 import { LoadingSpinner } from "@/components/common/LoadingSpinner";
+import { CategorySidebar } from "@/components/user/CategorySidebar";
 
 import type { Post } from "@/types/post";
 
@@ -24,32 +25,36 @@ export default function PostList() {
     }, [dispatch]);
 
     if (loading) { return <LoadingSpinner /> }
-    if (posts.length === 0) return <EmptyState message="열심히 공부 중입니다..." />
-    if (error) throw error;
+    // if (posts.length === 0) return <EmptyState message="열심히 공부 중입니다..." />
+    // if (error) throw error;
 
     return (
-        <PostListSection>
-            <PostListWrapper>
-                {posts.map((post: Post) => (
-                    <ListItem key={post.slug}>
-                        <Post>
-                            <Link href={`/posts/${post.slug}`}>
-                                <TitleWrapper>
-                                    <Title>{post.title}</Title>
-                                    <Category>{post.category}</Category>
-                                </TitleWrapper>
+        <>
+            <PostListSection>
+                <PostListWrapper>
+                    {posts.map((post: Post) => (
+                        <ListItem key={post.slug}>
+                            <Post>
+                                <Link href={`/posts/${post.slug}`}>
+                                    <TitleWrapper>
+                                        <Title>{post.title}</Title>
+                                        <Category>{post.category}</Category>
+                                    </TitleWrapper>
 
-                                <Content>{post.contentSummary}</Content>
+                                    <Content>{post.contentSummary}</Content>
 
-                                <Meta>
-                                    <time dateTime={post.createdAt}>{post.createdAt}</time>
-                                </Meta>
-                            </Link>
-                        </Post>
-                    </ListItem>
-                ))}
-            </PostListWrapper>
-        </PostListSection>
+                                    <Meta>
+                                        <time dateTime={post.createdAt}>{post.createdAt}</time>
+                                    </Meta>
+                                </Link>
+                            </Post>
+                        </ListItem>
+                    ))}
+                </PostListWrapper>
+            </PostListSection>
+
+            <CategorySidebar />
+        </>
     );
 };
 
