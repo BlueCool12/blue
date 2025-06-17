@@ -11,7 +11,7 @@ interface PageProps {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
     const { slug: rawSlug } = await params;
-    const slug = decodeURIComponent(rawSlug);    
+    const slug = decodeURIComponent(rawSlug);
     const post = await postService.getPostBySlug(slug);
 
     return {
@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function PostDetail({ params }: PageProps) {
     const { slug: rawSlug } = await params;
-    const slug = decodeURIComponent(rawSlug);    
+    const slug = decodeURIComponent(rawSlug);
     const post = await postService.getPostBySlug(slug);
     if (!post) notFound();
 
@@ -42,7 +42,13 @@ export default async function PostDetail({ params }: PageProps) {
                         {post.createdAt}
                     </time>
 
-                    <span className={styles.category}>{post.category}</span>
+                    <span className={styles.category}>
+                        {post.categories.map((cat: string) => (
+                            <span key={cat} className={styles.category}>
+                                {cat}
+                            </span>
+                        ))}
+                    </span>
                 </div>
 
                 <h1 className={styles.title}>{post.title}</h1>

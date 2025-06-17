@@ -57,8 +57,17 @@ const postSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
+            .addCase(createPost.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
             .addCase(createPost.fulfilled, (state, action) => {
                 state.postId = action.payload;
+                state.loading = false;
+            })
+            .addCase(createPost.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.error.message || "글 작성 실패";
             })
 
 

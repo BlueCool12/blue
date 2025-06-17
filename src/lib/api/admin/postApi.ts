@@ -4,7 +4,7 @@ import type { CreatePostPayload, PostListResponse, PostDetailResponse } from "@/
 
 export const postApi = {
 
-    createPost: async (payload: CreatePostPayload) => {
+    createPost: async (payload: CreatePostPayload): Promise<any> => {
         const response = await api.post("/admin/posts", payload);
         return response.data;
     },
@@ -19,7 +19,7 @@ export const postApi = {
         return response.data;
     },
 
-    updatePost: async (id: number, payload: CreatePostPayload) => {
+    updatePost: async (id: number, payload: CreatePostPayload): Promise<any> => {
         const response = await api.put(`/admin/posts/${id}`, payload);
         return response.data;
     }
