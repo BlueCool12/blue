@@ -3,7 +3,7 @@
 export interface Post {
     slug: string;
     title: string;
-    categories: string[];
+    category: string;
     contentSummary: string;
     createdAt: string;
 }
@@ -15,6 +15,6 @@ export interface PostDetail extends Post {
 export interface PostFormValues {
     title: string;
     content: string;
-    categories: number[];
+    categoryId: number | null;
     isPublic: boolean;
 }

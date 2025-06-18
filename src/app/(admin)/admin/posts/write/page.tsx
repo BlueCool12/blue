@@ -17,6 +17,17 @@ const Write = () => {
     const dispatch = useAppDispatch();
 
     const handleCreate = async (post: PostFormValues) => {
+
+        if (post.categoryId === null || !Number.isInteger(post.categoryId)) {
+            alert("카테고리를 선택해주세요.");
+            return;
+        }
+
+        if (!post.title.trim()) {
+            alert("제목을 입력해주세요.");
+            return;
+        }
+
         try {
             await dispatch(createPost(post));
             alert("등록 성공");

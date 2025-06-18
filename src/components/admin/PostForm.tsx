@@ -21,7 +21,7 @@ interface PostFormProps {
 const DEFAULT_POST: PostFormValues = {
     title: '',
     content: '',
-    categories: [],
+    categoryId: null,
     isPublic: true,
 }
 
@@ -39,11 +39,11 @@ export const PostForm = ({ initialData, onSubmit, mode }: PostFormProps) => {
                 <Form>
 
                     <CategorySelector
-                        values={post.categories}
-                        onChange={(ids: number[]) =>
+                        value={post.categoryId}
+                        onChange={(id: number | null) =>
                             setPost((prev) => ({
                                 ...prev,
-                                categories: ids,
+                                categoryId: id,
                             }))
                         }
                     />
@@ -73,7 +73,7 @@ export const PostForm = ({ initialData, onSubmit, mode }: PostFormProps) => {
 
                     <ButtonRow>
                         {/* <OutlineButton type="button" label="임시 저장" /> */}
-                        <OutlineButton type="button" label={mode === 'create' ? '글 작성' : '글 수정'} onClick={() => onSubmit({ ...post, categories: post.categories })} />
+                        <OutlineButton type="button" label={mode === 'create' ? '글 작성' : '글 수정'} onClick={() => onSubmit({ ...post, categoryId: post.categoryId })} />
                     </ButtonRow>
                 </Form>
             </EditorWrapper >

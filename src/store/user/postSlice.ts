@@ -21,8 +21,12 @@ const initialState: PostListState = {
 
 export const loadPosts = createAsyncThunk(
     "user/loadPosts",
-    async () => {
-        const result = await postService.getAllPosts();
+    async (category: string | null = null) => {
+        const url = category && category !== 'all'
+            ? `/user/posts?category=${category}`
+            : '/user/posts';
+
+        const result = await postService.getAllPosts(url);
         return result;
     }
 );

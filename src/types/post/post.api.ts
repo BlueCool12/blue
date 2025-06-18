@@ -2,7 +2,7 @@
 export interface CreatePostPayload {
     title: string;
     content: string;
-    categories: number[];
+    categoryId: number | null;
     isPublic: boolean;
 }
 
