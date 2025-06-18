@@ -94,7 +94,7 @@ const Editor = ({ onChange, initialData }: EditorProps) => {
 				TodoList, Underline
 			],
 			simpleUpload: {
-				uploadUrl: 'https://bluecool.pyomin.com/api/admin/posts/images',
+				uploadUrl: 'https://bluecool.pyomin.com/api/admin/images',
 				headers: {
 					'Authorization': `Bearer ${token}`
 				}

@@ -1,57 +1,162 @@
 'use client';
 
-import styled from "styled-components";
-
 import { useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 
-import { RootState } from "@/store/store";
-import { loadPosts } from "@/store/user/postSlice";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import styled from "styled-components";
 
 import { EmptyState } from "@/components/user/EmptyState";
 import { LoadingSpinner } from "@/components/common/LoadingSpinner";
+import { CategorySidebar } from "@/components/user/CategorySidebar";
+import { MdOutlineArrowDropDown } from "react-icons/md";
+
+import { RootState } from "@/store/store";
+import { loadPosts } from "@/store/user/postSlice";
+import { fetchCategories } from "@/store/user/categorySlice";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 import type { Post } from "@/types/post";
 
 export default function PostList() {
 
     const dispatch = useAppDispatch();
-    const { posts, loading, error } = useAppSelector((state: RootState) => state.userPost);
+
+    const isMobile = useIsMobile(1024);
+
+    const { posts, loading: postLoading, error: postError } = useAppSelector((state: RootState) => state.userPost);
+    const { categories, loading: categoryLoading, error: categoryError } = useAppSelector((state: RootState) => state.userCategory);
+
+    const router = useRouter();
+    const searchParams = useSearchParams();
+    const selectedCategory = searchParams.get("category");
+
+    const handleSelectedCategory = (category: string | null) => {
+        const newParams = new URLSearchParams(searchParams);
+        if (category) {
+            newParams.set('category', category);
+        } else {
+            newParams.delete('category');
+        }
+        router.replace(`/posts?${newParams.toString()}`);
+    };
 
     useEffect(() => {
-        dispatch(loadPosts());
+        dispatch(loadPosts(selectedCategory));
+    }, [dispatch, selectedCategory]);
+
+    useEffect(() => {
+        dispatch(fetchCategories());
     }, [dispatch]);
 
-    if (loading) { return <LoadingSpinner /> }
-    if (posts.length === 0) return <EmptyState message="열심히 공부 중입니다..." />
-    if (error) throw error;
+    if (postError) throw new Error(postError);
 
     return (
-        <PostListSection>
-            <PostListWrapper>
-                {posts.map((post: Post) => (
-                    <ListItem key={post.slug}>
-                        <Post>
-                            <Link href={`/posts/${post.slug}`}>
-                                <TitleWrapper>
-                                    <Title>{post.title}</Title>
-                                    <Category>{post.category}</Category>
-                                </TitleWrapper>
+        <>
+            {isMobile && (
+                <MobileCategorySelectWrapper>
+                    <MobileCategorySelect
+                        id="mobile-category-select"
+                        value={selectedCategory ?? ''}
+                        onChange={(e) =>
+                            handleSelectedCategory(e.target.value === '' ? null : e.target.value)
+                        }
+                    >
+                        <option value="">전체 카테고리</option>
+                        {categories.map((category) =>
+                            category.children && category.children.length > 0 && (
+                                <optgroup key={category.name} label={category.name}>
+                                    {category.children.map((child) => (
+                                        <option key={child.name} value={child.name}>
+                                            {child.name}
+                                        </option>
+                                    ))}
+                                </optgroup>
+                            )
+                        )}
 
-                                <Content>{post.contentSummary}</Content>
+                    </MobileCategorySelect>
+                    <SelectIcon />
+                </MobileCategorySelectWrapper>
+            )}
 
-                                <Meta>
-                                    <time dateTime={post.createdAt}>{post.createdAt}</time>
-                                </Meta>
-                            </Link>
-                        </Post>
-                    </ListItem>
-                ))}
-            </PostListWrapper>
-        </PostListSection>
+            <PostListSection>
+                {postLoading ? (
+                    <LoadingSpinner />
+                ) : posts.length === 0 ? (
+                    <EmptyState message="열심히 공부 중입니다..." />
+                ) : (
+                    <PostListWrapper>
+                        {posts.map((post: Post) => (
+                            <ListItem key={post.slug}>
+                                <Post>
+                                    <Link href={`/posts/${post.slug}`}>
+                                        <TitleWrapper>
+                                            <Title>{post.title}</Title>
+
+
+                                            <Category>{post.category}</Category>
+
+
+                                        </TitleWrapper>
+
+                                        <Content>{post.contentSummary}</Content>
+
+                                        <Meta>
+                                            <time dateTime={post.createdAt}>{post.createdAt}</time>
+                                        </Meta>
+                                    </Link>
+                                </Post>
+                            </ListItem>
+                        ))}
+                    </PostListWrapper>
+                )}
+            </PostListSection>
+
+            {!isMobile && (
+                <CategorySidebar
+                    categories={categories}
+                    loading={categoryLoading}
+                    error={categoryError}
+                    selectedCategory={selectedCategory}
+                    onSelectCategory={handleSelectedCategory}
+                />
+            )}
+        </>
     );
 };
+
+// 모바일 카테고리 시작
+const MobileCategorySelectWrapper = styled.div`
+  position: relative;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+`;
+
+const MobileCategorySelect = styled.select`
+  width: 100%;
+  padding: 0.5rem 2.5rem 0.5rem 0.5rem; /* 오른쪽 여백 추가 */
+  font-size: 0.9rem;
+  border-radius: 6px;
+  color: var(--text-color);
+  appearance: none; /* 기본 화살표 제거 */
+  -webkit-appearance: none;
+  -moz-appearance: none;  
+  border: 1px solid var(--border-color);
+`;
+
+const SelectIcon = styled(MdOutlineArrowDropDown)`
+  position: absolute;
+  right: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--text-color);
+  font-size: 1.2rem;
+`;
+// 모바일 카테고리 끝
 
 const PostListSection = styled.section`
     padding: 1rem;    

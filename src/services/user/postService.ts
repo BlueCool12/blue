@@ -8,8 +8,8 @@ import { fetchPostBySlug } from "@/lib/server/post";
 import type { PostDetail } from "@/types/post";
 
 export const postService = {
-    getAllPosts: async () => {
-        const result = await postApi.getAllPosts();
+    getAllPosts: async (url: string) => {
+        const result = await postApi.getAllPosts(url);
         return result.map((post: PostDetail) => ({
             ...post,
             createdAt: formatDate(post.createdAt),

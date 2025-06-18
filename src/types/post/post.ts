@@ -15,6 +15,6 @@ export interface PostDetail extends Post {
 export interface PostFormValues {
     title: string;
     content: string;
-    category: string;
+    categoryId: number | null;
     isPublic: boolean;
 }

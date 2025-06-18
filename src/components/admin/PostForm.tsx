@@ -1,8 +1,10 @@
+import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
+
 import styled from "styled-components";
 import { OutlineButton } from "../common/OutlineButton";
 
-import { useEffect, useState } from "react";
-import dynamic from "next/dynamic";
+import { CategorySelector } from "./CategorySelector";
 
 import type { PostFormValues } from "@/types/post";
 
@@ -13,17 +15,19 @@ const CKEditor = dynamic(() => import('./editor/Editor'), {
 interface PostFormProps {
     initialData?: PostFormValues;
     onSubmit: (post: PostFormValues) => void;
-    mode?: 'create' | 'edit';
+    mode: 'create' | 'edit';
 }
 
-export const PostForm = ({ initialData, onSubmit, mode = 'create' }: PostFormProps) => {
+const DEFAULT_POST: PostFormValues = {
+    title: '',
+    content: '',
+    categoryId: null,
+    isPublic: true,
+}
 
-    const [post, setPost] = useState<PostFormValues>(() => initialData ?? {
-        title: '',
-        content: '',
-        category: '',
-        isPublic: true,
-    });
+export const PostForm = ({ initialData, onSubmit, mode }: PostFormProps) => {
+
+    const [post, setPost] = useState<PostFormValues>(() => initialData ?? DEFAULT_POST);
 
     useEffect(() => {
         if (initialData) setPost(initialData);
@@ -33,22 +37,18 @@ export const PostForm = ({ initialData, onSubmit, mode = 'create' }: PostFormPro
         <>
             <EditorWrapper>
                 <Form>
+
+                    <CategorySelector
+                        value={post.categoryId}
+                        onChange={(id: number | null) =>
+                            setPost((prev) => ({
+                                ...prev,
+                                categoryId: id,
+                            }))
+                        }
+                    />
+
                     <CategoryRow>
-                        <Select
-                            value={post.category}
-                            onChange={(e) => setPost((prev) => ({ ...prev, category: e.target.value }))}
-                        >
-                            <option value="">선택하세요</option>
-                            <option value="Java">Java</option>
-                            <option value="JavaScript">JavaScript</option>
-                            <option value="TypeScript">TypeScript</option>
-                            <option value="React">React</option>
-                            <option value="Spring">Spring</option>
-                            <option value="HTML">HTML</option>
-                            <option value="CSS">CSS</option>
-                            <option value="MarkDown">MarkDown</option>
-                            <option value="BlueCool">BlueCool</option>
-                        </Select>
                         <TitleInput
                             value={post.title}
                             onChange={(e) => setPost((prev) => ({ ...prev, title: e.target.value }))}
@@ -72,8 +72,8 @@ export const PostForm = ({ initialData, onSubmit, mode = 'create' }: PostFormPro
                     />
 
                     <ButtonRow>
-                        <OutlineButton type="button" label="임시 저장" />
-                        <OutlineButton type="button" label={mode === 'create' ? '글 작성' : '글 수정'} onClick={() => onSubmit(post)} />
+                        {/* <OutlineButton type="button" label="임시 저장" /> */}
+                        <OutlineButton type="button" label={mode === 'create' ? '글 작성' : '글 수정'} onClick={() => onSubmit({ ...post, categoryId: post.categoryId })} />
                     </ButtonRow>
                 </Form>
             </EditorWrapper >
@@ -106,13 +106,6 @@ const CategoryRow = styled.div`
     display: flex;    
     gap: 8px;
     align-items: center;    
-`;
-
-const Select = styled.select`    
-    width: auto;
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 6px;    
 `;
 
 const TitleInput = styled.input`

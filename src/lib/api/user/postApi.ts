@@ -2,8 +2,8 @@ import api from "../axiosInstance"
 
 
 export const postApi = {
-    getAllPosts: async () => {
-        const response = await api.get("/user/posts");
+    getAllPosts: async (url: string) => {
+        const response = await api.get(url);
         return response.data;
     },
 

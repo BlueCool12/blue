@@ -41,6 +41,7 @@ const projects = [
             { name: 'Spring', color: '#6db33f' },
             { name: 'MariaDB', color: '#003545' },
             { name: 'JavaScript', color: '#f7df1e' },
+            { name: 'Thymeleaf', color: '#005F0F' },
             { name: 'BootStrap', color: '#7952B3' },
         ]
     }

@@ -3,8 +3,10 @@
 import React from 'react';
 import { useRouter } from "next/navigation";
 
-import { postApi } from "@/lib/api/admin/postApi";
 import { PostForm } from "@/components/admin/PostForm";
+
+import { useAppDispatch } from '@/store/hooks';
+import { createPost } from '@/store/admin/postSlice';
 
 import type { PostFormValues } from '@/types/post';
 
@@ -12,15 +14,26 @@ const Write = () => {
 
     const router = useRouter();
 
+    const dispatch = useAppDispatch();
+
     const handleCreate = async (post: PostFormValues) => {
+
+        if (post.categoryId === null || !Number.isInteger(post.categoryId)) {
+            alert("카테고리를 선택해주세요.");
+            return;
+        }
+
+        if (!post.title.trim()) {
+            alert("제목을 입력해주세요.");
+            return;
+        }
+
         try {
-            const result = await postApi.createPost(post);
-            console.log("등록 성공", result);
+            await dispatch(createPost(post));
+            alert("등록 성공");
             router.push('/admin');
-            // 성공 후 로직
-        } catch (error) {
-            console.error("등록 실패", error);
-            // 실패 후 로직
+        } catch {
+            alert("등록 실패");
         }
     };
 
