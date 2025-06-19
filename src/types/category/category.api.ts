@@ -8,7 +8,3 @@ export interface CategoryListResponse {
     name: string;
     parentId: number | null;
 }
-
-export interface Category extends CategoryListResponse {
-    children: Category[];
-}

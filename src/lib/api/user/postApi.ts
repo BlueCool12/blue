@@ -1,5 +1,4 @@
-import api from "../axiosInstance"
-
+import api from "../axiosInstance";
 
 export const postApi = {
     getAllPosts: async (url: string) => {

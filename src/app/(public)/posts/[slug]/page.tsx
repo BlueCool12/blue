@@ -1,7 +1,10 @@
 import styles from './page.module.css';
 
+import Link from 'next/link';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+
+import { CommentSection } from '@/components/user/CommentSection';
 
 import { postService } from '@/services/user/postService';
 
@@ -35,29 +38,32 @@ export default async function PostDetail({ params }: PageProps) {
     if (!post) notFound();
 
     return (
-        <article className={styles.article}>
-            <header className={styles.header}>
-                <div className={styles.meta}>
-                    <time className={styles.date} dateTime={post.createdAt}>
-                        {post.createdAt}
-                    </time>
+        <>
+            <article className={styles.article}>
+                <header className={styles.header}>
+                    <div className={styles.meta}>
+                        <time className={styles.date} dateTime={post.createdAt}>
+                            {post.createdAt}
+                        </time>
 
-                    <span className={styles.category}>
-                        {post.categories.map((cat: string) => (
-                            <span key={cat} className={styles.category}>
-                                {cat}
+                        <Link href={`/posts?category=${encodeURIComponent(post.category)}`}>
+                            <span className={styles.category}>
+                                {post.category}
                             </span>
-                        ))}
-                    </span>
-                </div>
+                        </Link>
 
-                <h1 className={styles.title}>{post.title}</h1>
-            </header>
+                    </div>
 
-            <div
-                className={styles.content}
-                dangerouslySetInnerHTML={{ __html: post.content }}
-            />
-        </article>
+                    <h1 className={styles.title}>{post.title}</h1>
+                </header>
+
+                <div
+                    className={styles.content}
+                    dangerouslySetInnerHTML={{ __html: post.content }}
+                />
+            </article>
+
+            <CommentSection postId={post.id} />
+        </>
     );
 }

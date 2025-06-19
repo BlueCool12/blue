@@ -15,7 +15,7 @@ export const CategorySelector: React.FC<Props> = ({ value, onChange }) => {
     const [parentId, setParentId] = useState<number | null>(null);
 
     useEffect(() => {
-        if (value && categories.length > 0) {
+        if (value !== null && categories.length > 0) {
             const parent = categories.find((parent) => {
                 return parent.children?.some((child) => child.id === value);
             });
@@ -48,9 +48,14 @@ export const CategorySelector: React.FC<Props> = ({ value, onChange }) => {
                     ))}
                 </StyledSelect>
 
-                {parentId && (
+                {parentId !== null && (
                     <StyledSelect
-                        value={value !== null ? String(value) : ''}
+                        value={
+                            categories.find((parent) => parent.id === parentId)
+                                ?.children?.some((child) => child.id === value)
+                                ? String(value)
+                                : ''
+                        }
                         onChange={(e) => {
                             const id = Number(e.target.value);
                             onChange(id);

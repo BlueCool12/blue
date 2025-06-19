@@ -84,18 +84,16 @@ export const PostForm = ({ initialData, onSubmit, mode }: PostFormProps) => {
 const EditorWrapper = styled.div`
     display: flex;
     justify-content: center;  
-    align-items: center;    
-    padding: 40px 24px;
-    height: 100%;
+    align-items: center;        
+    height: auto;
     width: 100%;
     box-sizing: border-box;    
 `;
 
-const Form = styled.div`
-    width: 100%;    
+const Form = styled.div`    
     max-width: 720px;
     min-width: 320px;    
-    margin: 0 auto;
+    margin: 0 auto;    
     box-sizing: border-box;
     display: flex;
     flex-direction: column;

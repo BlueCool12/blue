@@ -39,7 +39,7 @@ export const CategorySidebar = ({ categories, loading, error, selectedCategory, 
             ) : (
                 <nav>
                     <h3
-                        className={styles.title}
+                        className={`${styles.title} ${selectedCategory === null ? styles.active : ''}`}
                         onClick={() => onSelectCategory(null)}
                     >
                         ALL
