@@ -2,10 +2,6 @@ import { postApi } from "@/lib/api/admin/postApi";
 
 import type { CreatePostPayload, PostListResponse, PostDetailResponse } from "@/types/post";
 
-const formatDate = (isoDateString: string) => {
-    return isoDateString.split("T")[0];
-};
-
 export const postService = {
 
     createPost: async (payload: CreatePostPayload) => {
@@ -29,7 +25,11 @@ export const postService = {
     },
 
     updatePost: async (id: number, payload: CreatePostPayload) => {
-        await postApi.updatePost(id, payload);        
-    }
+        await postApi.updatePost(id, payload);
+    },
 
+}
+
+function formatDate(isoDateString: string): string {
+    return isoDateString.split("T")[0];
 }

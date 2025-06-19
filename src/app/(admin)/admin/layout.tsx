@@ -1,9 +1,10 @@
+import { ReactNode, Suspense } from 'react';
+import Link from 'next/link';
+
 import '@/app/globals.css';
 import '@/components/admin/editor/ckeditor.css';
 import styles from './layout.module.css';
 
-import { ReactNode, Suspense } from 'react';
-import Link from 'next/link';
 import { LoadingSpinner } from '@/components/common/LoadingSpinner';
 
 export default async function MainLayout({ children }: { children: ReactNode }) {
@@ -18,7 +19,7 @@ export default async function MainLayout({ children }: { children: ReactNode }) 
                     <Link href="/admin/posts/write" className={styles.navItem}>글 작성</Link>
                     <Link href="/admin/categories" className={styles.navItem}>카테고리 관리</Link>
                 </nav>
-                <main>
+                <main className={styles.main}>
                     <Suspense fallback={<LoadingSpinner />}>{children}</Suspense>
                 </main>
             </div>

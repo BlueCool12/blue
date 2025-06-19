@@ -9,6 +9,7 @@ export interface Post {
 }
 
 export interface PostDetail extends Post {
+    id: number;
     content: string;
 }
 

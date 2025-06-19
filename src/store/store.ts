@@ -4,6 +4,7 @@ import adminPostReducer from "./admin/postSlice";
 import adminCategoryReducer from "./admin/categorySlice";
 import userPostReducer from "./user/postSlice";
 import userCategoryReducer from "./user/categorySlice";
+import userCommentReducer from "./user/commentSlice";
 
 export const store = configureStore({
     reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
         adminCategory: adminCategoryReducer,
         userPost: userPostReducer,
         userCategory: userCategoryReducer,
+        userComment: userCommentReducer,
     }
 });
 
