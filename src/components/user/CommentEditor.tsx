@@ -58,14 +58,12 @@ export const CommentEditor: React.FC<Props> = ({ postId }) => {
             return;
         }
 
-        console.log(postId);
-
-        // await dispatch(createComment({
-        //     postId,
-        //     parentId: null,
-        //     nickname: checkedNickname,
-        //     content: trimmedContent,
-        // }));
+        await dispatch(createComment({
+            postId,
+            parentId: null,
+            nickname: checkedNickname,
+            content: trimmedContent,
+        }));
 
         alert("댓글이 등록되었습니다!");
         setContent('');
