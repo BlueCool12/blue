@@ -1,9 +1,7 @@
 
 export async function fetchPostBySlug(slug: string) {
 
-    const isServer = typeof window === 'undefined';
-
-    const baseUrl = 'https://bluecool.pyomin.com/api';    
+    const baseUrl = 'http://localhost:8888/api';
 
     const url = `${baseUrl}/user/posts/${slug}`;
 
