@@ -1,8 +1,14 @@
 'use client';
 
+import { useEffect } from "react";
+
 import styled from "styled-components";
 
 import { CommentEditor } from "./CommentEditor";
+
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { fetchComments } from "@/store/user/commentSlice";
+import { LoadingSpinner } from "../common/LoadingSpinner";
 
 interface Props {
     postId: number;
@@ -10,14 +16,31 @@ interface Props {
 
 export const CommentSection: React.FC<Props> = ({ postId }) => {
 
+    const dispatch = useAppDispatch();
+    const { comments, loading, error } = useAppSelector((state) => state.userComment);
+
+    useEffect(() => {
+        dispatch(fetchComments(postId));
+    }, [dispatch, postId]);
+
+    if (error) throw new Error(error);
+
     return (
         <Section>
 
             <CommentList>
-                <CommentItem>
-                    <CommentAuthor>작성자</CommentAuthor>
-                    <CommentContent>댓글 내용입니다. 여기에 실제 댓글 내용이 출력됩니다.</CommentContent>
-                </CommentItem>
+                {loading ? (
+                    <LoadingSpinner />
+                ) : comments.length === 0 ? (
+                    <p>첫 댓글을 남겨보세요!</p>
+                ) : (
+                    comments.map((comment) => (
+                        <CommentItem key={comment.id}>
+                            <CommentAuthor>{comment.nickname}</CommentAuthor>
+                            <CommentContent>{comment.content}</CommentContent>
+                        </CommentItem>
+                    ))
+                )}
             </CommentList>
 
             <CommentEditor postId={postId} />
