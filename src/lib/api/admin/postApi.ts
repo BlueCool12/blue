@@ -1,10 +1,10 @@
 import api from "../axiosInstance";
 
-import type { CreatePostPayload, PostListResponse, PostDetailResponse } from "@/types/post";
+import type { CreatePostPayload, PostListResponse, PostDetailResponse, PostCreateResponse } from "@/types/post";
 
 export const postApi = {
 
-    createPost: async (payload: CreatePostPayload): Promise<any> => {
+    createPost: async (payload: CreatePostPayload): Promise<PostCreateResponse> => {
         const response = await api.post("/admin/posts", payload);
         return response.data;
     },

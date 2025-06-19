@@ -6,6 +6,10 @@ export interface CreatePostPayload {
     isPublic: boolean;
 }
 
+export interface PostCreateResponse {
+    postId: number;
+}
+
 export interface PostListResponse {
     id: number;
     title: string;
@@ -21,7 +25,10 @@ export interface PostDetailResponse {
     id: number;
     title: string;
     content: string;
-    category: string;
+    category: {
+        id: number;
+        name: string;
+    };
     isPublic: boolean;
     isDeleted: boolean;
     slug: string;

@@ -16,11 +16,10 @@ const initialState: CategoryState = {
     error: null,
 }
 
-export const createCategory = createAsyncThunk<number, CreateCategoryPayload>(
+export const createCategory = createAsyncThunk<void, CreateCategoryPayload>(
     "admin/createCategory",
     async (payload) => {
-        const result = await categoryService.createCategory(payload);
-        return result.id;
+        await categoryService.createCategory(payload);
     }
 );
 

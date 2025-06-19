@@ -24,7 +24,7 @@ export const createPost = createAsyncThunk<number, CreatePostPayload>(
     "admin/createPost",
     async (payload) => {
         const result = await postService.createPost(payload);
-        return result.id;
+        return result.postId;
     }
 );
 

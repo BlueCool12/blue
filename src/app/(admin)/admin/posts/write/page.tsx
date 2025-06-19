@@ -1,12 +1,13 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useRouter } from "next/navigation";
 
 import { PostForm } from "@/components/admin/PostForm";
 
 import { useAppDispatch } from '@/store/hooks';
 import { createPost } from '@/store/admin/postSlice';
+import { fetchCategories } from '@/store/admin/categorySlice';
 
 import type { PostFormValues } from '@/types/post';
 
@@ -15,6 +16,10 @@ const Write = () => {
     const router = useRouter();
 
     const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        dispatch(fetchCategories());
+    }, [dispatch]);
 
     const handleCreate = async (post: PostFormValues) => {
 

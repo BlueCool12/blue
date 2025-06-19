@@ -4,9 +4,8 @@ import type { CategoryListResponse, CreateCategoryPayload } from "@/types/catego
 
 export const categoryApi = {
 
-    createCategory: async (payload: CreateCategoryPayload): Promise<any> => {
-        const response = await api.post("/admin/categories", payload);
-        return response.data;
+    createCategory: async (payload: CreateCategoryPayload): Promise<void> => {
+        await api.post("/admin/categories", payload);
     },
 
     getCategories: async (): Promise<CategoryListResponse[]> => {
