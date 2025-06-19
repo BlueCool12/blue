@@ -51,9 +51,7 @@ export default function PostList() {
         dispatch(fetchCategories());
     }, [dispatch]);
 
-    if (postError) {
-        throw new Error(postError);
-    }
+    if (postError) throw new Error(postError);
 
     return (
         <>

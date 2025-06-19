@@ -20,9 +20,7 @@ const PostList = () => {
         dispatch(getPosts());
     }, [dispatch]);
 
-    if (error) {
-        throw new Error(error);
-    }
+    if (error) throw new Error(error);
 
     return (
         <Section>
