@@ -29,8 +29,7 @@ export const postService = {
     },
 
     updatePost: async (id: number, payload: CreatePostPayload) => {
-        const result = await postApi.updatePost(id, payload);
-        return result;
+        await postApi.updatePost(id, payload);        
     }
 
 }

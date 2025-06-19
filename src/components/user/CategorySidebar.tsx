@@ -21,14 +21,16 @@ export const CategorySidebar = ({ categories, loading, error, selectedCategory, 
     const toggle = (name: string) => {
         setOpenIds((prev) => {
             const newSet = new Set(prev);
-            newSet.has(name) ? newSet.delete(name) : newSet.add(name);
+            if (newSet.has(name)) {
+                newSet.delete(name);
+            } else {
+                newSet.add(name);
+            }
             return newSet;
         });
     };
 
-    if (error) {
-        throw new Error(error);
-    }
+    if (error) throw new Error(error);
 
     return (
         <aside className={styles.sidebar}>

@@ -19,9 +19,8 @@ export const postApi = {
         return response.data;
     },
 
-    updatePost: async (id: number, payload: CreatePostPayload): Promise<any> => {
-        const response = await api.put(`/admin/posts/${id}`, payload);
-        return response.data;
+    updatePost: async (id: number, payload: CreatePostPayload): Promise<void> => {
+        await api.put(`/admin/posts/${id}`, payload);
     }
 
 }

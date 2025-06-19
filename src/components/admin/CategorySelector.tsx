@@ -27,9 +27,7 @@ export const CategorySelector: React.FC<Props> = ({ value, onChange }) => {
 
     if (loading) return <p>로딩 중...</p>;
 
-    if (error) {
-        throw new Error(error);
-    }
+    if (error) throw new Error(error);
 
     return (
         <Wrapper>
