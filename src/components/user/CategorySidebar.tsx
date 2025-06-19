@@ -26,7 +26,9 @@ export const CategorySidebar = ({ categories, loading, error, selectedCategory, 
         });
     };
 
-    if (error) throw new Error(error);
+    if (error) {
+        throw new Error(error);
+    }
 
     return (
         <aside className={styles.sidebar}>

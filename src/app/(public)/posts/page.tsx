@@ -51,24 +51,25 @@ export default function PostList() {
         dispatch(fetchCategories());
     }, [dispatch]);
 
-    if (postError) throw new Error(postError);
+    if (postError) {
+        throw new Error(postError);
+    }
 
     return (
         <>
             {isMobile && (
                 <MobileCategorySelectWrapper>
                     <MobileCategorySelect
-                        id="mobile-category-select"
                         value={selectedCategory ?? ''}
                         onChange={(e) =>
                             handleSelectedCategory(e.target.value === '' ? null : e.target.value)
                         }
                     >
-                        <option value="">전체 카테고리</option>
-                        {categories.map((category) =>
-                            category.children && category.children.length > 0 && (
-                                <optgroup key={category.name} label={category.name}>
-                                    {category.children.map((child) => (
+                        <option value="">ALL</option>
+                        {categories.map((parent) =>
+                            parent.children && parent.children.length > 0 && (
+                                <optgroup key={parent.name} label={parent.name}>
+                                    {parent.children.map((child) => (
                                         <option key={child.name} value={child.name}>
                                             {child.name}
                                         </option>
@@ -131,13 +132,14 @@ export default function PostList() {
 // 모바일 카테고리 시작
 const MobileCategorySelectWrapper = styled.div`
   position: relative;
-  padding: 0.75rem 1rem;
+  padding: 0.75rem 0;
+  margin: 0 1rem;
   border-bottom: 1px solid var(--border-color);
 `;
 
 const MobileCategorySelect = styled.select`
   width: 100%;
-  padding: 0.5rem 2.5rem 0.5rem 0.5rem; /* 오른쪽 여백 추가 */
+  padding: 0.5rem 1rem 0.5rem; /* 오른쪽 여백 추가 */
   font-size: 0.9rem;
   border-radius: 6px;
   color: var(--text-color);
@@ -149,7 +151,7 @@ const MobileCategorySelect = styled.select`
 
 const SelectIcon = styled(MdOutlineArrowDropDown)`
   position: absolute;
-  right: 1.5rem;
+  right: 1rem;
   top: 50%;
   transform: translateY(-50%);
   pointer-events: none;

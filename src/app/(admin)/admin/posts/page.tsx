@@ -1,9 +1,9 @@
 'use client';
 
-import styled from "styled-components";
-
 import { useEffect } from "react";
 import Link from "next/link";
+
+import styled from "styled-components";
 
 import { LoadingSpinner } from "@/components/common/LoadingSpinner";
 
@@ -20,8 +20,9 @@ const PostList = () => {
         dispatch(getPosts());
     }, [dispatch]);
 
-    if (loading) return <LoadingSpinner />
-    if (error) return <p>{error}</p>;
+    if (error) {
+        throw new Error(error);
+    }
 
     return (
         <Section>
@@ -40,7 +41,13 @@ const PostList = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {posts.length > 0 ? (
+                    {loading ? (
+                        <tr>
+                            <Td colSpan={8}>
+                                <LoadingSpinner />
+                            </Td>
+                        </tr>
+                    ) : posts.length > 0 ? (
                         posts.map((post) => (
                             <Tr key={post.id}>
                                 <Td>{post.id}</Td>

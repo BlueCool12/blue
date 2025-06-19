@@ -5,8 +5,7 @@ import type { Category, CreateCategoryPayload } from "@/types/category";
 export const categoryService = {
 
     createCategory: async (payload: CreateCategoryPayload) => {
-        const result = await categoryApi.createCategory(payload);
-        return result;
+        await categoryApi.createCategory(payload);
     },
 
     getCategories: async (): Promise<Category[]> => {

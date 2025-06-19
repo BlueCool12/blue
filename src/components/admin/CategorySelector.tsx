@@ -1,8 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import styled from "styled-components";
-
-import { MdClose } from "react-icons/md";
 
 import { useAppSelector } from "@/store/hooks";
 
@@ -16,8 +14,22 @@ export const CategorySelector: React.FC<Props> = ({ value, onChange }) => {
 
     const [parentId, setParentId] = useState<number | null>(null);
 
+    useEffect(() => {
+        if (value && categories.length > 0) {
+            const parent = categories.find((parent) => {
+                return parent.children?.some((child) => child.id === value);
+            });
+            if (parent) {
+                setParentId(parent.id);
+            }
+        }
+    }, [value, categories]);
+
     if (loading) return <p>로딩 중...</p>;
-    if (error) throw new Error(error);
+
+    if (error) {
+        throw new Error(error);
+    }
 
     return (
         <Wrapper>
@@ -85,26 +97,4 @@ const StyledSelect = styled.select`
     outline: none;
     border-color: #0070f3;
   }
-`;
-
-const SelectedList = styled.div`
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-`;
-
-const Tag = styled.span`
-  background-color: var(--theme-color-9);
-  color: white;
-  border-radius: 9999px;
-  padding: 4px 10px;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-`;
-
-const RemoveIcon = styled(MdClose)`
-  cursor: pointer;
-  font-size: 16px;
 `;
