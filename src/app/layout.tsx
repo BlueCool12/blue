@@ -18,6 +18,16 @@ export const metadata: Metadata = {
     },
     description: 'BlueCool 공식 블로그 입니다.',
     keywords: ['BlueCool', 'BlueCool12', '블루쿨'],
+    metadataBase: new URL('https://www.pyomin.com'),
+    verification: {
+        google: 'a_U5y0WSCgz0M6vCAXxFu6HFYeMcpYpbxrmX25W_veQ',
+    },
+    icons: [
+        {
+            rel: 'icon',
+            url: '/images/favicon.ico',
+        }
+    ],
     openGraph: {
         title: 'BlueCool',
         description: 'BlueCool 공식 블로그 입니다.',
@@ -40,8 +50,14 @@ export const metadata: Metadata = {
         description: 'BlueCool 공식 블로그 입니다.',
         images: ['https://www.pyomin.com/images/og_image_resize.png'],
     },
-    metadataBase: new URL('https://www.pyomin.com'),
 }
+
+export const viewport = {
+    themeColor: [
+        { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+        { media: '(prefers-color-scheme: dark)', color: '#000000' },
+    ],
+};
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
