@@ -26,13 +26,13 @@ export const CommentSection: React.FC<Props> = ({ postId }) => {
     if (error) throw new Error(error);
 
     return (
-        <Section>
+        <Section>            
 
             <CommentList>
                 {loading ? (
                     <LoadingSpinner />
                 ) : comments.length === 0 ? (
-                    <p>첫 댓글을 남겨보세요!</p>
+                    <CommentItem>첫 댓글을 남겨보세요!</CommentItem>
                 ) : (
                     comments.map((comment) => (
                         <CommentItem key={comment.id}>

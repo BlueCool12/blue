@@ -10,6 +10,7 @@ export default function Head() {
 
             {/* 사이트 인증 */}
             <meta name="google-site-verification" content="a_U5y0WSCgz0M6vCAXxFu6HFYeMcpYpbxrmX25W_veQ" />
+            <meta name="google-adsense-account" content="ca-pub-7027574538017618"></meta>
         </>
     );
 }
