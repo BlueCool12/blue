@@ -1,6 +1,7 @@
 import { commentApi } from "@/lib/api/user/commentApi"
+import { formatDate } from "@/lib/utils/format";
 
-import { CreateCommentPayload } from "@/types/comment";
+import { Comment, CreateCommentPayload, DeleteCommentPayload } from "@/types/comment";
 
 export const commentService = {
 
@@ -9,6 +10,16 @@ export const commentService = {
     },
 
     getAllComments: async (postId: number) => {
-        return await commentApi.getAllComments(postId);
+        const result = await commentApi.getAllComments(postId);
+        return result.map((comment: Comment) => ({
+            ...comment,
+            nickname: comment.isDeleted ? "알 수 없음" : comment.nickname,
+            content: comment.isDeleted ? "삭제된 댓글입니다." : comment.content,
+            createdAt: formatDate(comment.createdAt),
+        }));
     },
-}
+
+    deleteComment: async (payload: DeleteCommentPayload) => {
+        await commentApi.deleteComment(payload);
+    }
+};

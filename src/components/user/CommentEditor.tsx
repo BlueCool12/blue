@@ -14,14 +14,34 @@ interface Props {
     postId: number;
 }
 
+const anonymousNicknames = [
+    "익명의먼치킨",
+    "익명의사모예드",
+    "익명의개발자",
+    "익명의고구마",
+    "익명의개구리",
+    "익명의티라노",
+    "익명의햄스터",
+    "익명의알파카",
+];
+
+function getRandomAnonymousNickname() {
+    const index = Math.floor(Math.random() * anonymousNicknames.length);
+    return anonymousNicknames[index];
+}
+
 export const CommentEditor: React.FC<Props> = ({ postId }) => {
 
     const dispatch = useAppDispatch();
     const { loading, error } = useAppSelector((state: RootState) => state.userComment);
 
     const [open, setOpen] = useState(false);
-    const [nickname, setNickname] = useState('');
-    const [content, setContent] = useState('');
+
+    const [form, setForm] = useState({
+        nickname: '',
+        content: '',
+        password: '',
+    });
 
     const editorRef = useRef<HTMLDivElement>(null);
     const floatingBtnRef = useRef<HTMLButtonElement>(null);
@@ -48,25 +68,42 @@ export const CommentEditor: React.FC<Props> = ({ postId }) => {
         };
     }, [open]);
 
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value } = e.target;
+
+        if (name === 'password' && !/^\d*$/.test(value)) return;
+
+        setForm(prev => ({
+            ...prev,
+            [name]: value,
+        }));
+    };
 
     const handleSubmit = async () => {
-        const checkedNickname = nickname.trim() || '익명';
-        const trimmedContent = content.trim();
+        const trimmedNickname = form.nickname.trim() || getRandomAnonymousNickname();
+        const trimmedPassword = form.password.trim();
+        const trimmedContent = form.content.trim();
+
+        if (!/^\d{4}$/.test(trimmedPassword)) {
+            alert('숫자 4자리의 비밀번호를 입력해주세요.');
+            return;
+        }
 
         if (!trimmedContent) {
-            alert('댓글을 입력해주세요!');
+            alert('내용을 적어주세요.');
             return;
         }
 
         await dispatch(createComment({
             postId,
             parentId: null,
-            nickname: checkedNickname,
+            nickname: trimmedNickname,
+            password: form.password,
             content: trimmedContent,
         }));
 
         alert("댓글이 등록되었습니다!");
-        setContent('');
+        setForm({ nickname: '', content: '', password: '' });
         setOpen(false);
     };
 
@@ -80,15 +117,29 @@ export const CommentEditor: React.FC<Props> = ({ postId }) => {
 
             {open && (
                 <EditorBox ref={editorRef}>
-                    <NicknameInput
-                        placeholder="닉네임 (선택)"
-                        value={nickname}
-                        onChange={(e) => setNickname(e.target.value)}
-                    />
+
+                    <NicknamePasswordWrapper>
+                        <NicknameInput
+                            placeholder="닉네임 (선택)"
+                            maxLength={10}
+                            name="nickname"
+                            value={form.nickname}
+                            onChange={handleChange}
+                        />
+                        <PasswordInput
+                            placeholder="비밀번호"
+                            maxLength={4}
+                            name="password"
+                            value={form.password}
+                            onChange={handleChange}
+                        />
+                    </NicknamePasswordWrapper>
+
                     <TextArea
                         placeholder="소중한 의견 남겨주세요 :D"
-                        value={content}
-                        onChange={(e) => setContent(e.target.value)}
+                        name="content"
+                        value={form.content}
+                        onChange={handleChange}
                     />
 
                     <SubmitButton onClick={handleSubmit} disabled={loading}>
@@ -151,11 +202,26 @@ const EditorBox = styled.div`
     }
 `;
 
+const NicknamePasswordWrapper = styled.div`    
+    display: flex;
+    gap: 0.5rem;    
+    width: 100%;
+`;
+
 const NicknameInput = styled.input`
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
     border: 1px solid var(--border-color);
     font-size: 0.9rem;    
+    width: 70%;
+`;
+
+const PasswordInput = styled.input`    
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--border-color);
+    font-size: 0.9rem;
+    width: 30%;
 `;
 
 const TextArea = styled.textarea`

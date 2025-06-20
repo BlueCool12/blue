@@ -1,4 +1,4 @@
-import { Comment, CreateCommentPayload } from "@/types/comment";
+import { Comment, CreateCommentPayload, DeleteCommentPayload } from "@/types/comment";
 import api from "../axiosInstance";
 
 export const commentApi = {
@@ -12,4 +12,10 @@ export const commentApi = {
         });
         return response.data.comments;
     },
+
+    deleteComment: async (payload: DeleteCommentPayload): Promise<void> => {
+        await api.delete(`/user/comments/${payload.commentId}`, {
+            data: { password: payload.password },
+        });
+    }
 };
