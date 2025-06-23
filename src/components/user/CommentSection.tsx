@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 import styled from "styled-components";
 
+import { toast } from "react-toastify";
 import { MdOutlineDelete, MdOutlineEdit } from "react-icons/md";
 import { CommentEditor } from "./CommentEditor";
 import { CommentForm } from "./CommentForm";
@@ -39,9 +40,9 @@ export const CommentSection: React.FC<Props> = ({ postId }) => {
 
         try {
             await dispatch(deleteComment({ postId, commentId, password: input })).unwrap();
-            alert("댓글이 삭제되었습니다.");
+            toast.success("댓글이 삭제되었습니다.");
         } catch {
-            alert("댓글 삭제에 실패했습니다.");
+            toast.error("댓글 삭제에 실패했습니다.");
         }
     }
 
@@ -60,7 +61,7 @@ export const CommentSection: React.FC<Props> = ({ postId }) => {
         if (matched) {
             setEditingCommentId(commentId);
         } else {
-            alert("비밀번호가 일치하지 않습니다.");
+            toast.error("비밀번호가 일치하지 않습니다.");
         }
     };
 
@@ -71,15 +72,13 @@ export const CommentSection: React.FC<Props> = ({ postId }) => {
         try {
             await dispatch(updateComment({ commentId: editingCommentId, postId, data: { nickname, password, content } })).unwrap();
 
-            alert("댓글이 수정되었습니다.");
+            toast.success("댓글이 수정되었습니다.");
             setEditingCommentId(null);
         } catch {
-            alert("댓글 수정에 실패했습니다.");
+            toast.error("댓글 수정에 실패했습니다.");
         }
 
-    }
-
-    if (error) throw new Error(error);
+    }    
 
     return (
         <Section>
