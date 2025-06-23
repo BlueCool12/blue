@@ -20,7 +20,7 @@ interface Props {
 export const CommentSection: React.FC<Props> = ({ postId }) => {
 
     const dispatch = useAppDispatch();
-    const { comments, error } = useAppSelector((state) => state.userComment);
+    const { comments } = useAppSelector((state) => state.userComment);
 
     const [editingCommentId, setEditingCommentId] = useState<number | null>(null);
 
