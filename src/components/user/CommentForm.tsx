@@ -2,67 +2,81 @@ import { useState } from "react";
 
 import styled from "styled-components";
 
+interface CommentFormValues {
+    nickname: string;
+    password: string;
+    content: string;
+}
+
 interface Props {
-    initialNickname?: string;
-    initialContent?: string;
+    initialValues?: Partial<CommentFormValues>;
     onCancel?: () => void;
-    onSubmit: (content: string, password: string) => void;
+    onSubmit: ({ nickname, password, content }: { nickname: string; password: string; content: string; }) => void;
     loading?: boolean;
 }
 
 export const CommentForm: React.FC<Props> = ({
-    initialNickname = "",
-    initialContent = "",
+    initialValues = {},
     onCancel,
     onSubmit,
     loading = false,
 }) => {
 
-    const [nickname, setNickname] = useState(initialNickname);
-    const [content, setContent] = useState(initialContent);
-    const [password, setPassword] = useState("");
+    const [form, setForm] = useState<CommentFormValues>({
+        nickname: initialValues.nickname ?? "익명의티라노",
+        password: "",
+        content: initialValues.content ?? "",
+    });
+
+    const handleChange = (field: keyof CommentFormValues) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setForm((prev) => ({ ...prev, [field]: e.target.value }));
+    };
 
     const handleSubmit = () => {
-        if (!/^\d{4}$/.test(password.trim())) {
+        if (!/^\d{4}$/.test(form.password.trim())) {
             alert("비밀번호는 숫자 4자리여야 합니다.");
             return;
         }
 
-        if (!content.trim()) {
+        if (!form.content.trim()) {
             alert("내용을 입력해주세요.");
             return;
         }
 
-        onSubmit(content.trim(), password.trim());
+        onSubmit({
+            nickname: form.nickname.trim(),
+            password: form.password.trim(),
+            content: form.content.trim()
+        });
     };
 
     return (
         <FormWrapper>
             <TopInputWrapper>
                 <NicknameInput
-                    value={nickname}
-                    onChange={(e) => setNickname(e.target.value)}
+                    value={form.nickname}
+                    onChange={handleChange("nickname")}
                     placeholder="닉네임"
                     maxLength={10}
                 />
                 <PasswordInput
                     type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    value={form.password}
+                    onChange={handleChange("password")}
                     placeholder="비밀번호"
                     maxLength={4}
                 />
             </TopInputWrapper>
 
             <TextArea
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
+                value={form.content}
+                onChange={handleChange("content")}
                 placeholder="내용을 입력하세요"
             />
 
             <InputWrapper>
                 <SubmitButton onClick={handleSubmit} disabled={loading}>
-                    {loading ? "전송 중..." : "확인"}
+                    {loading ? "전송 중..." : "등록"}
                 </SubmitButton>
                 {onCancel && <CancelButton onClick={onCancel}>취소</CancelButton>}
             </InputWrapper>

@@ -11,3 +11,9 @@ export interface DeleteCommentPayload {
     commentId: number;
     password: string;
 }
+
+export interface UpdateCommentPayload {
+    nickname: string;
+    password: string;
+    content: string;
+}

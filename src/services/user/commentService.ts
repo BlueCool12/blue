@@ -1,7 +1,7 @@
 import { commentApi } from "@/lib/api/user/commentApi"
 import { formatDate } from "@/lib/utils/format";
 
-import { Comment, CreateCommentPayload, DeleteCommentPayload } from "@/types/comment";
+import { Comment, CreateCommentPayload, DeleteCommentPayload, UpdateCommentPayload } from "@/types/comment";
 
 export const commentService = {
 
@@ -21,5 +21,13 @@ export const commentService = {
 
     deleteComment: async (payload: DeleteCommentPayload) => {
         await commentApi.deleteComment(payload);
-    }
+    },
+
+    verifyCommentPassword: async (commentId: number, password: string): Promise<boolean> => {
+        return await commentApi.verifyCommentPassword(commentId, password);
+    },
+
+    updateComment: async (commentId: number, payload: UpdateCommentPayload): Promise<void> => {
+        await commentApi.updateComment(commentId, payload);
+    },
 };

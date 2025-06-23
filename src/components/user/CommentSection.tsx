@@ -6,10 +6,11 @@ import styled from "styled-components";
 
 import { MdOutlineDelete, MdOutlineEdit } from "react-icons/md";
 import { CommentEditor } from "./CommentEditor";
+import { CommentForm } from "./CommentForm";
 
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { deleteComment, fetchComments } from "@/store/user/commentSlice";
-import { CommentForm } from "./CommentForm";
+import { deleteComment, fetchComments, updateComment } from "@/store/user/commentSlice";
+import { commentService } from "@/services/user/commentService";
 
 interface Props {
     postId: number;
@@ -29,7 +30,9 @@ export const CommentSection: React.FC<Props> = ({ postId }) => {
     const handleDeleteComment = async (commentId: number) => {
         const input = prompt("비밀번호를 입력하세요");
 
-        if (!input || input.length !== 4 || !/^\d{4}$/.test(input)) {
+        if (input === null) return;
+
+        if (!/^\d{4}$/.test(input)) {
             alert("비밀번호는 4자리 숫자입니다.");
             return;
         }
@@ -42,12 +45,38 @@ export const CommentSection: React.FC<Props> = ({ postId }) => {
         }
     }
 
-    const handleEditClick = (commentId: number) => {
-        setEditingCommentId(commentId);
+    const handleEditClick = async (commentId: number) => {
+        const input = prompt("비밀번호를 입력하세요");
+
+        if (input === null) return;
+
+        if (!/^\d{4}$/.test(input)) {
+            alert("비밀번호는 4자리 숫자입니다.");
+            return;
+        }
+
+        const matched = await commentService.verifyCommentPassword(commentId, input);
+
+        if (matched) {
+            setEditingCommentId(commentId);
+        } else {
+            alert("비밀번호가 일치하지 않습니다.");
+        }
     };
 
-    const handleEditSubmit = () => {
-        setEditingCommentId(null);
+    const handleEditSubmit = async ({ nickname, password, content }: { nickname: string; password: string; content: string; }) => {
+
+        if (editingCommentId === null) return;
+
+        try {
+            await dispatch(updateComment({ commentId: editingCommentId, postId, data: { nickname, password, content } })).unwrap();
+
+            alert("댓글이 수정되었습니다.");
+            setEditingCommentId(null);
+        } catch {
+            alert("댓글 수정에 실패했습니다.");
+        }
+
     }
 
     if (error) throw new Error(error);
@@ -64,11 +93,9 @@ export const CommentSection: React.FC<Props> = ({ postId }) => {
 
                             {editingCommentId === comment.id ? (
                                 <CommentForm
-                                    initialContent={comment.content}
+                                    initialValues={{ nickname: comment.nickname, content: comment.content }}
                                     onCancel={() => setEditingCommentId(null)}
-                                    onSubmit={(content, password) =>
-                                        handleEditSubmit()
-                                    }
+                                    onSubmit={handleEditSubmit}
                                 />
                             ) : (
                                 <CommentBody>
