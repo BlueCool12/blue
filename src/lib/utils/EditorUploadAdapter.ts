@@ -1,6 +1,6 @@
-import { FileLoader } from "@ckeditor/ckeditor5-upload";
 import axios from "axios";
 
+import { FileLoader } from "@ckeditor/ckeditor5-upload";
 
 export class EditorUploadAdapter {
     constructor(private loader: FileLoader) {}
