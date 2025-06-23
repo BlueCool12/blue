@@ -1,7 +1,7 @@
-import { highlightCodeBlocksWithShiki } from "@/lib/utils/highlight";
-
 import { notFound } from "next/navigation";
 
+import { highlightCodeBlocksWithShiki } from "@/lib/utils/highlight";
+import { formatDate } from "@/lib/utils/format";
 import { postApi } from "@/lib/api/user/postApi";
 import { fetchPostBySlug } from "@/lib/server/post";
 
@@ -30,11 +30,3 @@ export const postService = {
         }
     }
 };
-
-function formatDate(isoDate: string): string {
-    const date = new Date(isoDate);
-    const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const day = date.getDate().toString().padStart(2, '0');
-    return `${year}.${month}.${day}`;
-}

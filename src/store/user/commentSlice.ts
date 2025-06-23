@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import { commentService } from "@/services/user/commentService";
 
-import { Comment, CreateCommentPayload } from "@/types/comment";
+import { Comment, CreateCommentPayload, DeleteCommentPayload, UpdateCommentPayload } from "@/types/comment";
 
 interface CommentState {
     comments: Comment[];
@@ -28,6 +28,24 @@ export const fetchComments = createAsyncThunk(
     "user/fetchComments",
     async (postId: number) => {
         return await commentService.getAllComments(postId);
+    }
+);
+
+export const deleteComment = createAsyncThunk<void, DeleteCommentPayload>(
+    "user/deleteComment",
+    async (payload, { dispatch }) => {
+        await commentService.deleteComment(payload);
+        dispatch(fetchComments(payload.postId));
+    }
+);
+
+export const updateComment = createAsyncThunk<void,
+    { commentId: number; postId: number; data: UpdateCommentPayload }
+>(
+    "user/updateComment",
+    async ({ commentId, postId, data }, { dispatch }) => {
+        await commentService.updateComment(commentId, data);
+        dispatch(fetchComments(postId));
     }
 );
 
@@ -62,6 +80,32 @@ const commentSlice = createSlice({
             .addCase(fetchComments.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.error.message || "댓글 불러오기 실패";
+            })
+
+            // 댓글 삭제
+            .addCase(deleteComment.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(deleteComment.fulfilled, (state) => {
+                state.loading = false;
+            })
+            .addCase(deleteComment.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.error.message || "댓글 삭제 실패";
+            })
+
+            // 댓글 수정
+            .addCase(updateComment.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(updateComment.fulfilled, (state) => {
+                state.loading = false;
+            })
+            .addCase(updateComment.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.error.message || "댓글 수정 실패";
             })
     },
 });

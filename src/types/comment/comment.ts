@@ -4,5 +4,6 @@ export interface Comment {
     parentId?: number;
     nickname: string;
     content: string;
+    isDeleted: boolean;
     createdAt: string;
 }
