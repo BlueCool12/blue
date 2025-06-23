@@ -6,6 +6,10 @@
  */
 
 import { useState, useEffect, useRef, useMemo } from 'react';
+
+import 'ckeditor5/ckeditor5.css';
+import translations from 'ckeditor5/translations/ko.js';
+
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import {
 	ClassicEditor, Alignment, Autoformat, AutoImage, AutoLink,
@@ -25,14 +29,10 @@ import {
 	TableColumnResize, TableLayout, TableProperties, TableToolbar, TextPartLanguage,
 	TextTransformation, TodoList, Underline, HeadingOption
 } from 'ckeditor5';
+import { EditorUploadAdapter } from '@/lib/utils/EditorUploadAdapter';
 
-import translations from 'ckeditor5/translations/ko.js';
-
-import 'ckeditor5/ckeditor5.css';
-
-import { useAppSelector } from '../../../store/hooks';
-import { selectToken } from '../../../lib/auth/authSlice';
-import { EditorUploadAdapter } from '@/lib/utils/editorUploadAdapter';
+import { useAppSelector } from '@/store/hooks';
+import { selectToken } from '@/lib/auth/authSlice';
 
 interface EditorProps {
 	onChange: (data: string) => void;
