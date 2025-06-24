@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import styles from './CategorySidebar.module.css';
 
+import { MdOutlineNumbers } from 'react-icons/md';
 import { LoadingSpinner } from '../common/LoadingSpinner';
 
 import { Category } from '@/types/category';
@@ -71,7 +72,7 @@ export const CategorySidebar = ({ categories, loading, error, selectedCategory, 
                                                             onSelectCategory(child.name);
                                                         }}
                                                     >
-                                                        {child.name}
+                                                        <MdOutlineNumbers />{child.name}
                                                     </button>
                                                 </li>
                                             ))}

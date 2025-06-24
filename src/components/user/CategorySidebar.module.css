@@ -31,7 +31,7 @@
     display: block;
     padding: 0.5rem 0;
     font-size: 1rem;
-    font-weight: 500;
+    font-weight: 600;
     color: var(--text-color);
     text-decoration: none;
     cursor: pointer;
@@ -49,11 +49,13 @@
 }
 
 .subLink {
-    cursor: pointer;    
+    cursor: pointer;
     padding: 0 1rem 0.25rem;
     font-size: 1rem;
+    font-weight: 600;
     justify-self: center;
-    display: block;
+    display: flex;
+    gap: 0.1rem;
     color: var(--text-color);
 }
 
