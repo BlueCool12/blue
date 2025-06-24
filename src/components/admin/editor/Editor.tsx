@@ -6,6 +6,10 @@
  */
 
 import { useState, useEffect, useRef, useMemo } from 'react';
+
+import 'ckeditor5/ckeditor5.css';
+import translations from 'ckeditor5/translations/ko.js';
+
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import {
 	ClassicEditor, Alignment, Autoformat, AutoImage, AutoLink,
@@ -25,13 +29,10 @@ import {
 	TableColumnResize, TableLayout, TableProperties, TableToolbar, TextPartLanguage,
 	TextTransformation, TodoList, Underline, HeadingOption
 } from 'ckeditor5';
+import { EditorUploadAdapter } from '@/lib/utils/EditorUploadAdapter';
 
-import translations from 'ckeditor5/translations/ko.js';
-
-import 'ckeditor5/ckeditor5.css';
-
-import { useAppSelector } from '../../../store/hooks';
-import { selectToken } from '../../../lib/auth/authSlice';
+import { useAppSelector } from '@/store/hooks';
+import { selectToken } from '@/lib/auth/authSlice';
 
 interface EditorProps {
 	onChange: (data: string) => void;
@@ -92,13 +93,7 @@ const Editor = ({ onChange, initialData }: EditorProps) => {
 				Superscript, Table, TableCaption, TableCellProperties, TableColumnResize,
 				TableLayout, TableProperties, TableToolbar, TextPartLanguage, TextTransformation,
 				TodoList, Underline
-			],
-			simpleUpload: {
-				uploadUrl: 'https://bluecool.pyomin.com/api/admin/images',
-				headers: {
-					'Authorization': `Bearer ${token}`
-				}
-			},
+			],			
 			fontFamily: {
 				supportAllValues: true,
 			},
@@ -276,9 +271,12 @@ const Editor = ({ onChange, initialData }: EditorProps) => {
 						{editorConfig && (
 							<CKEditor
 								onReady={(editor) => {
+									// UploadAdapter
+									editor.plugins.get("FileRepository").createUploadAdapter = (loader) =>
+										new EditorUploadAdapter(loader);
 
+									// 메뉴 바 이동
 									const menuBarElement = editor.ui.view.menuBarView?.element;
-
 									if (editorMenuBarRef.current && menuBarElement) {
 										editorMenuBarRef.current.appendChild(menuBarElement);
 									}
