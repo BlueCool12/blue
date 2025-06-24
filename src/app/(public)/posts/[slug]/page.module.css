@@ -134,9 +134,10 @@
 }
 
 /* 이미지 캡션 및 figure */
-.content figure {
-    margin: 2rem 0;
-    text-align: center;
+.content figure.image {
+    display: block;
+    margin: 1.5rem auto;
+    max-width: 100%;
 }
 
 .content figcaption {
