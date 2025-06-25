@@ -29,7 +29,7 @@ export const CommentSection: React.FC<Props> = ({ postId }) => {
     }, [dispatch, postId]);
 
     const handleDeleteComment = async (commentId: number) => {
-        const input = prompt("비밀번호를 입력하세요");
+        const input = prompt("⬇️ 비밀번호를 입력하세요 ⬇️");
 
         if (input === null) return;
 
@@ -47,7 +47,7 @@ export const CommentSection: React.FC<Props> = ({ postId }) => {
     }
 
     const handleEditClick = async (commentId: number) => {
-        const input = prompt("비밀번호를 입력하세요");
+        const input = prompt("⬇️ 비밀번호를 입력하세요 ⬇️");
 
         if (input === null) return;
 
@@ -167,12 +167,10 @@ const CommentContent = styled.p`
 const MetaAndActions = styled.div`
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-top: 0.5rem;
+    align-items: center;    
 `;
 
-const CommentMeta = styled.div`
-    margin-top: 0.5rem;
+const CommentMeta = styled.div`    
     font-size: 0.75rem;
     justify-self: end;
 `;
