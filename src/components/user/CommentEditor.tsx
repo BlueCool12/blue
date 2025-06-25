@@ -10,24 +10,10 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { RootState } from "@/store/store";
 import { createComment } from "@/store/user/commentSlice";
 
+import { getRandomAnonymousNickname } from "@/lib/utils/getRandomAnonymousNickname";
+
 interface Props {
     postId: number;
-}
-
-const anonymousNicknames = [
-    "익명의먼치킨",
-    "익명의사모예드",
-    "익명의개발자",
-    "익명의고구마",
-    "익명의개구리",
-    "익명의티라노",
-    "익명의햄스터",
-    "익명의알파카",
-];
-
-function getRandomAnonymousNickname() {
-    const index = Math.floor(Math.random() * anonymousNicknames.length);
-    return anonymousNicknames[index];
 }
 
 export const CommentEditor: React.FC<Props> = ({ postId }) => {

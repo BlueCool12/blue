@@ -2,6 +2,8 @@ import { useState } from "react";
 
 import styled from "styled-components";
 
+import { getRandomAnonymousNickname } from "@/lib/utils/getRandomAnonymousNickname";
+
 interface CommentFormValues {
     nickname: string;
     password: string;
@@ -43,8 +45,10 @@ export const CommentForm: React.FC<Props> = ({
             return;
         }
 
+        const trimmedNickname = form.nickname.trim() || getRandomAnonymousNickname();
+
         onSubmit({
-            nickname: form.nickname.trim(),
+            nickname: trimmedNickname,
             password: form.password.trim(),
             content: form.content.trim()
         });
