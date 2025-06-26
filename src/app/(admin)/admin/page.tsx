@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 export default function Page() {
 
     const handleGenerateSitemap = async () => {
-        fetch('http://localhost:8888/files/sitemaps/download')
+        fetch('https://bluecool.pyomin.com/files/sitemaps/download')
             .then(response => {
                 if (!response.ok) {
                     toast.error('다운로드 실패');
