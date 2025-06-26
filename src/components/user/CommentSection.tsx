@@ -18,6 +18,7 @@ interface Props {
 }
 
 export const CommentSection: React.FC<Props> = ({ postId }) => {
+    const [isClient, setIsClient] = useState(false);
 
     const dispatch = useAppDispatch();
     const { comments } = useAppSelector((state) => state.userComment);
@@ -25,11 +26,17 @@ export const CommentSection: React.FC<Props> = ({ postId }) => {
     const [editingCommentId, setEditingCommentId] = useState<number | null>(null);
 
     useEffect(() => {
+        setIsClient(true);
+    }, []);
+
+    useEffect(() => {
         dispatch(fetchComments(postId));
     }, [dispatch, postId]);
 
     const handleDeleteComment = async (commentId: number) => {
-        const input = prompt("⬇️ 비밀번호를 입력하세요 ⬇️");
+        if (!isClient) return;
+
+        const input = prompt("⬇️ 비밀번호를 입력해 주세요 ⬇️");
 
         if (input === null) return;
 
@@ -47,7 +54,9 @@ export const CommentSection: React.FC<Props> = ({ postId }) => {
     }
 
     const handleEditClick = async (commentId: number) => {
-        const input = prompt("⬇️ 비밀번호를 입력하세요 ⬇️");
+        if (!isClient) return;
+
+        const input = prompt("⬇️ 비밀번호를 입력해 주세요 ⬇️");
 
         if (input === null) return;
 
@@ -78,7 +87,7 @@ export const CommentSection: React.FC<Props> = ({ postId }) => {
             toast.error("댓글 수정에 실패했습니다.");
         }
 
-    }    
+    }
 
     return (
         <Section>
@@ -103,7 +112,7 @@ export const CommentSection: React.FC<Props> = ({ postId }) => {
                                 </CommentBody>
                             )}
 
-                            <MetaAndActions>
+                            <MetaAndActions isEditing={editingCommentId === comment.id}>
                                 <CommentMeta>{comment.createdAt}</CommentMeta>
 
                                 {!comment.isDeleted && (
@@ -164,8 +173,8 @@ const CommentContent = styled.p`
     color: var(--text-color);
 `;
 
-const MetaAndActions = styled.div`
-    display: flex;
+const MetaAndActions = styled.div<{ isEditing: boolean }>`
+    display: ${({ isEditing }) => (isEditing ? 'none' : 'flex')};
     justify-content: space-between;
     align-items: center;    
 `;

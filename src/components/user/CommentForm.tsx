@@ -102,15 +102,15 @@ const TopInputWrapper = styled.div`
 `;
 
 const NicknameInput = styled.input`
-  flex: 1;
+  width: 70%;
   padding: 0.5rem;
   font-size: 0.9rem;
   border-radius: 0.5rem;
   border: 1px solid var(--border-color);
 `;
 
-const PasswordInput = styled.input`
-  width: 6rem;
+const PasswordInput = styled.input` 
+  width: 30%; 
   padding: 0.5rem;
   font-size: 0.9rem;
   border-radius: 0.5rem;
