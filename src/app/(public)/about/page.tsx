@@ -1,8 +1,8 @@
-import styles from './page.module.css';
-import clsx from 'clsx';
-
 import { Metadata } from 'next';
 import Image from 'next/image';
+
+import styles from './page.module.css';
+import clsx from 'clsx';
 
 import { MdOutlineMail } from 'react-icons/md';
 import ProjectTabs from './ProjectTabs';
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'About',
         description: 'BlueCool12의 이력과 프로젝트를 소개합니다.',
-        url: 'https://www.pyomin.com/about',        
+        url: 'https://pyomin.com/about',        
     },
     twitter: {        
         title: 'About',
@@ -30,6 +30,7 @@ const About = () => {
 
     return (
         <main className={styles['main-wrapper']}>
+            
             {/* Hero Section */}
             <section className={styles['hero-section']}>
                 <div className={styles['hero-section__card']}>

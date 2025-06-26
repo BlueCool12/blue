@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         openGraph: {
             title: post.title,
             type: 'article',
-            url: `https://www.pyomin.com/posts/${slug}`,
+            url: `https://pyomin.com/posts/${slug}`,
         },
         twitter: {
             card: 'summary_large_image',
