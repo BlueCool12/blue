@@ -55,6 +55,7 @@
     font-weight: 600;
     justify-self: center;
     display: flex;
+    align-items: center;
     gap: 0.1rem;
     color: var(--text-color);
 }

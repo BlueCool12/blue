@@ -136,7 +136,7 @@ const InputWrapper = styled.div`
 const SubmitButton = styled.button`
     padding: 0.5rem 1rem;
     background-color: var(--theme-color-9);
-    color: white;
+    color: #fff;
     border: none;
     border-radius: 0.5rem;
     cursor: pointer;
@@ -149,6 +149,7 @@ const SubmitButton = styled.button`
 const CancelButton = styled.button`
     padding: 0.5rem 1rem;
     background-color: #ccc;
+    color: #333;
     border: none;
     border-radius: 0.5rem;
     cursor: pointer;
