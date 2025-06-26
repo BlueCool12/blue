@@ -18,26 +18,26 @@ export const metadata: Metadata = {
     },
     description: 'BlueCool 공식 블로그 입니다.',
     keywords: ['BlueCool', 'BlueCool12', '블루쿨'],
-    metadataBase: new URL('https://www.pyomin.com'),
+    metadataBase: new URL('https://pyomin.com'),
     verification: {
         google: 'a_U5y0WSCgz0M6vCAXxFu6HFYeMcpYpbxrmX25W_veQ',
     },
     icons: [
         {
             rel: 'icon',
-            url: '/images/favicon.ico',
+            url: '/favicon.ico',
         }
     ],
     openGraph: {
         title: 'BlueCool',
         description: 'BlueCool 공식 블로그 입니다.',
         siteName: 'BlueCool',
-        url: 'https://www.pyomin.com',
+        url: 'https://pyomin.com',
         locale: 'ko_KR',
         type: 'website',
         images: [
             {
-                url: 'https://www.pyomin.com/images/og_image_resize.png',
+                url: 'https://pyomin.com/images/og_image_resize.png',
                 width: 1200,
                 height: 630,
                 alt: 'BlueCool 대표 이미지',
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
         card: 'summary_large_image',
         title: 'BlueCool',
         description: 'BlueCool 공식 블로그 입니다.',
-        images: ['https://www.pyomin.com/images/og_image_resize.png'],
+        images: ['https://pyomin.com/images/og_image_resize.png'],
     },
 }
 
@@ -90,7 +90,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                             "@context": "https://schema.org",
                             "@type": "WebSite",
                             name: "BlueCool",
-                            url: "https://www.pyomin.com",
+                            url: "https://pyomin.com",
                             description: "BlueCool 공식 블로그입니다.",
                             inLanguage: "ko-KR"
                         }),

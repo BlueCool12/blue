@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: '방명록',
         description: 'BlueCool 블로그 방명록 페이지입니다.',
-        url: 'https://www.pyomin.com/guestbooks',
+        url: 'https://pyomin.com/guestbooks',
     },
     twitter: {
         title: '방명록',

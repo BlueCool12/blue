@@ -1,11 +1,12 @@
 'use client';
 
-import styles from './page.module.css';
-import clsx from 'clsx';
-import { MdOutlineDescription, MdOutlineTravelExplore, MdOutlineRocketLaunch } from 'react-icons/md';
-
 import { useState } from 'react';
 import Image from 'next/image';
+
+import styles from './page.module.css';
+import clsx from 'clsx';
+
+import { MdOutlineDescription, MdOutlineTravelExplore, MdOutlineRocketLaunch } from 'react-icons/md';
 
 const projects = [
     {
