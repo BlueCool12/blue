@@ -78,10 +78,10 @@ const Test = () => {
                             O(n)
                         </div>
                         <div style={{ borderBottom: '1px solid #BEE9F4', padding: '0.5rem' }}>
-                            O(n)
+                            O(n) / O(1)
                         </div>
                         <div style={{ padding: '0.5rem' }}>
-                            O(n)
+                            O(n) / O(1)
                         </div>
                     </div>
 
@@ -93,13 +93,13 @@ const Test = () => {
                             인덱스로 바로 접근
                         </div>
                         <div style={{ borderBottom: '1px solid #BEE9F4', padding: '0.5rem 2rem 0.5rem 1rem' }}>
-                            원하는 값을 찾기위해 처음부터 끝까지 탐색
+                            원하는 값을 찾기 위해 처음부터 끝까지 탐색
                         </div>
                         <div style={{ borderBottom: '1px solid #BEE9F4', padding: '0.5rem 2rem 0.5rem 1rem' }}>
-                            중간 삽입 시 요소 이동 필요
+                            중간 요소 추가 시에는 O(n), 마지막 요소는 O(1)
                         </div>
                         <div style={{ padding: '0.5rem 2rem 0.5rem 1rem' }}>
-                            중간 삭제 시 요소 이동 필요
+                            중간 요소 삭제 시에는 O(n), 마지막 요소는 O(1)
                         </div>
                     </div>
                 </div>

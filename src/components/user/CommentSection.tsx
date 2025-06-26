@@ -112,7 +112,7 @@ export const CommentSection: React.FC<Props> = ({ postId }) => {
                                 </CommentBody>
                             )}
 
-                            <MetaAndActions isEditing={editingCommentId === comment.id}>
+                            <MetaAndActions $isEditing={editingCommentId === comment.id}>
                                 <CommentMeta>{comment.createdAt}</CommentMeta>
 
                                 {!comment.isDeleted && (
@@ -173,8 +173,8 @@ const CommentContent = styled.p`
     color: var(--text-color);
 `;
 
-const MetaAndActions = styled.div<{ isEditing: boolean }>`
-    display: ${({ isEditing }) => (isEditing ? 'none' : 'flex')};
+const MetaAndActions = styled.div<{ $isEditing: boolean }>`
+    display: ${({ $isEditing }) => ($isEditing ? 'none' : 'flex')};
     justify-content: space-between;
     align-items: center;    
 `;
@@ -187,6 +187,7 @@ const CommentMeta = styled.div`
 const ButtonGroup = styled.div`
     display: flex;
     gap: 0.5rem;
+    color: var(--text-color);
 `;
 
 const CommentEditButton = styled.button`
