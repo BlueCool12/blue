@@ -139,7 +139,7 @@ export const CommentSection: React.FC<Props> = ({ postId }) => {
 };
 
 const Section = styled.section`
-    padding-bottom: 5rem;
+    padding: 2rem 0 5rem;
 `;
 
 const CommentList = styled.div`

@@ -1,7 +1,5 @@
 .article {
-    padding: 3rem 1rem;
-    margin-bottom: 3rem;
-    border-bottom: 2px solid var(--border-color);
+    padding: 3rem 1rem 5rem;    
 }
 
 @media (max-width: 768px) {
