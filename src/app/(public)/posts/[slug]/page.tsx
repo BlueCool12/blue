@@ -11,7 +11,7 @@ import { LoadingSpinner } from '@/components/common/LoadingSpinner';
 
 const CommentSection = dynamic<{
     postId: number;
-}>(() => import('@/components/user/CommentSection').then(mod => mod.CommentSection), {
+}>(() => import('@/components/user/CommentSection'), {
     ssr: false,
     loading: () => <LoadingSpinner />,
 });
