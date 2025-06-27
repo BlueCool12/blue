@@ -1,10 +1,10 @@
-import styles from './page.module.css';
-
-import Link from 'next/link';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import Link from 'next/link';
 
-import { CommentSection } from '@/components/user/CommentSection';
+import styles from './page.module.css';
+
+import CommentSectionWrapper from '@/components/user/CommentSectionWrapper';
 
 import { postService } from '@/services/user/postService';
 import { LogoBorder } from '@/components/user/LogoBorder';
@@ -66,7 +66,8 @@ export default async function PostDetail({ params }: PageProps) {
 
             <LogoBorder />
 
-            <CommentSection postId={post.id} />
+            <CommentSectionWrapper postId={post.id} />
+
         </>
     );
 }
