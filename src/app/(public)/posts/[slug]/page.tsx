@@ -4,10 +4,17 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-import { CommentSection } from '@/components/user/CommentSection';
-
 import { postService } from '@/services/user/postService';
 import { LogoBorder } from '@/components/user/LogoBorder';
+import dynamic from 'next/dynamic';
+import { LoadingSpinner } from '@/components/common/LoadingSpinner';
+
+const CommentSection = dynamic<{
+    postId: number;
+}>(() => import('@/components/user/CommentSection').then(mod => mod.CommentSection), {
+    ssr: false,
+    loading: () => <LoadingSpinner />,
+});
 
 interface PageProps {
     params: Promise<{ slug: string }>;
