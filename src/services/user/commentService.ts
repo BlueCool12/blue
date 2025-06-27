@@ -10,13 +10,17 @@ export const commentService = {
     },
 
     getAllComments: async (postId: number) => {
-        const result = await commentApi.getAllComments(postId);
-        return result.map((comment: Comment) => ({
-            ...comment,
-            nickname: comment.isDeleted ? "알 수 없음" : comment.nickname,
-            content: comment.isDeleted ? "삭제된 댓글입니다." : comment.content,
-            createdAt: formatDate(comment.createdAt),
-        }));
+        try {
+            const result = await commentApi.getAllComments(postId);
+            return result.map((comment: Comment) => ({
+                ...comment,
+                nickname: comment.isDeleted ? "알 수 없음" : comment.nickname,
+                content: comment.isDeleted ? "삭제된 댓글입니다." : comment.content,
+                createdAt: formatDate(comment.createdAt),
+            }));
+        } catch {
+            return [];
+        }        
     },
 
     deleteComment: async (payload: DeleteCommentPayload) => {
