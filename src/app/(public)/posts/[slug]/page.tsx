@@ -7,6 +7,7 @@ import { notFound } from 'next/navigation';
 import { CommentSection } from '@/components/user/CommentSection';
 
 import { postService } from '@/services/user/postService';
+import { LogoBorder } from '@/components/user/LogoBorder';
 
 interface PageProps {
     params: Promise<{ slug: string }>;
@@ -62,6 +63,8 @@ export default async function PostDetail({ params }: PageProps) {
                     dangerouslySetInnerHTML={{ __html: post.content }}
                 />
             </article>
+
+            <LogoBorder />
 
             <CommentSection postId={post.id} />
         </>
