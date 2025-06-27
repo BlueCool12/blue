@@ -32,7 +32,7 @@ export const CommentSection: React.FC<Props> = ({ postId }) => {
     useEffect(() => {
         const loadComments = async () => {
             try {
-                await dispatch(fetchComments(postId));
+                await dispatch(fetchComments(postId)).unwrap();
             } catch {
                 toast.error("댓글을 불러오지 못했습니다.");
             }
