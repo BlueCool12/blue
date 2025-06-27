@@ -17,7 +17,7 @@ interface Props {
     postId: number;
 }
 
-export const CommentSection: React.FC<Props> = ({ postId }) => {
+const CommentSection: React.FC<Props> = ({ postId }) => {
     const [isClient, setIsClient] = useState(false);
 
     const dispatch = useAppDispatch();
@@ -145,6 +145,8 @@ export const CommentSection: React.FC<Props> = ({ postId }) => {
         </Section>
     );
 };
+
+export default CommentSection;
 
 const Section = styled.section`
     padding: 2rem 0 5rem;
