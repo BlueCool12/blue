@@ -26,8 +26,12 @@ export const createComment = createAsyncThunk<void, CreateCommentPayload>(
 
 export const fetchComments = createAsyncThunk(
     "user/fetchComments",
-    async (postId: number) => {
-        return await commentService.getAllComments(postId);
+    async (postId: number, { rejectWithValue }) => {
+        try {
+            return await commentService.getAllComments(postId);
+        } catch {
+            return rejectWithValue("댓글 불러오기 실패");
+        }
     }
 );
 
@@ -79,7 +83,7 @@ const commentSlice = createSlice({
             })
             .addCase(fetchComments.rejected, (state, action) => {
                 state.loading = false;
-                state.error = action.error.message || "댓글 불러오기 실패";
+                state.error = (action.payload as string) || "댓글 불러오기 실패";
             })
 
             // 댓글 삭제
