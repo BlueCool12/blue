@@ -17,11 +17,11 @@ interface Props {
     postId: number;
 }
 
-const CommentSection: React.FC<Props> = ({ postId }) => {
+export const CommentSection: React.FC<Props> = ({ postId }) => {
     const [isClient, setIsClient] = useState(false);
 
     const dispatch = useAppDispatch();
-    const { comments } = useAppSelector((state) => state.userComment);
+    const { comments, error } = useAppSelector((state) => state.userComment);
 
     const [editingCommentId, setEditingCommentId] = useState<number | null>(null);
 
@@ -101,7 +101,9 @@ const CommentSection: React.FC<Props> = ({ postId }) => {
         <Section>
 
             <CommentList>
-                {comments.length === 0 ? (
+                {error ? (
+                    <CommentItem>댓글을 불러오는 데 실패했습니다. 새로고침 해주세요.</CommentItem>
+                ) : comments.length === 0 ? (
                     <CommentItem>첫 댓글을 남겨보세요!</CommentItem>
                 ) : (
                     comments.map((comment) => (
@@ -145,8 +147,6 @@ const CommentSection: React.FC<Props> = ({ postId }) => {
         </Section>
     );
 };
-
-export default CommentSection;
 
 const Section = styled.section`
     padding: 2rem 0 5rem;
