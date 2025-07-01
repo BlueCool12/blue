@@ -1,6 +1,7 @@
 import { PostListResponse } from "@/types/post";
 import { NextResponse } from "next/server";
 
+export const dynamic = 'force-dynamic';
 
 const BACKEND_URL = 'https://bluecool.pyomin.com';
 const FRONTEND_URL = 'https://pyomin.com';
@@ -11,9 +12,14 @@ const staticUrls = [
     '/guestbooks'
 ];
 
-async function fetchPosts() {
-    const res = await fetch(`${BACKEND_URL}/api/user/posts`);
-    return res.json();
+async function fetchPosts(): Promise<PostListResponse[]> {
+    try {
+        const res = await fetch(`${BACKEND_URL}/api/user/posts`, { cache: 'no-store' });
+        if (!res.ok) throw new Error('글 불러오기 실패');
+        return res.json();
+    } catch {
+        return [];
+    }
 }
 
 export async function GET() {
