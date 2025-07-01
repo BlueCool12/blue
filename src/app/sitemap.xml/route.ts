@@ -8,6 +8,7 @@ const SITE_URL = 'https://pyomin.com';
 const staticUrls = [
     '/',
     '/about',
+    '/posts',
     '/guestbooks'
 ];
 
@@ -17,20 +18,12 @@ async function fetchPosts(): Promise<PostListResponse[]> {
         if (!res.ok) throw new Error('글 불러오기 실패');
         return res.json();
     } catch (err: unknown) {
-        if (err instanceof Error) {
-            console.error('❗ fetchPosts 에러:', err.message);
-        } else {
-            console.error('❗ fetchPosts 알 수 없는 에러:', err);
-        }
         return [];
     }
 }
 
 export async function GET() {
-    console.log('🚀 sitemap.xml 요청 들어옴');
-
     const posts = await fetchPosts();
-    console.log('🧾 최종 post 수:', posts.length);
 
     const dynamicUrls = posts.map((post: PostListResponse) => {
         return `
