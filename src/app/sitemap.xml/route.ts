@@ -3,8 +3,7 @@ import { NextResponse } from "next/server";
 
 export const dynamic = 'force-dynamic';
 
-const BACKEND_URL = 'https://bluecool.pyomin.com';
-const FRONTEND_URL = 'https://pyomin.com';
+const SITE_URL = 'https://pyomin.com';
 
 const staticUrls = [
     '/',
@@ -14,7 +13,7 @@ const staticUrls = [
 
 async function fetchPosts(): Promise<PostListResponse[]> {
     try {
-        const res = await fetch(`${BACKEND_URL}/api/user/posts`, { cache: 'no-store' });
+        const res = await fetch(`${process.env.INTERNAL_API_BASE_URL}/api/user/posts`, { cache: 'no-store' });
         if (!res.ok) throw new Error('글 불러오기 실패');
         return res.json();
     } catch {
@@ -28,7 +27,7 @@ export async function GET() {
     const dynamicUrls = posts.map((post: PostListResponse) => {
         return `
             <url>
-                <loc>${FRONTEND_URL}/posts/${post.slug}</loc>
+                <loc>${SITE_URL}/posts/${post.slug}</loc>
                 <lastmod>${new Date(post.updatedAt).toISOString()}</lastmod>
                 <changefreq>weekly</changefreq>
                 <priority>0.8</priority>
@@ -39,7 +38,7 @@ export async function GET() {
         const priority = path === '/' ? '1.0' : '0.5';
         return `
             <url>
-                <loc>${FRONTEND_URL}${path}</loc>
+                <loc>${SITE_URL}${path}</loc>
                 <lastmod>${new Date().toISOString()}</lastmod>
                 <changefreq>monthly</changefreq>
                 <priority>${priority}</priority>
