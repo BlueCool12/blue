@@ -13,7 +13,7 @@ const staticUrls = [
 
 async function fetchPosts(): Promise<PostListResponse[]> {
     try {
-        const res = await fetch(`${process.env.INTERNAL_API_BASE_URL}/api/user/posts`, { cache: 'no-store' });
+        const res = await fetch(`${process.env.INTERNAL_API_BASE_URL}/user/posts`, { cache: 'no-store' });
         if (!res.ok) throw new Error('글 불러오기 실패');
         return res.json();
     } catch (err: unknown) {
