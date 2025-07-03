@@ -8,7 +8,7 @@ export default function Home() {
         <main className={styles.wrapper}>
 
             <Image
-                src='/images/working.png'
+                src='/images/working.webp'
                 alt='작업중 이미지'
                 width={300}
                 height={300}

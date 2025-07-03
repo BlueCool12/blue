@@ -49,7 +49,7 @@ const About = () => {
 
                     <div className={styles['hero-section__mascot-wrapper']}>
                         <Image
-                            src='/images/BlueCool1.png'
+                            src='/images/about.webp'
                             alt="BlueCool12 마스코트 이미지"
                             width={160}
                             height={160}

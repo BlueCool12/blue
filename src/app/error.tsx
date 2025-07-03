@@ -23,7 +23,7 @@ export default function Error({
 
             <TitleSection>
                 <Image
-                    src="/images/Error2.png"
+                    src="/images/error.webp"
                     alt="에러 이미지"
                     width={256}
                     height={278}
