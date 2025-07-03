@@ -18,16 +18,11 @@ interface Props {
 }
 
 export const CommentSection: React.FC<Props> = ({ postId }) => {
-    const [isClient, setIsClient] = useState(false);
 
     const dispatch = useAppDispatch();
     const { comments, error } = useAppSelector((state) => state.userComment);
 
     const [editingCommentId, setEditingCommentId] = useState<number | null>(null);
-
-    useEffect(() => {
-        setIsClient(true);
-    }, []);
 
     useEffect(() => {
         const loadComments = async () => {
@@ -42,7 +37,6 @@ export const CommentSection: React.FC<Props> = ({ postId }) => {
     }, [dispatch, postId]);
 
     const handleDeleteComment = async (commentId: number) => {
-        if (!isClient) return;
 
         const input = prompt("⬇️ 비밀번호를 입력해 주세요 ⬇️");
 
@@ -62,7 +56,6 @@ export const CommentSection: React.FC<Props> = ({ postId }) => {
     }
 
     const handleEditClick = async (commentId: number) => {
-        if (!isClient) return;
 
         const input = prompt("⬇️ 비밀번호를 입력해 주세요 ⬇️");
 
