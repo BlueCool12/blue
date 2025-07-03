@@ -33,8 +33,8 @@ export const Header: React.FC = () => {
                         <Image
                             src={
                                 resolvedTheme === 'light'
-                                    ? '/images/logo/big_org.png'
-                                    : '/images/logo/big_dark_org.png'
+                                    ? '/images/logo/logo.webp'
+                                    : '/images/logo/logo_dark.webp'
                             }
                             alt="헤더 로고"
                             width={resolvedTheme === 'light' ? 50 : 74}
@@ -89,8 +89,8 @@ export const Header: React.FC = () => {
                             <Image
                                 src={
                                     resolvedTheme === 'light'
-                                        ? '/images/logo/small.png'
-                                        : '/images/logo/small_dark.png'
+                                        ? '/images/logo/mobile_logo.webp'
+                                        : '/images/logo/mobile_logo_dark.webp'
                                 }
                                 alt='모바일 메뉴 로고'
                                 width={31}
