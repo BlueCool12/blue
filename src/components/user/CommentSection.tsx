@@ -104,7 +104,7 @@ export const CommentSection: React.FC<Props> = ({ postId }) => {
                 {error ? (
                     <CommentItem>댓글을 불러오는 데 실패했습니다. 새로고침 해주세요.</CommentItem>
                 ) : comments.length === 0 ? (
-                    <CommentItem>첫 댓글을 남겨보세요!</CommentItem>
+                    <CommentItem>첫 댓글을 남겨보세요! ( ='X'= )</CommentItem>
                 ) : (
                     comments.map((comment) => (
                         <CommentItem key={comment.id}>
