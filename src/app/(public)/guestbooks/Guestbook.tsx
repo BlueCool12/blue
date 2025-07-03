@@ -58,7 +58,7 @@ export default function GuestbookPage() {
             <h1>GUESTBOOK</h1>
             <Image
                 alt='방명록 이미지'
-                src='/images/guestbooks.png'
+                src='/images/guestbooks.webp'
                 width={200}
                 height={200}
                 className={styles.image}
