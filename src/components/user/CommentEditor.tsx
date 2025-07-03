@@ -141,7 +141,7 @@ export const CommentEditor: React.FC<Props> = ({ postId }) => {
 const FloatingButton = styled.button`
     position: fixed;
     bottom: 5.5rem;
-    right: calc(50% - 400px + 1rem);;
+    right: calc(50% - 400px + 1rem);
     width: 3.5rem;
     height: 3.5rem;
     border-radius: 50%;
@@ -169,8 +169,8 @@ const FloatingButton = styled.button`
 const EditorBox = styled.div`
     width: 20rem;
     position: fixed;
-    bottom: 10rem;    
-    right: 2rem;
+    bottom: 10rem;
+    right: calc(50% - 400px + 1rem);
     padding: 1rem;
     background: var(--card-bg);
     border: 1px solid var(--border-color);
