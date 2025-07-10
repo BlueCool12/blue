@@ -22,8 +22,8 @@ const projects = [
             { name: 'JavaScript', color: '#f7df1e' },
             { name: 'Express.js', color: '#000000' },
             { name: 'MSSQL', color: '#CC2927' },
-            { name: 'React', color: '#61dafb' },
-            { name: 'CSS', color: '#264de4' },
+            { name: 'React', color: '#61DAFB' },
+            { name: 'CSS', color: '#663399' },
         ]
     },
     {
@@ -38,7 +38,7 @@ const projects = [
         stack: [
             { name: 'Java', color: '#f89820' },
             { name: 'Spring', color: '#6db33f' },
-            { name: 'Postgresql', color: '#336791' },
+            { name: 'Postgresql', color: '#4169E1' },
             { name: 'TypeScript', color: '#3178c6' },
             { name: 'React', color: '#61dafb' },
             { name: 'Next.js', color: '#000000' },

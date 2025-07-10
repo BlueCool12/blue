@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from "react";
+import { Metadata } from "next";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 
@@ -19,6 +20,14 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
 import type { Post } from "@/types/post";
+
+export const metadata: Metadata = {
+    title: '게시글 목록',
+    description: 'BlueCool 블로그의 게시글 목록입니다.',
+    alternates: {
+        canonical: 'https://pyomin.com/posts',
+    },
+};
 
 export default function PostList() {
 
