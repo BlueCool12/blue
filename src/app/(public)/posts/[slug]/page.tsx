@@ -13,6 +13,8 @@ interface PageProps {
     params: Promise<{ slug: string }>;
 }
 
+export const revalidate = 86400;
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
     const { slug: rawSlug } = await params;
     const slug = decodeURIComponent(rawSlug);

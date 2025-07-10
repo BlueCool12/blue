@@ -1,10 +1,10 @@
 'use client';
 
-import styles from './Guestbook.module.css';
-
 import { useEffect, useRef, useState } from 'react';
 import { useTheme } from 'next-themes';
 import Image from 'next/image';
+
+import styles from './Guestbook.module.css';
 
 import { LoadingSpinner } from '@/components/common/LoadingSpinner';
 
