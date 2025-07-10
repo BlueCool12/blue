@@ -37,7 +37,7 @@ const Login = () => {
             <LoginWrapper>
                 <Form>
                     <Image
-                        src='/images/BlueCoolLogin.png'
+                        src='/images/login.webp'
                         alt="Logo"
                         width={100}
                         height={100}

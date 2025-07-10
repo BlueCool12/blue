@@ -8,7 +8,7 @@ export const EmptyState = ({ message }: { message?: string }) => {
 
     <section className={styles['empty-state']}>
       <Image
-        src='/images/empty_org.png'
+        src='/images/empty.webp'
         alt="글이 없을때의 일러스트"
         className={styles['empty-state__illustration']}
         width={320}

@@ -19,7 +19,7 @@ export default function NotFound() {
                 <h1 className={styles['notfound__title']}>404</h1>
                 <div className={styles['notfound__image-wrapper']}>
                     <Image
-                        src='/images/BlueCoolError.png'
+                        src='/images/not_found.webp'
                         alt="에러 이미지"
                         width={300}
                         height={300}

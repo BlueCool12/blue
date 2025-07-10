@@ -16,7 +16,7 @@ const projects = [
             '기존 ASP기반의 프로젝트를 React와 Express로 리뉴얼 하였습니다.\n\n' +
             '프론트엔드 전반을 담당하며 React Query의 useQuery 및 useMutation을 활용해 백엔드와의 데이터 통신을 구현하였습니다.\n\n' +
             '카카오 싱크를 활용한 간편 가입 기능을 도입하였습니다.',
-        image: '/images/projects/baroyeon_org.png',
+        image: '/images/projects/baroyeon.webp',
         link: 'https://www.baroyeon.net/',
         stack: [
             { name: 'JavaScript', color: '#f7df1e' },
