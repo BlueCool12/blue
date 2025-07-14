@@ -19,7 +19,7 @@ export default function Error({
     const router = useRouter();
 
     return (
-        <ErrorMain>
+        <ErrorWrapper>
 
             <TitleSection>
                 <Image
@@ -37,11 +37,11 @@ export default function Error({
                 <OutlineButton type="button" icon={<MdOutlineHistory size={24} />} label="다시 시도" onClick={reset}></OutlineButton>
             </ActionNav>
 
-        </ErrorMain>
+        </ErrorWrapper>
     );
 }
 
-const ErrorMain = styled.main`
+const ErrorWrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;

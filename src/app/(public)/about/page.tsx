@@ -29,7 +29,7 @@ export const metadata: Metadata = {
 const About = () => {
 
     return (
-        <main className={styles['main-wrapper']}>
+        <div className={styles['wrapper']}>
             
             {/* Hero Section */}
             <section className={styles['hero-section']}>
@@ -82,7 +82,7 @@ const About = () => {
 
             <ProjectTabs />
 
-        </main>
+        </div>
     );
 };
 

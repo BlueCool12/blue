@@ -23,7 +23,7 @@ export default function CategoriesPage() {
     }, [dispatch]);
 
     return (
-        <main className={styles.container}>
+        <div className={styles.container}>
             <h1 className={styles.heading}>카테고리 목록</h1>
 
             <button className={styles.addButton} onClick={() => setShowCategoryModal(true)}>카테고리 추가</button>
@@ -41,6 +41,6 @@ export default function CategoriesPage() {
                     categories={categories}
                 />
             )}
-        </main>
+        </div>
     );
 };

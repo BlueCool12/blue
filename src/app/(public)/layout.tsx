@@ -12,11 +12,11 @@ export default function UserMainLayout({ children }: { children: React.ReactNode
     return (
         <>
             <Header />
-            <div className={styles.content}>
+            <main className={styles.content}>
                 <Suspense fallback={<LoadingSpinner />}>
                     {children}
                 </Suspense>
-            </div>
+            </main>
             <Footer />
         </>
     );
