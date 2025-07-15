@@ -13,7 +13,7 @@ export default function NotFound() {
     const router = useRouter();
 
     return (
-        <main className={styles['notfound__main']}>
+        <div className={styles['notfound__wrapper']}>
 
             <section className={styles['notfound__title-section']}>
                 <h1 className={styles['notfound__title']}>404</h1>
@@ -35,6 +35,6 @@ export default function NotFound() {
                 <OutlineButton type="button" icon={<MdOutlineHistory size={24} />} label="이전 페이지" onClick={() => router.back()}></OutlineButton>
             </nav>
 
-        </main>
+        </div>
     );
 }

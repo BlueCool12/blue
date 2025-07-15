@@ -54,7 +54,7 @@ export default function GuestbookPage() {
     }, [theme, mounted]);
 
     return (
-        <main className={styles.container}>
+        <div className={styles.container}>
             <h1>GUESTBOOK</h1>
             <Image
                 alt='방명록 이미지'
@@ -71,6 +71,6 @@ export default function GuestbookPage() {
             )}
 
             <div ref={ref} />
-        </main>
+        </div>
     );
 }
