@@ -8,6 +8,7 @@ import styles from './page.module.css';
 import { MdOutlineStar } from 'react-icons/md';
 import Link from 'next/link';
 import { useLatestPosts } from '@/hooks/queries/posts/useLatestPosts';
+import { PostLatest } from '@/types/post';
 
 const greetings = [
     '환영합니다 :D',
@@ -34,7 +35,7 @@ export default function Home() {
 
     useEffect(() => {
         const current = greetings[index];
-        let charIndex = displayedText.length;
+        const charIndex = displayedText.length;
 
         if (typingRef.current) clearTimeout(typingRef.current);
 
@@ -128,7 +129,7 @@ export default function Home() {
                     <p className={styles['recent-posts__error']}>최신글을 불러오는 데 실패했어요 😢</p>
                 )}
 
-                {latestPosts?.map((post) => (
+                {latestPosts?.map((post: PostLatest) => (
                     <Link key={post.id} href={`/posts/${post.slug}`} className={styles['recent-posts__link']}>
                         <article className={styles['recent-posts__card']}>
                             <div className={styles['recent-posts__content']}>
