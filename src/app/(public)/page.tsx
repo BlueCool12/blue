@@ -7,6 +7,7 @@ import styles from './page.module.css';
 
 import { MdOutlineStar } from 'react-icons/md';
 import Link from 'next/link';
+import { useLatestPosts } from '@/hooks/queries/posts/useLatestPosts';
 
 const greetings = [
     '환영합니다 :D',
@@ -26,6 +27,8 @@ export default function Home() {
     const [isDeleting, setIsDeleting] = useState(false);
 
     const [visible, setVisible] = useState(false);
+
+    const { data: latestPosts, isLoading, isError } = useLatestPosts();
 
     const typingRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -110,12 +113,34 @@ export default function Home() {
             <section className={styles['recent-posts']}>
                 <h2 className={styles['recent-posts__title']}>최신글</h2>
 
-                <article className={styles['recent-posts__card']}>
-                    <img src='/images/og_image_resize.png' className={styles['recent-posts__image']} />
-                    <div className={styles['recent-posts__content']}>
-                        <h3 className={styles['recent-posts__card-title']}>🔎 Next.js를 이용한 SEO 최적화</h3>                        
+                {isLoading && (
+                    <div className={styles['recent-posts__skeleton-wrapper']}>
+                        {[...Array(3)].map((_, idx) => (
+                            <div key={idx} className={styles['recent-posts__skeleton']}>
+                                <div className={styles['skeleton-title']} />
+                                <div className={styles['skeleton-date']} />
+                            </div>
+                        ))}
                     </div>
-                </article>
+                )}
+
+                {isError && (
+                    <p className={styles['recent-posts__error']}>최신글을 불러오는 데 실패했어요 😢</p>
+                )}
+
+                {latestPosts?.map((post) => (
+                    <Link key={post.id} href={`/posts/${post.slug}`} className={styles['recent-posts__link']}>
+                        <article className={styles['recent-posts__card']}>
+                            <div className={styles['recent-posts__content']}>
+                                <h3 className={styles['recent-posts__card-title']}>{post.title}</h3>
+
+                                <time className={styles['recent-posts__date']} dateTime={post.createdAt}>
+                                    {post.createdAt}
+                                </time>
+                            </div>
+                        </article>
+                    </Link>
+                ))}
 
             </section>
         </>

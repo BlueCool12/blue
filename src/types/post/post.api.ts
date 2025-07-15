@@ -35,3 +35,10 @@ export interface PostDetailResponse {
     createdAt: string;
     updatedAt: string;
 }
+
+export interface PostLatest {
+    id: number;
+    title: string;
+    slug: string;
+    createdAt: string;
+}

@@ -155,39 +155,74 @@
 
 /* 최신글 섹션 */
 .recent-posts {
-    padding: 4rem 0;
     margin-top: 1rem;
 }
 
 .recent-posts__title {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     font-weight: 700;
     margin-bottom: 1rem;
 }
 
 .recent-posts__card {
-    display: flex;
-    align-items: center;
-}
-
-.recent-posts__image {
-    width: 9rem;
-    height: 9rem;
-    object-fit: cover;
+    border: 1px solid var(--border-color);
+    cursor: pointer;
 }
 
 .recent-posts__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 1rem;
 }
 
 .recent-posts__card-title {
     font-size: 1.2rem;
     font-weight: 600;
-    margin-bottom: 0.5rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.recent-posts__card-desc {
-    font-size: 0.95rem;
-    color: #555;
-    line-height: 1.4;
+.recent-posts__date {
+    font-size: 0.9rem;
+    color: #ddd;
+}
+
+.recent-posts__skeleton {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 12px;
+    background: var(--card-bg);
+    margin-bottom: 1rem;
+    animation: pulse 1.5s infinite ease-in-out;
+}
+
+.skeleton-title {
+    width: 70%;
+    height: 1.2rem;
+    background-color: var(--theme-color-1);
+    border-radius: 6px;    
+}
+
+.skeleton-date {
+    width: 30%;
+    height: 1.2rem;
+    background-color: var(--theme-color-1);
+    border-radius: 6px;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.4;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }

@@ -5,7 +5,7 @@ import { formatDate } from "@/lib/utils/format";
 import { postApi } from "@/lib/api/user/postApi";
 import { fetchPostBySlug } from "@/lib/server/post";
 
-import type { PostDetail } from "@/types/post";
+import type { PostDetail, PostLatest } from "@/types/post";
 
 export const postService = {
     getAllPosts: async (url: string) => {
@@ -28,5 +28,13 @@ export const postService = {
         } catch {
             notFound();
         }
-    }
+    },
+
+    getLatestPosts: async (): Promise<PostLatest[]> => {
+        const result = await postApi.getLatestPosts();
+        return result.map((post) => ({
+            ...post,
+            createdAt: formatDate(post.createdAt),
+        }));
+    },
 };
