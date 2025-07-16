@@ -1,3 +1,10 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem 0 3rem;
+}
+
 .hero {
     display: flex;
     align-items: center;
@@ -5,8 +12,7 @@
     justify-content: space-between;
     gap: 1rem;
     width: 100%;
-    padding: 2rem;
-    margin: 1.5rem 0;
+    padding: 2rem;    
     background: linear-gradient(to right, #e5eaf0, #c9d9f2);
     border-radius: 3rem;
     box-shadow:
@@ -158,15 +164,27 @@
     margin-top: 1rem;
 }
 
-.recent-posts__title {
-    font-size: 1.5rem;
-    font-weight: 700;
+.recent-posts__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 1rem;
+}
+
+.recent-posts__title {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.recent-posts__all-link {
+    font-size: 1.8rem;
+    display: flex;    
 }
 
 .recent-posts__card {
     border: 1px solid var(--border-color);
     cursor: pointer;
+    margin-bottom: 0.5rem;
 }
 
 .recent-posts__content {
@@ -177,7 +195,7 @@
 }
 
 .recent-posts__card-title {
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 600;
     white-space: nowrap;
     overflow: hidden;
@@ -185,8 +203,8 @@
 }
 
 .recent-posts__date {
-    font-size: 0.9rem;
-    color: #ddd;
+    font-size: 0.8rem;
+    color: #999999;
 }
 
 .recent-posts__skeleton {

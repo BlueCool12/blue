@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 import styles from './page.module.css';
 
-import { MdOutlineStar } from 'react-icons/md';
+import { MdOutlineStar, MdOutlineChevronRight } from 'react-icons/md';
 import Link from 'next/link';
 import { useLatestPosts } from '@/hooks/queries/posts/useLatestPosts';
 import { PostLatest } from '@/types/post';
@@ -66,7 +66,7 @@ export default function Home() {
     }, [displayedText, isDeleting, index]);
 
     return (
-        <>
+        <div className={styles.container}>
             <section className={styles.hero}>
 
                 <div className={styles.hero__text}>
@@ -112,7 +112,11 @@ export default function Home() {
             </section>
 
             <section className={styles['recent-posts']}>
-                <h2 className={styles['recent-posts__title']}>최신글</h2>
+
+                <div className={styles['recent-posts__header']}>
+                    <h2 className={styles['recent-posts__title']}>📚 최신글</h2>
+                    <Link href="/posts" className={styles['recent-posts__all-link']}><MdOutlineChevronRight /></Link>
+                </div>
 
                 {isLoading && (
                     <div className={styles['recent-posts__skeleton-wrapper']}>
@@ -144,6 +148,6 @@ export default function Home() {
                 ))}
 
             </section>
-        </>
+        </div>
     )
 }
