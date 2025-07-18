@@ -114,7 +114,7 @@ export default function Home() {
             <section className={styles['recent-posts']}>
 
                 <div className={styles['recent-posts__header']}>
-                    <h2 className={styles['recent-posts__title']}>📚 최신글</h2>
+                    <Link href="/posts"><h2 className={styles['recent-posts__title']}>📚 최신글</h2></Link>
                     <Link href="/posts" className={styles['recent-posts__all-link']}><MdOutlineChevronRight /></Link>
                 </div>
 
