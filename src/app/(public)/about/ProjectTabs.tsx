@@ -14,12 +14,13 @@ const projects = [
         subtitle: '바로연 웹사이트 리뉴얼',
         description:
             '기존 ASP기반의 프로젝트를 React와 Express로 리뉴얼 하였습니다.\n\n' +
-            '프론트엔드 전반을 담당하며 React Query의 useQuery 및 useMutation을 활용해 백엔드와의 데이터 통신을 구현하였습니다.\n\n' +
-            '카카오 싱크를 활용한 간편 가입 기능을 도입하였습니다.',
+            '프론트엔드 전반을 담당하며 RTK Query를 활용해 백엔드와의 데이터 통신을 구현하였습니다.\n\n' +
+            '온라인 계약과 관련된 API 및 반응형 페이지를 구현하였습니다.',
         image: '/images/projects/baroyeon.webp',
         link: 'https://www.baroyeon.net/',
         stack: [
             { name: 'JavaScript', color: '#f7df1e' },
+            { name: 'Node.js', color: '#339933' },
             { name: 'Express.js', color: '#000000' },
             { name: 'MSSQL', color: '#CC2927' },
             { name: 'React', color: '#61DAFB' },
