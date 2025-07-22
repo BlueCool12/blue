@@ -62,6 +62,7 @@ export default function PostList() {
                         onChange={(e) =>
                             handleSelectedCategory(e.target.value === '' ? null : e.target.value)
                         }
+                        aria-label="글 카테고리 선택"
                     >
                         <option value="">ALL</option>
                         {categories.map((parent) =>

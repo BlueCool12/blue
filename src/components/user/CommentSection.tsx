@@ -120,10 +120,10 @@ export const CommentSection: React.FC<Props> = ({ postId }) => {
 
                                 {!comment.isDeleted && (
                                     <ButtonGroup>
-                                        <CommentEditButton onClick={() => handleEditClick(comment.id)}>
+                                        <CommentEditButton onClick={() => handleEditClick(comment.id)} aria-label="댓글 수정">
                                             <MdOutlineEdit />
                                         </CommentEditButton>
-                                        <CommentDeleteButton onClick={() => handleDeleteComment(comment.id)}>
+                                        <CommentDeleteButton onClick={() => handleDeleteComment(comment.id)} aria-label="댓글 삭제">
                                             <MdOutlineDelete />
                                         </CommentDeleteButton>
                                     </ButtonGroup>
