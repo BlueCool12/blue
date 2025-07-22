@@ -91,7 +91,11 @@ export default function Home() {
                     </p>
 
                     <div className={styles.hero__about}>
-                        <button onClick={() => setVisible((prev) => !prev)} className={styles['hero__about-button']}>
+                        <button
+                            onClick={() => setVisible((prev) => !prev)}
+                            className={styles['hero__about-button']}
+                            aria-label='About Me 보기 토글'
+                        >
                             <MdOutlineStar size={20} color='var(--theme-color-9)' />
                         </button>
                         <Link href={'/about'} className={`${styles['hero__about-label']} ${visible ? styles['hero__about-label--show'] : ''}`}>
@@ -115,7 +119,7 @@ export default function Home() {
 
                 <div className={styles['recent-posts__header']}>
                     <Link href="/posts"><h2 className={styles['recent-posts__title']}>📚 최신글</h2></Link>
-                    <Link href="/posts" className={styles['recent-posts__all-link']}><MdOutlineChevronRight /></Link>
+                    <Link href="/posts" className={styles['recent-posts__all-link']} aria-label='전체 글 목록 보기'><MdOutlineChevronRight /></Link>
                 </div>
 
                 {isLoading && (

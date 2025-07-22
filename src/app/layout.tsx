@@ -76,7 +76,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                                 window.dataLayer = window.dataLayer || [];
                                 function gtag(){dataLayer.push(arguments);}
                                 gtag('js', new Date());
-                                gtag('config', 'G-GHCGQG92ZD');
+                                gtag('config', 'G-GHCGQG92ZD', { debug_mode: false });
                                 `,
                     }}
                 />

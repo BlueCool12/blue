@@ -43,7 +43,7 @@
 }
 
 /* 다크 모드 */
-html.dark {
+html[data-theme='dark'] {
   --bg-color: #121212;
   --contrast-bg-color: #e0e0e0;
   --text-color: #e0e0e0;
@@ -68,7 +68,7 @@ html.dark {
   --btn-color: #EDEDED;
   --btn-hover-color: #13293D;
 
-  --link-hover-color: #4dabf7;  
+  --link-hover-color: #4dabf7;
 }
 
 /* Reset */

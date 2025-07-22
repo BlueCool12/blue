@@ -97,7 +97,11 @@ export const CommentEditor: React.FC<Props> = ({ postId }) => {
 
     return (
         <>
-            <FloatingButton ref={floatingBtnRef} onClick={() => setOpen(prev => !prev)}>
+            <FloatingButton
+                ref={floatingBtnRef}
+                onClick={() => setOpen(prev => !prev)}
+                aria-label="댓글 작성하기"
+            >
                 <MdOutlineModeComment />
             </FloatingButton>
 
