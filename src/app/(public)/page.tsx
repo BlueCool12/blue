@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
 
 import styles from './page.module.css';
@@ -9,6 +9,8 @@ import { MdOutlineStar, MdOutlineChevronRight } from 'react-icons/md';
 import Link from 'next/link';
 import { useLatestPosts } from '@/hooks/queries/posts/useLatestPosts';
 import { PostLatest } from '@/types/post';
+import { useCategories } from '@/hooks/queries/categories/useCategories';
+import { getDailySeed, seededShuffle } from '@/lib/utils/dailyShuffle';
 
 const greetings = [
     '환영합니다 :D',
@@ -29,9 +31,16 @@ export default function Home() {
 
     const [visible, setVisible] = useState(false);
 
-    const { data: latestPosts, isLoading, isError } = useLatestPosts();
+    const latestPosts = useLatestPosts();
+
+    const categories = useCategories();
 
     const typingRef = useRef<NodeJS.Timeout | null>(null);
+
+    const shuffledChildren = useMemo(() => {
+        const allChildren = categories.data?.flatMap((parent) => parent.children ?? []) ?? [];
+        return seededShuffle(allChildren, getDailySeed()).slice(0, 3);
+    }, [categories.data]);
 
     useEffect(() => {
         const current = greetings[index];
@@ -67,6 +76,7 @@ export default function Home() {
 
     return (
         <div className={styles.container}>
+            {/* Hero Section */}
             <section className={styles.hero}>
 
                 <div className={styles.hero__text}>
@@ -114,15 +124,52 @@ export default function Home() {
                     className={styles.hero__image}
                 />
             </section>
+            {/* Hero Section */}
 
+            {/* Categories Section */}
+            <section className={styles['category-preview']}>
+                <div className={styles['category-preview__heading']}>
+                    <h2 className={styles['category-preview__title']}>Daily Pick 👀</h2>
+                    <p className={styles['category-preview__subtitle']}>매일 새롭게 만나는 세 가지 주제</p>
+                </div>
+
+                <div className={styles['category-preview__wrapper']}>
+                    <div className={styles['category-preview__list']}>
+                        {shuffledChildren.map((category, i) => (
+                            <Link
+                                key={category.name}
+                                href={`/posts?category=${encodeURIComponent(category.name)}`}
+                                className={`${styles['category-preview__item']} ${i === 1 ? styles['category-preview__item--center'] : ''
+                                    }`}
+                            >
+                                <Image
+                                    src={`/images/categories/svgrepo_${encodeURIComponent(category.name)}.svg`}
+                                    className={styles['category-preview__image']}
+                                    alt={category.name}
+                                    width={100}
+                                    height={100}
+                                />
+                                <span className={styles['category-preview__alt']}>{category.name}</span>
+                            </Link>
+                        ))}
+                    </div>
+                </div>
+            </section>
+            {/* Categories Section */}
+
+            {/* Latest Posts Section */}
             <section className={styles['recent-posts']}>
 
                 <div className={styles['recent-posts__header']}>
-                    <Link href="/posts"><h2 className={styles['recent-posts__title']}>📚 최신글</h2></Link>
+                    <div className={styles['recent-posts__heading']}>
+                        <h2 className={styles['recent-posts__title']}>최신글 🌟</h2>
+                        <p className={styles['recent-posts__subtitle']}>새로 올라온 글들을 확인해보세요</p>
+                    </div>
+
                     <Link href="/posts" className={styles['recent-posts__all-link']} aria-label='전체 글 목록 보기'><MdOutlineChevronRight /></Link>
                 </div>
 
-                {isLoading && (
+                {latestPosts.isLoading && (
                     <div className={styles['recent-posts__skeleton-wrapper']}>
                         {[...Array(3)].map((_, idx) => (
                             <div key={idx} className={styles['recent-posts__skeleton']}>
@@ -133,11 +180,11 @@ export default function Home() {
                     </div>
                 )}
 
-                {isError && (
+                {latestPosts.isError && (
                     <p className={styles['recent-posts__error']}>최신글을 불러오는 데 실패했어요 😢</p>
                 )}
 
-                {latestPosts?.map((post: PostLatest) => (
+                {latestPosts.data?.map((post: PostLatest) => (
                     <Link key={post.id} href={`/posts/${post.slug}`} className={styles['recent-posts__link']}>
                         <article className={styles['recent-posts__card']}>
                             <div className={styles['recent-posts__content']}>
@@ -150,8 +197,8 @@ export default function Home() {
                         </article>
                     </Link>
                 ))}
-
             </section>
+            {/* Latest Posts Section */}
         </div>
     )
 }

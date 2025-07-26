@@ -13,12 +13,12 @@ import { MdOutlineArrowDropDown } from "react-icons/md";
 
 import { RootState } from "@/store/store";
 import { loadPosts } from "@/store/user/postSlice";
-import { fetchCategories } from "@/store/user/categorySlice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 
 import { useIsMobile } from "@/hooks/useIsMobile";
 
 import type { Post } from "@/types/post";
+import { useCategories } from "@/hooks/queries/categories/useCategories";
 
 export default function PostList() {
 
@@ -27,7 +27,7 @@ export default function PostList() {
     const isMobile = useIsMobile(1024);
 
     const { posts, loading: postLoading, error: postError } = useAppSelector((state: RootState) => state.userPost);
-    const { categories, loading: categoryLoading, error: categoryError } = useAppSelector((state: RootState) => state.userCategory);
+    const categories = useCategories();
 
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -45,11 +45,7 @@ export default function PostList() {
 
     useEffect(() => {
         dispatch(loadPosts(selectedCategory));
-    }, [dispatch, selectedCategory]);
-
-    useEffect(() => {
-        dispatch(fetchCategories());
-    }, [dispatch]);
+    }, [dispatch, selectedCategory]);    
 
     if (postError) throw new Error(postError);
 
@@ -65,7 +61,7 @@ export default function PostList() {
                         aria-label="글 카테고리 선택"
                     >
                         <option value="">ALL</option>
-                        {categories.map((parent) =>
+                        {categories.data?.map((parent) =>
                             parent.children && parent.children.length > 0 && (
                                 <optgroup key={parent.name} label={parent.name}>
                                     {parent.children.map((child) => (
@@ -117,9 +113,9 @@ export default function PostList() {
 
             {!isMobile && (
                 <CategorySidebar
-                    categories={categories}
-                    loading={categoryLoading}
-                    error={categoryError}
+                    categories={categories.data ?? []}
+                    loading={categories.isLoading}
+                    error={categories.isError ? (categories.error?.message ?? '카테고리 로딩 실패') : null}
                     selectedCategory={selectedCategory}
                     onSelectCategory={handleSelectedCategory}
                 />
