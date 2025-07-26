@@ -45,7 +45,7 @@ export default function PostList() {
 
     useEffect(() => {
         dispatch(loadPosts(selectedCategory));
-    }, [dispatch, selectedCategory]);    
+    }, [dispatch, selectedCategory]);
 
     if (postError) throw new Error(postError);
 
@@ -91,15 +91,9 @@ export default function PostList() {
                                     <Link href={`/posts/${post.slug}`}>
                                         <TitleWrapper>
                                             <Title>{post.title}</Title>
-
-
                                             <Category>{post.category}</Category>
-
-
                                         </TitleWrapper>
-
                                         <Content>{post.contentSummary}</Content>
-
                                         <Meta>
                                             <time dateTime={post.createdAt}>{post.createdAt}</time>
                                         </Meta>

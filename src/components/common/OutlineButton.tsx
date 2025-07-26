@@ -9,8 +9,7 @@ const StyledOutlineButton = styled.button`
     border-radius: 8px;
     color: var(--text-color);
     transition: background-color 0.3s;
-    font-size: 14px;    
-    cursor: pointer;
+    font-size: 14px;        
 
     &:hover {
         background-color: var(--contrast-bg-color);

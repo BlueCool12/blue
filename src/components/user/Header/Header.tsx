@@ -38,7 +38,7 @@ export const Header: React.FC = () => {
                             }
                             alt="헤더 로고"
                             width={resolvedTheme === 'light' ? 50 : 74}
-                            height={40}
+                            height={resolvedTheme === 'light' ? 39 : 40}
                             priority
                         />
                     </Link>
@@ -61,13 +61,13 @@ export const Header: React.FC = () => {
                     {/* PC 네비바 */}
 
                     <div className={styles['header__icons']}>
-                        <div onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
+                        <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')} aria-label='테마 전환'>
                             {resolvedTheme === 'light' ? (
-                                <MdOutlineDarkMode size={24} />
+                                <MdOutlineDarkMode size={24} className={styles['header__icon']} />
                             ) : (
-                                <MdOutlineLightMode size={24} />
+                                <MdOutlineLightMode size={24} className={styles['header__icon']} />
                             )}
-                        </div>
+                        </button>
 
                         <MdOutlineMenu
                             size={24}
@@ -85,7 +85,7 @@ export const Header: React.FC = () => {
 
                     <div className={styles['mobile-menu__header']}>
 
-                        <div className={styles['mobile-menu__logo']}>
+                        <Link href='/' onClick={() => setIsMobileMenuOpen(false)} className={styles['mobile-menu__logo']}>
                             <Image
                                 src={
                                     resolvedTheme === 'light'
@@ -97,7 +97,7 @@ export const Header: React.FC = () => {
                                 height={36}
                                 priority
                             />
-                        </div>
+                        </Link>
 
                         <MdOutlineClose
                             size={24}
