@@ -196,8 +196,7 @@ const ButtonGroup = styled.div`
 const CommentEditButton = styled.button`
     background: none;
     border: none;
-    font-size: 0.9rem;
-    cursor: pointer;
+    font-size: 0.9rem;    
 
     &:hover {
         color: var(--theme-color-9);
@@ -207,8 +206,7 @@ const CommentEditButton = styled.button`
 const CommentDeleteButton = styled.button`
     background: none;
     border: none;    
-    font-size: 0.9rem;
-    cursor: pointer;
+    font-size: 0.9rem;    
 
     &:hover {
         color: var(--theme-color-9);        

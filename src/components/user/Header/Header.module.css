@@ -41,7 +41,6 @@
 }
 
 .desktop-nav__item {
-  cursor: pointer;
   font-weight: 500;
   color: var(--header-text-color);
   transition: color 0.2s;
@@ -66,11 +65,23 @@
 
 .header__icons svg {
   display: flex;
-  cursor: pointer;
 }
 
-.header__menu-toggle {
+.header__icons button {  
+  transition: color 0.3s ease;
+}
+
+.header__icons button:hover {
+  color: var(--link-hover-color);
+}
+
+.header__menu-toggle {  
   display: none;
+  transition: color 0.3s ease;
+}
+
+.header__menu-toggle:hover {
+  color: var(--link-hover-color);
 }
 
 @media (max-width: 768px) {
@@ -103,13 +114,13 @@
   position: relative;
 }
 
-.mobile-menu__logo {  
+.mobile-menu__logo {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
 }
 
-.mobile-menu__logo img {  
+.mobile-menu__logo img {
   object-fit: cover;
 }
 

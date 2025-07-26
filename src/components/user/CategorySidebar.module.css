@@ -17,8 +17,7 @@
     font-size: 1.1rem;
     font-weight: 600;
     border-bottom: 1px solid var(--border-color);
-    padding-bottom: 1rem;
-    cursor: pointer;
+    padding-bottom: 1rem;    
 }
 
 .list {
@@ -29,12 +28,11 @@
 
 .link {
     display: block;
-    padding: 0.5rem 0;
+    padding: 0.8rem 0;
     font-size: 1rem;
     font-weight: 600;
     color: var(--text-color);
-    text-decoration: none;
-    cursor: pointer;
+    text-decoration: none;    
     text-transform: uppercase;
     justify-self: center;
     transition: color 0.2s ease;
@@ -48,9 +46,8 @@
     list-style: none;
 }
 
-.subLink {
-    cursor: pointer;
-    padding: 0 1rem 0.25rem;
+.subLink {    
+    padding: 0 1rem 0.6rem;
     font-size: 1rem;
     font-weight: 600;
     justify-self: center;

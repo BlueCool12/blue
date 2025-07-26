@@ -106,7 +106,7 @@ export default function Home() {
                             className={styles['hero__about-button']}
                             aria-label='About Me 보기 토글'
                         >
-                            <MdOutlineStar size={20} color='var(--theme-color-9)' />
+                            <MdOutlineStar size={20} className={styles.starIcon} />
                         </button>
                         <Link href={'/about'} className={`${styles['hero__about-label']} ${visible ? styles['hero__about-label--show'] : ''}`}>
                             About Me
@@ -118,10 +118,9 @@ export default function Home() {
                 <Image
                     src='/images/main.webp'
                     alt='메인 페이지 이미지'
-                    width={300}
-                    height={300}
+                    width={280}
+                    height={280}
                     priority
-                    className={styles.hero__image}
                 />
             </section>
             {/* Hero Section */}
@@ -129,7 +128,12 @@ export default function Home() {
             {/* Categories Section */}
             <section className={styles['category-preview']}>
                 <div className={styles['category-preview__heading']}>
-                    <h2 className={styles['category-preview__title']}>Daily Pick 👀</h2>
+                    <div className={styles['category-preview__title-line']}>
+                        <hr />
+                        <h2 className={styles['category-preview__title']}>Daily Pick 👀</h2>
+                        <hr />
+                    </div>
+
                     <p className={styles['category-preview__subtitle']}>매일 새롭게 만나는 세 가지 주제</p>
                 </div>
 
@@ -161,10 +165,10 @@ export default function Home() {
             <section className={styles['recent-posts']}>
 
                 <div className={styles['recent-posts__header']}>
-                    <div className={styles['recent-posts__heading']}>
+                    <Link href='/posts' className={styles['recent-posts__heading']}>
                         <h2 className={styles['recent-posts__title']}>최신글 🌟</h2>
                         <p className={styles['recent-posts__subtitle']}>새로 올라온 글들을 확인해보세요</p>
-                    </div>
+                    </Link>
 
                     <Link href="/posts" className={styles['recent-posts__all-link']} aria-label='전체 글 목록 보기'><MdOutlineChevronRight /></Link>
                 </div>

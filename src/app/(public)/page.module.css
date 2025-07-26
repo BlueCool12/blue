@@ -127,12 +127,24 @@
 }
 
 .hero__about-button {
-    cursor: pointer;
     color: inherit;
     display: flex;
     border: 2px solid var(--theme-color-9);
     border-radius: 100%;
     padding: 0.1rem;
+}
+
+.starIcon {
+    color: var(--theme-color-9);
+    transition: color 0.3s ease;
+}
+
+.hero__about-button:hover {
+    border-color: var(--link-hover-color);
+}
+
+.hero__about-button:hover .starIcon {
+    color: var(--link-hover-color);    
 }
 
 .hero__about-label {
@@ -152,16 +164,9 @@
     pointer-events: auto;
 }
 
-@media (max-width: 768px) {
-    .hero__image {
-        max-width: 240px;
-        max-height: 240px;
-    }
-}
-
 /* 최신글 섹션 */
 .recent-posts {
-    margin-top: 5rem;
+    margin-top: 4rem;
 }
 
 @media (max-width: 768px) {
@@ -174,7 +179,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;
+    margin-bottom: 1rem;    
 }
 
 .recent-posts__heading {
@@ -214,7 +219,6 @@
 
 .recent-posts__card {
     border: 1px solid var(--border-color);
-    cursor: pointer;
     margin-bottom: 0.5rem;
 }
 
@@ -276,6 +280,12 @@
     }
 }
 
+.recent-posts__error {
+    background-color: var(--card-bg);
+    padding: 1rem;
+    border-radius: 12px;
+}
+
 /* Categories Section */
 .category-preview {
     margin-top: 3rem;
@@ -288,9 +298,25 @@
     align-items: center;
 }
 
+.category-preview__title-line {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+}
+
+.category-preview__title-line hr {
+    flex: 1;
+    height: 2px;
+    background-color: #888888;
+    border: none;
+    opacity: 0.5;
+}
+
 .category-preview__title {
     font-size: 2rem;
     font-weight: 500;
+    white-space: nowrap;
 }
 
 .category-preview__subtitle {
@@ -328,6 +354,7 @@
 
 .category-preview__item {
     text-align: center;
+    line-height: 3;
     transform: scale(1);
     transition: transform 0.3s ease;
 }
@@ -341,11 +368,19 @@
     padding: 1rem;
     border-radius: 100%;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
 }
 
 .category-preview__image:hover {
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-    transition: box-shadow 0.3s ease;
+}
+
+[data-theme='dark'] .category-preview__image {
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.5);
+}
+
+[data-theme='dark'] .category-preview__image:hover {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
 }
 
 .category-preview__alt {

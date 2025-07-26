@@ -196,8 +196,7 @@
     gap: 1rem;
 }
 
-.project-section__item {
-    cursor: pointer;
+.project-section__item {    
     font-size: 16px;
     font-weight: 500;
     color: var(--text-color);
