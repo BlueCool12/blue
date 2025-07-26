@@ -3,7 +3,6 @@ import authReducer from "../lib/auth/authSlice";
 import adminPostReducer from "./admin/postSlice";
 import adminCategoryReducer from "./admin/categorySlice";
 import userPostReducer from "./user/postSlice";
-import userCategoryReducer from "./user/categorySlice";
 import userCommentReducer from "./user/commentSlice";
 
 export const store = configureStore({
@@ -11,8 +10,7 @@ export const store = configureStore({
         auth: authReducer,
         adminPost: adminPostReducer,
         adminCategory: adminCategoryReducer,
-        userPost: userPostReducer,
-        userCategory: userCategoryReducer,
+        userPost: userPostReducer,        
         userComment: userCommentReducer,
     }
 });
