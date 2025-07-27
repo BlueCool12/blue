@@ -196,10 +196,18 @@ const ButtonGroup = styled.div`
 const CommentEditButton = styled.button`
     background: none;
     border: none;
-    font-size: 0.9rem;    
+    font-size: 0.9rem;   
+    
+    svg {
+        color: var(--text-color);        
+    }
 
     &:hover {
         color: var(--theme-color-9);
+
+        svg {
+            color: var(--link-hover-color);
+        }
     }
 `;
 
@@ -208,7 +216,15 @@ const CommentDeleteButton = styled.button`
     border: none;    
     font-size: 0.9rem;    
 
+    svg {
+        color: var(--text-color);
+    }
+
     &:hover {
-        color: var(--theme-color-9);        
+        color: var(--theme-color-9);  
+        
+        svg {
+            color: var(--link-hover-color);
+        }
     }
 `;
