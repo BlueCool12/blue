@@ -67,7 +67,7 @@
   display: flex;
 }
 
-.header__icons button {  
+.header__icons button {
   transition: color 0.3s ease;
 }
 
@@ -75,8 +75,18 @@
   color: var(--link-hover-color);
 }
 
-.header__menu-toggle {  
+.header__icon {
+  color: var(--header-text-color);
+  transition: color 0.3s ease;
+}
+
+.header__icon:hover {
+  color: var(--link-hover-color);
+}
+
+.header__menu-toggle {
   display: none;
+  color: var(--header-text-color);
   transition: color 0.3s ease;
 }
 
