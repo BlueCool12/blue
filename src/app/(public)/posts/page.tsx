@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 
@@ -11,22 +10,17 @@ import { LoadingSpinner } from "@/components/common/LoadingSpinner";
 import { CategorySidebar } from "@/components/user/CategorySidebar";
 import { MdOutlineArrowDropDown } from "react-icons/md";
 
-import { RootState } from "@/store/store";
-import { loadPosts } from "@/store/user/postSlice";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
-
+import { usePosts } from "@/hooks/queries/posts/usePosts";
+import { useCategories } from "@/hooks/queries/categories/useCategories";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
 import type { Post } from "@/types/post";
-import { useCategories } from "@/hooks/queries/categories/useCategories";
 
-export default function PostList() {
-
-    const dispatch = useAppDispatch();
+export default function PostList() {    
 
     const isMobile = useIsMobile(1024);
 
-    const { posts, loading: postLoading, error: postError } = useAppSelector((state: RootState) => state.userPost);
+    const posts = usePosts();
     const categories = useCategories();
 
     const router = useRouter();
@@ -41,13 +35,9 @@ export default function PostList() {
             newParams.delete('category');
         }
         router.replace(`/posts?${newParams.toString()}`);
-    };
+    };    
 
-    useEffect(() => {
-        dispatch(loadPosts(selectedCategory));
-    }, [dispatch, selectedCategory]);
-
-    if (postError) throw new Error(postError);
+    if (posts.isError) throw new Error(posts.error.message ?? "글 목록 조회 실패");
 
     return (
         <>
@@ -79,13 +69,13 @@ export default function PostList() {
             )}
 
             <PostListSection>
-                {postLoading ? (
+                {posts.isLoading ? (
                     <LoadingSpinner />
-                ) : posts.length === 0 ? (
+                ) : !posts.data || posts.data.length === 0 ? (
                     <EmptyState message="열심히 공부 중입니다..." />
                 ) : (
                     <PostListWrapper>
-                        {posts.map((post: Post) => (
+                        {posts.data.map((post: Post) => (
                             <ListItem key={post.slug}>
                                 <Post>
                                     <Link href={`/posts/${post.slug}`}>

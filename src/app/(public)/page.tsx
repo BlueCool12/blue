@@ -2,15 +2,18 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import styles from './page.module.css';
 
 import { MdOutlineStar, MdOutlineChevronRight } from 'react-icons/md';
-import Link from 'next/link';
+
 import { useLatestPosts } from '@/hooks/queries/posts/useLatestPosts';
-import { PostLatest } from '@/types/post';
 import { useCategories } from '@/hooks/queries/categories/useCategories';
+
 import { getDailySeed, seededShuffle } from '@/lib/utils/dailyShuffle';
+
+import { PostLatest } from '@/types/post';
 
 const greetings = [
     '환영합니다 :D',

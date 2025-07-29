@@ -1,16 +1,25 @@
-import { PostListResponse } from "@/types/post";
+import fs from 'fs';
+import path from 'path';
+
 import { NextResponse } from "next/server";
+
+import { PostListResponse } from "@/types/post";
 
 export const dynamic = 'force-dynamic';
 
 const SITE_URL = 'https://pyomin.com';
 
-const staticUrls = [
-    '/',
-    '/about',
-    '/posts',
-    '/guestbooks'
-];
+const getFileLastModified = (relativePath: string): string => {
+    try {
+        const filePath = path.join(process.cwd(), relativePath);
+        const stats = fs.statSync(filePath);
+        return stats.mtime.toISOString();
+    } catch {
+        return new Date().toISOString();
+    }
+};
+
+const staticUrls = ['/', '/about', '/posts', '/guestbooks']
 
 async function fetchPosts(): Promise<PostListResponse[]> {
     try {
@@ -24,6 +33,35 @@ async function fetchPosts(): Promise<PostListResponse[]> {
 
 export async function GET() {
     const posts = await fetchPosts();
+    posts.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+
+    const mainPageLastMod = posts.length > 0
+        ? new Date(posts[0].updatedAt).toISOString()
+        : getFileLastModified('app/(public)/page.tsx');
+
+
+    const staticPagesLastModified: Record<string, string> = {
+        '/': mainPageLastMod,
+        '/about': getFileLastModified('app/(public)/about/page.tsx'),
+        '/posts': getFileLastModified('app/(public)/posts/page.tsx'),
+        '/guestbooks': getFileLastModified('app/(public)/guestbooks/page.tsx'),
+    };
+
+    const staticPart = staticUrls.map((path) => {
+        const priority = path === '/' ? '1.0' : '0.5';
+
+        const changefreq = ['/', '/posts'].includes(path) ? 'weekly' : 'yearly';
+
+        const lastmod = staticPagesLastModified[path];
+
+        return `
+            <url>
+                <loc>${SITE_URL}${path}</loc>
+                <lastmod>${lastmod}</lastmod>
+                <changefreq>${changefreq}</changefreq>
+                <priority>${priority}</priority>
+            </url>`
+    }).join('');
 
     const dynamicUrls = posts.map((post: PostListResponse) => {
         return `
@@ -32,17 +70,6 @@ export async function GET() {
                 <lastmod>${new Date(post.updatedAt).toISOString()}</lastmod>
                 <changefreq>weekly</changefreq>
                 <priority>0.8</priority>
-            </url>`
-    }).join('');
-
-    const staticPart = staticUrls.map((path) => {
-        const priority = path === '/' ? '1.0' : '0.5';
-        return `
-            <url>
-                <loc>${SITE_URL}${path}</loc>
-                <lastmod>${new Date().toISOString()}</lastmod>
-                <changefreq>monthly</changefreq>
-                <priority>${priority}</priority>
             </url>`
     }).join('');
 
