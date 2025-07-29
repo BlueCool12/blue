@@ -1,6 +1,3 @@
-import fs from 'fs';
-import path from 'path';
-
 import { NextResponse } from "next/server";
 
 import { PostListResponse } from "@/types/post";
@@ -8,16 +5,6 @@ import { PostListResponse } from "@/types/post";
 export const dynamic = 'force-dynamic';
 
 const SITE_URL = 'https://pyomin.com';
-
-const getFileLastModified = (relativePath: string): string => {
-    try {
-        const filePath = path.join(process.cwd(), relativePath);
-        const stats = fs.statSync(filePath);
-        return stats.mtime.toISOString();
-    } catch {
-        return new Date().toISOString();
-    }
-};
 
 const staticUrls = ['/', '/about', '/posts', '/guestbooks']
 
@@ -35,16 +22,15 @@ export async function GET() {
     const posts = await fetchPosts();
     posts.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 
-    const mainPageLastMod = posts.length > 0
-        ? new Date(posts[0].updatedAt).toISOString()
-        : getFileLastModified('app/(public)/page.tsx');
+    const latestPostDate = posts.length > 0
+        ? new Date(posts[0].updatedAt).toISOString() : new Date().toISOString();
 
 
     const staticPagesLastModified: Record<string, string> = {
-        '/': mainPageLastMod,
-        '/about': getFileLastModified('app/(public)/about/page.tsx'),
-        '/posts': getFileLastModified('app/(public)/posts/page.tsx'),
-        '/guestbooks': getFileLastModified('app/(public)/guestbooks/page.tsx'),
+        '/': latestPostDate,
+        '/posts': latestPostDate,
+        '/about': '2025-07-01T00:00:00.000Z',
+        '/guestbooks': '2025-07-01T00:00:00.000Z',
     };
 
     const staticPart = staticUrls.map((path) => {
