@@ -157,8 +157,7 @@ const FloatingButton = styled.button`
     justify-content: center;
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     z-index: 1000;
-    border: none;
-    cursor: pointer;
+    border: none;    
 
     &:hover {
         background-color: var(--theme-color-8);
@@ -232,8 +231,7 @@ const SubmitButton = styled.button`
     color: white;
     font-size: 1rem;
     display: flex;    
-    justify-content: center;
-    cursor: pointer;
+    justify-content: center;    
 
     &:hover {
         background: var(--theme-color-8);

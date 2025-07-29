@@ -138,8 +138,7 @@ const SubmitButton = styled.button`
     background-color: var(--theme-color-9);
     color: #fff;
     border: none;
-    border-radius: 0.5rem;
-    cursor: pointer;
+    border-radius: 0.5rem;    
 
     &:hover {
         background-color: var(--theme-color-8);
@@ -151,8 +150,7 @@ const CancelButton = styled.button`
     background-color: #ccc;
     color: #333;
     border: none;
-    border-radius: 0.5rem;
-    cursor: pointer;
+    border-radius: 0.5rem;    
 
     &:hover {
         background-color: #bbb;

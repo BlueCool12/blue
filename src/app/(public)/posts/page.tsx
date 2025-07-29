@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 
@@ -11,23 +10,18 @@ import { LoadingSpinner } from "@/components/common/LoadingSpinner";
 import { CategorySidebar } from "@/components/user/CategorySidebar";
 import { MdOutlineArrowDropDown } from "react-icons/md";
 
-import { RootState } from "@/store/store";
-import { loadPosts } from "@/store/user/postSlice";
-import { fetchCategories } from "@/store/user/categorySlice";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
-
+import { usePosts } from "@/hooks/queries/posts/usePosts";
+import { useCategories } from "@/hooks/queries/categories/useCategories";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
 import type { Post } from "@/types/post";
 
-export default function PostList() {
-
-    const dispatch = useAppDispatch();
+export default function PostList() {    
 
     const isMobile = useIsMobile(1024);
 
-    const { posts, loading: postLoading, error: postError } = useAppSelector((state: RootState) => state.userPost);
-    const { categories, loading: categoryLoading, error: categoryError } = useAppSelector((state: RootState) => state.userCategory);
+    const posts = usePosts();
+    const categories = useCategories();
 
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -41,17 +35,9 @@ export default function PostList() {
             newParams.delete('category');
         }
         router.replace(`/posts?${newParams.toString()}`);
-    };
+    };    
 
-    useEffect(() => {
-        dispatch(loadPosts(selectedCategory));
-    }, [dispatch, selectedCategory]);
-
-    useEffect(() => {
-        dispatch(fetchCategories());
-    }, [dispatch]);
-
-    if (postError) throw new Error(postError);
+    if (posts.isError) throw new Error(posts.error.message ?? "글 목록 조회 실패");
 
     return (
         <>
@@ -65,7 +51,7 @@ export default function PostList() {
                         aria-label="글 카테고리 선택"
                     >
                         <option value="">ALL</option>
-                        {categories.map((parent) =>
+                        {categories.data?.map((parent) =>
                             parent.children && parent.children.length > 0 && (
                                 <optgroup key={parent.name} label={parent.name}>
                                     {parent.children.map((child) => (
@@ -83,27 +69,21 @@ export default function PostList() {
             )}
 
             <PostListSection>
-                {postLoading ? (
+                {posts.isLoading ? (
                     <LoadingSpinner />
-                ) : posts.length === 0 ? (
+                ) : !posts.data || posts.data.length === 0 ? (
                     <EmptyState message="열심히 공부 중입니다..." />
                 ) : (
                     <PostListWrapper>
-                        {posts.map((post: Post) => (
+                        {posts.data.map((post: Post) => (
                             <ListItem key={post.slug}>
                                 <Post>
                                     <Link href={`/posts/${post.slug}`}>
                                         <TitleWrapper>
                                             <Title>{post.title}</Title>
-
-
                                             <Category>{post.category}</Category>
-
-
                                         </TitleWrapper>
-
                                         <Content>{post.contentSummary}</Content>
-
                                         <Meta>
                                             <time dateTime={post.createdAt}>{post.createdAt}</time>
                                         </Meta>
@@ -117,9 +97,9 @@ export default function PostList() {
 
             {!isMobile && (
                 <CategorySidebar
-                    categories={categories}
-                    loading={categoryLoading}
-                    error={categoryError}
+                    categories={categories.data ?? []}
+                    loading={categories.isLoading}
+                    error={categories.isError ? (categories.error?.message ?? '카테고리 로딩 실패') : null}
                     selectedCategory={selectedCategory}
                     onSelectCategory={handleSelectedCategory}
                 />
