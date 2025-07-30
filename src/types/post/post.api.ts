@@ -17,8 +17,20 @@ export interface PostListResponse {
     isPublic: boolean;
     isDeleted: boolean;
     slug: string;
+    contentSummary: string;
     createdAt: string;
     updatedAt: string;
+}
+
+export interface PageResponse<T> {
+    content: T[];
+    totalPages: number;
+    totalElements: number;
+    size: number;
+    number: number;
+    first: boolean;
+    last: boolean;
+    empty: boolean;
 }
 
 export interface PostDetailResponse {

@@ -1,9 +1,23 @@
-import { PostLatest } from "@/types/post";
+import { PageResponse, PostLatest, PostListResponse } from "@/types/post";
 import api from "../axiosInstance";
 
 export const postApi = {
-    getAllPosts: async (url: string) => {
-        const response = await api.get(url);
+    getAllPosts: async ({
+        category,
+        page = 1,
+        size = 10,
+    }: {
+        category?: string | null;
+        page?: number;
+        size?: number;
+    }): Promise<PageResponse<PostListResponse>> => {
+        const params = new URLSearchParams();
+        if (category) params.append('category', category);
+        if (page) params.append('page', (page - 1).toString());
+        if (size) params.append('size', size.toString());
+
+        const response = await api.get(`/user/posts?${params.toString()}`);
+        console.log(response.data);
         return response.data;
     },
 

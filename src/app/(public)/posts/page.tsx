@@ -10,22 +10,47 @@ import { LoadingSpinner } from "@/components/common/LoadingSpinner";
 import { CategorySidebar } from "@/components/user/CategorySidebar";
 import { MdOutlineArrowDropDown } from "react-icons/md";
 
-import { usePosts } from "@/hooks/queries/posts/usePosts";
+import { useInfinitePosts } from "@/hooks/queries/posts/useInfinitePosts";
 import { useCategories } from "@/hooks/queries/categories/useCategories";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
 import type { Post } from "@/types/post";
+import { useEffect, useRef } from "react";
 
-export default function PostList() {    
-
-    const isMobile = useIsMobile(1024);
-
-    const posts = usePosts();
-    const categories = useCategories();
+export default function PostList() {
 
     const router = useRouter();
     const searchParams = useSearchParams();
     const selectedCategory = searchParams.get("category");
+
+    const { isMobile, ready } = useIsMobile(1024);
+    const size = isMobile ? 7 : 10;
+
+    const posts = useInfinitePosts(selectedCategory, size, ready);
+    const categories = useCategories();
+
+    const loadMoreRef = useRef<HTMLDivElement | null>(null);
+
+    useEffect(() => {
+        if (!ready || posts.isLoading || !posts.hasNextPage || posts.isFetchingNextPage) return;
+
+        const observer = new IntersectionObserver(([entry]) => {
+            if (entry.isIntersecting) {
+                posts.fetchNextPage();
+            }
+        });
+
+        const el = loadMoreRef.current;
+        if (el) observer.observe(el);
+
+        return () => {
+            if (el) observer.unobserve(el);
+        };
+    }, [posts.hasNextPage, posts.isFetchingNextPage, posts.fetchNextPage, loadMoreRef]);
+
+    useEffect(() => {
+        window.scrollTo({ top: 0 });
+    }, [selectedCategory]);
 
     const handleSelectedCategory = (category: string | null) => {
         const newParams = new URLSearchParams(searchParams);
@@ -35,9 +60,11 @@ export default function PostList() {
             newParams.delete('category');
         }
         router.replace(`/posts?${newParams.toString()}`);
-    };    
+    };
 
     if (posts.isError) throw new Error(posts.error.message ?? "글 목록 조회 실패");
+
+    const allPosts = posts.data?.pages?.flatMap((page) => page?.posts ?? []) ?? [];
 
     return (
         <>
@@ -69,31 +96,42 @@ export default function PostList() {
             )}
 
             <PostListSection>
-                {posts.isLoading ? (
-                    <LoadingSpinner />
-                ) : !posts.data || posts.data.length === 0 ? (
+                {/* 처음 로딩 */}
+                {(!ready || posts.isLoading) && <LoadingSpinner />}
+
+                {/* 데이터가 없는 경우 */}
+                {!posts.isLoading && allPosts.length === 0 && (
                     <EmptyState message="열심히 공부 중입니다..." />
-                ) : (
-                    <PostListWrapper>
-                        {posts.data.map((post: Post) => (
-                            <ListItem key={post.slug}>
-                                <Post>
-                                    <Link href={`/posts/${post.slug}`}>
-                                        <TitleWrapper>
-                                            <Title>{post.title}</Title>
-                                            <Category>{post.category}</Category>
-                                        </TitleWrapper>
-                                        <Content>{post.contentSummary}</Content>
-                                        <Meta>
-                                            <time dateTime={post.createdAt}>{post.createdAt}</time>
-                                        </Meta>
-                                    </Link>
-                                </Post>
-                            </ListItem>
-                        ))}
-                    </PostListWrapper>
+                )}
+
+                {/* 게시글 리스트 */}
+                {allPosts.length > 0 && (
+                    <>
+                        <PostListWrapper>
+                            {allPosts.map((post) => (
+                                <ListItem key={post.slug}>
+                                    <Post>
+                                        <Link href={`/posts/${post.slug}`}>
+                                            <TitleWrapper>
+                                                <Title>{post.title}</Title>
+                                                <Category>{post.category}</Category>
+                                            </TitleWrapper>
+                                            <Content>{post.contentSummary}</Content>
+                                            <Meta>
+                                                <time dateTime={post.createdAt}>{post.createdAt}</time>
+                                            </Meta>
+                                        </Link>
+                                    </Post>
+                                </ListItem>
+                            ))}
+                        </PostListWrapper>
+
+                        {posts.isFetchingNextPage && <LoadingSpinner />}
+                        <div ref={loadMoreRef} style={{ height: "1px" }} />
+                    </>
                 )}
             </PostListSection>
+
 
             {!isMobile && (
                 <CategorySidebar
