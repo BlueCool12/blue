@@ -5,15 +5,36 @@ import { formatDate } from "@/lib/utils/format";
 import { postApi } from "@/lib/api/user/postApi";
 import { fetchPostBySlug } from "@/lib/server/post";
 
-import type { PostDetail, PostLatest } from "@/types/post";
+import type { PagedPost, PageResponse, Post, PostLatest, PostListResponse } from "@/types/post";
 
 export const postService = {
-    getAllPosts: async (url: string) => {
-        const result = await postApi.getAllPosts(url);
-        return result.map((post: PostDetail) => ({
-            ...post,
-            createdAt: formatDate(post.createdAt),
+    getAllPosts: async ({
+        category,
+        page,
+        size,
+    }: {
+        category?: string | null;
+        page?: number;
+        size?: number;
+    }): Promise<PagedPost> => {
+        const result: PageResponse<PostListResponse> = await postApi.getAllPosts({ category, page, size });
+
+        const posts: Post[] = result.content.map((post) => ({
+            id: post.id,
+            title: post.title,
+            category: post.category,
+            slug: post.slug,
+            contentSummary: post.contentSummary,
+            createdAt: formatDate(post.createdAt),            
         }));
+
+        return {
+            posts,
+            totalPages: result.totalPages,
+            totalElements: result.totalElements,
+            currentPage: result.number,
+            isLast: result.last,
+        };
     },
 
     getPostBySlug: async (slug: string) => {

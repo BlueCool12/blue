@@ -8,6 +8,14 @@ export interface Post {
     createdAt: string;
 }
 
+export interface PagedPost {
+    posts: Post[];
+    totalPages: number;
+    totalElements: number;
+    currentPage: number;
+    isLast: boolean;
+}
+
 export interface PostDetail extends Post {
     id: number;
     content: string;
