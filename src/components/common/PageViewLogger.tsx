@@ -1,12 +1,12 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { Suspense, useEffect, useRef } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 
 import { ensureSessionId } from '@/lib/utils/session';
 import { pageViewApi } from '@/lib/api/user/pageViewApi';
 
-export const PageViewLogger = () => {
+const PageViewInner = () => {
     const pathname = usePathname();
     const searchParams = useSearchParams();
     const referrerRef = useRef<string>("");
@@ -27,4 +27,12 @@ export const PageViewLogger = () => {
     }, [pathname, searchParams]);
 
     return null;
+};
+
+export const PageViewLogger = () => {
+    return (
+        <Suspense fallback={null}>
+            <PageViewInner />
+        </Suspense>
+    );
 };
