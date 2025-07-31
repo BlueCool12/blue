@@ -3,7 +3,6 @@
 import { Suspense, useEffect, useRef } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 
-import { ensureSessionId } from '@/lib/utils/session';
 import { pageViewApi } from '@/lib/api/user/pageViewApi';
 
 const PageViewInner = () => {
@@ -12,9 +11,7 @@ const PageViewInner = () => {
     const referrerRef = useRef<string>("");
 
     useEffect(() => {
-        if (!pathname) return;
-
-        ensureSessionId();
+        if (!pathname) return;        
 
         const currentUrl = `${pathname}${searchParams?.toString() ? `?${searchParams.toString()}` : ''}`;
 
