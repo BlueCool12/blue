@@ -2,7 +2,7 @@ import api from "../axiosInstance";
 
 export const pageViewApi = {
 
-    logPageView: async (url: string): Promise<void> => {
+    logPageView: async ({ url, referrer }: { url: string; referrer?: string }): Promise<void> => {
         try {
             await api.post(
                 "/user/page-view/log",
@@ -10,6 +10,7 @@ export const pageViewApi = {
                 {
                     headers: {
                         "Content-Type": "application/json",
+                        "X-Referrer": referrer ?? '',
                     },
                 }
             );
