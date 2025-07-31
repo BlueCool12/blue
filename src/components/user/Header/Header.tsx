@@ -1,13 +1,12 @@
 'use client';
 
-import styles from './Header.module.css';
-import clsx from 'clsx';
-
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useTheme } from 'next-themes';
 
+import styles from './Header.module.css';
+import clsx from 'clsx';
 
 import { MdOutlineDarkMode, MdOutlineLightMode, MdOutlineMenu, MdOutlineClose } from 'react-icons/md';
 
