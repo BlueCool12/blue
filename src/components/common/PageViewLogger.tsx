@@ -1,22 +1,35 @@
 'use client';
 
-import { useEffect } from 'react';
-import { usePathname } from 'next/navigation';
+import { Suspense, useEffect, useRef } from 'react';
+import { usePathname, useSearchParams } from 'next/navigation';
 
-import { ensureSessionId } from '@/lib/utils/session';
 import { pageViewApi } from '@/lib/api/user/pageViewApi';
 
-export const PageViewLogger = () => {
+const PageViewInner = () => {
     const pathname = usePathname();
+    const searchParams = useSearchParams();
+    const referrerRef = useRef<string>("");
 
     useEffect(() => {
-        ensureSessionId();
+        if (!pathname) return;        
 
-        if (!pathname) return;
+        const currentUrl = `${pathname}${searchParams?.toString() ? `?${searchParams.toString()}` : ''}`;
 
-        const fullUrl = `${window.location.pathname}${window.location.search}`;
-        pageViewApi.logPageView(fullUrl);
-    }, [pathname]);
+        pageViewApi.logPageView({
+            url: currentUrl,
+            referrer: referrerRef.current,
+        });
+
+        referrerRef.current = currentUrl;
+    }, [pathname, searchParams]);
 
     return null;
+};
+
+export const PageViewLogger = () => {
+    return (
+        <Suspense fallback={null}>
+            <PageViewInner />
+        </Suspense>
+    );
 };

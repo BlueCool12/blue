@@ -168,10 +168,10 @@ export default function Home() {
             <section className={styles['recent-posts']}>
 
                 <div className={styles['recent-posts__header']}>
-                    <Link href='/posts' className={styles['recent-posts__heading']}>
-                        <h2 className={styles['recent-posts__title']}>최신글 🌟</h2>
+                    <div className={styles['recent-posts__heading']}>
+                        <Link href='/posts' className={styles['recent-posts__title']}>최신글 🌟</Link>
                         <p className={styles['recent-posts__subtitle']}>새로 올라온 글들을 확인해보세요</p>
-                    </Link>
+                    </div>
 
                     <Link href="/posts" className={styles['recent-posts__all-link']} aria-label='전체 글 목록 보기'><MdOutlineChevronRight /></Link>
                 </div>

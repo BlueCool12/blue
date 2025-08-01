@@ -3,12 +3,23 @@ import { v4 as uuidv4 } from 'uuid';
 export const ensureSessionId = () => {
     const cookieName = 'bluecool_sid';
 
-    const existing = document.cookie
+    const cookieValue = document.cookie
         .split('; ')
-        .find((c) => c.startsWith(cookieName + '='));
+        .find((c) => c.startsWith(`${cookieName}=`))
+        ?.split('=')[1];
 
-    if (existing) return;
+    if (cookieValue) {
+        localStorage.setItem(cookieName, cookieValue);
+        return cookieValue;
+    }
 
-    const newId = uuidv4();
-    document.cookie = `${cookieName}=${newId}; path=/; max-age=2592000; SameSite=Lax; Secure`;
+    let sid = localStorage.getItem(cookieName);
+    if (!sid) {
+        sid = uuidv4();
+        localStorage.setItem(cookieName, sid);
+    }
+
+    document.cookie = `${cookieName}=${sid}; path=/; max-age=2592000; domain=.pyomin.com; SameSite=None; Secure`;
+
+    return sid;
 }

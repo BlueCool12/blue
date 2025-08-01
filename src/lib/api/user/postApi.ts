@@ -16,8 +16,7 @@ export const postApi = {
         if (page) params.append('page', (page - 1).toString());
         if (size) params.append('size', size.toString());
 
-        const response = await api.get(`/user/posts?${params.toString()}`);
-        console.log(response.data);
+        const response = await api.get(`/user/posts?${params.toString()}`);        
         return response.data;
     },
 
