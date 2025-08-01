@@ -12,7 +12,11 @@ async function fetchPosts(): Promise<PostListResponse[]> {
     try {
         const res = await fetch(`${process.env.INTERNAL_API_BASE_URL}/user/posts`, { cache: 'no-store' });
         if (!res.ok) throw new Error('글 불러오기 실패');
-        return res.json();
+        
+        const json = await res.json();
+
+        console.log('[sitemap] 응답 구조:', json);
+        return json;
     } catch {
         return [];
     }
