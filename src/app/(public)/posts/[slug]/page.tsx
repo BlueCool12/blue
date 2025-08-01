@@ -8,6 +8,7 @@ import CommentSectionWrapper from '@/components/user/CommentSectionWrapper';
 
 import { postService } from '@/services/user/postService';
 import { LogoBorder } from '@/components/user/LogoBorder';
+import ShareButtons from '@/components/user/ShareButtons';
 
 interface PageProps {
     params: Promise<{ slug: string }>;
@@ -65,6 +66,8 @@ export default async function PostDetail({ params }: PageProps) {
                     dangerouslySetInnerHTML={{ __html: post.content }}
                 />
             </article>
+
+            <ShareButtons title={post.title} slug={slug} />
 
             <LogoBorder />
 
