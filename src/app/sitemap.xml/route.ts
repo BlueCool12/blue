@@ -56,7 +56,7 @@ export async function GET() {
             <url>
                 <loc>${SITE_URL}/posts/${post.slug}</loc>
                 <lastmod>${new Date(post.updatedAt).toISOString()}</lastmod>
-                <changefreq>weekly</changefreq>
+                <changefreq>monthly</changefreq>
                 <priority>0.8</priority>
             </url>`
     }).join('');
