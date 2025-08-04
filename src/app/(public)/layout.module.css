@@ -12,6 +12,7 @@
 @media (max-width: 768px) {
     .content {
         max-width: 100%;
+        min-width: 500px;
         min-height: 100vh;
         padding-top: 64px;
         padding-bottom: 56px;
