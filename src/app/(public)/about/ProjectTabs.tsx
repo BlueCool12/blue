@@ -120,8 +120,7 @@ export default function ProjectTabs() {
                         {!imageLoaded ? (
                             <div className={styles['project-section__image-skeleton']} />
                         ) : (
-                            <Image
-                                key={project.image}
+                            <Image                                
                                 src={project.image}
                                 alt={`${project.title} 미리보기`}
                                 width={1280}
