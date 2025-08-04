@@ -6,7 +6,7 @@ import Image from 'next/image';
 import styles from './page.module.css';
 import clsx from 'clsx';
 
-import { MdOutlineDescription, MdOutlineTravelExplore, MdOutlineRocketLaunch } from 'react-icons/md';
+import { MdOutlineDescription, MdOutlineTravelExplore, MdOutlineRocketLaunch, MdPictureAsPdf } from 'react-icons/md';
 
 const projects = [
     {
@@ -15,9 +15,11 @@ const projects = [
         description:
             '기존 ASP기반의 프로젝트를 React와 Express로 리뉴얼 하였습니다.\n\n' +
             '프론트엔드 전반을 담당하며 RTK Query를 활용해 백엔드와의 데이터 통신을 구현하였습니다.\n\n' +
-            '온라인 계약과 관련된 API 및 반응형 페이지를 구현하였습니다.',
+            'react-signature를 활용한 온라인 계약 기능과 관련 API를 구현하였습니다.\n\n' +
+            '관리자가 팝업을 등록, 수정, 삭제하며 위치 및 노출 여부를 제어할 수 있는 팝업 관리 기능을 구현하였습니다.',
         image: '/images/projects/baroyeon.webp',
         link: 'https://www.baroyeon.net/',
+        pdf: undefined,
         stack: [
             { name: 'JavaScript', color: '#f7df1e' },
             { name: 'Node.js', color: '#339933' },
@@ -32,10 +34,12 @@ const projects = [
         subtitle: '개인 블로그 프로젝트',
         description:
             '관리자 페이지가 있는 개인 블로그를 기획하였습니다.\n\n' +
-            '다크모드 구현 및 기존 리액트 프로젝트를 SEO 최적화를 위해 Next.js로 마이그레이션 하였습니다.\n\n' +
-            'JWT 토큰을 이용한 Spring Security 구성 및 CKEditor를 사용한 글 작성 및 파일 업로드 기능을 구현하였습니다.',
+            '기존 React 기반 프로젝트를 SEO 최적화를 위해 Next.js로 마이그레이션하고 다크 모드와 반응형 UI를 구현하였습니다.\n\n' +
+            '백엔드는 Spring Boot와 PostgreSQL로 구성하였으며 JWT 기반 인증과 Spring Security를 통해 관리자 로그인 기능을 개발하였습니다.\n\n' +
+            'CKEditor를 활용해 글 작성 및 파일 업로드 기능을 구현하였고 사용자 행동 분석을 위해 페이지 조회 로그 기록 시스템을 구축하였습니다.',
         image: '/images/projects/bluecool_1280_720.webp',
         link: 'https://www.pyomin.com',
+        pdf: undefined,
         stack: [
             { name: 'Java', color: '#f89820' },
             { name: 'Spring', color: '#6db33f' },
@@ -55,6 +59,7 @@ const projects = [
             '외부 API로는 카카오 지도, 로그인, 결제와 Chart.js를 사용하였습니다.',
         image: '/images/projects/tourstory_1280_720.webp',
         link: 'https://tourstory.pyomin.com',
+        pdf: 'https://pyomin.com/pdfs/tourstory.pdf',
         stack: [
             { name: 'Java', color: '#f89820' },
             { name: 'Spring', color: '#6db33f' },
@@ -126,6 +131,20 @@ export default function ProjectTabs() {
                             </a>
                         </section>
                     )}
+
+                    {project.pdf && (
+                        <section aria-label="PDF 포트폴리오 링크" className={styles['project-section__link']}>
+                            <h4><MdPictureAsPdf size={24} />PDF</h4>
+                            <a
+                                href={project.pdf}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                {project.title} 포트폴리오
+                            </a>
+                        </section>
+                    )}
+
 
                     <section aria-label="사용한 기술 스택" style={{ margin: "12px 0" }}>
                         <h4><MdOutlineRocketLaunch size={24} />Stack</h4>

@@ -31,7 +31,7 @@ export async function GET() {
     const staticPagesLastModified: Record<string, string> = {
         '/': latestPostDate,
         '/posts': latestPostDate,
-        '/about': '2025-07-01T00:00:00.000Z',
+        '/about': '2025-08-04T00:00:00.000Z',
         '/guestbooks': '2025-07-01T00:00:00.000Z',
     };
 
