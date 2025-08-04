@@ -1,15 +1,9 @@
-import { Noto_Sans_KR } from 'next/font/google';
 import { Metadata } from 'next';
 import Script from 'next/script';
 
-import { Providers } from './providers';
+import { pretendard } from 'fonts/pretendard';
 
-const notoSans = Noto_Sans_KR({
-    subsets: ['latin'],
-    weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
-    variable: '--font-noto',
-    display: 'swap',
-});
+import { Providers } from './providers';
 
 export const metadata: Metadata = {
     title: {
@@ -61,7 +55,7 @@ export const viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
-        <html lang="ko" suppressHydrationWarning className={notoSans.variable}>
+        <html lang="ko" suppressHydrationWarning className={`${pretendard.variable}`}>
             <body>
                 {/* 구글 애널리틱스 스크립트 */}
                 <Script

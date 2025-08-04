@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 import styles from './page.module.css';
@@ -74,7 +74,13 @@ const projects = [
 export default function ProjectTabs() {
 
     const [selectedProject, setSelectedProject] = useState(0);
+    const [imageLoaded, setImageLoaded] = useState(false);
+
     const project = projects[selectedProject];
+
+    useEffect(() => {
+        setImageLoaded(false);
+    }, [selectedProject]);
 
     return (
         <>
@@ -111,12 +117,19 @@ export default function ProjectTabs() {
                     </p>
 
                     <figure className={styles['project-section__image-wrapper']}>
-                        <Image
-                            src={project.image}
-                            alt={`${project.title} 미리보기`}
-                            width={1280}
-                            height={720}
-                        />
+                        {!imageLoaded ? (
+                            <div className={styles['project-section__image-skeleton']} />
+                        ) : (
+                            <Image
+                                key={project.image}
+                                src={project.image}
+                                alt={`${project.title} 미리보기`}
+                                width={1280}
+                                height={720}
+                                onLoadingComplete={() => setImageLoaded(true)}
+                                className={styles['project-section__image']}
+                            />
+                        )}
                     </figure>
 
                     {project.link && (
