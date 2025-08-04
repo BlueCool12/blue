@@ -84,16 +84,13 @@ html[data-theme='dark'] {
 html,
 body {
   height: 100%;
-  font-family: var(--font-noto), sans-serif;
+  font-family: var(--font-pretendard), sans-serif;
   background-color: var(--bg-color);
   color: var(--text-color);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: background-color 0.3s, color 0.3s;
-}
-
-body {
   cursor: url('/images/cursor.png') 2 2, auto;
 }
 
