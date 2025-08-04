@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 
 import styles from './page.module.css';
@@ -17,7 +17,7 @@ const projects = [
             '프론트엔드 전반을 담당하며 RTK Query를 활용해 백엔드와의 데이터 통신을 구현하였습니다.\n\n' +
             'react-signature를 활용한 온라인 계약 기능과 관련 API를 구현하였습니다.\n\n' +
             '관리자가 팝업을 등록, 수정, 삭제하며 위치 및 노출 여부를 제어할 수 있는 팝업 관리 기능을 구현하였습니다.',
-        image: '/images/projects/baroyeon.webp',
+        image: '/images/projects/baroyeon.webp',    
         link: 'https://www.baroyeon.net/',
         pdf: undefined,
         stack: [
@@ -37,7 +37,7 @@ const projects = [
             '기존 React 기반 프로젝트를 SEO 최적화를 위해 Next.js로 마이그레이션하고 다크 모드와 반응형 UI를 구현하였습니다.\n\n' +
             '백엔드는 Spring Boot와 PostgreSQL로 구성하였으며 JWT 기반 인증과 Spring Security를 통해 관리자 로그인 기능을 개발하였습니다.\n\n' +
             'CKEditor를 활용해 글 작성 및 파일 업로드 기능을 구현하였고 사용자 행동 분석을 위해 페이지 조회 로그 기록 시스템을 구축하였습니다.',
-        image: '/images/projects/bluecool_1280_720.webp',
+        image: '/images/projects/bluecool_1280_720.webp',        
         link: 'https://www.pyomin.com',
         pdf: undefined,
         stack: [
@@ -57,7 +57,7 @@ const projects = [
             '여행 일정을 계획하고 숙소 예약, 원데이 클래스 예약, 여행 패키지 상품 예약 및 여행 게시판과 미니게임이 가능한 종합 여행 플랫폼을 기획하였습니다.\n\n' +
             '숙소 예약 기능은 에어비앤비를 참고하였으며 라이브러리를 사용하지 않고 자바스크립트로 달력을 구현하였고 Polling 방식을 이용한 알림기능도 구현하였습니다.\n\n' +
             '외부 API로는 카카오 지도, 로그인, 결제와 Chart.js를 사용하였습니다.',
-        image: '/images/projects/tourstory_1280_720.webp',
+        image: '/images/projects/tourstory_1280_720.webp',        
         link: 'https://tourstory.pyomin.com',
         pdf: 'https://pyomin.com/pdfs/tourstory.pdf',
         stack: [
@@ -74,13 +74,8 @@ const projects = [
 export default function ProjectTabs() {
 
     const [selectedProject, setSelectedProject] = useState(0);
-    const [imageLoaded, setImageLoaded] = useState(false);
 
     const project = projects[selectedProject];
-
-    useEffect(() => {
-        setImageLoaded(false);
-    }, [selectedProject]);
 
     return (
         <>
@@ -117,18 +112,13 @@ export default function ProjectTabs() {
                     </p>
 
                     <figure className={styles['project-section__image-wrapper']}>
-                        {!imageLoaded ? (
-                            <div className={styles['project-section__image-skeleton']} />
-                        ) : (
-                            <Image                                
-                                src={project.image}
-                                alt={`${project.title} 미리보기`}
-                                width={1280}
-                                height={720}
-                                onLoadingComplete={() => setImageLoaded(true)}
-                                className={styles['project-section__image']}
-                            />
-                        )}
+                        <Image
+                            src={project.image}
+                            alt={`${project.title} 미리보기`}
+                            className={styles['project-section__image']}
+                            width={1280}
+                            height={720}                            
+                        />
                     </figure>
 
                     {project.link && (

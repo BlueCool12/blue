@@ -294,28 +294,8 @@
     border-radius: 12px;
 }
 
-.project-section__image-skeleton {
-    width: 100%;
-    padding-top: calc(720 / 1280 * 100%);
-    background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
-    background-size: 200% 100%;
-    animation: skeleton-loading 1.2s infinite;
-    border-radius: 12px;
-}
-
-@keyframes skeleton-loading {
-    0% {
-        background-position: 200% 0;
-    }
-
-    100% {
-        background-position: -200% 0;
-    }
-}
-
 .project-section__image {
     border-radius: 12px;
-    transition: opacity 0.3s ease-in-out;
 }
 
 /* Project Area */
