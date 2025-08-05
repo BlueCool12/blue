@@ -18,6 +18,7 @@ export interface PostListResponse {
     isDeleted: boolean;
     slug: string;
     contentSummary: string;
+    description?: string;
     createdAt: string;
     updatedAt: string;
 }
