@@ -4,11 +4,11 @@
 
 # 📝 개인 블로그
 
-🔗 배포 URL: [https://pyomin.com](https://pyomin.com)
-
 > **풀스택 개발자 BlueCool12의 블로그 개발 공간입니다.**  
 > 이 프로젝트는 **TypeScript**, **React**, **Next.js**, **Java**, **Spring Boot**, **JPA**를 기반으로 구축되었으며,  
 > **다크모드 / 반응형 / 에디터 / 사용자 행동 분석 시스템**까지 포함한 **개인 블로그 플랫폼**입니다.
+
+🔗 배포 URL: [https://pyomin.com](https://pyomin.com)
 
 ---
 
