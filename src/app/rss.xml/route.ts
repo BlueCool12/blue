@@ -26,7 +26,7 @@ export async function GET() {
     posts.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 
     const latestPostDate = posts.length > 0
-        ? new Date(posts[0].updatedAt).toISOString() : new Date().toISOString();
+        ? new Date(posts[0].updatedAt).toUTCString() : new Date().toUTCString();
 
     const items = posts.map((post) => `
         <item>
