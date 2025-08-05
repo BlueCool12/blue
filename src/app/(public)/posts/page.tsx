@@ -68,6 +68,8 @@ export default function PostList() {
 
     return (
         <>
+            <VisuallyHiddenH1>BlueCool 블로그 게시글 목록</VisuallyHiddenH1>
+
             {isMobile && (
                 <MobileCategorySelectWrapper>
                     <MobileCategorySelect
@@ -145,6 +147,19 @@ export default function PostList() {
         </>
     );
 };
+
+// 숨김용 H1
+const VisuallyHiddenH1 = styled.h1`
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+`;
 
 // 모바일 카테고리 시작
 const MobileCategorySelectWrapper = styled.div`

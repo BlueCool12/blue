@@ -22,15 +22,19 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     const post = await postService.getPostBySlug(slug);
 
     return {
-        title: post.title,
+        title: post.title,        
+        description: post.description,
+        metadataBase: new URL('https://pyomin.com'),
         openGraph: {
             title: post.title,
+            description: post.description,
             type: 'article',
             url: `https://pyomin.com/posts/${slug}`,
         },
         twitter: {
             card: 'summary_large_image',
             title: post.title,
+            description: post.description,
         },
     };
 }

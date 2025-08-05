@@ -10,7 +10,7 @@ export const metadata: Metadata = {
         default: 'BlueCool',
         template: '%s | BlueCool',
     },
-    description: 'BlueCool 공식 블로그 입니다.',
+    description: 'BlueCool은 실전 웹 개발부터 서버 운영, DevOps 환경 구축까지 다양한 인사이트를 전하는 개발자 블로그입니다.',
     keywords: ['BlueCool', 'BlueCool12', '블루쿨'],
     metadataBase: new URL('https://pyomin.com'),
     verification: {
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     ],
     openGraph: {
         title: 'BlueCool',
-        description: 'BlueCool 공식 블로그 입니다.',
+        description: '개발자 BlueCool이 전하는 실전 웹 개발과 서버 운영 이야기',
         siteName: 'BlueCool',
         url: 'https://pyomin.com',
         locale: 'ko_KR',
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'BlueCool',
-        description: 'BlueCool 공식 블로그 입니다.',
+        description: '개발자 BlueCool이 전하는 실전 웹 개발과 서버 운영 이야기',
         images: ['https://pyomin.com/images/og_image_resize.png'],
     },
 }
@@ -85,8 +85,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                             "@type": "WebSite",
                             name: "BlueCool",
                             url: "https://pyomin.com",
-                            description: "BlueCool 공식 블로그입니다.",
-                            inLanguage: "ko-KR"
+                            description: "개발자 BlueCool이 전하는 실전 웹 개발과 서버 운영 이야기",
+                            inLanguage: "ko-KR",
+                            publisher: {
+                                "@type": "Organization",
+                                name: "BlueCool",
+                                logo: {
+                                    "@type": "ImageObject",
+                                    url: "https://pyomin.com/images/og_image_resize.png"
+                                }
+                            }
                         }),
                     }}
                 />
