@@ -4,31 +4,48 @@
 
 # 📝 개인 블로그
 
-이 프로젝트는 **React**, **TypeScript**, **styled-components**를 기반으로 제작한 **개인 블로그**입니다.  
-다크모드, 반응형 레이아웃, 라우팅 기능이 포함되어 있으며, 추후 블로그 포스팅 기능도 확장 예정입니다.
+🔗 배포 URL: [https://pyomin.com](https://pyomin.com)
+
+> **풀스택 개발자 BlueCool12의 블로그 개발 공간입니다.**  
+> 이 프로젝트는 **TypeScript**, **React**, **Next.js**, **Java**, **Spring Boot**, **JPA**를 기반으로 구축되었으며,  
+> **다크모드 / 반응형 / 에디터 / 사용자 행동 분석 시스템**까지 포함한 **개인 블로그 플랫폼**입니다.
+
+---
 
 ## 🔧 기술 스택
 
-- ⚛️ React – 사용자 인터페이스 라이브러리  
-- 🟦 TypeScript – 정적 타입 지원  
-- 💅 styled-components – CSS-in-JS 스타일링  
-- 🌗 다크모드 – localStorage를 활용한 테마 전환 기능  
-- 🔀 React Router v6 – 페이지 라우팅 처리
+### 🧩 프론트엔드
+- ⚛️ **React + Next.js** – 서버 사이드 렌더링(SSR) 지원
+- 🟦 **TypeScript**
+- 💅 **styled-components** + **CSS Modules**
 
-## 🌗 다크모드
+### 🛠 백엔드 (Spring Boot API 서버)
+- ☕ **Java + Spring Boot**
+- 📦 **Spring Data JPA**
+- 🐘 **PostgreSQL**
+- 🐳 **Docker Compose** (Raspberry Pi 환경)
 
-- 테마 상태는 localStorage에 저장되어 브라우저 새로고침 후에도 유지됩니다.
-- styled-components의 ThemeProvider를 통해 전체 스타일에 적용됩니다.
-- Header 컴포넌트에서 아이콘 버튼을 눌러 테마를 전환할 수 있습니다.
+---
 
-## 🚀 향후 계획
+## ✅ 구현된 기능
 
-- ✏️ Markdown 기반 포스트 작성 기능
-- 🔍 검색 및 카테고리 필터 기능
-- 🗂 태그 및 포스트 분류
-- 📱 모바일 최적화 강화
-- 📝 관리자 전용 글쓰기 페이지
+- 🌗 **Next 기반 다크모드 구현** (localStorage + globals.css)
+- ✏️ **CKEditor 기반 마크다운 포스트 작성**
+- 🔍 **카테고리 필터 기능**
+- 📊 **사용자 행동 분석 로그 저장**
+- 🧠 **SEO 최적화 적용** – `metadata` 활용 및 sitemap, og 태그 구성 완료
+- 📰 **RSS 피드 생성** – 최신 포스트 기준 자동 피드 제공 (`/rss.xml`)
+
+---
+
+## 🚧 예정된 기능
+
+- 🔍 포스트 검색 기능
+- 🧾 포스트 내 목차 기능
+
+---
 
 ## 💬 라이선스
 
-본 프로젝트는 개인 용도로 개발되었습니다. 별도의 명시가 없는 한, 상업적 사용은 허용되지 않습니다.
+MIT License 기반으로 오픈되어 있으며,  
+**개인 블로그 콘텐츠는 저작권 보호 대상**이므로 무단 사용은 금지됩니다.
