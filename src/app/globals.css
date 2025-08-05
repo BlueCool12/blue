@@ -129,6 +129,7 @@ button {
   cursor: url('/images/cursor.png') 2 2, auto;
   border: none;
   background: none;
+  font-family: inherit;
 }
 
 /* 폼 요소 */
