@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
 import PostList from "./PostList";
 
-export async function generateMetadata(
-    props: Promise<{ searchParams?: { [key: string]: string | string[] | undefined } }>
-): Promise<Metadata> {
-    const { searchParams } = await props;
+export async function generateMetadata({
+    searchParams,
+}: {
+    searchParams?: { [key: string]: string | string[] | undefined };
+}): Promise<Metadata> {    
     const category = typeof searchParams?.category === 'string' ? searchParams.category : null;
 
     const title = category ? `${category} 카테고리 글 목록` : '전체 글 목록';
