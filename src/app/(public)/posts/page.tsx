@@ -1,12 +1,8 @@
 import type { Metadata } from 'next';
 import PostList from "./PostList";
 
-type Props = {
-    searchParams?: { [key: string]: string | string[] | undefined };
-};
-
 export async function generateMetadata(
-    props: Props
+    props: any
 ): Promise<Metadata> {
     const category = typeof props.searchParams?.category === 'string' ? props.searchParams.category : null;
 
@@ -37,7 +33,6 @@ export async function generateMetadata(
     }
 };
 
-export default function Page({ searchParams }: Props) {
-    void searchParams;
+export default function Page() {    
     return <PostList />
 };
