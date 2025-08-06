@@ -1,10 +1,14 @@
 import type { Metadata } from 'next';
 import PostList from "./PostList";
 
-export async function generateMetadata(
-    props: any
-): Promise<Metadata> {
-    const category = typeof props.searchParams?.category === 'string' ? props.searchParams.category : null;
+type PageProps = {
+    searchParams?: { [key: string]: string | string[] };
+};
+
+export async function generateMetadata({
+    searchParams,
+}: PageProps): Promise<Metadata> {
+    const category = typeof searchParams?.category === 'string' ? searchParams.category : null;
 
     const title = category ? `${category} 카테고리 글 목록` : '전체 글 목록';
     const description = category
@@ -33,6 +37,6 @@ export async function generateMetadata(
     }
 };
 
-export default function Page() {    
+export default function Page() {
     return <PostList />
 };
