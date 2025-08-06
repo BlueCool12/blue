@@ -5,7 +5,7 @@ export async function generateMetadata({
     searchParams,
 }: {
     searchParams?: { [key: string]: string | string[] | undefined };
-}): Promise<Metadata> {    
+}): Promise<Metadata> {
     const category = typeof searchParams?.category === 'string' ? searchParams.category : null;
 
     const title = category ? `${category} 카테고리 글 목록` : '전체 글 목록';
@@ -35,6 +35,6 @@ export async function generateMetadata({
     }
 };
 
-export default function Page() {
+export default function Page({ searchParams: _searchParams }: any) {
     return <PostList />
 };
