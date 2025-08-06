@@ -35,6 +35,11 @@ export async function generateMetadata({
     }
 };
 
-export default function Page({ searchParams: _searchParams }: any) {
+export default function Page({
+    searchParams,
+}: {
+    searchParams?: { [key: string]: string | string[] | undefined };
+}) {
+    void searchParams;
     return <PostList />
 };
