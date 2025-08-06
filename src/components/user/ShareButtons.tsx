@@ -27,14 +27,20 @@ const ShareButtons = ({ title, slug }: ShareButtonsProps) => {
         }
     };
 
-    const handleNaviveShare = async () => {
+    const handleNativeShare = async () => {
         if (navigator.share) {
             try {
                 await navigator.share({
                     title,
                     url: shareUrl,
                 });
-            } catch {
+            } catch (error: unknown) {
+                if (typeof error === 'object' && error !== null) {
+                    const shareError = error as { name?: string; message?: string };
+                    if (shareError.name === 'AbortError') return;
+                    if (typeof shareError.message === 'string' && shareError.message.includes('cancel')) return;
+                }
+
                 toast.error('공유 실패 ㅠ__ㅠ');
             }
         } else {
@@ -48,7 +54,7 @@ const ShareButtons = ({ title, slug }: ShareButtonsProps) => {
         <Wrapper>
 
             {isMobile ? (
-                <ShareButton aria-label='공유' title='공유' onClick={handleNaviveShare}>
+                <ShareButton aria-label='공유' title='공유' onClick={handleNativeShare}>
                     <MdIosShare />
                 </ShareButton>
             ) : (
