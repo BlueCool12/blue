@@ -42,8 +42,8 @@ export const CommentSection: React.FC<Props> = ({ postId }) => {
 
         if (input === null) return;
 
-        if (!/^\d{4}$/.test(input)) {
-            alert("비밀번호는 4자리 숫자입니다.");
+        if (!/^\d{4}$/.test(input)) {            
+            toast.error('비밀번호는 4자리 숫자입니다.');
             return;
         }
 
@@ -61,8 +61,8 @@ export const CommentSection: React.FC<Props> = ({ postId }) => {
 
         if (input === null) return;
 
-        if (!/^\d{4}$/.test(input)) {
-            alert("비밀번호는 4자리 숫자입니다.");
+        if (!/^\d{4}$/.test(input)) {            
+            toast.error('비밀번호는 4자리 숫자입니다.');
             return;
         }
 
