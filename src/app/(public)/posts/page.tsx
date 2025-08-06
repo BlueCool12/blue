@@ -1,13 +1,9 @@
 import type { Metadata } from 'next';
 import PostList from "./PostList";
 
-type PageProps = {
-    searchParams?: { [key: string]: string | string[] };
-};
-
-export async function generateMetadata({
-    searchParams,
-}: PageProps): Promise<Metadata> {
+export async function generateMetadata(
+    { searchParams }: { searchParams?: Record<string, string | string[]> }
+): Promise<Metadata> {
     const category = typeof searchParams?.category === 'string' ? searchParams.category : null;
 
     const title = category ? `${category} 카테고리 글 목록` : '전체 글 목록';
