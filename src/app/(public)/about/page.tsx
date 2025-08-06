@@ -15,6 +15,9 @@ const careers = [
 export const metadata: Metadata = {
     title: 'About',
     description: 'BlueCool12의 이력과 프로젝트를 소개합니다.',
+    alternates: {
+        canonical: '/about',
+    },
     openGraph: {
         title: 'About',
         description: 'BlueCool12의 이력과 프로젝트를 소개합니다.',

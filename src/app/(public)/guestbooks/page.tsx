@@ -5,6 +5,9 @@ import GuestbookPage from "./Guestbook";
 export const metadata: Metadata = {
     title: '방명록',
     description: 'BlueCool 블로그 방명록 페이지입니다.',
+    alternates: {
+        canonical: '/guestbooks',
+    },
     openGraph: {
         title: '방명록',
         description: 'BlueCool 블로그 방명록 페이지입니다.',

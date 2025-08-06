@@ -1,271 +1,41 @@
-'use client';
+import type { Metadata } from 'next';
+import PostList from "./PostList";
 
-import { useRouter, useSearchParams } from "next/navigation";
-import Link from "next/link";
-
-import styled from "styled-components";
-
-import { EmptyState } from "@/components/user/EmptyState";
-import { LoadingSpinner } from "@/components/common/LoadingSpinner";
-import { CategorySidebar } from "@/components/user/CategorySidebar";
-import { MdOutlineArrowDropDown } from "react-icons/md";
-
-import { useInfinitePosts } from "@/hooks/queries/posts/useInfinitePosts";
-import { useCategories } from "@/hooks/queries/categories/useCategories";
-import { useIsMobile } from "@/hooks/useIsMobile";
-
-import type { Post } from "@/types/post";
-import { useEffect, useRef } from "react";
-
-export default function PostList() {
-
-    const router = useRouter();
-    const searchParams = useSearchParams();
-    const selectedCategory = searchParams.get("category");
-
-    const { isMobile, ready } = useIsMobile(1024);
-    const size = isMobile ? 7 : 10;
-
-    const posts = useInfinitePosts(selectedCategory, size, ready);
-    const categories = useCategories();
-
-    const loadMoreRef = useRef<HTMLDivElement | null>(null);
-
-    useEffect(() => {
-        if (!ready || posts.isLoading || !posts.hasNextPage || posts.isFetchingNextPage) return;
-
-        const observer = new IntersectionObserver(([entry]) => {
-            if (entry.isIntersecting) {
-                posts.fetchNextPage();
-            }
-        });
-
-        const el = loadMoreRef.current;
-        if (el) observer.observe(el);
-
-        return () => {
-            if (el) observer.unobserve(el);
-        };
-    }, [posts.hasNextPage, posts.isFetchingNextPage, posts.fetchNextPage, loadMoreRef]);
-
-    useEffect(() => {
-        window.scrollTo({ top: 0 });
-    }, [selectedCategory]);
-
-    const handleSelectedCategory = (category: string | null) => {
-        const newParams = new URLSearchParams(searchParams);
-        if (category) {
-            newParams.set('category', category);
-        } else {
-            newParams.delete('category');
-        }
-        router.replace(`/posts?${newParams.toString()}`);
-    };
-
-    if (posts.isError) throw new Error(posts.error.message ?? "글 목록 조회 실패");
-
-    const allPosts = posts.data?.pages?.flatMap((page) => page?.posts ?? []) ?? [];
-
-    return (
-        <>
-            <VisuallyHiddenH1>BlueCool 블로그 게시글 목록</VisuallyHiddenH1>
-
-            {isMobile && (
-                <MobileCategorySelectWrapper>
-                    <MobileCategorySelect
-                        value={selectedCategory ?? ''}
-                        onChange={(e) =>
-                            handleSelectedCategory(e.target.value === '' ? null : e.target.value)
-                        }
-                        aria-label="글 카테고리 선택"
-                    >
-                        <option value="">ALL</option>
-                        {categories.data?.map((parent) =>
-                            parent.children && parent.children.length > 0 && (
-                                <optgroup key={parent.name} label={parent.name}>
-                                    {parent.children.map((child) => (
-                                        <option key={child.name} value={child.name}>
-                                            {child.name}
-                                        </option>
-                                    ))}
-                                </optgroup>
-                            )
-                        )}
-
-                    </MobileCategorySelect>
-                    <SelectIcon />
-                </MobileCategorySelectWrapper>
-            )}
-
-            <PostListSection>
-                {/* 처음 로딩 */}
-                {(!ready || posts.isLoading) && <LoadingSpinner />}
-
-                {/* 데이터가 없는 경우 */}
-                {!posts.isLoading && allPosts.length === 0 && (
-                    <EmptyState message="열심히 공부 중입니다..." />
-                )}
-
-                {/* 게시글 리스트 */}
-                {allPosts.length > 0 && (
-                    <>
-                        <PostListWrapper>
-                            {allPosts.map((post) => (
-                                <ListItem key={post.slug}>
-                                    <Post>
-                                        <Link href={`/posts/${post.slug}`}>
-                                            <TitleWrapper>
-                                                <Title>{post.title}</Title>
-                                                <Category>{post.category}</Category>
-                                            </TitleWrapper>
-                                            <Content>{post.contentSummary}</Content>
-                                            <Meta>
-                                                <time dateTime={post.createdAt}>{post.createdAt}</time>
-                                            </Meta>
-                                        </Link>
-                                    </Post>
-                                </ListItem>
-                            ))}
-                        </PostListWrapper>
-
-                        {posts.isFetchingNextPage && <LoadingSpinner />}
-                        <div ref={loadMoreRef} style={{ height: "1px" }} />
-                    </>
-                )}
-            </PostListSection>
-
-
-            {!isMobile && (
-                <CategorySidebar
-                    categories={categories.data ?? []}
-                    loading={categories.isLoading}
-                    error={categories.isError ? (categories.error?.message ?? '카테고리 로딩 실패') : null}
-                    selectedCategory={selectedCategory}
-                    onSelectCategory={handleSelectedCategory}
-                />
-            )}
-        </>
-    );
+type Props = {
+    searchParams: { [key: string]: string | string[] | undefined };
 };
 
-// 숨김용 H1
-const VisuallyHiddenH1 = styled.h1`
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-`;
+export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
+    const params = await searchParams;
+    const category = typeof params.category === 'string' ? params.category : null;
 
-// 모바일 카테고리 시작
-const MobileCategorySelectWrapper = styled.div`
-  position: relative;
-  padding: 0.75rem 0;
-  margin: 0 1rem;
-  border-bottom: 1px solid var(--border-color);
-`;
+    const title = category ? `${category} 카테고리 글 목록` : '전체 글 목록';
+    const description = category
+        ? `BlueCool 블로그의 "${category}" 카테고리 글 목록입니다.`
+        : 'BlueCool 블로그의 전체글 목록입니다. 다양한 기술과 개발 이야기를 확인해보세요.';
 
-const MobileCategorySelect = styled.select`
-  width: 100%;
-  padding: 0.5rem 1rem 0.5rem; /* 오른쪽 여백 추가 */
-  font-size: 0.9rem;
-  border-radius: 6px;
-  color: var(--text-color);
-  appearance: none; /* 기본 화살표 제거 */
-  -webkit-appearance: none;
-  -moz-appearance: none;  
-  border: 1px solid var(--border-color);
-`;
-
-const SelectIcon = styled(MdOutlineArrowDropDown)`
-  position: absolute;
-  right: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none;
-  color: var(--text-color);
-  font-size: 1.2rem;
-`;
-// 모바일 카테고리 끝
-
-const PostListSection = styled.section`
-    padding: 1rem;    
-`;
-
-const PostListWrapper = styled.ul`
-    width: 100%;    
-`;
-
-const ListItem = styled.li`
-    list-style: none;    
-    display: flex;
-    flex-direction: column;            
-    padding: 0 1rem;
-
-    @media (max-width: 768px) {
-        padding: 0;
+    return {
+        title,
+        description,
+        alternates: {
+            canonical: '/posts',
+        },
+        openGraph: {
+            title,
+            description,
+            type: 'website',
+            url: category
+                ? `https://pyomin.com/posts?category=${encodeURIComponent(category)}`
+                : 'https://pyomin.com/posts',
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title,
+            description,
+        },
     }
-`;
+};
 
-const Post = styled.article`
-    padding: 1.2rem 0 0.8rem;    
-    border-bottom: 2px solid var(--border-color);
-
-    &:hover {
-        border-bottom: 2px solid var(--theme-color-9);
-    }
-
-    a {
-        display: block;
-        text-decoration: none;
-        color: inherit;
-    }
-`;
-
-const TitleWrapper = styled.header`
-    display: flex;
-    align-items: center;
-    gap: 12px;
-`;
-
-const Title = styled.h2`
-    flex: 1;
-    font-size: 1.1rem;
-    font-weight: 500;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-`;
-
-const Category = styled.span`    
-    display: inline-block;
-    background-color: var(--theme-color-9);
-    color: var(--theme-color-1);
-    border-radius: 9999px;
-    padding: 0.2rem 0.5rem;
-    font-size: 0.75rem;
-    font-weight: 700;
-`;
-
-const Content = styled.p`
-    margin: 0.5rem 0;
-    font-size: 0.9rem;
-    line-height: 1.5;
-    opacity: 0.8;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    word-break: break-all;
-`;
-
-const Meta = styled.footer`
-    display: flex;        
-    justify-content: end;    
-    font-size: 0.8rem;
-    opacity: 0.6;
-`;
+export default function Page() {
+    return <PostList />
+};

@@ -37,6 +37,7 @@ export async function GET() {
             <pubDate>${new Date(post.createdAt).toUTCString()}</pubDate>            
             <category>${post.category}</category>
             <media:thumbnail url="https://pyomin.com/images/empty.webp" />
+            <enclosure url="https://pyomin.com/images/empty.webp" type="image/webp" />
         </item>
     `).join('');
 
