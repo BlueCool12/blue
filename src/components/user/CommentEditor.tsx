@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import styled from 'styled-components';
 
 import { MdOutlineModeComment, MdOutlineSend } from "react-icons/md";
+import { toast } from "react-toastify";
 
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { RootState } from "@/store/store";
@@ -71,12 +72,12 @@ export const CommentEditor: React.FC<Props> = ({ postId }) => {
         const trimmedContent = form.content.trim();
 
         if (!/^\d{4}$/.test(trimmedPassword)) {
-            alert('숫자 4자리의 비밀번호를 입력해주세요.');
+            toast.error('숫자 4자리의 비밀번호를 입력해주세요.');
             return;
         }
 
         if (!trimmedContent) {
-            alert('내용을 적어주세요.');
+            toast.error('내용을 적어주세요.');
             return;
         }
 
@@ -88,7 +89,7 @@ export const CommentEditor: React.FC<Props> = ({ postId }) => {
             content: trimmedContent,
         }));
 
-        alert("댓글이 등록되었습니다!");
+        toast.success('댓글이 등록되었습니다!');
         setForm({ nickname: '', content: '', password: '' });
         setOpen(false);
     };

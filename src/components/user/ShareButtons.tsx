@@ -4,47 +4,79 @@ import styled from 'styled-components';
 import { FaFacebookF, FaTwitter, FaLink } from 'react-icons/fa';
 import { SiNaver } from 'react-icons/si';
 
+import { useIsMobile } from '@/hooks/useIsMobile';
+import { MdIosShare } from 'react-icons/md';
+import { toast } from 'react-toastify';
+
 interface ShareButtonsProps {
     title: string;
     slug: string;
 }
 
 const ShareButtons = ({ title, slug }: ShareButtonsProps) => {
+    const { isMobile, ready } = useIsMobile();
+
     const shareUrl = `https://pyomin.com/posts/${slug}`;
 
     const handleCopy = async () => {
         try {
             await navigator.clipboard.writeText(shareUrl);
-            alert('링크가 복사되었습니다 ^__^');
+            toast.success('링크가 복사되었습니다 ^__^');
         } catch {
-            alert('복사 실패 ㅠ__ㅠ');
+            toast.error('복사 실패 ㅠ__ㅠ');
         }
     };
 
+    const handleNaviveShare = async () => {
+        if (navigator.share) {
+            try {
+                await navigator.share({
+                    title,
+                    url: shareUrl,
+                });
+            } catch {
+                toast.error('공유 실패 ㅠ__ㅠ');
+            }
+        } else {
+            handleCopy();
+        }
+    }
+
+    if (!ready) return null;
+
     return (
         <Wrapper>
-            <ShareButton aria-label='페이스북 공유' title='페이스북 공유' onClick={() =>
-                window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`, '_blank')
-            }>
-                <FaFacebookF />
-            </ShareButton>
 
-            <ShareButton aria-label='트위터 공유' title='트위터 공유' onClick={() =>
-                window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(shareUrl)}`, '_blank')
-            }>
-                <FaTwitter />
-            </ShareButton>
+            {isMobile ? (
+                <ShareButton aria-label='공유' title='공유' onClick={handleNaviveShare}>
+                    <MdIosShare />
+                </ShareButton>
+            ) : (
+                <>
+                    <ShareButton aria-label='페이스북 공유' title='페이스북 공유' onClick={() =>
+                        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`, '_blank')
+                    }>
+                        <FaFacebookF />
+                    </ShareButton>
 
-            <ShareButton aria-label='네이버 공유' title='네이버 공유' onClick={() =>
-                window.open(`https://share.naver.com/web/shareView.nhn?url=${encodeURIComponent(shareUrl)}&title=${encodeURIComponent(title)}`, '_blank')
-            }>
-                <SiNaver />
-            </ShareButton>
+                    <ShareButton aria-label='트위터 공유' title='트위터 공유' onClick={() =>
+                        window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(shareUrl)}`, '_blank')
+                    }>
+                        <FaTwitter />
+                    </ShareButton>
 
-            <ShareButton aria-label='링크 공유' title='링크 공유' onClick={handleCopy}>
-                <FaLink />
-            </ShareButton>
-        </Wrapper>
+                    <ShareButton aria-label='네이버 공유' title='네이버 공유' onClick={() =>
+                        window.open(`https://share.naver.com/web/shareView.nhn?url=${encodeURIComponent(shareUrl)}&title=${encodeURIComponent(title)}`, '_blank')
+                    }>
+                        <SiNaver />
+                    </ShareButton>
+
+                    <ShareButton aria-label='링크 공유' title='링크 공유' onClick={handleCopy}>
+                        <FaLink />
+                    </ShareButton>
+                </>
+            )}
+        </Wrapper >
     );
 };
 

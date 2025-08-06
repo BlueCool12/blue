@@ -2,6 +2,8 @@ import { useState } from "react";
 
 import styled from "styled-components";
 
+import { toast } from "react-toastify";
+
 import { getRandomAnonymousNickname } from "@/lib/utils/getRandomAnonymousNickname";
 
 interface CommentFormValues {
@@ -35,13 +37,13 @@ export const CommentForm: React.FC<Props> = ({
     };
 
     const handleSubmit = () => {
-        if (!/^\d{4}$/.test(form.password.trim())) {
-            alert("비밀번호는 숫자 4자리여야 합니다.");
+        if (!/^\d{4}$/.test(form.password.trim())) {            
+            toast.error('비밀번호는 숫자 4자리여야 합니다.');
             return;
         }
 
-        if (!form.content.trim()) {
-            alert("내용을 입력해주세요.");
+        if (!form.content.trim()) {            
+            toast.error('내용을 입력해주세요.');
             return;
         }
 
