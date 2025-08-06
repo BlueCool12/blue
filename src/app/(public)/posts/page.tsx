@@ -1,10 +1,15 @@
 import type { Metadata } from 'next';
 import PostList from "./PostList";
 
+type CustomSearchParams = {
+    searchParams?: { [key: string]: string | string[] };
+};
+
 export async function generateMetadata(
-    props: any
+    props: unknown
 ): Promise<Metadata> {
-    const category = typeof props?.searchParams?.category === 'string' ? props.searchParams.category : null;
+    const { searchParams } = props as CustomSearchParams;
+    const category = typeof searchParams?.category === 'string' ? searchParams.category : null;
 
     const title = category ? `${category} 카테고리 글 목록` : '전체 글 목록';
     const description = category
