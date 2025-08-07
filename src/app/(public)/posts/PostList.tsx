@@ -1,13 +1,13 @@
 'use client';
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 
 import styled from "styled-components";
 
 import { EmptyState } from "@/components/user/EmptyState";
 import { LoadingSpinner } from "@/components/common/LoadingSpinner";
-import { CategorySidebar } from "@/components/user/CategorySidebar";
+import { CategorySidebar } from "@/components/user/categories/CategorySidebar";
 import { MdOutlineArrowDropDown } from "react-icons/md";
 
 import { useInfinitePosts } from "@/hooks/queries/posts/useInfinitePosts";
@@ -17,11 +17,15 @@ import { useIsMobile } from "@/hooks/useIsMobile";
 import type { Post } from "@/types/post";
 import { useEffect, useRef } from "react";
 
-export default function PostList() {
+export default function PostList({ category }: { category?: string }) {
 
     const router = useRouter();
-    const searchParams = useSearchParams();
-    const selectedCategory = searchParams.get("category");
+    const params = useParams();
+    const selectedCategory = typeof category === 'string'
+        ? category
+        : typeof params?.category === 'string'
+            ? decodeURIComponent(params.category)
+            : null;
 
     const { isMobile, ready } = useIsMobile(1024);
     const size = isMobile ? 7 : 10;
@@ -46,20 +50,14 @@ export default function PostList() {
         return () => {
             if (el) observer.unobserve(el);
         };
-    }, [posts.hasNextPage, posts.isFetchingNextPage, posts.fetchNextPage, loadMoreRef]);
+    }, [ready, posts.hasNextPage, posts.isFetchingNextPage, posts.fetchNextPage, posts.isLoading, loadMoreRef]);
 
     useEffect(() => {
         window.scrollTo({ top: 0 });
     }, [selectedCategory]);
 
     const handleSelectedCategory = (category: string | null) => {
-        const newParams = new URLSearchParams(searchParams);
-        if (category) {
-            newParams.set('category', category);
-        } else {
-            newParams.delete('category');
-        }
-        router.replace(`/posts?${newParams.toString()}`);
+        router.replace(category ? `/posts/category/${encodeURIComponent(category)}` : '/posts');
     };
 
     if (posts.isError) throw new Error(posts.error.message ?? "글 목록 조회 실패");
@@ -68,8 +66,6 @@ export default function PostList() {
 
     return (
         <>
-            <VisuallyHiddenH1>BlueCool 블로그 게시글 목록</VisuallyHiddenH1>
-
             {isMobile && (
                 <MobileCategorySelectWrapper>
                     <MobileCategorySelect
@@ -102,7 +98,7 @@ export default function PostList() {
                 {(!ready || posts.isLoading) && <LoadingSpinner />}
 
                 {/* 데이터가 없는 경우 */}
-                {!posts.isLoading && allPosts.length === 0 && (
+                {ready && !posts.isLoading && allPosts.length === 0 && (
                     <EmptyState message="열심히 공부 중입니다..." />
                 )}
 
@@ -147,19 +143,6 @@ export default function PostList() {
         </>
     );
 };
-
-// 숨김용 H1
-const VisuallyHiddenH1 = styled.h1`
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-`;
 
 // 모바일 카테고리 시작
 const MobileCategorySelectWrapper = styled.div`

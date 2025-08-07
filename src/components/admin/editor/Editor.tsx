@@ -31,9 +31,6 @@ import {
 } from 'ckeditor5';
 import { EditorUploadAdapter } from '@/lib/utils/EditorUploadAdapter';
 
-import { useAppSelector } from '@/store/hooks';
-import { selectToken } from '@/lib/auth/authSlice';
-
 interface EditorProps {
 	onChange: (data: string) => void;
 	initialData?: string;
@@ -48,9 +45,7 @@ const Editor = ({ onChange, initialData }: EditorProps) => {
 	const editorContainerRef = useRef<HTMLDivElement>(null);
 	const editorRef = useRef<HTMLDivElement>(null);
 	const editorMenuBarRef = useRef<HTMLDivElement>(null);
-	const [isLayoutReady, setIsLayoutReady] = useState(false);
-
-	const token = useAppSelector(selectToken);
+	const [isLayoutReady, setIsLayoutReady] = useState(false);	
 
 	useEffect(() => {
 		setIsLayoutReady(true);
@@ -93,7 +88,7 @@ const Editor = ({ onChange, initialData }: EditorProps) => {
 				Superscript, Table, TableCaption, TableCellProperties, TableColumnResize,
 				TableLayout, TableProperties, TableToolbar, TextPartLanguage, TextTransformation,
 				TodoList, Underline
-			],			
+			],
 			fontFamily: {
 				supportAllValues: true,
 			},
@@ -253,7 +248,7 @@ const Editor = ({ onChange, initialData }: EditorProps) => {
 			},
 			translations: [translations]
 		};
-	}, [isLayoutReady, token]);
+	}, [isLayoutReady]);
 
 	return (
 		<div className='main-container'>

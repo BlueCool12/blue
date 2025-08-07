@@ -2,7 +2,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { postService } from "@/services/user/postService";
 import { PagedPost } from "@/types/post";
 
-export const useInfinitePosts = (category: string | null = null, size: number = 10, enabled = true) => {
+export const useInfinitePosts = (category: string | null = null, size: number = 10, ready = true) => {
     return useInfiniteQuery<PagedPost>({
         queryKey: ['posts', category, size],
         queryFn: ({ pageParam }) =>
@@ -12,6 +12,6 @@ export const useInfinitePosts = (category: string | null = null, size: number = 
             return lastPage.isLast ? undefined : allPages.length + 1;
         },
         staleTime: 1000 * 60 * 5,
-        enabled,
+        enabled: ready && size > 0,
     });
 };

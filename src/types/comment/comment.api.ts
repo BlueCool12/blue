@@ -1,6 +1,6 @@
 export interface CreateCommentPayload {
     postId: number;
-    parentId: number | null;
+    parentId?: number | null;
     nickname: string | null;
     password: string;
     content: string;

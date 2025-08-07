@@ -14,13 +14,15 @@ interface CommentFormValues {
 
 interface Props {
     initialValues?: Partial<CommentFormValues>;
+    placeholder?: string;
     onCancel?: () => void;
-    onSubmit: ({ nickname, password, content }: { nickname: string; password: string; content: string; }) => void;
+    onSubmit: (data: { nickname: string; password: string; content: string; parentId?: number }) => void;
     loading?: boolean;
 }
 
 export const CommentForm: React.FC<Props> = ({
     initialValues = {},
+    placeholder = '',
     onCancel,
     onSubmit,
     loading = false,
@@ -37,12 +39,12 @@ export const CommentForm: React.FC<Props> = ({
     };
 
     const handleSubmit = () => {
-        if (!/^\d{4}$/.test(form.password.trim())) {            
+        if (!/^\d{4}$/.test(form.password.trim())) {
             toast.error('비밀번호는 숫자 4자리여야 합니다.');
             return;
         }
 
-        if (!form.content.trim()) {            
+        if (!form.content.trim()) {
             toast.error('내용을 입력해주세요.');
             return;
         }
@@ -77,11 +79,11 @@ export const CommentForm: React.FC<Props> = ({
             <TextArea
                 value={form.content}
                 onChange={handleChange("content")}
-                placeholder="내용을 입력하세요"
+                placeholder={placeholder || "내용을 입력하세요"}
             />
 
             <InputWrapper>
-                <SubmitButton onClick={handleSubmit} disabled={loading}>
+                <SubmitButton onClick={handleSubmit} type="button" disabled={loading}>
                     {loading ? "전송 중..." : "등록"}
                 </SubmitButton>
                 {onCancel && <CancelButton onClick={onCancel}>취소</CancelButton>}
