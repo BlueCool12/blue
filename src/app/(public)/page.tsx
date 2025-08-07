@@ -145,7 +145,7 @@ export default function Home() {
                         {shuffledChildren.map((category, i) => (
                             <Link
                                 key={category.name}
-                                href={`/posts?category=${encodeURIComponent(category.name)}`}
+                                href={`/posts/category/${encodeURIComponent(category.name)}`}
                                 className={`${styles['category-preview__item']} ${i === 1 ? styles['category-preview__item--center'] : ''
                                     }`}
                             >
