@@ -266,13 +266,14 @@ const ReplyButton = styled.button`
     display: flex;
     font-size: 0.8rem;
     align-items: center;
+    color: var(--text-color);
 
     svg {
         color: var(--text-color);        
     }
 
     &:hover {
-        color: var(--theme-color-9);
+        color: var(--link-hover-color);
 
         svg {
             color: var(--link-hover-color);

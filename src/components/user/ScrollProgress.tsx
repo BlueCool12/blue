@@ -44,7 +44,7 @@ const ProgressBar = styled.div<{ width: number }>`
     height: 4px;
     background-color: var(--theme-color-9);
     z-index: 9999;
-    transition: width 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: width 0.2s linear;
 
     @media (max-width:768px) {
         top: 63px;
