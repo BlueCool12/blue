@@ -1,7 +1,8 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { LoadingSpinner } from '@/components/common/LoadingSpinner';
+
+import { CommentSkeleton } from './CommentSkeleton';
 
 interface Props {
     postId: number;
@@ -11,7 +12,7 @@ const CommentSection = dynamic<Props>(
     () => import('./CommentSection').then(mod => mod.CommentSection),
     {
         ssr: false,
-        loading: () => <LoadingSpinner />,
+        loading: () => <CommentSkeleton />,
     }
 );
 

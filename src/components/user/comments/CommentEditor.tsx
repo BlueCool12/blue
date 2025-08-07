@@ -7,9 +7,8 @@ import styled from 'styled-components';
 import { MdOutlineModeComment, MdOutlineSend } from "react-icons/md";
 import { toast } from "react-toastify";
 
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { RootState } from "@/store/store";
-import { createComment } from "@/store/user/commentSlice";
+import { commentService } from "@/services/user/commentService";
+import { useComments } from "@/hooks/queries/comments/useComments";
 
 import { getRandomAnonymousNickname } from "@/lib/utils/getRandomAnonymousNickname";
 
@@ -19,9 +18,9 @@ interface Props {
 
 export const CommentEditor: React.FC<Props> = ({ postId }) => {
 
-    const dispatch = useAppDispatch();
-    const { loading, error } = useAppSelector((state: RootState) => state.userComment);
+    const comments = useComments(postId);
 
+    const [loading, setLoading] = useState(false);
     const [open, setOpen] = useState(false);
 
     const [form, setForm] = useState({
@@ -67,6 +66,8 @@ export const CommentEditor: React.FC<Props> = ({ postId }) => {
     };
 
     const handleSubmit = async () => {
+        if (loading) return;
+
         const trimmedNickname = form.nickname.trim() || getRandomAnonymousNickname();
         const trimmedPassword = form.password.trim();
         const trimmedContent = form.content.trim();
@@ -81,20 +82,27 @@ export const CommentEditor: React.FC<Props> = ({ postId }) => {
             return;
         }
 
-        await dispatch(createComment({
-            postId,
-            parentId: null,
-            nickname: trimmedNickname,
-            password: form.password,
-            content: trimmedContent,
-        }));
+        try {
+            setLoading(true);
 
-        toast.success('댓글이 등록되었습니다!');
-        setForm({ nickname: '', content: '', password: '' });
-        setOpen(false);
+            await commentService.createComment({
+                postId,
+                parentId: null,
+                nickname: trimmedNickname,
+                password: form.password,
+                content: trimmedContent,
+            });
+
+            toast.success('댓글이 등록되었습니다!');
+            setForm({ nickname: '', content: '', password: '' });
+            setOpen(false);
+            comments.refetch();
+        } catch {
+            toast.error('댓글 등록에 실패했습니다.');
+        } finally {
+            setLoading(false);
+        }
     };
-
-    if (error) throw new Error(error);
 
     return (
         <>
@@ -133,7 +141,7 @@ export const CommentEditor: React.FC<Props> = ({ postId }) => {
                         onChange={handleChange}
                     />
 
-                    <SubmitButton onClick={handleSubmit} disabled={loading}>
+                    <SubmitButton onClick={handleSubmit} disabled={loading} aria-disabled={loading}>
                         {loading ? "전송 중..." : (<MdOutlineSend />)}
                     </SubmitButton>
 

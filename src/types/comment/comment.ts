@@ -6,4 +6,5 @@ export interface Comment {
     content: string;
     isDeleted: boolean;
     createdAt: string;
+    children: Comment[];
 }

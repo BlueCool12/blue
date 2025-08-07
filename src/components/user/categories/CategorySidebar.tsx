@@ -3,7 +3,7 @@ import { useState } from 'react';
 import styles from './CategorySidebar.module.css';
 
 import { MdOutlineNumbers } from 'react-icons/md';
-import { LoadingSpinner } from '../common/LoadingSpinner';
+import { CategorySidebarSkeleton } from './CategorySidebarSkeleton';
 
 import { Category } from '@/types/category';
 
@@ -36,7 +36,7 @@ export const CategorySidebar = ({ categories, loading, error, selectedCategory, 
     return (
         <aside className={styles.sidebar}>
             {loading ? (
-                <LoadingSpinner />
+                <CategorySidebarSkeleton />
             ) : (
                 <nav>
                     <h3

@@ -1,20 +1,11 @@
 import type { Metadata } from 'next';
 import PostList from "./PostList";
 
-type CustomSearchParams = {
-    searchParams?: { [key: string]: string | string[] };
-};
+export const dynamic = 'force-dynamic';
 
-export async function generateMetadata(
-    props: unknown
-): Promise<Metadata> {
-    const { searchParams } = props as CustomSearchParams;
-    const category = typeof searchParams?.category === 'string' ? searchParams.category : null;
-
-    const title = category ? `${category} 카테고리 글 목록` : '전체 글 목록';
-    const description = category
-        ? `BlueCool 블로그의 "${category}" 카테고리 글 목록입니다.`
-        : 'BlueCool 블로그의 전체글 목록입니다. 다양한 기술과 개발 이야기를 확인해보세요.';
+export async function generateMetadata(): Promise<Metadata> {
+    const title = '전체 글 목록';
+    const description = 'BlueCool 블로그의 전체글 목록입니다. 다양한 기술과 개발 이야기를 확인해보세요.';
 
     return {
         title,
@@ -26,9 +17,7 @@ export async function generateMetadata(
             title,
             description,
             type: 'website',
-            url: category
-                ? `https://pyomin.com/posts?category=${encodeURIComponent(category)}`
-                : 'https://pyomin.com/posts',
+            url: 'https://pyomin.com/posts',
         },
         twitter: {
             card: 'summary_large_image',

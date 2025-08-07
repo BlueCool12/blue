@@ -4,11 +4,12 @@ import Link from 'next/link';
 
 import styles from './page.module.css';
 
-import CommentSectionWrapper from '@/components/user/CommentSectionWrapper';
-
-import { postService } from '@/services/user/postService';
+import CommentSectionWrapper from '@/components/user/comments/CommentSectionWrapper';
+import { ScrollProgress } from '@/components/user/ScrollProgress';
 import { LogoBorder } from '@/components/user/LogoBorder';
 import ShareButtons from '@/components/user/ShareButtons';
+
+import { postService } from '@/services/user/postService';
 
 interface PageProps {
     params: Promise<{ slug: string }>;
@@ -22,8 +23,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     const post = await postService.getPostBySlug(slug);
 
     return {
-        title: post.title,        
-        description: post.description,        
+        title: post.title,
+        description: post.description,
         alternates: {
             canonical: `/posts/${slug}`,
         },
@@ -49,6 +50,8 @@ export default async function PostDetail({ params }: PageProps) {
 
     return (
         <>
+            <ScrollProgress />
+
             <article className={styles.article}>
                 <header className={styles.header}>
                     <div className={styles.meta}>
