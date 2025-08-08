@@ -111,6 +111,13 @@
     }
 }
 
+.hero__image {
+    position: relative;
+    width: 280px;
+    height: 280px;
+    flex-shrink: 0;
+}
+
 .hero__about {
     display: flex;
     align-items: center;
@@ -144,7 +151,7 @@
 }
 
 .hero__about-button:hover .starIcon {
-    color: var(--link-hover-color);    
+    color: var(--link-hover-color);
 }
 
 .hero__about-label {
@@ -179,13 +186,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;    
 }
 
 .recent-posts__heading {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
 }
 
 .recent-posts__title {

@@ -103,7 +103,7 @@ const ShareButton = styled.button`
     color: var(--btn-color);
     border: none;
     border-radius: 100%;    
-    transition: background 0.2s;
+    transition: background-color 0.2s ease transform 0.2s ease;
 
     svg {
         font-size: 1rem;        
@@ -111,5 +111,6 @@ const ShareButton = styled.button`
 
     &:hover {
         background-color: var(--btn-hover-color);
+        transform: scale(1.1);
     }
 `;

@@ -44,15 +44,14 @@ export const postService = {
             const formattedCreatedAt = formatDate(response.createdAt);
 
             const postDetail: PostDetail = {
-                ...response,
-                category: response.category.name,
+                ...response,                
                 content: highlightedContent,
                 createdAt: formattedCreatedAt,
             };
 
             return postDetail;
         } catch {
-            notFound();            
+            notFound();
         }
     },
 

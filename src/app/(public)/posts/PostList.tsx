@@ -109,7 +109,7 @@ export default function PostList({ category }: { category?: string }) {
                             {allPosts.map((post) => (
                                 <ListItem key={post.slug}>
                                     <Post>
-                                        <Link href={`/posts/${post.slug}`}>
+                                        <Link href={`/posts/${post.slug}`} prefetch={false}>
                                             <TitleWrapper>
                                                 <Title>{post.title}</Title>
                                                 <Category>{post.category}</Category>

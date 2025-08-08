@@ -17,7 +17,7 @@ export const metadata: Metadata = {
             rel: 'icon',
             url: '/favicon.ico',
         }
-    ],    
+    ],
 }
 
 export const viewport = {
@@ -31,7 +31,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
         <html lang="ko" suppressHydrationWarning className={`${pretendard.variable}`}>
             <body>
-                {/* 구글 애널리틱스 스크립트 */}
+                {/* 구글 애드센스 */}
+                <script
+                    async
+                    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7027574538017618"
+                    crossOrigin="anonymous"
+                ></script>
+                {/* 구글 애널리틱스 */}
                 <Script
                     strategy="afterInteractive"
                     src="https://www.googletagmanager.com/gtag/js?id=G-GHCGQG92ZD"

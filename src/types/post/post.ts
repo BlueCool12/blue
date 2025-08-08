@@ -26,7 +26,10 @@ export interface PostDetail {
     slug: string;
     title: string;
     description: string;
-    category: string;    
+    category: {
+        name: string;
+        slug: string;
+    };
     content: string;
     createdAt: string;
     previousPost?: PostSummary | null;

@@ -12,9 +12,19 @@ export const ScrollProgress = () => {
         const handleScroll = () => {
             if (!ticking) {
                 window.requestAnimationFrame(() => {
+                    const contentElement = document.getElementById('main-content');
+                    if (!contentElement) return;
+
+                    const contentTop = contentElement.offsetTop;
+                    const contentHeight = contentElement.offsetHeight;
+
                     const scrollTop = window.scrollY;
-                    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-                    const scrollPercent = docHeight > 0 ? Math.min(Math.max((scrollTop / docHeight) * 100, 0), 100) : 0;
+                    const scrollMax = contentTop + contentHeight - window.innerHeight;
+
+                    const scrollPercent = scrollMax > 0
+                        ? Math.min(Math.max((scrollTop / scrollMax) * 100, 0), 100)
+                        : 0;
+
                     setScrollWidth(scrollPercent);
                     ticking = false;
                 });
@@ -33,14 +43,18 @@ export const ScrollProgress = () => {
         };
     }, []);
 
+
     return <ProgressBar width={scrollWidth} />;
 };
 
-const ProgressBar = styled.div<{ width: number }>`
+const ProgressBar = styled.div.attrs<{ width: number }>(props => ({
+    style: {
+        width: `${props.width}%`
+    },
+}))`
     position: fixed;
     top: 79px;
-    left: 0;
-    width: ${({ width }) => width}%;
+    left: 0;    
     height: 4px;
     background-color: var(--theme-color-9);
     z-index: 9999;
