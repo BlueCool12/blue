@@ -9,7 +9,7 @@ import { ScrollProgress } from '@/components/user/ScrollProgress';
 import ShareButtons from '@/components/user/ShareButtons';
 import { LogoBorder } from '@/components/user/LogoBorder';
 import { PrevNextNavigation } from '@/components/user/PrevNextNavigation';
-import AdsenseAd from '@/components/user/AdsenseAd';
+// import AdsenseAd from '@/components/user/AdsenseAd';
 
 import { postService } from '@/services/user/postService';
 
