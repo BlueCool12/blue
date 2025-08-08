@@ -34,9 +34,15 @@ export interface PageResponse<T> {
     empty: boolean;
 }
 
+export interface PostSummaryResponse {
+    slug: string;
+    title: string;
+}
+
 export interface PostDetailResponse {
     id: number;
     title: string;
+    description: string;
     content: string;
     category: {
         id: number;
@@ -47,6 +53,8 @@ export interface PostDetailResponse {
     slug: string;
     createdAt: string;
     updatedAt: string;
+    previousPost?: PostSummaryResponse | null;
+    nextPost?: PostSummaryResponse | null;
 }
 
 export interface PostLatest {

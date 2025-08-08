@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import styles from './CategorySidebar.module.css';
 
@@ -11,27 +11,35 @@ interface Props {
     categories: Category[];
     loading: boolean;
     error: string | null;
-    selectedCategory: string | null;
-    onSelectCategory: (category: string | null) => void;
+    categorySlug: string | null;
+    onCategorySlug: (category: string | null) => void;
 }
 
-export const CategorySidebar = ({ categories, loading, error, selectedCategory, onSelectCategory }: Props) => {
+export const CategorySidebar = ({ categories, loading, error, categorySlug, onCategorySlug }: Props) => {
 
     const [openIds, setOpenIds] = useState<Set<string>>(new Set());
 
-    const toggle = (name: string) => {
+    const toggle = (slug: string) => {
         setOpenIds((prev) => {
             const newSet = new Set(prev);
-            if (newSet.has(name)) {
-                newSet.delete(name);
+            if (newSet.has(slug)) {
+                newSet.delete(slug);
             } else {
-                newSet.add(name);
+                newSet.add(slug);
             }
             return newSet;
         });
     };
 
     if (error) throw new Error(error);
+
+    useEffect(() => {
+        if (!categorySlug) return;
+        const parent = categories.find(cat => (cat.children ?? []).some(ch => ch.slug === categorySlug));
+        if (parent) {
+            setOpenIds(prev => (prev.has(parent.slug) ? prev : new Set(prev).add(parent.slug)));
+        }
+    }, [categorySlug, categories]);
 
     return (
         <aside className={styles.sidebar}>
@@ -40,8 +48,8 @@ export const CategorySidebar = ({ categories, loading, error, selectedCategory, 
             ) : (
                 <nav>
                     <h3
-                        className={`${styles.title} ${selectedCategory === null ? styles.active : ''}`}
-                        onClick={() => onSelectCategory(null)}
+                        className={`${styles.title} ${categorySlug === null ? styles.active : ''}`}
+                        onClick={() => onCategorySlug(null)}
                     >
                         ALL
                     </h3>
@@ -50,26 +58,26 @@ export const CategorySidebar = ({ categories, loading, error, selectedCategory, 
                         {categories.map((category) => {
                             const children = category.children ?? [];
 
-                            const isActiveParent = children.some((child) => child.name === selectedCategory);
+                            const isActiveParent = children.some((child) => child.slug === categorySlug);
 
                             return (
-                                <li key={category.name}>
+                                <li key={category.slug}>
                                     <button
-                                        className={`${styles.link} ${category.name === selectedCategory || isActiveParent ? styles.active : ''}`}
-                                        onClick={() => toggle(category.name)}
+                                        className={`${styles.link} ${category.slug === categorySlug || isActiveParent ? styles.active : ''}`}
+                                        onClick={() => toggle(category.slug)}
                                     >
                                         {category.name}
                                     </button>
 
-                                    {openIds.has(category.name) && children.length > 0 && (
+                                    {openIds.has(category.slug) && children.length > 0 && (
                                         <ul className={styles.subList}>
                                             {children.map((child) => (
-                                                <li key={child.name}>
+                                                <li key={child.slug}>
                                                     <button
-                                                        className={`${styles.subLink} ${selectedCategory === child.name ? styles.active : ''}`}
+                                                        className={`${styles.subLink} ${categorySlug === child.slug ? styles.active : ''}`}
                                                         onClick={() => {
-                                                            setOpenIds((prev) => new Set(prev).add(category.name));
-                                                            onSelectCategory(child.name);
+                                                            setOpenIds((prev) => new Set(prev).add(category.slug));
+                                                            onCategorySlug(child.slug);
                                                         }}
                                                     >
                                                         <MdOutlineNumbers />{child.name}

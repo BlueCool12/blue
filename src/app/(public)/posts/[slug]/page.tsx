@@ -6,8 +6,9 @@ import styles from './page.module.css';
 
 import CommentSectionWrapper from '@/components/user/comments/CommentSectionWrapper';
 import { ScrollProgress } from '@/components/user/ScrollProgress';
-import { LogoBorder } from '@/components/user/LogoBorder';
 import ShareButtons from '@/components/user/ShareButtons';
+import { LogoBorder } from '@/components/user/LogoBorder';
+import { PrevNextNavigation } from '@/components/user/PrevNextNavigation';
 
 import { postService } from '@/services/user/postService';
 
@@ -79,6 +80,8 @@ export default async function PostDetail({ params }: PageProps) {
             <ShareButtons title={post.title} slug={slug} />
 
             <LogoBorder />
+
+            <PrevNextNavigation prev={post.previousPost} next={post.nextPost} />
 
             <CommentSectionWrapper postId={post.id} />
 

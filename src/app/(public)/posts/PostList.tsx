@@ -21,7 +21,7 @@ export default function PostList({ category }: { category?: string }) {
 
     const router = useRouter();
     const params = useParams();
-    const selectedCategory = typeof category === 'string'
+    const categorySlug = typeof category === 'string'
         ? category
         : typeof params?.category === 'string'
             ? decodeURIComponent(params.category)
@@ -30,7 +30,7 @@ export default function PostList({ category }: { category?: string }) {
     const { isMobile, ready } = useIsMobile(1024);
     const size = isMobile ? 7 : 10;
 
-    const posts = useInfinitePosts(selectedCategory, size, ready);
+    const posts = useInfinitePosts(categorySlug, size, ready);
     const categories = useCategories();
 
     const loadMoreRef = useRef<HTMLDivElement | null>(null);
@@ -54,9 +54,9 @@ export default function PostList({ category }: { category?: string }) {
 
     useEffect(() => {
         window.scrollTo({ top: 0 });
-    }, [selectedCategory]);
+    }, [categorySlug]);
 
-    const handleSelectedCategory = (category: string | null) => {
+    const handleCategorySlug = (category: string | null) => {
         router.replace(category ? `/posts/category/${encodeURIComponent(category)}` : '/posts');
     };
 
@@ -69,18 +69,18 @@ export default function PostList({ category }: { category?: string }) {
             {isMobile && (
                 <MobileCategorySelectWrapper>
                     <MobileCategorySelect
-                        value={selectedCategory ?? ''}
+                        value={categorySlug ?? ''}
                         onChange={(e) =>
-                            handleSelectedCategory(e.target.value === '' ? null : e.target.value)
+                            handleCategorySlug(e.target.value === '' ? null : e.target.value)
                         }
                         aria-label="글 카테고리 선택"
                     >
                         <option value="">ALL</option>
                         {categories.data?.map((parent) =>
                             parent.children && parent.children.length > 0 && (
-                                <optgroup key={parent.name} label={parent.name}>
+                                <optgroup key={parent.slug} label={parent.name}>
                                     {parent.children.map((child) => (
-                                        <option key={child.name} value={child.name}>
+                                        <option key={child.slug} value={child.slug}>
                                             {child.name}
                                         </option>
                                     ))}
@@ -136,8 +136,8 @@ export default function PostList({ category }: { category?: string }) {
                     categories={categories.data ?? []}
                     loading={categories.isLoading}
                     error={categories.isError ? (categories.error?.message ?? '카테고리 로딩 실패') : null}
-                    selectedCategory={selectedCategory}
-                    onSelectCategory={handleSelectedCategory}
+                    categorySlug={categorySlug}
+                    onCategorySlug={handleCategorySlug}
                 />
             )}
         </>

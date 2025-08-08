@@ -16,9 +16,21 @@ export interface PagedPost {
     isLast: boolean;
 }
 
-export interface PostDetail extends Post {
+export interface PostSummary {
+    slug: string;
+    title: string;
+}
+
+export interface PostDetail {
     id: number;
+    slug: string;
+    title: string;
+    description: string;
+    category: string;    
     content: string;
+    createdAt: string;
+    previousPost?: PostSummary | null;
+    nextPost?: PostSummary | null;
 }
 
 export interface PostFormValues {
