@@ -5,7 +5,7 @@ import { formatDate } from "@/lib/utils/format";
 import { postApi } from "@/lib/api/user/postApi";
 import { fetchPostBySlug } from "@/lib/server/post";
 
-import type { PagedPost, PageResponse, Post, PostLatest, PostListResponse } from "@/types/post";
+import type { PagedPost, PageResponse, Post, PostDetail, PostDetailResponse, PostLatest, PostListResponse } from "@/types/post";
 
 export const postService = {
     getAllPosts: async ({
@@ -25,7 +25,7 @@ export const postService = {
             category: post.category,
             slug: post.slug,
             contentSummary: post.contentSummary,
-            createdAt: formatDate(post.createdAt),            
+            createdAt: formatDate(post.createdAt),
         }));
 
         return {
@@ -37,17 +37,22 @@ export const postService = {
         };
     },
 
-    getPostBySlug: async (slug: string) => {
+    getPostBySlug: async (slug: string): Promise<PostDetail> => {
         try {
-            const post = await fetchPostBySlug(slug);
-            const highlightedContent = await highlightCodeBlocksWithShiki(post.content);
-            return {
-                ...post,
+            const response: PostDetailResponse = await fetchPostBySlug(slug);
+            const highlightedContent = await highlightCodeBlocksWithShiki(response.content);
+            const formattedCreatedAt = formatDate(response.createdAt);
+
+            const postDetail: PostDetail = {
+                ...response,
+                category: response.category.name,
                 content: highlightedContent,
-                createdAt: formatDate(post.createdAt),
+                createdAt: formattedCreatedAt,
             };
+
+            return postDetail;
         } catch {
-            notFound();
+            notFound();            
         }
     },
 

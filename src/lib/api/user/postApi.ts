@@ -1,4 +1,4 @@
-import { PageResponse, PostLatest, PostListResponse } from "@/types/post";
+import { PageResponse, PostDetailResponse, PostLatest, PostListResponse } from "@/types/post";
 import api from "../axiosInstance";
 
 export const postApi = {
@@ -16,11 +16,11 @@ export const postApi = {
         if (page) params.append('page', (page - 1).toString());
         if (size) params.append('size', size.toString());
 
-        const response = await api.get(`/user/posts?${params.toString()}`);        
+        const response = await api.get(`/user/posts?${params.toString()}`);
         return response.data;
     },
 
-    getPostBySlug: async (slug: string) => {
+    getPostBySlug: async (slug: string): Promise<PostDetailResponse> => {
         const response = await api.get(`/user/posts/${slug}`);
         return response.data;
     },
