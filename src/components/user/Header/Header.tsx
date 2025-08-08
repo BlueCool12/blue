@@ -28,7 +28,7 @@ export const Header: React.FC = () => {
                 <div className={styles['header__inner']}>
 
 
-                    <Link href='/'>
+                    <Link href='/' prefetch={false}>
                         <Image
                             src={
                                 resolvedTheme === 'light'
@@ -47,13 +47,13 @@ export const Header: React.FC = () => {
                     <nav className={styles['desktop-nav']}>
                         <ul className={styles['desktop-nav__list']}>
                             <li className={styles['desktop-nav__item']}>
-                                <Link href='/about'>ABOUT</Link>
+                                <Link href='/about' prefetch={false}>ABOUT</Link>
                             </li>
                             <li className={styles['desktop-nav__item']}>
-                                <Link href='/posts'>POSTS</Link>
+                                <Link href='/posts' prefetch={false}>POSTS</Link>
                             </li>
                             <li className={styles['desktop-nav__item']}>
-                                <Link href='/guestbooks'>GUESTBOOK</Link>
+                                <Link href='/guestbooks' prefetch={false}>GUESTBOOK</Link>
                             </li>
                         </ul>
                     </nav>

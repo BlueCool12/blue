@@ -132,16 +132,20 @@ export const CommentSection: React.FC<Props> = ({ postId }) => {
                                 <CommentFooter $isEditing={editingCommentId === comment.id}>
                                     {!comment.isDeleted && (
                                         <>
-                                            <ReplyButton onClick={() => setReplyToCommentId(comment.id)}>
-                                                <MdSubdirectoryArrowRight size={16} />답글 달기
+                                            <ReplyButton onClick={() => {
+                                                setReplyToCommentId((prev) =>
+                                                    prev === comment.id ? null : comment.id
+                                                )
+                                            }}>
+                                                <MdSubdirectoryArrowRight size={14} />답글 달기
                                             </ReplyButton>
 
                                             <ButtonGroup>
                                                 <CommentEditButton onClick={() => handleEditClick(comment.id)} aria-label="댓글 수정">
-                                                    <MdOutlineEdit size={16} />
+                                                    <MdOutlineEdit size={14} />
                                                 </CommentEditButton>
                                                 <CommentDeleteButton onClick={() => handleDeleteComment(comment.id)} aria-label="댓글 삭제">
-                                                    <MdOutlineDelete size={16} />
+                                                    <MdOutlineDelete size={14} />
                                                 </CommentDeleteButton>
                                             </ButtonGroup>
                                         </>
@@ -185,10 +189,10 @@ export const CommentSection: React.FC<Props> = ({ postId }) => {
                                         {!child.isDeleted && (
                                             <ButtonGroup>
                                                 <CommentEditButton onClick={() => handleEditClick(child.id)} aria-label="댓글 수정">
-                                                    <MdOutlineEdit size={16} />
+                                                    <MdOutlineEdit size={14} />
                                                 </CommentEditButton>
                                                 <CommentDeleteButton onClick={() => handleDeleteComment(child.id)} aria-label="댓글 삭제">
-                                                    <MdOutlineDelete size={16} />
+                                                    <MdOutlineDelete size={14} />
                                                 </CommentDeleteButton>
                                             </ButtonGroup>
                                         )}
@@ -264,7 +268,7 @@ const ButtonGroup = styled.div`
 
 const ReplyButton = styled.button`
     display: flex;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     align-items: center;
     color: var(--text-color);
 

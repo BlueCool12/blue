@@ -118,13 +118,15 @@ export default function Home() {
 
                 </div>
 
-                <Image
-                    src='/images/main.webp'
-                    alt='메인 페이지 이미지'
-                    width={280}
-                    height={280}
-                    priority
-                />
+                <div className={styles.hero__image}>
+                    <Image
+                        src='/images/main.webp'
+                        alt='메인 페이지 이미지'
+                        priority
+                        fill
+                        sizes="(max-width: 768px) 100vw, 280px"
+                    />
+                </div>
             </section>
             {/* Hero Section */}
 
@@ -169,7 +171,7 @@ export default function Home() {
 
                 <div className={styles['recent-posts__header']}>
                     <div className={styles['recent-posts__heading']}>
-                        <Link href='/posts' className={styles['recent-posts__title']}>최신글 🌟</Link>
+                        <Link href='/posts' className={styles['recent-posts__title']}>최신 글 🌟</Link>
                         <p className={styles['recent-posts__subtitle']}>새로 올라온 글들을 확인해보세요</p>
                     </div>
 
@@ -188,7 +190,7 @@ export default function Home() {
                 )}
 
                 {latestPosts.isError && (
-                    <p className={styles['recent-posts__error']}>최신글을 불러오는 데 실패했어요 😢</p>
+                    <p className={styles['recent-posts__error']}>최신 글을 불러오는 데 실패했어요 😢</p>
                 )}
 
                 {latestPosts.data?.map((post: PostLatest) => (

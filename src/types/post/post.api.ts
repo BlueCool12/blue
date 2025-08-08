@@ -47,6 +47,7 @@ export interface PostDetailResponse {
     category: {
         id: number;
         name: string;
+        slug: string;
     };
     isPublic: boolean;
     isDeleted: boolean;
