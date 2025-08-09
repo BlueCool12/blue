@@ -17,7 +17,9 @@ interface PageProps {
     params: Promise<{ slug: string }>;
 }
 
-export const revalidate = 86400;
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+// export const revalidate = 86400;
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
     const { slug: rawSlug } = await params;
