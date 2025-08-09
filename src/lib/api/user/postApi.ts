@@ -20,10 +20,8 @@ export const postApi = {
         return response.data;
     },
 
-    getPostBySlug: async (slug: string): Promise<PostDetailResponse> => {
-        console.log('[postApi.getPostBySlug] slug:', slug);
-        const response = await api.get(`/user/posts/${slug}`);
-        console.log('[postApi.getPostBySlug] response status:', response.status);
+    getPostBySlug: async (slug: string): Promise<PostDetailResponse> => {        
+        const response = await api.get(`/user/posts/${slug}`);        
         return response.data;
     },
 
