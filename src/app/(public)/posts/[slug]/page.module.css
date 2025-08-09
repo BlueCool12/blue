@@ -20,6 +20,9 @@
 }
 
 .category {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
     background: var(--theme-color-9);
     color: var(--theme-color-1);
     padding: 0.3rem 0.6rem;
