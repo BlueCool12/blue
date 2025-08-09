@@ -22,16 +22,7 @@ export const revalidate = 86400;
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
     const { slug: rawSlug } = await params;
     const slug = decodeURIComponent(rawSlug);
-
-    console.log('[generateMetadata] rawSlug:', rawSlug, 'decoded:', slug);
-
     const post = await postService.getPostBySlug(slug);
-
-    console.log('[generateMetadata] post:', post);
-
-    if (!post) {
-        console.warn('[generateMetadata] post not found for slug:', slug);
-    }
 
     return {
         title: post.title,
@@ -56,17 +47,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function PostDetail({ params }: PageProps) {
     const { slug: rawSlug } = await params;
     const slug = decodeURIComponent(rawSlug);
-
-    console.log('[PostDetail] rawSlug:', rawSlug, 'decoded:', slug);
-
     const post = await postService.getPostBySlug(slug);
 
-    console.log('[PostDetail] fetched post:', post);
-
-    if (!post) {
-        console.warn('[PostDetail] not found slug:', slug);
-        notFound();
-    }
+    if (!post) notFound();
 
     return (
         <>
