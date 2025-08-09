@@ -24,7 +24,7 @@ jobs:
             cd /home/${{ secrets.RASPBERRY_USER }}/docker-compose/bluecool/blue
             git pull origin main
             cd /home/${{ secrets.RASPBERRY_USER }}/docker-compose
-            docker compose up -d --force-recreate --build pyomin
+            docker compose up -d --force-recreate --build blue
           EOF
         
     
