@@ -152,7 +152,7 @@ export default function Home() {
                                     }`}
                             >
                                 <Image
-                                    src={`/images/categories/svgrepo_${encodeURIComponent(category.name)}.svg`}
+                                    src={`/images/categories/svgrepo_${encodeURIComponent(category.slug)}.svg`}
                                     className={styles['category-preview__image']}
                                     alt={category.name}
                                     width={100}

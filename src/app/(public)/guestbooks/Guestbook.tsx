@@ -54,8 +54,7 @@ export default function GuestbookPage() {
     }, [theme, mounted]);
 
     return (
-        <div className={styles.container}>
-            <h1>GUESTBOOK</h1>
+        <div className={styles.container}>            
             <Image
                 alt='방명록 이미지'
                 src='/images/guestbooks.webp'

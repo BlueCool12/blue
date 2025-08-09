@@ -217,7 +217,7 @@ const Section = styled.section`
 const CommentList = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.2rem;
 `;
 
 const CommentItem = styled.div`
@@ -225,18 +225,58 @@ const CommentItem = styled.div`
     border: 1px solid var(--border-color);
     border-radius: 0.75rem;
     background-color: var(--card-bg);
+
+    display: inline-block;
+    width: fit-content;
+    max-width: 100%;
+    word-break: break-word;
+
+    @media (max-width: 768px) {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+    }
 `;
 
-const ReplyCommentItem = styled(CommentItem)`
-    width: 95%;
-    margin-left: auto;
+const ReplyCommentItem = styled(CommentItem)`    
+    margin-left: 2rem;    
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: -10px; /* 테두리 포함 높이 */
+        left: 14px;
+        width: 0;
+        height: 0;
+        border-left: 10px solid transparent;  /* 겉 테두리 폭 */
+        border-right: 10px solid transparent;
+        border-bottom: 10px solid var(--border-color); /* 테두리 색 */
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        top: -9px; /* 속 꼬리는 1px 아래 */
+        left: 15px; /* 속 꼬리는 1px 오른쪽 */
+        width: 0;
+        height: 0;
+        border-left: 9px solid transparent;  /* 속 폭 */
+        border-right: 9px solid transparent;
+        border-bottom: 9px solid var(--card-bg); /* 배경색 */
+    }
+
+    @media (max-width: 768px) {
+        width: calc(100% - 2rem);
+        max-width: calc(100% - 2rem);
+    }
 `;
 
 const CommentHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  gap: 0.25rem;
-  margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 5rem;
+    margin-bottom: 0.5rem;
 `;
 
 const CommentAuthor = styled.div`
@@ -253,6 +293,7 @@ const CommentContent = styled.p`
     font-size: 0.95rem;
     line-height: 1.5;
     color: var(--text-color);
+    margin-bottom: 1.5rem;
 `;
 
 const CommentFooter = styled.div<{ $isEditing: boolean; $isReply?: boolean }>`
