@@ -1,6 +1,6 @@
-import { PostListResponse } from "@/types/post";
 import { NextResponse } from "next/server";
 
+import { PostListResponse } from "@/types/post";
 
 export const dynamic = 'force-dynamic';
 

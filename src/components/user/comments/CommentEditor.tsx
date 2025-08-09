@@ -126,6 +126,7 @@ export const CommentEditor: React.FC<Props> = ({ postId }) => {
                             onChange={handleChange}
                         />
                         <PasswordInput
+                            type="password"
                             placeholder="비밀번호"
                             maxLength={4}
                             name="password"
