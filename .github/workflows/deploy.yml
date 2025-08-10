@@ -11,7 +11,9 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.7.0
@@ -21,10 +23,17 @@ jobs:
       - name: SSH and deploy to Raspberry Pi
         run: |
           ssh -p ${{ secrets.RASPBERRY_PORT }} -o StrictHostKeyChecking=no ${{ secrets.RASPBERRY_USER }}@${{ secrets.RASPBERRY_HOST }} << 'EOF'
+            set -euo pipefail
+            
             cd /home/${{ secrets.RASPBERRY_USER }}/docker-compose/bluecool/blue
-            git pull origin main
-            cd /home/${{ secrets.RASPBERRY_USER }}/docker-compose
-            docker compose up -d --force-recreate --build blue
+            git fetch --all --prune
+            git reset --hard origin/main
+            git config core.ignorecase false            
+            
+            docker compose build --no-cache blue
+            docker compose up -d --force-recreate blue
+
+            docker image prune -f || true
           EOF
         
     
