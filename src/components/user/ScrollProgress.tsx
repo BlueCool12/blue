@@ -57,7 +57,7 @@ const ProgressBar = styled.div.attrs<{ width: number }>(props => ({
     left: 0;    
     height: 4px;
     background-color: var(--theme-color-9);
-    z-index: 9999;
+    z-index: 1000;
     transition: width 0.2s linear;
 
     @media (max-width:768px) {
