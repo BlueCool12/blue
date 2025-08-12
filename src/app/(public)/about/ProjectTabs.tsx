@@ -77,6 +77,7 @@ const projects = [
 export default function ProjectTabs() {
 
     const [selectedProject, setSelectedProject] = useState(0);
+    const [imgLoading, setImgLoading] = useState(true);
 
     const project = projects[selectedProject];
 
@@ -92,7 +93,10 @@ export default function ProjectTabs() {
                                 className={clsx(styles['project-section__item'], {
                                     [styles['project-section__item--active']]: index === selectedProject,
                                 })}
-                                onClick={() => setSelectedProject(index)}
+                                onClick={() => {
+                                    setSelectedProject(index);
+                                    setImgLoading(true);
+                                }}
                             >
                                 <span>{project.title}</span>
                             </button>
@@ -116,13 +120,22 @@ export default function ProjectTabs() {
 
                     <figure className={styles['project-section__image-wrapper']}>
                         <Image
+                            key={project.image.src}
                             src={project.image}
                             alt={`${project.title} 미리보기`}
                             className={styles['project-section__image']}
                             width={1280}
                             height={720}
                             placeholder='blur'
+                            onLoadingComplete={() => {
+                                setTimeout(() => setImgLoading(false), 150);
+                            }}
                         />
+                        {imgLoading && (
+                            <div aria-label='이미지 로딩중' className={styles['project-section__image-overlay']}>
+                                <div className={styles['project-section__image-spinner']} />
+                            </div>
+                        )}
                     </figure>
 
                     {project.link && (
@@ -168,7 +181,7 @@ export default function ProjectTabs() {
 
                 </article>
 
-            </section>
+            </section >
             {/* Project Area */}
         </>
     );

@@ -289,6 +289,7 @@
 }
 
 .project-section__image-wrapper {
+    position: relative;
     margin: 2rem 0 1rem;
     border: 1px solid var(--border-color);
     border-radius: 12px;
@@ -296,6 +297,30 @@
 
 .project-section__image {
     border-radius: 12px;
+}
+
+.project-section__image-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+}
+
+.project-section__image-spinner {
+    width: 28px;
+    height: 28px;
+    border: 3px solid rgba(0, 0, 0, 0.15);
+    border-top-color: rgba(0, 0, 0, 0.6);
+    border-radius: 50%;
+    animation: project-section__image-spin 0.7s linear infinite;
+}
+
+@keyframes project-section__image-spin {
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 /* Project Area */
