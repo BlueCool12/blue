@@ -1,21 +1,22 @@
 'use client';
 
+import { useEffect, useRef } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 
 import styled from "styled-components";
 
-import { EmptyState } from "@/components/user/EmptyState";
+import { MdOutlineArrowDropDown } from "react-icons/md";
+import { EmptyState } from "@/components/user/posts/EmptyState";
+import { PostListSkeleton } from "@/components/user/posts/PostListSkeleton";
 import { LoadingSpinner } from "@/components/common/LoadingSpinner";
 import { CategorySidebar } from "@/components/user/categories/CategorySidebar";
-import { MdOutlineArrowDropDown } from "react-icons/md";
 
 import { useInfinitePosts } from "@/hooks/queries/posts/useInfinitePosts";
 import { useCategories } from "@/hooks/queries/categories/useCategories";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
 import type { Post } from "@/types/post";
-import { useEffect, useRef } from "react";
 
 export default function PostList({ category }: { category?: string }) {
 
@@ -36,21 +37,29 @@ export default function PostList({ category }: { category?: string }) {
     const loadMoreRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
-        if (!ready || posts.isLoading || !posts.hasNextPage || posts.isFetchingNextPage) return;
-
-        const observer = new IntersectionObserver(([entry]) => {
-            if (entry.isIntersecting) {
-                posts.fetchNextPage();
-            }
-        });
+        if (!ready || !posts.hasNextPage || posts.isFetching || posts.isFetchingNextPage) return;
 
         const el = loadMoreRef.current;
-        if (el) observer.observe(el);
+        if (!el) return;
 
-        return () => {
-            if (el) observer.unobserve(el);
-        };
-    }, [ready, posts.hasNextPage, posts.isFetchingNextPage, posts.fetchNextPage, posts.isLoading, loadMoreRef]);
+        let mounted = true;
+
+        const observer = new IntersectionObserver((entries, obs) => {
+            const [entry] = entries;
+            if (entry.isIntersecting) {
+                obs.unobserve(entry.target);
+                posts.fetchNextPage().finally(() => {
+                    if (!mounted) return;
+                    if (document.contains(entry.target as Node)) {
+                        obs.observe(entry.target);
+                    }
+                });
+            }
+        }, { rootMargin: '200px', threshold: 0 });
+
+        observer.observe(el);
+        return () => { mounted = false; observer.disconnect(); }
+    }, [ready, posts.hasNextPage, posts.isFetching, posts.isFetchingNextPage, posts.fetchNextPage]);
 
     useEffect(() => {
         window.scrollTo({ top: 0 });
@@ -95,7 +104,7 @@ export default function PostList({ category }: { category?: string }) {
 
             <PostListSection>
                 {/* 처음 로딩 */}
-                {(!ready || posts.isLoading) && <LoadingSpinner />}
+                {(!ready || posts.isLoading) && <PostListSkeleton />}
 
                 {/* 데이터가 없는 경우 */}
                 {ready && !posts.isLoading && allPosts.length === 0 && (

@@ -5,10 +5,10 @@ import Link from 'next/link';
 import styles from './page.module.css';
 
 import CommentSectionWrapper from '@/components/user/comments/CommentSectionWrapper';
-import { ScrollProgress } from '@/components/user/ScrollProgress';
-import ShareButtons from '@/components/user/ShareButtons';
-import { LogoBorder } from '@/components/user/LogoBorder';
-import { PrevNextNavigation } from '@/components/user/PrevNextNavigation';
+import { ScrollProgress } from '@/components/user/posts/ScrollProgress';
+import ShareButtons from '@/components/user/posts/ShareButtons';
+import { LogoBorder } from '@/components/user/posts/LogoBorder';
+import { PrevNextNavigation } from '@/components/user/posts/PrevNextNavigation';
 // import AdsenseAd from '@/components/user/AdsenseAd';
 
 import { postService } from '@/services/user/postService';
@@ -62,9 +62,9 @@ export default async function PostDetail({ params }: PageProps) {
                             {post.createdAt}
                         </time>
 
-                        <Link href={`/posts/category/${encodeURIComponent(post.category?.slug)}`}>
+                        <Link href={`/posts/category/${encodeURIComponent(post.category.slug)}`}>
                             <span className={styles.category}>
-                                {post.category?.name}
+                                {post.category.name}
                             </span>
                         </Link>
 
