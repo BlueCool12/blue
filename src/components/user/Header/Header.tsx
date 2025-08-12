@@ -84,7 +84,7 @@ export const Header: React.FC = () => {
 
                     <div className={styles['mobile-menu__header']}>
 
-                        <Link href='/' onClick={() => setIsMobileMenuOpen(false)} className={styles['mobile-menu__logo']}>
+                        <Link href='/' prefetch={false} onClick={() => setIsMobileMenuOpen(false)} className={styles['mobile-menu__logo']}>
                             <Image
                                 src={
                                     resolvedTheme === 'light'
@@ -105,9 +105,9 @@ export const Header: React.FC = () => {
                     </div>
 
                     <ul className={styles['mobile-menu__nav']}>
-                        <li><Link href='/about' onClick={() => setIsMobileMenuOpen(false)}>ABOUT</Link></li>
-                        <li><Link href='/posts' onClick={() => setIsMobileMenuOpen(false)}>POSTS</Link></li>
-                        <li><Link href='/guestbooks' onClick={() => setIsMobileMenuOpen(false)}>GUESTBOOK</Link></li>
+                        <li><Link href='/about' prefetch={false} onClick={() => setIsMobileMenuOpen(false)}>ABOUT</Link></li>
+                        <li><Link href='/posts' prefetch={false} onClick={() => setIsMobileMenuOpen(false)}>POSTS</Link></li>
+                        <li><Link href='/guestbooks' prefetch={false} onClick={() => setIsMobileMenuOpen(false)}>GUESTBOOK</Link></li>
                     </ul>
                 </div >
             )}
