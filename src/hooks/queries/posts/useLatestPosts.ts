@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { postService } from "@/services/user/postService"
+import { postService } from "@/services/postService"
 import { PostLatest } from "@/types/post";
 
 export const useLatestPosts = () => {

@@ -1,9 +1,9 @@
 
 export async function fetchPostBySlug(slug: string) {
 
-    const baseUrl = 'http://localhost:8888/api';
+    const baseUrl = 'http://localhost:8888/api/v1';
 
-    const url = `${baseUrl}/user/posts/${slug}`;
+    const url = `${baseUrl}/posts/${slug}`;
 
     const response = await fetch(url, {
         next: { revalidate: 300 },

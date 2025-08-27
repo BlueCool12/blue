@@ -14,7 +14,7 @@ const FALLBACK_LEN = 752976;
 
 async function fetchPosts(): Promise<PostListResponse[]> {
     try {
-        const response = await fetch(`${process.env.INTERNAL_API_BASE_URL}/user/posts`, {
+        const response = await fetch(`${process.env.INTERNAL_API_BASE_URL}/posts`, {
             cache: 'no-store',
         });
         if (!response.ok) throw new Error('글 불러오기 실패');

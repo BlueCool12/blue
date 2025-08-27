@@ -1,5 +1,3 @@
-
-
 export interface Post {
     slug: string;
     title: string;
@@ -34,11 +32,4 @@ export interface PostDetail {
     createdAt: string;
     previousPost?: PostSummary | null;
     nextPost?: PostSummary | null;
-}
-
-export interface PostFormValues {
-    title: string;
-    content: string;
-    categoryId: number | null;
-    isPublic: boolean;
 }

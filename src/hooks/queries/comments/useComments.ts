@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-import { commentService } from "@/services/user/commentService"
+import { commentService } from "@/services/commentService"
 
 
 export const useComments = (postId: number) => {

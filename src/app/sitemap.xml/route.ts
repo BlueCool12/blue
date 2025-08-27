@@ -19,7 +19,7 @@ async function fetchAllPosts(): Promise<PostListResponse[]> {
     const all: PostListResponse[] = [];
 
     while (page < maxPages) {
-        const res = await fetch(`${process.env.INTERNAL_API_BASE_URL}/user/posts?page=${page}&size=${size}`, { cache: 'no-store' });
+        const res = await fetch(`${process.env.INTERNAL_API_BASE_URL}/posts?page=${page}&size=${size}`, { cache: 'no-store' });
         if (!res.ok) throw new Error('글 불러오기 실패');
 
         const json = await res.json();
@@ -33,7 +33,7 @@ async function fetchAllPosts(): Promise<PostListResponse[]> {
 
 async function fetchCategories(): Promise<string[]> {
     try {
-        const res = await fetch(`${process.env.INTERNAL_API_BASE_URL}/user/categories`, { cache: 'no-store' });
+        const res = await fetch(`${process.env.INTERNAL_API_BASE_URL}/categories`, { cache: 'no-store' });
         if (!res.ok) throw new Error('카테고리 불러오기 실패');
         const json = await res.json();
         return extractChildSlugs(json);

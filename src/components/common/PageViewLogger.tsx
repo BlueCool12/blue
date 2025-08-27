@@ -3,7 +3,7 @@
 import { Suspense, useEffect, useRef } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 
-import { pageViewApi } from '@/lib/api/user/pageViewApi';
+import { pageViewApi } from '@/lib/api/pageViewApi';
 
 const PageViewInner = () => {
     const pathname = usePathname();

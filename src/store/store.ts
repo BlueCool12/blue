@@ -1,14 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import authReducer from "../lib/auth/authSlice";
-import adminPostReducer from "./admin/postSlice";
-import adminCategoryReducer from "./admin/categorySlice";
-import userPostReducer from "./user/postSlice";
+import userPostReducer from "./postSlice";
 
 export const store = configureStore({
     reducer: {
-        auth: authReducer,
-        adminPost: adminPostReducer,
-        adminCategory: adminCategoryReducer,
         userPost: userPostReducer,
     }
 });
