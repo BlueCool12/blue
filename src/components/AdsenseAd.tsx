@@ -25,7 +25,7 @@ export default function AdsenseAd() {
     }, []);
 
     return (
-        <div style={{ textAlign: 'center', margin: '1rem 0' }}>
+        <div style={{ textAlign: 'center', margin: '0 0 3rem' }}>
             <ins
                 className="adsbygoogle"
                 style={{ display: 'block', width: '100%' }}
