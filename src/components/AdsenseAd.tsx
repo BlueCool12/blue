@@ -28,11 +28,10 @@ export default function AdsenseAd() {
         <div style={{ textAlign: 'center', margin: '1rem 0' }}>
             <ins
                 className="adsbygoogle"
-                style={{ display: 'block' }}
+                style={{ display: 'block', width: '100%' }}
                 data-ad-client="ca-pub-7027574538017618"
                 data-ad-slot="3033125272"
                 data-ad-format="auto"
-                data-full-width-responsive="true"                
                 ref={adRef}
             />
         </div>
