@@ -1,5 +1,5 @@
 import { keepPreviousData, useInfiniteQuery } from "@tanstack/react-query";
-import { postService } from "@/services/user/postService";
+import { postService } from "@/services/postService";
 import { PagedPost } from "@/types/post";
 
 export const useInfinitePosts = (category: string | null = null, size: number = 10, ready = true) => {

@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { categoryService } from '@/services/user/categoryService';
+import { categoryService } from '@/services/categoryService';
 import { Category } from '@/types/category';
 
 export const useCategories = () => {

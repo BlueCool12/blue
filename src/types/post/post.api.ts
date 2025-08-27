@@ -1,15 +1,3 @@
-
-export interface CreatePostPayload {
-    title: string;
-    content: string;
-    categoryId: number | null;
-    isPublic: boolean;
-}
-
-export interface PostCreateResponse {
-    postId: number;
-}
-
 export interface PostListResponse {
     id: number;
     title: string;
