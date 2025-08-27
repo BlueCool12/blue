@@ -85,9 +85,10 @@ export default async function PostDetail({ params }: PageProps) {
 
             <LogoBorder />
 
+            <CommentSectionWrapper postId={post.id} />
+            
             <AdsenseAd />
 
-            <CommentSectionWrapper postId={post.id} />
 
         </>
     );
