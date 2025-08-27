@@ -106,7 +106,7 @@ export const CommentSection: React.FC<Props> = ({ postId }) => {
                 {comments.isError ? (
                     <CommentItem>댓글을 불러오는 데 실패했습니다. 새로고침 해주세요.</CommentItem>
                 ) : comments.data?.length === 0 ? (
-                    <CommentItem>첫 댓글을 남겨보세요! ( =&#39;X&#39;= )</CommentItem>
+                    <EmptyComment>첫 댓글을 남겨보세요! ( =&#39;X&#39;= )</EmptyComment>
                 ) : (
                     comments.data?.map((comment) => (
                         <Fragment key={comment.id}>
@@ -236,6 +236,15 @@ const CommentItem = styled.div`
         width: 100%;
         max-width: 100%;
     }
+`;
+
+const EmptyComment = styled.div`
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+    background-color: var(--card-bg);
+    width: 100%;
+    max-width: 100%;    
 `;
 
 const ReplyCommentItem = styled(CommentItem)`    
