@@ -224,9 +224,14 @@
     }
 }
 
+.recent-posts__card-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
 .recent-posts__card {
-    border: 1px solid var(--border-color);
-    margin-bottom: 0.5rem;
+    border: 1px solid var(--border-color);    
 }
 
 .recent-posts__content {
