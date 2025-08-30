@@ -9,8 +9,11 @@ import styles from './Header.module.css';
 import clsx from 'clsx';
 
 import { MdOutlineDarkMode, MdOutlineLightMode, MdOutlineMenu, MdOutlineClose } from 'react-icons/md';
+import { useIsMobile } from '@/hooks/useIsMobile';
 
 export const Header: React.FC = () => {
+
+    const { isMobile, ready } = useIsMobile();
 
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const { theme, resolvedTheme, setTheme } = useTheme();
@@ -19,6 +22,12 @@ export const Header: React.FC = () => {
     useEffect(() => {
         setMounted(true)
     }, []);
+
+    useEffect(() => {
+        if (ready && !isMobile && isMobileMenuOpen) {
+            setIsMobileMenuOpen(false);
+        }
+    }, [ready, isMobile, isMobileMenuOpen]);
 
     if (!mounted) return null;
 
@@ -68,18 +77,20 @@ export const Header: React.FC = () => {
                             )}
                         </button>
 
-                        <MdOutlineMenu
-                            size={24}
-                            className={styles['header__menu-toggle']}
-                            onClick={() => setIsMobileMenuOpen(true)}
-                        />
-
+                        {ready && isMobile && (
+                            <MdOutlineMenu
+                                size={24}
+                                className={styles['header__menu-toggle']}
+                                onClick={() => setIsMobileMenuOpen(true)}
+                                aria-label='모바일 메뉴 열기'
+                            />
+                        )}
                     </div>
 
                 </div>
             </header>
 
-            {isMobileMenuOpen && (
+            {ready && isMobile && isMobileMenuOpen && (
                 <div className={clsx(styles['mobile-menu'])}>
 
                     <div className={styles['mobile-menu__header']}>
@@ -101,6 +112,7 @@ export const Header: React.FC = () => {
                         <MdOutlineClose
                             size={24}
                             onClick={() => setIsMobileMenuOpen(false)}
+                            aria-label='모바일 메뉴 닫기'
                         />
                     </div>
 
