@@ -193,19 +193,21 @@ export default function Home() {
                     <p className={styles['recent-posts__error']}>최신 글을 불러오는 데 실패했어요 😢</p>
                 )}
 
-                {latestPosts.data?.map((post: PostLatest) => (
-                    <Link key={post.id} href={`/posts/${post.slug}`} className={styles['recent-posts__link']}>
-                        <article className={styles['recent-posts__card']}>
-                            <div className={styles['recent-posts__content']}>
-                                <h3 className={styles['recent-posts__card-title']}>{post.title}</h3>
+                <div className={styles['recent-posts__card-wrapper']}>
+                    {latestPosts.data?.map((post: PostLatest) => (
+                        <Link key={post.id} href={`/posts/${post.slug}`} className={styles['recent-posts__link']}>
+                            <article className={styles['recent-posts__card']}>
+                                <div className={styles['recent-posts__content']}>
+                                    <h3 className={styles['recent-posts__card-title']}>{post.title}</h3>
 
-                                <time className={styles['recent-posts__date']} dateTime={post.createdAt}>
-                                    {post.createdAt}
-                                </time>
-                            </div>
-                        </article>
-                    </Link>
-                ))}
+                                    <time className={styles['recent-posts__date']} dateTime={post.createdAt}>
+                                        {post.createdAt}
+                                    </time>
+                                </div>
+                            </article>
+                        </Link>
+                    ))}
+                </div>
             </section>
             {/* Latest Posts Section */}
         </div>
