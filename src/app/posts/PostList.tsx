@@ -1,13 +1,13 @@
 'use client';
 
-import { useEffect, useRef } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 
 import styled from "styled-components";
 
+import styles from './page.module.css';
+
 import { MdOutlineArrowDropDown } from "react-icons/md";
-import { EmptyState } from "@/components/posts/EmptyState";
 import { PostListSkeleton } from "@/components/posts/PostListSkeleton";
 import { LoadingSpinner } from "@/components/common/LoadingSpinner";
 import { CategorySidebar } from "@/components/categories/CategorySidebar";
@@ -18,64 +18,61 @@ import { useIsMobile } from "@/hooks/useIsMobile";
 
 import type { Post } from "@/types/post";
 
-export default function PostList({ category }: { category?: string }) {
+type Props = {
+    startPage: number;
+    size: number;
+    categorySlug?: string | null;
+};
 
-    const router = useRouter();
-    const params = useParams();
-    const categorySlug = typeof category === 'string'
-        ? category
-        : typeof params?.category === 'string'
-            ? decodeURIComponent(params.category)
-            : null;
+export default function PostList({ startPage, size, categorySlug = null }: Props) {
 
-    const { isMobile, ready } = useIsMobile(1024);
-    const size = isMobile ? 7 : 10;
+    const [started, setStarted] = useState(false);
+    const sentinelRef = useRef<HTMLDivElement | null>(null);
 
-    const posts = useInfinitePosts(categorySlug, size, ready);
-    const categories = useCategories();
-
-    const loadMoreRef = useRef<HTMLDivElement | null>(null);
+    const {
+        data,
+        refetch,
+        fetchNextPage,
+        hasNextPage,
+        isFetching,
+        isFetchingNextPage
+    } = useInfinitePosts({
+        category: categorySlug,
+        size,
+        startPage,
+        enabled: false
+    });
 
     useEffect(() => {
-        if (!ready || !posts.hasNextPage || posts.isFetching || posts.isFetchingNextPage) return;
-
-        const el = loadMoreRef.current;
+        const el = sentinelRef.current;
         if (!el) return;
 
-        let mounted = true;
-
-        const observer = new IntersectionObserver((entries, obs) => {
+        const io = new IntersectionObserver(async (entries) => {
             const [entry] = entries;
-            if (entry.isIntersecting) {
-                obs.unobserve(entry.target);
-                posts.fetchNextPage().finally(() => {
-                    if (!mounted) return;
-                    if (document.contains(entry.target as Node)) {
-                        obs.observe(entry.target);
-                    }
-                });
+            if (!entry.isIntersecting) return;
+
+            io.unobserve(entry.target);
+            try {
+                if (!started) {
+                    await refetch();
+                    setStarted(true);
+                } else if (hasNextPage) {
+                    await fetchNextPage();
+                }
+            } finally {
+                if (document.contains(entry.target)) io.observe(entry.target);
             }
         }, { rootMargin: '200px', threshold: 0 });
 
-        observer.observe(el);
-        return () => { mounted = false; observer.disconnect(); }
-    }, [ready, posts.hasNextPage, posts.isFetching, posts.isFetchingNextPage, posts.fetchNextPage]);
+        io.observe(el);
+        return () => io.disconnect();
+    }, [started, hasNextPage, refetch, fetchNextPage]);
 
-    useEffect(() => {
-        window.scrollTo({ top: 0 });
-    }, [categorySlug]);
-
-    const handleCategorySlug = (category: string | null) => {
-        router.replace(category ? `/posts/category/${encodeURIComponent(category)}` : '/posts');
-    };
-
-    if (posts.isError) throw new Error(posts.error.message ?? "글 목록 조회 실패");
-
-    const allPosts = posts.data?.pages?.flatMap((page) => page?.posts ?? []) ?? [];
+    const more: Post[] = data?.pages.flatMap((p: any) => p?.posts ?? []) ?? [];
 
     return (
         <>
-            {isMobile && (
+            {/* {isMobile && (
                 <MobileCategorySelectWrapper>
                     <MobileCategorySelect
                         value={categorySlug ?? ''}
@@ -100,47 +97,35 @@ export default function PostList({ category }: { category?: string }) {
                     </MobileCategorySelect>
                     <SelectIcon />
                 </MobileCategorySelectWrapper>
+            )} */}
+
+            {more.map((post) => (
+                <li key={post.slug} className={styles.item}>
+                    <article className={styles.post}>
+                        <Link href={`/posts/${post.slug}`} prefetch={false}>
+                            <header className={styles.titleRow}>
+                                <h2 className={styles.title}>{post.title}</h2>
+                                <span className={styles.badge}>{post.category}</span>
+                            </header>
+                            <p className={styles.content}>{post.contentSummary}</p>
+                            <footer className={styles.meta}>
+                                <time dateTime={post.createdAt}>
+                                    {post.createdAtText ?? post.createdAt}
+                                </time>
+                            </footer>
+                        </Link>
+                    </article>
+                </li>
+            ))}
+
+            {(isFetching || isFetchingNextPage) && (
+                <LoadingSpinner />
             )}
 
-            <PostListSection>
-                {/* 처음 로딩 */}
-                {(!ready || posts.isLoading) && <PostListSkeleton />}
-
-                {/* 데이터가 없는 경우 */}
-                {ready && !posts.isLoading && allPosts.length === 0 && (
-                    <EmptyState message="열심히 공부 중입니다..." />
-                )}
-
-                {/* 게시글 리스트 */}
-                {allPosts.length > 0 && (
-                    <>
-                        <PostListWrapper>
-                            {allPosts.map((post) => (
-                                <ListItem key={post.slug}>
-                                    <Post>
-                                        <Link href={`/posts/${post.slug}`} prefetch={false}>
-                                            <TitleWrapper>
-                                                <Title>{post.title}</Title>
-                                                <Category>{post.category}</Category>
-                                            </TitleWrapper>
-                                            <Content>{post.contentSummary}</Content>
-                                            <Meta>
-                                                <time dateTime={post.createdAt}>{post.createdAt}</time>
-                                            </Meta>
-                                        </Link>
-                                    </Post>
-                                </ListItem>
-                            ))}
-                        </PostListWrapper>
-
-                        {posts.isFetchingNextPage && <LoadingSpinner />}
-                        <div ref={loadMoreRef} style={{ height: "1px" }} />
-                    </>
-                )}
-            </PostListSection>
+            <div ref={sentinelRef} style={{ height: 1 }} />
 
 
-            {!isMobile && (
+            {/* {!isMobile && (
                 <CategorySidebar
                     categories={categories.data ?? []}
                     loading={categories.isLoading}
@@ -148,7 +133,7 @@ export default function PostList({ category }: { category?: string }) {
                     categorySlug={categorySlug}
                     onCategorySlug={handleCategorySlug}
                 />
-            )}
+            )} */}
         </>
     );
 };
@@ -183,81 +168,3 @@ const SelectIcon = styled(MdOutlineArrowDropDown)`
   font-size: 1.2rem;
 `;
 // 모바일 카테고리 끝
-
-const PostListSection = styled.section`
-    padding: 1rem;    
-`;
-
-const PostListWrapper = styled.ul`
-    width: 100%;    
-`;
-
-const ListItem = styled.li`
-    list-style: none;    
-    display: flex;
-    flex-direction: column;            
-    padding: 0 1rem;
-
-    @media (max-width: 768px) {
-        padding: 0;
-    }
-`;
-
-const Post = styled.article`
-    padding: 1.2rem 0 0.8rem;    
-    border-bottom: 2px solid var(--border-color);
-
-    &:hover {
-        border-bottom: 2px solid var(--theme-color-9);
-    }
-
-    a {
-        display: block;
-        text-decoration: none;
-        color: inherit;
-    }
-`;
-
-const TitleWrapper = styled.header`
-    display: flex;
-    align-items: center;
-    gap: 12px;
-`;
-
-const Title = styled.h2`
-    flex: 1;
-    font-size: 1.1rem;
-    font-weight: 500;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-`;
-
-const Category = styled.span`    
-    display: inline-block;
-    background-color: var(--theme-color-9);
-    color: var(--theme-color-1);
-    border-radius: 9999px;
-    padding: 0.2rem 0.5rem;
-    font-size: 0.75rem;
-    font-weight: 700;
-`;
-
-const Content = styled.p`
-    margin: 0.5rem 0;
-    font-size: 0.9rem;
-    line-height: 1.5;
-    opacity: 0.8;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    word-break: break-all;
-`;
-
-const Meta = styled.footer`
-    display: flex;        
-    justify-content: end;    
-    font-size: 0.8rem;
-    opacity: 0.6;
-`;
