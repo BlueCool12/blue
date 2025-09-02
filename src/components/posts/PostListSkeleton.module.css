@@ -78,7 +78,7 @@
 
 .post-list-skeleton__meta {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     font-size: 0.8rem;
     opacity: 0.6;
 }

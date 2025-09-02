@@ -9,7 +9,7 @@ import { LoadingSpinner } from "@/components/common/LoadingSpinner";
 
 import { useInfinitePosts } from "@/hooks/queries/posts/useInfinitePosts";
 
-import type { Post } from "@/types/post";
+import type { PagedPost, Post } from "@/types/post";
 
 type Props = {
     startPage: number | null;
@@ -53,9 +53,9 @@ export default function MorePosts({ startPage, size, categorySlug = null }: Prop
 
         io.observe(el);
         return () => io.disconnect();
-    }, [hasNextPage, fetchNextPage]);
+    }, [hasNextPage, fetchNextPage, isFetchingNextPage]);
 
-    const more: Post[] = data?.pages.flatMap((p: any) => p?.posts ?? []) ?? [];
+    const more: Post[] = data?.pages.flatMap((p: PagedPost) => p?.posts ?? []) ?? [];
 
     return (
         <>

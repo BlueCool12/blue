@@ -134,7 +134,7 @@ const InputWrapper = styled.div`
     display: flex;
     gap: 0.5rem;
     align-items: center;
-    justify-content: end;
+    justify-content: flex-end;
 `;
 
 const SubmitButton = styled.button`
