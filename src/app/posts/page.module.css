@@ -64,9 +64,10 @@
     font-size: 0.9rem;
     line-height: 1.5;
     opacity: 0.8;
+    line-clamp: 3;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
     overflow: hidden;
     word-break: break-all;
 }
@@ -76,4 +77,14 @@
     justify-content: end;
     font-size: 0.8rem;
     opacity: 0.6;
+}
+
+.onlyMobile {
+    display: block;
+}
+
+@media (min-width: 768px) {
+    .onlyMobile {
+        display: none;
+    }
 }

@@ -4,12 +4,15 @@ import { notFound } from 'next/navigation';
 
 import styles from '../../page.module.css';
 
-import PostList from "../../PostList";
+import MorePosts from "../../MorePosts";
 import { EmptyState } from '@/components/posts/EmptyState';
+import { CategorySidebar } from '@/components/categories/CategorySidebar';
+import MobileCategorySelect from '@/components/categories/MobileCategorySelect';
 
-import { fetchPostsPage } from '@/lib/server/post';
+import { categoryService } from '@/services/categoryService';
+import { postService } from '@/services/postService';
 
-export const revalidate = 60;
+export const revalidate = 300;
 
 type Props = {
     params: Promise<{ category: string }>;
@@ -21,7 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const decoded = decodeURIComponent(category);
     if (!decoded) return notFound();
 
-    const title = `${decoded} 카테고리 글 목록`;
+    const title = `${decoded.toUpperCase()} 카테고리 글 목록`;
     const description = `BlueCool 블로그의 "${decoded}" 카테고리 글 목록입니다.`;
 
     return {
@@ -51,13 +54,27 @@ export default async function CategoryPage({ params }: Props) {
 
     const PAGE_SIZE = 10;
 
-    const initial = await fetchPostsPage({ page: 1, size: PAGE_SIZE, category: decoded });
+    const [initial, categories] = await Promise.all([
+        postService.getAllPosts({ page: 1, size: PAGE_SIZE, category: decoded }),
+        categoryService.getCategories(),
+    ]);
 
     const items = initial.posts ?? [];
-    const nextPage = initial.nextPage ?? 2;
 
     return (
         <>
+            <div className={styles.onlyMobile}>
+                <MobileCategorySelect
+                    categories={categories}
+                    current={decoded}
+                />
+            </div>
+
+            <CategorySidebar
+                categories={categories}
+                categorySlug={decoded}
+            />
+
             <section className={styles.section}>
                 {items.length === 0 ? (
                     <EmptyState message="열심히 공부 중입니다..." />
@@ -82,7 +99,7 @@ export default async function CategoryPage({ params }: Props) {
                             </li>
                         ))}
 
-                        <PostList startPage={nextPage} size={PAGE_SIZE} categorySlug={decoded} />
+                        <MorePosts startPage={2} size={PAGE_SIZE} categorySlug={decoded} />
                     </ul>
                 )}
             </section >
