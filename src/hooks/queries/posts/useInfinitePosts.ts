@@ -1,20 +1,37 @@
-import { keepPreviousData, useInfiniteQuery } from "@tanstack/react-query";
+import { InfiniteData, useInfiniteQuery } from "@tanstack/react-query";
 import { postService } from "@/services/postService";
 import { PagedPost } from "@/types/post";
 
-export const useInfinitePosts = (category: string | null = null, size: number = 10, ready = true) => {
+type Options = {
+    category?: string | null;
+    size?: number;
+    startPage?: number | null;
+    enabled?: boolean;
+    initialData?: InfiniteData<PagedPost>;
+}
+
+export const useInfinitePosts = ({
+    category = null,
+    size = 10,
+    startPage = 2,
+    enabled = true,
+    initialData,
+}: Options) => {
+
+    const initialParam = startPage ?? 2;
+
     return useInfiniteQuery<PagedPost>({
         queryKey: ['posts', category, size],
+        initialPageParam: initialParam,
         queryFn: ({ pageParam }) =>
             postService.getAllPosts({ category, page: pageParam as number, size }),
-        initialPageParam: 1,
-        getNextPageParam: (lastPage, allPages) => {
-            return lastPage.isLast ? undefined : allPages.length + 1;
+        getNextPageParam: (lastPage) => {
+            if (lastPage.isLast) return undefined;
+            return lastPage.currentPage + 2;
         },
+        enabled: enabled && startPage !== null,
+        initialData,
         staleTime: 1000 * 60 * 5,
-        enabled: ready && size > 0,
-        
-        placeholderData: keepPreviousData,
         refetchOnWindowFocus: false,
     });
 };

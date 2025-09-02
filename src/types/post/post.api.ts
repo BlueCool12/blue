@@ -51,4 +51,5 @@ export interface PostLatest {
     title: string;
     slug: string;
     createdAt: string;
+    createdAtText: string;
 }

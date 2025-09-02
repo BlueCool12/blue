@@ -4,6 +4,7 @@ export interface Post {
     category: string;
     contentSummary: string;
     createdAt: string;
+    createdAtText: string;
 }
 
 export interface PagedPost {
@@ -30,6 +31,7 @@ export interface PostDetail {
     };
     content: string;
     createdAt: string;
+    createdAtText: string;
     previousPost?: PostSummary | null;
     nextPost?: PostSummary | null;
 }

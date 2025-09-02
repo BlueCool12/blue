@@ -25,7 +25,8 @@ export const postService = {
             category: post.category,
             slug: post.slug,
             contentSummary: post.contentSummary,
-            createdAt: formatDate(post.createdAt),
+            createdAt: post.createdAt,
+            createdAtText: formatDate(post.createdAt),
         }));
 
         return {
@@ -46,7 +47,7 @@ export const postService = {
             const postDetail: PostDetail = {
                 ...response,                
                 content: highlightedContent,
-                createdAt: formattedCreatedAt,
+                createdAtText: formattedCreatedAt,                
             };
 
             return postDetail;
@@ -59,7 +60,7 @@ export const postService = {
         const result = await postApi.getLatestPosts();
         return result.map((post) => ({
             ...post,
-            createdAt: formatDate(post.createdAt),
+            createdAtText: formatDate(post.createdAt),
         }));
     },
 };
