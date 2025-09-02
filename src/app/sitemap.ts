@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 
 import { PostListResponse } from "@/types/post";
 
-export const revalidate = 3600;
+export const dynamic = 'force-dynamic';
 
 const SITE_URL = 'https://pyomin.com';
 const staticUrls = ['/', '/about', '/posts', '/guestbooks'] as const;
@@ -18,10 +18,7 @@ async function fetchAllPosts(): Promise<PostListResponse[]> {
     const all: PostListResponse[] = [];
 
     while (page < maxPages) {
-        const res = await fetch(
-            `${process.env.INTERNAL_API_BASE_URL}/posts?page=${page}&size=${size}`,
-            { next: { revalidate } }
-        );
+        const res = await fetch(`${process.env.INTERNAL_API_BASE_URL}/posts?page=${page}&size=${size}`);
         if (!res.ok) throw new Error('글 불러오기 실패');
 
         const json = await res.json();
@@ -36,7 +33,7 @@ async function fetchAllPosts(): Promise<PostListResponse[]> {
 
 async function fetchCategories(): Promise<string[]> {
     try {
-        const res = await fetch(`${process.env.INTERNAL_API_BASE_URL}/categories`, { next: { revalidate } });
+        const res = await fetch(`${process.env.INTERNAL_API_BASE_URL}/categories`);
         if (!res.ok) throw new Error('카테고리 불러오기 실패');
         const json = await res.json();
         return extractChildSlugs(json);
