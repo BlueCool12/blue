@@ -1,9 +1,8 @@
 import axios from "axios";
-
-const isServer = typeof window === 'undefined';
+import { getApiBase } from "./apiBase";
 
 const api = axios.create({
-    baseURL: `${isServer ? process.env.INTERNAL_API_BASE_URL : process.env.PUBLIC_API_BASE_URL}`,
+    baseURL: getApiBase(),
     headers: {
         "Content-Type": "application/json"
     },

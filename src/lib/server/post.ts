@@ -1,11 +1,8 @@
+import { getApiBase } from "../api/apiBase";
 
 export async function fetchPostBySlug(slug: string) {
 
-    const isServer = typeof window === 'undefined';
-
-    const baseUrl = isServer
-        ? process.env.INTERNAL_API_BASE_URL
-        : process.env.PUBLIC_API_BASE_URL;
+    const baseUrl = getApiBase();
 
     const url = `${baseUrl}/posts/${slug}`;
 
