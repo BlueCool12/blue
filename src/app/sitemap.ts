@@ -19,7 +19,7 @@ async function fetchAllPosts(): Promise<PostListResponse[]> {
 
     while (page < maxPages) {
         const res = await fetch(
-            `https://bluecool.pyomin.com/api/v1/posts?page=${page}&size=${size}`,
+            `${process.env.INTERNAL_API_BASE_URL}/posts?page=${page}&size=${size}`,
             { next: { revalidate } }
         );
         if (!res.ok) throw new Error('글 불러오기 실패');
