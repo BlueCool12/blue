@@ -1,7 +1,11 @@
 
 export async function fetchPostBySlug(slug: string) {
 
-    const baseUrl = `${process.env.INTERNAL_API_BASE_URL}`;
+    const isServer = typeof window === 'undefined';
+
+    const baseUrl = isServer
+        ? process.env.INTERNAL_API_BASE_URL
+        : process.env.PUBLIC_API_BASE_URL;
 
     const url = `${baseUrl}/posts/${slug}`;
 
