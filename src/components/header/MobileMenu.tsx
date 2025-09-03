@@ -18,7 +18,7 @@ export function MobileMenu() {
         : '/images/logo/mobile_logo_dark.webp';
 
     useEffect(() => {
-        const mq = window.matchMedia('(min-width: 1024px)');
+        const mq = window.matchMedia('(min-width: 768px)');
 
         const onChange = () => mq.matches && setOpen(false);
 

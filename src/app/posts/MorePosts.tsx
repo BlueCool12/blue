@@ -63,7 +63,7 @@ export default function MorePosts({ startPage, size, categorySlug = null }: Prop
                 <li key={post.slug} className={styles.item}>
                     <article className={styles.post}>
                         <Link href={`/posts/${post.slug}`} prefetch={false}>
-                            <header className={styles.titleRow}>
+                            <header className={styles['post__header']}>
                                 <h2 className={styles.title}>{post.title}</h2>
                                 <span className={styles.badge}>{post.category}</span>
                             </header>

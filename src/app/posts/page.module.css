@@ -34,7 +34,7 @@
     color: inherit;
 }
 
-.titleRow {
+.post__header {
     display: flex;
     align-items: center;
     gap: 12px;
@@ -79,12 +79,12 @@
     opacity: 0.6;
 }
 
-.onlyMobile {
+.posts--mobile {
     display: block;
 }
 
 @media (min-width: 768px) {
-    .onlyMobile {
+    .posts--mobile {
         display: none;
     }
 }

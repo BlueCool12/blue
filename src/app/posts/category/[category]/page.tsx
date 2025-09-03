@@ -63,7 +63,7 @@ export default async function CategoryPage({ params }: Props) {
 
     return (
         <>
-            <div className={styles.onlyMobile}>
+            <div className={styles['posts--mobile']}>
                 <MobileCategorySelect
                     categories={categories}
                     current={decoded}
@@ -84,7 +84,7 @@ export default async function CategoryPage({ params }: Props) {
                             <li key={post.slug} className={styles.item}>
                                 <article className={styles.post}>
                                     <Link href={`/posts/${post.slug}`} prefetch={false}>
-                                        <header className={styles.titleRow}>
+                                        <header className={styles['post__header']}>
                                             <h2 className={styles.title}>{post.title}</h2>
                                             <span className={styles.badge}>{post.category}</span>
                                         </header>
