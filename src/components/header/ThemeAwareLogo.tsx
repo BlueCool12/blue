@@ -11,6 +11,8 @@ export function ThemeAwareLogo() {
 
     useEffect(() => setMounted(true), []);
 
+    if (!mounted) return null;
+
     const isLight = mounted ? resolvedTheme === 'light' : true;
 
     const src = isLight ? '/images/logo/logo.webp' : '/images/logo/logo_dark.webp';

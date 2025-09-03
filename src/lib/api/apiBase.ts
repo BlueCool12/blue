@@ -2,15 +2,18 @@
 export function getApiBase(): string {
 
     const isServer = typeof window === 'undefined';
-    const isBuild = process.env.NEXT_PHASE === 'phase-production-build';
-
-    if (isBuild) {
-        return process.env.PUBLIC_API_BASE_URL!;
-    }
 
     if (isServer) {
-        return process.env.INTERNAL_API_BASE_URL || process.env.PUBLIC_API_BASE_URL!;
+        const base =
+            process.env.INTERNAL_API_BASE_URL ??
+            process.env.PUBLIC_API_BASE_URL ??
+            process.env.NEXT_PUBLIC_API_BASE_URL;
+
+        if (!base) throw new Error('API base URL missing (server)');
+        return base;
     }
 
-    return process.env.PUBLIC_API_BASE_URL!;
+    const base = process.env.NEXT_PUBLIC_API_BASE_URL;
+    if (!base) throw new Error('NEXT_PUBLIC_API_BASE_URL missing (client)');
+    return base;
 }

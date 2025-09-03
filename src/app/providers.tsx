@@ -32,7 +32,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
     return (
         <Provider store={store}>
             <QueryClientProvider client={queryClient}>
-                <ThemeProvider attribute="data-theme" defaultTheme="system" enableSystem={true}>
+                <ThemeProvider attribute="data-theme" defaultTheme="system" enableSystem={true} disableTransitionOnChange>
                     {children}
                     <Toaster />
                 </ThemeProvider>

@@ -13,7 +13,7 @@ import { postService } from '@/services/postService';
 import { Category } from '@/types/category';
 import { categoryService } from '@/services/categoryService';
 
-export const revalidate = 1800;
+export const revalidate = 300;
 
 async function getLatestPosts(): Promise<PostLatest[]> {
     return await postService.getLatestPosts();
