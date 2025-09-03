@@ -1,5 +1,5 @@
 import { PageResponse, PostDetailResponse, PostLatest, PostListResponse } from "@/types/post";
-import api from "./axiosInstance";
+import { getApiBase } from "./apiBase";
 
 export const postApi = {
     getAllPosts: async ({
@@ -12,21 +12,23 @@ export const postApi = {
         size?: number;
     }): Promise<PageResponse<PostListResponse>> => {
         const params = new URLSearchParams();
-        if (category) params.append('category', category);
-        if (page) params.append('page', (page - 1).toString());
-        if (size) params.append('size', size.toString());
+        if (category) params.set('category', category);
+        params.set('page', (page - 1).toString());
+        params.set('size', size.toString());
 
-        const response = await api.get(`/posts?${params.toString()}`);
-        return response.data;
+        const response = await fetch(`${getApiBase()}/posts?${params.toString()}`);
+        if (!response.ok) throw new Error(`GET /posts 실패: ${response.status}`);
+        return response.json();
     },
 
-    getPostBySlug: async (slug: string): Promise<PostDetailResponse> => {        
-        const response = await api.get(`/posts/${slug}`);        
-        return response.data;
+    getPostBySlug: async (slug: string): Promise<PostDetailResponse> => {
+        const response = await fetch(`${getApiBase()}/posts/${slug}`);
+        if (!response.ok) throw new Error(`GET /posts/${slug} 실패: ${response.status}`);
+        return response.json();
     },
 
     getLatestPosts: async (): Promise<PostLatest[]> => {
-        const response = await api.get("/posts/latest");
-        return response.data;
+        const response = await fetch(`${getApiBase()}/posts/latest`);
+        return response.json();
     }
 }
