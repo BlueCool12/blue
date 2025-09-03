@@ -127,7 +127,7 @@ export default function ProjectTabs() {
                             width={1280}
                             height={720}
                             placeholder='blur'
-                            onLoadingComplete={() => {
+                            onLoad={() => {
                                 setTimeout(() => setImgLoading(false), 150);
                             }}
                         />

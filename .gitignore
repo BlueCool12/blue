@@ -37,3 +37,8 @@ dist-ssr
 /public/sitemap-*.xml
 
 .env
+
+/public/sw.js
+/public/workbox-*.js
+/public/worker-*.js
+/public/fallback-*.html
