@@ -3,7 +3,6 @@ import { notFound } from "next/navigation";
 import { highlightCodeBlocksWithShiki } from "@/lib/utils/highlight";
 import { formatDate } from "@/lib/utils/format";
 import { postApi } from "@/lib/api/postApi";
-import { fetchPostBySlug } from "@/lib/server/post";
 
 import type { PagedPost, PageResponse, Post, PostDetail, PostDetailResponse, PostLatest, PostListResponse } from "@/types/post";
 
@@ -40,7 +39,7 @@ export const postService = {
 
     getPostBySlug: async (slug: string): Promise<PostDetail> => {
         try {
-            const response: PostDetailResponse = await fetchPostBySlug(slug);
+            const response: PostDetailResponse = await postApi.getPostBySlug(slug);
             const highlightedContent = await highlightCodeBlocksWithShiki(response.content);
             const formattedCreatedAt = formatDate(response.createdAt);
 
