@@ -4,16 +4,16 @@ import { getApiBase } from "./apiBase";
 export const postApi = {
     getAllPosts: async ({
         category,
-        page = 1,
-        size = 10,
+        page,
+        size,
     }: {
         category?: string | null;
-        page?: number;
-        size?: number;
+        page: number;
+        size: number;
     }): Promise<PageResponse<PostListResponse>> => {
         const params = new URLSearchParams();
         if (category) params.set('category', category);
-        params.set('page', (page - 1).toString());
+        params.set('page', page.toString());
         params.set('size', size.toString());
 
         const response = await fetch(`${getApiBase()}/posts?${params.toString()}`);

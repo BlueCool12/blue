@@ -9,10 +9,8 @@ export interface Post {
 
 export interface PagedPost {
     posts: Post[];
-    totalPages: number;
-    totalElements: number;
-    currentPage: number;
-    isLast: boolean;
+    current: number;
+    hasNext: boolean;
 }
 
 export interface PostSummary {

@@ -12,12 +12,11 @@ import { useInfinitePosts } from "@/hooks/queries/posts/useInfinitePosts";
 import type { PagedPost, Post } from "@/types/post";
 
 type Props = {
-    startPage: number | null;
     size: number;
     categorySlug?: string | null;
 };
 
-export default function MorePosts({ startPage, size, categorySlug = null }: Props) {
+export default function MorePosts({ size, categorySlug = null }: Props) {
 
     const sentinelRef = useRef<HTMLDivElement | null>(null);
 
@@ -28,9 +27,7 @@ export default function MorePosts({ startPage, size, categorySlug = null }: Prop
         isFetchingNextPage,
     } = useInfinitePosts({
         category: categorySlug,
-        size,
-        startPage: startPage ?? 2,
-        enabled: startPage !== null,
+        size,        
     });
 
     useEffect(() => {

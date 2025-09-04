@@ -9,12 +9,12 @@ import type { PagedPost, PageResponse, Post, PostDetail, PostDetailResponse, Pos
 export const postService = {
     getAllPosts: async ({
         category,
-        page,
-        size,
+        page = 0,
+        size = 10,
     }: {
         category?: string | null;
-        page?: number;
-        size?: number;
+        page: number;
+        size: number;
     }): Promise<PagedPost> => {
         const result: PageResponse<PostListResponse> = await postApi.getAllPosts({ category, page, size });
 
@@ -30,10 +30,8 @@ export const postService = {
 
         return {
             posts,
-            totalPages: result.totalPages,
-            totalElements: result.totalElements,
-            currentPage: result.number,
-            isLast: result.last,
+            current: result.number,
+            hasNext: result.hasNext,
         };
     },
 
@@ -44,9 +42,9 @@ export const postService = {
             const formattedCreatedAt = formatDate(response.createdAt);
 
             const postDetail: PostDetail = {
-                ...response,                
+                ...response,
                 content: highlightedContent,
-                createdAtText: formattedCreatedAt,                
+                createdAtText: formattedCreatedAt,
             };
 
             return postDetail;
