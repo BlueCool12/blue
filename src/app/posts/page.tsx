@@ -40,11 +40,11 @@ export default async function Page() {
 
     const PAGE_SIZE = 10;
     const [initial, categories] = await Promise.all([
-        postService.getAllPosts({ page: 1, size: PAGE_SIZE, category: null }),
+        postService.getAllPosts({ page: 0, size: PAGE_SIZE, category: null }),
         categoryService.getCategories(),
     ]);
 
-    const items = initial.posts ?? [];
+    const posts = initial.posts ?? [];
 
     return (
         <>
@@ -61,11 +61,11 @@ export default async function Page() {
             />
 
             <section className={styles.section}>
-                {items.length === 0 ? (
+                {posts.length === 0 ? (
                     <EmptyState message="열심히 공부 중입니다..." />
                 ) : (
                     <ul className={styles.wrapper}>
-                        {items.map((post) => (
+                        {posts.map((post) => (
                             <li key={post.slug} className={styles.item}>
                                 <article className={styles.post}>
                                     <Link href={`/posts/${post.slug}`} prefetch={false}>
@@ -84,7 +84,9 @@ export default async function Page() {
                             </li>
                         ))}
 
-                        <MorePosts startPage={2} size={PAGE_SIZE} categorySlug={null} />
+                        {initial.hasNext && (
+                            <MorePosts size={PAGE_SIZE} categorySlug={null} />
+                        )}
                     </ul>
                 )}
             </section >
