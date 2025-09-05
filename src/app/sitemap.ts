@@ -59,7 +59,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             path === '/' || path === '/posts'
                 ? latestPostDateISO
                 : path === '/about'
-                    ? '2025-08-04T00:00:00.000Z'
+                    ? '2025-09-05T00:00:00.000Z'
                     : '2025-07-01T00:00:00.000Z',
         changeFrequency: path === '/' || path === '/posts' ? 'weekly' : 'yearly',
         priority: path === '/' ? 1.0 : 0.5,

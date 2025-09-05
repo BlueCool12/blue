@@ -6,6 +6,7 @@ import clsx from 'clsx';
 
 import { MdOutlineMail } from 'react-icons/md';
 import ProjectTabs from './ProjectTabs';
+import { FaGithub } from 'react-icons/fa';
 
 const careers = [
     { date: '2025.03 ~ Now', title: '바로연' },
@@ -21,11 +22,11 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'About',
         description: 'BlueCool12의 이력과 프로젝트를 소개합니다.',
-        url: 'https://pyomin.com/about',        
+        url: 'https://pyomin.com/about',
     },
-    twitter: {        
+    twitter: {
         title: 'About',
-        description: 'BlueCool12의 이력과 프로젝트를 소개합니다.',    
+        description: 'BlueCool12의 이력과 프로젝트를 소개합니다.',
     },
 }
 
@@ -33,7 +34,7 @@ const About = () => {
 
     return (
         <div className={styles['wrapper']}>
-            
+
             {/* Hero Section */}
             <section className={styles['hero-section']}>
                 <div className={styles['hero-section__card']}>
@@ -41,11 +42,21 @@ const About = () => {
                         <p className={styles['hero-section__intro']}>안녕하세요 👋</p>
                         <h1 className={styles['hero-section__title']}>
                             저는 풀스택 개발자 <br />
-                            <strong>BlueCool12</strong>입니다.
+                            <strong>BlueCool</strong> 입니다.
                         </h1>
                         <p className={styles['hero-section__email']}>
-                            <MdOutlineMail size={24} />
-                            <a href="mailto:pmini1203@gmail.com">pmini1203@gmail.com</a>
+                            <div>
+                                <MdOutlineMail size={24} />
+                                <a href="mailto:pmini1203@gmail.com">pmini1203@gmail.com</a>
+                            </div>
+
+                            <div>
+                                <FaGithub size={24} />
+                                <a href='https://github.com/BlueCool12' target='_blank' rel='noopener noreferrer'>
+                                    github.com/BlueCool12
+                                </a>
+                            </div>
+
                         </p>
 
                     </div>
