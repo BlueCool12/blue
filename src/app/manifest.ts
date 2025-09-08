@@ -34,12 +34,8 @@ export default function manifest(): MetadataRoute.Manifest {
             { name: 'About', url: '/about', description: '소개' },
             { name: 'Guestbook', url: '/guestbooks', description: '방명록' },
         ],
-        screenshots: [
-
-        ],
-        protocol_handlers: [
-
-        ],
+        screenshots: [],
+        protocol_handlers: [],
         related_applications: [],
         prefer_related_applications: false
     };
