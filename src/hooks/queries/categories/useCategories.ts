@@ -6,8 +6,8 @@ export const useCategories = () => {
   return useQuery<Category[]>({
     queryKey: ['categories'],
     queryFn: () => categoryService.getCategories(),
-    staleTime: 1000 * 60 * 60,
-    gcTime: 1000 * 60 * 60 * 24,
+    staleTime: 1000 * 60 * 60 * 24,
+    gcTime: 1000 * 60 * 60 * 24 * 7,
     refetchOnWindowFocus: false
   });
 };
