@@ -7,23 +7,22 @@ export const revalidate = 86400;
 const SITE_URL = 'https://pyomin.com';
 const staticUrls = ['/', '/about', '/posts', '/guestbooks'] as const;
 
-type PostSitemap = { slug: string; lastModified: string };
-type CategorySitemap = { slug: string; lastModified: string };
+type SlugSitemap = { slug: string; lastModified: string };
 type SitemapResponse<T> = { sitemap: T[] };
 
-async function fetchPostSitemap(): Promise<PostSitemap[]> {
+async function fetchPostSitemap(): Promise<SlugSitemap[]> {
     const res = await fetch(`${getApiBase()}/posts/sitemap`);
     if (!res.ok) throw new Error('posts/sitemap 실패');
 
-    const json = (await res.json()) as SitemapResponse<PostSitemap>;
+    const json = (await res.json()) as SitemapResponse<SlugSitemap>;
     return json.sitemap ?? [];
 }
 
-async function fetchCategorySitemap(): Promise<CategorySitemap[]> {
+async function fetchCategorySitemap(): Promise<SlugSitemap[]> {
     const res = await fetch(`${getApiBase()}/categories/sitemap`);
     if (!res.ok) return [];
 
-    const json = (await res.json()) as SitemapResponse<CategorySitemap>;
+    const json = (await res.json()) as SitemapResponse<SlugSitemap>;
     return json.sitemap ?? [];
 }
 
