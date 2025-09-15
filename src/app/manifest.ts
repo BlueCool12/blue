@@ -1,11 +1,10 @@
-import { MetadataRoute } from "next";
+import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
     return {
         name: 'BlueCool Blog',
         short_name: 'BlueCool',
-        description:
-            'BlueCool 블로그의 글들을 빠르게 탐색해보세요!',
+        description: 'BlueCool 블로그의 글들을 빠르게 탐색해보세요!',
         id: '/',
         start_url: '/',
         scope: '/',
