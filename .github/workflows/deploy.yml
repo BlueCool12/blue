@@ -1,39 +1,81 @@
-name: Deploy to Raspberry Pi
+name: Build & Deploy to Raspberry Pi
 
 on:
   push:
     branches: [ main ]
 
+concurrency:
+  group: blue-deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+    IMAGE_NAME: ghcr.io/bluecool12/blue
+
 jobs:
-  deploy:
-    name: Deploy via SSH
+  build:
+    name: Build & Push (GHCR)
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: read
+      packages: write
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+      - uses: actions/checkout@v4
 
+      - uses: docker/setup-qemu-action@v3
+      - uses: docker/setup-buildx-action@v3
+
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build & Push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          platforms: linux/arm64
+          push: true
+          tags: |
+            ${{ env.IMAGE_NAME }}:latest
+            ${{ env.IMAGE_NAME }}:${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          build-args: |
+            NEXT_PUBLIC_API_BASE_URL=${{ secrets.NEXT_PUBLIC_API_BASE_URL }}
+            PUBLIC_API_BASE_URL=${{ secrets.PUBLIC_API_BASE_URL }}
+
+  deploy:
+    name: Deploy via SSH (pull & up)
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.7.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
+      - name: Add host key (known_hosts)
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -p "${{ secrets.RASPBERRY_PORT }}" -H "${{ secrets.RASPBERRY_HOST }}" >> ~/.ssh/known_hosts
+          chmod 700 ~/.ssh
+          chmod 644 ~/.ssh/known_hosts
+
       - name: SSH and deploy to Raspberry Pi
         run: |
-          ssh -p ${{ secrets.RASPBERRY_PORT }} -o StrictHostKeyChecking=no ${{ secrets.RASPBERRY_USER }}@${{ secrets.RASPBERRY_HOST }} << 'EOF'
-            set -euo pipefail
-            
-            cd /home/${{ secrets.RASPBERRY_USER }}/docker-compose/bluecool/blue
-            git fetch --all --prune
-            git reset --hard origin/main
-            git config core.ignorecase false            
-            
-            docker compose build --no-cache blue
-            docker compose up -d --force-recreate blue
+          ssh -p ${{ secrets.RASPBERRY_PORT }} \
+              -o ServerAliveInterval=30 -o ServerAliveCountMax=10 \
+              ${{ secrets.RASPBERRY_USER }}@${{ secrets.RASPBERRY_HOST }} << 'EOF'
+            set -Eeuo pipefail
 
+            cd /home/${{ secrets.RASPBERRY_USER }}/docker-compose/bluecool/blue
+
+            git fetch --all --prune || true
+            git reset --hard origin/main || true
+            git config core.ignorecase false || true
+
+            docker compose pull blue
+            docker compose up -d blue
             docker image prune -f || true
           EOF
-        
-    
