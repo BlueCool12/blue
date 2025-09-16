@@ -94,6 +94,17 @@ body {
   cursor: url('/images/cursor.png') 2 2, auto;
 }
 
+body {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+header,
+footer {
+  flex: none;
+}
+
 /* 제목 초기화 */
 h1,
 h2,

@@ -44,7 +44,7 @@ const About = () => {
                             저는 풀스택 개발자 <br />
                             <strong>BlueCool</strong> 입니다.
                         </h1>
-                        <p className={styles['hero-section__email']}>
+                        <div className={styles['hero-section__email']}>
                             <div>
                                 <MdOutlineMail size={24} />
                                 <a href="mailto:pmini1203@gmail.com">pmini1203@gmail.com</a>
@@ -56,8 +56,7 @@ const About = () => {
                                     github.com/BlueCool12
                                 </a>
                             </div>
-
-                        </p>
+                        </div>
 
                     </div>
 
