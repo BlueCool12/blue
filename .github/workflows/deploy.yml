@@ -33,8 +33,7 @@ jobs:
       - name: Build & Push
         uses: docker/build-push-action@v5
         with:
-          context: .
-          file: ./bluecool/blue/Dockerfile
+          context: .          
           platforms: linux/arm64
           push: true
           tags: |

@@ -1,0 +1,33 @@
+# VCS
+.git
+.git/**
+
+# Node artifacts
+node_modules
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Next.js build outputs
+.next
+out
+
+# OS/editor junk
+.DS_Store
+Thumbs.db
+*.swp
+.vscode
+.idea
+
+# Env files
+.env
+.env.*
+
+.npmrc
+
+# Logs, coverage
+*.log
+coverage
+
+dist
+.cache
