@@ -92,7 +92,6 @@ export default async function Home() {
 
             {/* Latest Posts Section */}
             <section className={styles['recent-posts']}>
-
                 <div className={styles['recent-posts__header']}>
                     <div className={styles['recent-posts__heading']}>
                         <Link href='/posts' className={styles['recent-posts__title']}>최신 글 🌟</Link>

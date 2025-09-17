@@ -48,7 +48,7 @@ const projects = [
                 <strong>JWT</strong> 기반의 토큰 인증을 통해 관리자 로그인 기능을 개발하였습니다.<br /><br />
                 <strong>CKEditor</strong>를 활용해 글 작성 및 파일 업로드 기능을 구현하였고 사용자 행동 분석을 위해 <strong>페이지 조회 로그 기록 시스템</strong>을 구축하였습니다.<br /><br />
                 <strong>Prisma</strong>를 이용해 데이터베이스 스키마 정의 및 마이그레이션을 체계적으로 관리하였습니다.<br /><br />
-                <strong>[Blog]</strong><br />
+                <strong>[User]</strong><br />
                 기존 React 기반 프로젝트를 SEO 최적화를 위해 <strong>Next.js</strong>로 마이그레이션하고 <strong>다크 모드와 반응형 UI</strong>를 구현하였습니다.<br /><br />
                 Next.js의 <strong>MetadataRoute</strong> 기능을 통해 검색 엔진 최적화를 위한 <strong>Sitemap</strong> 과 <strong>RSS</strong>, PWA 지원을 위한 <strong>Manifest</strong>를 구성하였습니다.<br /><br />
                 <strong>useQuery</strong>를 활용하여 캐시 전략을 구성하고 <strong>Google Adsense</strong>로 페이지 단위 수익화를 구현하였습니다.<br /><br />

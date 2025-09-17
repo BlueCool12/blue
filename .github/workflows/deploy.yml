@@ -9,7 +9,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-    IMAGE_NAME: ghcr.io/bluecool12/blue
+  IMAGE_NAME: ghcr.io/bluecool12/blue
 
 jobs:
   build:
