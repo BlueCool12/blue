@@ -47,8 +47,8 @@ export default async function Home() {
                         src='/images/main.webp'
                         alt='메인 페이지 이미지'
                         priority
-                        fill
-                        sizes="(max-width: 768px) 100vw, 280px"
+                        width={280}
+                        height={280}
                     />
                 </div>
             </section>

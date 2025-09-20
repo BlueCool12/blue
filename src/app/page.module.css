@@ -112,9 +112,7 @@
 }
 
 .hero__image {
-    position: relative;
-    width: 280px;
-    height: 280px;
+    position: relative;    
     flex-shrink: 0;
 }
 
