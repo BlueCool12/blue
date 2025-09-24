@@ -32,6 +32,7 @@ export const metadata: Metadata = {
     description: 'BlueCool은 실전 웹 개발부터 서버 운영, DevOps 환경 구축까지 다양한 인사이트를 전하는 개발자 블로그입니다.',
     keywords: ['BlueCool', 'BlueCool12', '블루쿨', '개발 블로그', '개발자 블로그', '풀스택 개발자', '웹 개발', '프론트엔드', '백엔드'],
     alternates: {
+        canonical: '/',
         types: {
             'application/rss+xml': 'https://pyomin.com/rss.xml',
         },
