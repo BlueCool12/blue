@@ -11,28 +11,22 @@ import { commentService } from "@/services/commentService";
 import { useComments } from "@/hooks/queries/comments/useComments";
 
 import { getRandomAnonymousNickname } from "@/lib/utils/getRandomAnonymousNickname";
+import { useCommentForm } from "@/hooks/useCommentForm";
 
 interface Props {
     postId: number;
 }
 
-const MAX_LENGTH = 200;
-
 export const CommentEditor: React.FC<Props> = ({ postId }) => {
 
     const comments = useComments(postId);
-
     const [loading, setLoading] = useState(false);
     const [open, setOpen] = useState(false);
 
-    const [form, setForm] = useState({
-        nickname: '',
-        content: '',
-        password: '',
-    });
-
     const editorRef = useRef<HTMLDivElement>(null);
     const floatingBtnRef = useRef<HTMLButtonElement>(null);
+
+    const { form, setForm, handleChange, isOver, maxLength } = useCommentForm({}, 200);
 
     useEffect(() => {
         const handleClickOutside = (e: MouseEvent) => {
@@ -55,27 +49,6 @@ export const CommentEditor: React.FC<Props> = ({ postId }) => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
     }, [open]);
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const { name, value } = e.target;
-
-        if (name === 'password' && !/^\d*$/.test(value)) return;
-
-        if (name === 'content') {
-            if (value.length > MAX_LENGTH) {
-                setForm(prev => ({
-                    ...prev,
-                    content: value.slice(0, MAX_LENGTH),
-                }));
-                return;
-            }
-        }
-
-        setForm(prev => ({
-            ...prev,
-            [name]: value,
-        }));
-    };
 
     const handleSubmit = async () => {
         if (loading) return;
@@ -135,7 +108,7 @@ export const CommentEditor: React.FC<Props> = ({ postId }) => {
                             maxLength={10}
                             name="nickname"
                             value={form.nickname}
-                            onChange={handleChange}
+                            onChange={handleChange("nickname")}
                         />
                         <PasswordInput
                             type="password"
@@ -143,7 +116,7 @@ export const CommentEditor: React.FC<Props> = ({ postId }) => {
                             maxLength={4}
                             name="password"
                             value={form.password}
-                            onChange={handleChange}
+                            onChange={handleChange("password")}
                         />
                     </NicknamePasswordWrapper>
 
@@ -152,11 +125,11 @@ export const CommentEditor: React.FC<Props> = ({ postId }) => {
                             placeholder="소중한 의견 남겨주세요 :D"
                             name="content"
                             value={form.content}
-                            onChange={handleChange}
+                            onChange={handleChange("content")}
                         />
 
-                        <CharCount isOver={form.content.length >= MAX_LENGTH}>
-                            {form.content.length}/{MAX_LENGTH}
+                        <CharCount isOver={isOver}>
+                            {form.content.length}/{maxLength}
                         </CharCount>
                     </ContentWrapper>
 

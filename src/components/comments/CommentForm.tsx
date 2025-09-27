@@ -1,16 +1,9 @@
-import { useState } from "react";
-
 import styled from "styled-components";
 
 import { toast } from "react-toastify";
 
 import { getRandomAnonymousNickname } from "@/lib/utils/getRandomAnonymousNickname";
-
-interface CommentFormValues {
-    nickname: string;
-    password: string;
-    content: string;
-}
+import { CommentFormValues, useCommentForm } from "@/hooks/useCommentForm";
 
 interface Props {
     initialValues?: Partial<CommentFormValues>;
@@ -18,6 +11,7 @@ interface Props {
     onCancel?: () => void;
     onSubmit: (data: { nickname: string; password: string; content: string; parentId?: number }) => void;
     loading?: boolean;
+    maxLength?: number;
 }
 
 export const CommentForm: React.FC<Props> = ({
@@ -26,17 +20,9 @@ export const CommentForm: React.FC<Props> = ({
     onCancel,
     onSubmit,
     loading = false,
+    maxLength = 200,
 }) => {
-
-    const [form, setForm] = useState<CommentFormValues>({
-        nickname: initialValues.nickname ?? "익명의티라노",
-        password: "",
-        content: initialValues.content ?? "",
-    });
-
-    const handleChange = (field: keyof CommentFormValues) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setForm((prev) => ({ ...prev, [field]: e.target.value }));
-    };
+    const { form, handleChange, isOver } = useCommentForm(initialValues, maxLength);
 
     const handleSubmit = () => {
         if (!/^\d{4}$/.test(form.password.trim())) {
@@ -64,7 +50,7 @@ export const CommentForm: React.FC<Props> = ({
                 <NicknameInput
                     value={form.nickname}
                     onChange={handleChange("nickname")}
-                    placeholder="닉네임"
+                    placeholder="닉네임 (선택)"
                     maxLength={10}
                 />
                 <PasswordInput
@@ -76,11 +62,17 @@ export const CommentForm: React.FC<Props> = ({
                 />
             </TopInputWrapper>
 
-            <TextArea
-                value={form.content}
-                onChange={handleChange("content")}
-                placeholder={placeholder || "내용을 입력하세요"}
-            />
+            <ContentWrapper>
+                <TextArea
+                    value={form.content}
+                    onChange={handleChange("content")}
+                    placeholder={placeholder || "내용을 입력하세요"}
+                />
+
+                <CharCount isOver={isOver}>
+                    {form.content.length}/{maxLength}
+                </CharCount>
+            </ContentWrapper>
 
             <InputWrapper>
                 <SubmitButton onClick={handleSubmit} type="button" disabled={loading}>
@@ -95,7 +87,7 @@ export const CommentForm: React.FC<Props> = ({
 const FormWrapper = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.8rem;
     margin-top: 0.5rem;
 `;
 
@@ -121,13 +113,31 @@ const PasswordInput = styled.input`
   border: 1px solid var(--border-color);
 `;
 
+const ContentWrapper = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+`;
+
 const TextArea = styled.textarea`
+    width: 100%;
     padding: 0.75rem;
     font-size: 0.9rem;
     border: 1px solid var(--border-color);
     border-radius: 0.5rem;
     resize: none;
     height: 5rem;
+`;
+
+const CharCount = styled.div.withConfig({
+    shouldForwardProp: (prop) => prop !== "isOver",
+}) <{ isOver: boolean }>`
+    width: 100%;
+    color: ${({ isOver }) => (isOver ? '#dc2626' : 'inherit')};
+    font-weight: ${({ isOver }) => (isOver ? '500' : 'normal')};
+    font-size: 0.8rem;
+    text-align: right;
 `;
 
 const InputWrapper = styled.div`
