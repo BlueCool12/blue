@@ -16,6 +16,8 @@ interface Props {
     postId: number;
 }
 
+const MAX_LENGTH = 200;
+
 export const CommentEditor: React.FC<Props> = ({ postId }) => {
 
     const comments = useComments(postId);
@@ -58,6 +60,16 @@ export const CommentEditor: React.FC<Props> = ({ postId }) => {
         const { name, value } = e.target;
 
         if (name === 'password' && !/^\d*$/.test(value)) return;
+
+        if (name === 'content') {
+            if (value.length > MAX_LENGTH) {
+                setForm(prev => ({
+                    ...prev,
+                    content: value.slice(0, MAX_LENGTH),
+                }));
+                return;
+            }
+        }
 
         setForm(prev => ({
             ...prev,
@@ -135,12 +147,18 @@ export const CommentEditor: React.FC<Props> = ({ postId }) => {
                         />
                     </NicknamePasswordWrapper>
 
-                    <TextArea
-                        placeholder="소중한 의견 남겨주세요 :D"
-                        name="content"
-                        value={form.content}
-                        onChange={handleChange}
-                    />
+                    <ContentWrapper>
+                        <TextArea
+                            placeholder="소중한 의견 남겨주세요 :D"
+                            name="content"
+                            value={form.content}
+                            onChange={handleChange}
+                        />
+
+                        <CharCount isOver={form.content.length >= MAX_LENGTH}>
+                            {form.content.length}/{MAX_LENGTH}
+                        </CharCount>
+                    </ContentWrapper>
 
                     <SubmitButton onClick={handleSubmit} disabled={loading} aria-disabled={loading}>
                         {loading ? "전송 중..." : (<MdOutlineSend />)}
@@ -223,13 +241,31 @@ const PasswordInput = styled.input`
     width: 30%;
 `;
 
+const ContentWrapper = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+`;
+
 const TextArea = styled.textarea`
-    padding: 0.75rem 1rem;
+    width: 100%;
+    padding: 1rem;
     border-radius: 0.5rem;
     border: 1px solid var(--border-color);
     font-size: 0.95rem;
     resize: none;
     height: 5rem;
+`;
+
+const CharCount = styled.div.withConfig({
+    shouldForwardProp: (prop) => prop !== "isOver",
+}) <{ isOver: boolean }>`
+    width: 100%;
+    color: ${({ isOver }) => (isOver ? '#dc2626' : 'inherit')};
+    font-weight: ${({ isOver }) => (isOver ? '500' : 'normal')};
+    font-size: 0.8rem;
+    text-align: right;
 `;
 
 const SubmitButton = styled.button`
