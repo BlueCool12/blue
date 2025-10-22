@@ -10,7 +10,7 @@ import MorePosts from "./MorePosts";
 import { categoryService } from '@/services/categoryService';
 import { postService } from '@/services/postService';
 
-export const revalidate = 300;
+export const revalidate = 86400;
 
 export async function generateMetadata(): Promise<Metadata> {
     const title = '전체 글 목록';

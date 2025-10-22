@@ -12,12 +12,29 @@ import { PrevNextNavigation } from '@/components/posts/PrevNextNavigation';
 import AdsenseAd from '@/components/AdsenseAd';
 
 import { postService } from '@/services/postService';
+import { getApiBase } from "@/lib/api/apiBase";
+
+type Sitemap = { key: string; lastModified: string };
+type SitemapResponse<T> = { sitemap: T[] };
 
 interface PageProps {
     params: Promise<{ slug: string }>;
 }
 
 export const revalidate = 86400;
+export const dynamic = 'force-static';
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+    const res = await fetch(`${getApiBase()}/posts/sitemap`);
+    if (!res.ok) throw new Error('Failed to fetch staticParams');
+
+    const { sitemap }: SitemapResponse<Sitemap> = await res.json();
+
+    return sitemap.map((item): { slug: string } => ({
+        slug: item.key,
+    }));
+}
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
     const { slug: rawSlug } = await params;
@@ -86,7 +103,7 @@ export default async function PostDetail({ params }: PageProps) {
             <LogoBorder />
 
             <CommentSectionWrapper postId={post.id} />
-            
+
             <AdsenseAd />
 
 
