@@ -8,12 +8,12 @@ import HeroClient from '@/components/HeroClient';
 
 import { getDailySeed, seededShuffle } from '@/lib/utils/dailyShuffle';
 
-import { PostLatest } from '@/types/post';
+import { PagedPost, PostLatest } from '@/types/post';
 import { postService } from '@/services/postService';
 import { Category } from '@/types/category';
 import { categoryService } from '@/services/categoryService';
 
-export const revalidate = 300;
+export const revalidate = 86400;
 
 async function getLatestPosts(): Promise<PostLatest[]> {
     return await postService.getLatestPosts();
@@ -23,11 +23,16 @@ async function getCategories(): Promise<Category[]> {
     return await categoryService.getCategories();
 }
 
+async function getTroubleshootingPosts(): Promise<PagedPost> {
+    return await postService.getAllPosts({ category: 'troubleshooting', page: 0, size: 4 });
+}
+
 export default async function Home() {
 
-    const [latestPosts, categories] = await Promise.all([
+    const [latestPosts, categories, troubleshootingPosts] = await Promise.all([
         getLatestPosts(),
         getCategories(),
+        getTroubleshootingPosts(),
     ]);
 
     const allChildren = categories?.flatMap((parent) => parent.children ?? []) ?? [];
@@ -94,11 +99,24 @@ export default async function Home() {
             <section className={styles['recent-posts']}>
                 <div className={styles['recent-posts__header']}>
                     <div className={styles['recent-posts__heading']}>
-                        <Link href='/posts' className={styles['recent-posts__title']}>최신 글 🌟</Link>
-                        <p className={styles['recent-posts__subtitle']}>새로 올라온 글들을 확인해보세요</p>
+                        <Link
+                            href='/posts'
+                            className={styles['recent-posts__title']}
+                        >
+                            최신 글 🌟
+                        </Link>
+                        <p className={styles['recent-posts__subtitle']}>
+                            새로 올라온 글들을 확인해보세요!
+                        </p>
                     </div>
 
-                    <Link href="/posts" className={styles['recent-posts__all-link']} aria-label='전체 글 목록 보기'><MdOutlineChevronRight /></Link>
+                    <Link
+                        href="/posts"
+                        className={styles['recent-posts__all-link']}
+                        aria-label='전체 글 목록 보기'
+                    >
+                        <MdOutlineChevronRight />
+                    </Link>
                 </div>
 
                 <div className={styles['recent-posts__card-wrapper']}>
@@ -118,6 +136,60 @@ export default async function Home() {
                 </div>
             </section>
             {/* Latest Posts Section */}
+
+            {/* Troubleshooting Posts Section */}
+            <section className={styles['recent-posts']}>
+                <div className={styles['recent-posts__header']}>
+                    <div className={styles['recent-posts__heading']}>
+                        <Link href='/posts/category/troubleshooting' className={styles['recent-posts__title']}>Troubleshooting 🛠️</Link>
+                        <p className={styles['recent-posts__subtitle']}>실제 서비스에서 마주한 문제들을 분석하고 해결 과정에서 얻은 경험들</p>
+                    </div>
+
+                    <Link
+                        href="/posts/category/troubleshooting"
+                        className={styles['recent-posts__all-link']}
+                        aria-label='트러블슈팅 글 더 보기'
+                    >
+                        <MdOutlineChevronRight />
+                    </Link>
+                </div>
+
+                <div className={styles['troubleshooting-posts']}>
+                    {troubleshootingPosts?.posts.map((post) => {
+                        const src = post.coverPath ?? '/images/empty.webp';
+
+                        return (
+                            <article key={post.slug} className={styles['troubleshooting-posts__card']}>
+                                <Link
+                                    href={`/posts/${post.slug}`}
+                                    className={styles['troubleshooting-posts__card-link']}
+                                    aria-labelledby={`post-${post.slug}`}
+                                >
+                                    <figure className={styles['troubleshooting-posts__thumb']}>
+                                        <Image
+                                            src={post.coverPath ?? '/images/empty.webp'}
+                                            alt={`${post.title} 썸네일`}
+                                            fill
+                                            style={{ objectFit: 'cover' }}
+                                        />
+                                    </figure>
+
+                                    <div className={styles['troubleshooting-posts__content']}>
+                                        <h3 id={`post-${post.slug}`} className={styles['troubleshooting-posts__title']}>
+                                            {post.title}
+                                        </h3>
+                                        <p className={styles['troubleshooting-posts__summary']}>{post.contentSummary}</p>
+                                        <time className={styles['troubleshooting-posts__date']} dateTime={post.createdAt}>
+                                            {post.createdAtText}
+                                        </time>
+                                    </div>
+                                </Link>
+                            </article>
+                        );
+                    })}
+                </div>
+            </section>
+            {/* Troubleshooting Posts Section */}
         </div>
     )
 }

@@ -56,7 +56,7 @@ const projects = [
         ),
         image: bluecoolImage,
         members: '1명',
-        period: '2025.05 ~ (진행중)',
+        period: '2025.06 ~ 2025.08 (3개월)',
         link: 'https://www.pyomin.com',
         pdf: undefined,
         stack: [

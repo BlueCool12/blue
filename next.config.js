@@ -15,6 +15,17 @@ const nextConfig = {
     styledComponents: true,
   },
 
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'api.pyomin.com',
+        pathname: '/files/**',
+      }
+    ],
+    formats: ['image/avif', 'image/webp'],
+  },
+
   webpack: (config) => {
     config.resolve.alias['@'] = path.resolve(__dirname, 'src');
     return config;

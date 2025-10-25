@@ -24,6 +24,7 @@ export const postService = {
             category: post.category,
             slug: post.slug,
             contentSummary: post.contentSummary,
+            coverPath: post.coverPath,
             createdAt: post.createdAt,
             createdAtText: formatDate(post.createdAt),
         }));

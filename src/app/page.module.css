@@ -112,7 +112,7 @@
 }
 
 .hero__image {
-    position: relative;    
+    position: relative;
     flex-shrink: 0;
 }
 
@@ -167,133 +167,6 @@
     opacity: 1;
     transform: translateX(0);
     pointer-events: auto;
-}
-
-/* 최신글 섹션 */
-.recent-posts {
-    margin-top: 4rem;
-}
-
-@media (max-width: 768px) {
-    .recent-posts {
-        margin-top: 2rem;
-    }
-}
-
-.recent-posts__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.recent-posts__heading {
-    display: flex;
-    flex-direction: column;
-}
-
-.recent-posts__title {
-    font-size: 2rem;
-    font-weight: 500;
-    display: inline-block;
-    width: fit-content;
-}
-
-.recent-posts__subtitle {
-    font-size: 1rem;
-    font-weight: 300;
-}
-
-.recent-posts__all-link {
-    font-size: 2.5rem;
-    display: flex;
-}
-
-@media(max-width: 768px) {
-    .recent-posts__title {
-        font-size: 1.8rem;
-    }
-
-    .recent-posts__subtitle {
-        font-size: 0.9rem;
-    }
-
-    .recent-posts__all-link {
-        font-size: 2rem;
-    }
-}
-
-.recent-posts__card-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.recent-posts__card {
-    border: 1px solid var(--border-color);    
-}
-
-.recent-posts__content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-}
-
-.recent-posts__card-title {
-    font-size: 1rem;
-    font-weight: 600;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.recent-posts__date {
-    font-size: 0.8rem;
-    color: #999999;
-}
-
-.recent-posts__skeleton {
-    display: flex;
-    gap: 1rem;
-    padding: 1rem;
-    border-radius: 12px;
-    background: var(--card-bg);
-    margin-bottom: 1rem;
-    animation: pulse 1.5s infinite ease-in-out;
-}
-
-.skeleton-title {
-    width: 70%;
-    height: 1.2rem;
-    background-color: var(--theme-color-1);
-    border-radius: 6px;
-}
-
-.skeleton-date {
-    width: 30%;
-    height: 1.2rem;
-    background-color: var(--theme-color-1);
-    border-radius: 6px;
-}
-
-@keyframes pulse {
-    0% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0.4;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
-
-.recent-posts__error {
-    background-color: var(--card-bg);
-    padding: 1rem;
-    border-radius: 12px;
 }
 
 /* Categories Section */
@@ -426,3 +299,228 @@
 }
 
 /* Categories Section */
+
+/* Recent Posts Section */
+
+.recent-posts {
+    margin-top: 4rem;
+}
+
+@media (max-width: 768px) {
+    .recent-posts {
+        margin-top: 2rem;
+    }
+}
+
+.recent-posts__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.recent-posts__heading {
+    display: flex;
+    flex-direction: column;
+}
+
+.recent-posts__title {
+    font-size: 2rem;
+    font-weight: 500;
+    display: inline-block;
+    width: fit-content;
+}
+
+.recent-posts__subtitle {
+    font-size: 1rem;
+    font-weight: 300;
+}
+
+.recent-posts__all-link {
+    font-size: 2.5rem;
+    display: flex;
+}
+
+@media(max-width: 768px) {
+    .recent-posts__title {
+        font-size: 1.8rem;
+    }
+
+    .recent-posts__subtitle {
+        font-size: 0.9rem;
+    }
+
+    .recent-posts__all-link {
+        font-size: 2rem;
+    }
+}
+
+.recent-posts__card-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.recent-posts__card {
+    border: 1px solid var(--border-color);
+}
+
+.recent-posts__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+}
+
+.recent-posts__card-title {
+    font-size: 1rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.recent-posts__date {
+    font-size: 0.8rem;
+    color: #999999;
+}
+
+.recent-posts__skeleton {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 12px;
+    background: var(--card-bg);
+    margin-bottom: 1rem;
+    animation: pulse 1.5s infinite ease-in-out;
+}
+
+.skeleton-title {
+    width: 70%;
+    height: 1.2rem;
+    background-color: var(--theme-color-1);
+    border-radius: 6px;
+}
+
+.skeleton-date {
+    width: 30%;
+    height: 1.2rem;
+    background-color: var(--theme-color-1);
+    border-radius: 6px;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.4;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.recent-posts__error {
+    background-color: var(--card-bg);
+    padding: 1rem;
+    border-radius: 12px;
+}
+
+/* Recent Posts Section */
+
+/* Troubleshooting Posts Section */
+
+.troubleshooting-posts {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 12px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+}
+
+.troubleshooting-posts::-webkit-scrollbar {
+    height: 6px;
+}
+
+.troubleshooting-posts::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, .25);
+    border-radius: 8px;
+}
+
+.troubleshooting-posts__card {
+    flex: 0 0 auto;
+    width: 330px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    overflow: hidden;
+    scroll-snap-align: center;
+}
+
+.troubleshooting-posts__card-link {
+    display: flex;
+    flex-direction: column;
+}
+
+.troubleshooting-posts__thumb {
+    position: relative;
+    max-width: 100%;
+    width: 100%;
+    height: 18rem;
+    overflow: hidden;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+}
+
+.troubleshooting-posts__content {
+    display: flex;
+    flex-direction: column;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    padding: 1rem;
+    gap: 0.5rem;
+}
+
+.troubleshooting-posts__title {
+    font-size: 1rem;
+    line-height: 1.35;
+    font-weight: 700;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.troubleshooting-posts__summary {
+    margin: 0 0 0.5rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--text-color);
+    opacity: 0.8;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.troubleshooting-posts__date {
+    font-size: 0.85rem;
+    color: var(--text-color);
+    display: flex;
+    justify-content: flex-end;
+    opacity: 0.6;
+}
+
+@media(max-width: 768px) {
+    .troubleshooting-posts {
+        margin-right: calc(50% - 50vw);
+        padding-right: 16px;
+    }
+}
+
+/* Troubleshooting Posts Section */

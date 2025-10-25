@@ -3,6 +3,7 @@ export interface Post {
     title: string;
     category: string;
     contentSummary: string;
+    coverPath: string;
     createdAt: string;
     createdAtText: string;
 }

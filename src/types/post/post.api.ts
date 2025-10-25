@@ -5,6 +5,7 @@ export interface PostListResponse {
     isPublic: boolean;
     isDeleted: boolean;
     slug: string;
+    coverPath: string;
     contentSummary: string;
     description?: string;
     createdAt: string;
