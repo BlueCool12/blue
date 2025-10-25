@@ -7,6 +7,8 @@ const withPWA = require('next-pwa')({
   disable: process.env.NODE_ENV === 'development',
 });
 
+const { getApiBase } = require('@/lib/api/apiBase');
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'standalone',
@@ -19,7 +21,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'api.pyomin.com',
+        hostname: `${getApiBase()}`,
         pathname: '/files/**',
       }
     ],
