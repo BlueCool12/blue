@@ -155,9 +155,7 @@ export default async function Home() {
                 </div>
 
                 <div className={styles['troubleshooting-posts']}>
-                    {troubleshootingPosts?.posts.map((post) => {
-                        const src = post.coverPath ?? '/images/empty.webp';
-
+                    {troubleshootingPosts?.posts.map((post) => {                        
                         return (
                             <article key={post.slug} className={styles['troubleshooting-posts__card']}>
                                 <Link
