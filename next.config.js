@@ -19,8 +19,8 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'bluecool.pyomin.com',
-        pathname: '/api/v1/files/**',
+        hostname: 'api.pyomin.com',
+        pathname: '/files/**',
       }
     ],
     formats: ['image/avif', 'image/webp'],
