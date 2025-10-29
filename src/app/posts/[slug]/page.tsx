@@ -1,3 +1,5 @@
+import { Suspense } from 'react';
+
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
@@ -10,6 +12,7 @@ import ShareButtons from '@/components/posts/ShareButtons';
 import { LogoBorder } from '@/components/posts/LogoBorder';
 import { PrevNextNavigation } from '@/components/posts/PrevNextNavigation';
 import AdsenseAd from '@/components/AdsenseAd';
+import { CommentSkeleton } from '@/components/comments/CommentSkeleton';
 
 import { postService } from '@/services/postService';
 import { getApiBase } from "@/lib/api/apiBase";
@@ -102,11 +105,11 @@ export default async function PostDetail({ params }: PageProps) {
 
             <LogoBorder />
 
-            <CommentSectionWrapper postId={post.id} />
+            <Suspense fallback={<CommentSkeleton />}>
+                <CommentSectionWrapper postId={post.id} />
+            </Suspense>
 
             <AdsenseAd />
-
-
         </>
     );
 }

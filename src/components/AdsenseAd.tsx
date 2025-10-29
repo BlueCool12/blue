@@ -28,7 +28,7 @@ export default function AdsenseAd() {
         <div style={{ textAlign: 'center', margin: '0 0 3rem' }}>
             <ins
                 className="adsbygoogle"
-                style={{ display: 'block' }}
+                style={{ display: 'block', minHeight: 90 }}
                 data-ad-client="ca-pub-7027574538017618"
                 data-ad-slot="3033125272"
                 data-ad-format="auto"
