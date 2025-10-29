@@ -61,7 +61,8 @@ jobs:
           context: .          
           platforms: linux/arm64
           push: true
-          network: host          
+          network: host         
+          pull: false 
           tags: |
             ${{ env.IMAGE_NAME }}:latest
             ${{ env.IMAGE_NAME }}:${{ github.sha }}          
