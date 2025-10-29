@@ -15,16 +15,28 @@ import AdsenseAd from '@/components/AdsenseAd';
 import { CommentSkeleton } from '@/components/comments/CommentSkeleton';
 
 import { postService } from '@/services/postService';
+import { getApiBase } from "@/lib/api/apiBase";
+
+type Sitemap = { key: string; lastModified: string };
+type SitemapResponse<T> = { sitemap: T[] };
 
 interface PageProps {
     params: Promise<{ slug: string }>;
 }
 
 export const revalidate = 86400;
+export const dynamic = 'force-static';
 export const dynamicParams = true;
 
 export async function generateStaticParams() {
-    return [];
+    const res = await fetch(`${getApiBase()}/posts/sitemap`);
+    if (!res.ok) throw new Error('Failed to fetch staticParams');
+
+    const { sitemap }: SitemapResponse<Sitemap> = await res.json();
+
+    return sitemap.map((item): { slug: string } => ({
+        slug: item.key,
+    }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
