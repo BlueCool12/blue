@@ -16,16 +16,10 @@ import { categoryService } from '@/services/categoryService';
 import { postService } from '@/services/postService';
 
 export const revalidate = 86400;
-export const dynamic = 'force-static';
 export const dynamicParams = true;
 
 export async function generateStaticParams() {
-    const categories = await categoryService.getCategories();
-    const allChildren = categories?.flatMap((parent) => parent.children ?? []) ?? [];
-
-    return allChildren.map((cat) => ({
-        category: cat.slug,
-    }));
+    return [];
 }
 
 type Props = {
