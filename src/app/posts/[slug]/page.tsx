@@ -31,7 +31,7 @@ export const dynamicParams = true;
 export async function generateStaticParams() {
 
     const base = getApiBase();
-    console.error('[SSG posts/[slug]] base =', base, {
+    console.error('[SSG posts1/[slug]] base =', base, {
         preferPublic: process.env.PREFER_PUBLIC_API,
         isServer: typeof window === 'undefined'
     });
