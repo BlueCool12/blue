@@ -31,9 +31,10 @@ export const dynamicParams = true;
 export async function generateStaticParams() {
 
     const base = getApiBase();
-    if (process.env.DEBUG_API_BASE === '1') {
-        console.error('[SITEMAP_FETCH] ->', `${base}/posts/sitemap`);
-    }
+    console.error('[SSG posts/[slug]] base =', base, {
+        preferPublic: process.env.PREFER_PUBLIC_API,
+        isServer: typeof window === 'undefined'
+    });
 
     const res = await fetch(`${base}/posts/sitemap`);
     if (!res.ok) throw new Error('Failed to fetch staticParams');
