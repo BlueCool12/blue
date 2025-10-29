@@ -35,7 +35,7 @@ export async function generateStaticParams() {
     const { sitemap }: SitemapResponse<Sitemap> = await res.json();
 
     return sitemap.map((item): { slug: string } => ({
-        slug: item.key,
+        slug: item.key
     }));
 }
 
