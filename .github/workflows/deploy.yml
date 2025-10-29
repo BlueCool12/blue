@@ -59,10 +59,10 @@ jobs:
           cache-from: type=registry,ref=${{ env.IMAGE_NAME }}:buildcache
           cache-to: type=registry,ref=${{ env.IMAGE_NAME }}:buildcache,mode=max
           build-args: |
-            PREFER_PUBLIC_API=1
+            PREFER_PUBLIC_API=0
             INTERNAL_API_BASE_URL=${{ secrets.INTERNAL_API_BASE_URL }}
-            NEXT_PUBLIC_API_BASE_URL=${{ vars.NEXT_PUBLIC_API_BASE_URL }}
             PUBLIC_API_BASE_URL=${{ vars.PUBLIC_API_BASE_URL }}
+            NEXT_PUBLIC_API_BASE_URL=${{ vars.NEXT_PUBLIC_API_BASE_URL }}
 
   deploy:
     name: Deploy via SSH (pull & up)
