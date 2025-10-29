@@ -37,7 +37,7 @@ export default function Loading() {
                     aria-live="polite"
                     aria-label="목록 불러오는 중"
                 >
-                    {Array.from({ length: 7 }).map((_, i) => (
+                    {Array.from({ length: 5 }).map((_, i) => (
                         <li key={i} className={styles['post-list-skeleton__item']}>
                             <article className={styles['post-list-skeleton__post']}>
                                 <div className={styles['post-list-skeleton__title-wrapper']}>

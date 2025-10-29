@@ -1,3 +1,5 @@
+import { Suspense } from 'react';
+
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -8,6 +10,7 @@ import MorePosts from "../../MorePosts";
 import { EmptyState } from '@/components/posts/EmptyState';
 import { CategorySidebar } from '@/components/categories/CategorySidebar';
 import MobileCategorySelect from '@/components/categories/MobileCategorySelect';
+import { PostListSkeleton } from '@/components/posts/PostListSkeleton';
 
 import { categoryService } from '@/services/categoryService';
 import { postService } from '@/services/postService';
@@ -111,7 +114,9 @@ export default async function CategoryPage({ params }: Props) {
                         ))}
 
                         {initial.hasNext && (
-                            <MorePosts size={PAGE_SIZE} categorySlug={decoded} />
+                            <Suspense fallback={<PostListSkeleton count={3} />}>
+                                <MorePosts size={PAGE_SIZE} categorySlug={decoded} />
+                            </Suspense>
                         )}
                     </ul>
                 )}

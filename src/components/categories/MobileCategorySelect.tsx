@@ -26,7 +26,7 @@ export default function MobileCategorySelect({ categories, current = null }: Pro
             <div className={`${styles.wrapper}`}>
                 <select
                     className={styles.select}
-                    defaultValue={current ?? ''}
+                    value={current ?? ''}
                     aria-label="글 카테고리 선택"
                     onChange={(e) =>
                         handleChange(e.target.value)
