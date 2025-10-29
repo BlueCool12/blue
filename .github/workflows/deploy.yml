@@ -52,9 +52,7 @@ jobs:
           context: .          
           platforms: linux/arm64
           push: true
-          network: host
-          add-hosts: |
-            cool:host-gateway
+          network: host          
           tags: |
             ${{ env.IMAGE_NAME }}:latest
             ${{ env.IMAGE_NAME }}:${{ github.sha }}
