@@ -53,12 +53,14 @@ jobs:
           platforms: linux/arm64
           push: true
           network: host
+          add-hosts: |
+            bluecool.pyomin.com:127.0.0.1
           tags: |
             ${{ env.IMAGE_NAME }}:latest
             ${{ env.IMAGE_NAME }}:${{ github.sha }}          
           build-args: |
             PREFER_PUBLIC_API=0
-            INTERNAL_API_BASE_URL=${{ secrets.INTERNAL_API_BASE_URL }}
+            INTERNAL_API_BASE_URL=https://bluecool.pyomin.com/api/v1
             PUBLIC_API_BASE_URL=${{ vars.PUBLIC_API_BASE_URL }}
             NEXT_PUBLIC_API_BASE_URL=${{ vars.NEXT_PUBLIC_API_BASE_URL }}
 
