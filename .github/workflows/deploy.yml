@@ -43,26 +43,16 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Clean build cache on Pi
-        run: |
-          ssh -p ${{ secrets.RASPBERRY_PORT }} \
-              ${{ secrets.RASPBERRY_USER }}@${{ secrets.RASPBERRY_HOST }} << 'EOF'            
-            docker builder prune -af                        
-            docker image prune -af
-          EOF
+          password: ${{ secrets.GITHUB_TOKEN }}      
 
       - name: Build & Push
         uses: docker/build-push-action@v5
-        with:
-          no-cache: true
+        with:          
           builder: ${{ steps.buildx.outputs.name }}
           context: .          
           platforms: linux/arm64
           push: true
-          network: host         
-          pull: false 
+          network: host
           tags: |
             ${{ env.IMAGE_NAME }}:latest
             ${{ env.IMAGE_NAME }}:${{ github.sha }}          
