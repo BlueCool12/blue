@@ -54,7 +54,7 @@ jobs:
           push: true
           network: host
           add-hosts: |
-            bluecool.pyomin.com:127.0.0.1
+            bluecool.pyomin.com:${{ secrets.RASPBERRY_LOCAL_IP }}
           tags: |
             ${{ env.IMAGE_NAME }}:latest
             ${{ env.IMAGE_NAME }}:${{ github.sha }}          
