@@ -58,11 +58,9 @@ jobs:
           tags: |
             ${{ env.IMAGE_NAME }}:latest
             ${{ env.IMAGE_NAME }}:${{ github.sha }}          
-          build-args: |
-            PREFER_PUBLIC_API=0
+          build-args: |            
             INTERNAL_API_BASE_URL=https://bluecool.pyomin.com/api/v1
-            PUBLIC_API_BASE_URL=${{ vars.PUBLIC_API_BASE_URL }}
-            NEXT_PUBLIC_API_BASE_URL=${{ vars.NEXT_PUBLIC_API_BASE_URL }}
+            PUBLIC_API_BASE_URL=${{ vars.PUBLIC_API_BASE_URL }}            
 
   deploy:
     name: Deploy via SSH (pull & up)
