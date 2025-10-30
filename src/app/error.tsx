@@ -47,7 +47,11 @@ const ErrorWrapper = styled.div`
     align-items: center;
     justify-content: center;
     text-align: center;    
-    height: 100vh;
+    height: calc(100vh - 152px);
+
+    @media (max-width: 768px) {
+        height: calc(100vh - 120px);
+    }
 `;
 
 const TitleSection = styled.section`
