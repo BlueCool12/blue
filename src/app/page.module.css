@@ -440,14 +440,15 @@
     overflow-y: hidden;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
+    scrollbar-color: var(--theme-color-9);
 }
 
 .troubleshooting-posts::-webkit-scrollbar {
-    height: 6px;
+    height: 6px;    
 }
 
 .troubleshooting-posts::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, .25);
+    background: var(--theme-color-9);
     border-radius: 8px;
 }
 
