@@ -16,9 +16,9 @@
 
 - ⚛️ **React + Next.js** – 서버 사이드 렌더링(SSR) 지원
 - 🟦 **TypeScript**
-- 💅 **styled-components** + **CSS Modules**
-- 🔍 **React Query** – 데이터 캐싱 및 상태 관리
-- 🧠 **Shiki** – SSR 기반 코드 하이라이팅
+- 🎨 **styled-components** + **CSS Modules**
+- 💽 **React Query** – 데이터 캐싱 및 상태 관리
+- 🌈 **Shiki** – SSR 기반 코드 하이라이팅
 - 📡 **RSS / Sitemap / Manifest** 등 SEO 관련 기술
 
 ---
@@ -26,10 +26,9 @@
 ## ✅ 구현된 기능
 
 - 🌗 **다크모드 구현**
-- ✏️ **CKEditor 기반 마크다운 포스트 작성**
-- 🔍 **카테고리 필터 기능**
+- 🗄️ **카테고리 필터 기능**
 - 📊 **사용자 행동 분석 로그 저장** (PageView 기록)
-- 🧠 **SEO 최적화 적용** – `metadata`, og 태그, sitemap 등
+- 🔍 **SEO 최적화 적용** – `metadata`, og 태그, sitemap 등
 - 📰 **RSS 피드 생성** – `/rss.xml` 자동 생성
 
 ---
