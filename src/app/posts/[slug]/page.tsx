@@ -29,7 +29,7 @@ export const dynamic = 'force-static';
 export const dynamicParams = true;
 
 export async function generateStaticParams() {
-    const res = await fetch(`${getApiBase()}}/posts/sitemap`);
+    const res = await fetch(`${getApiBase()}/posts/sitemap`);
     if (!res.ok) throw new Error('Failed to fetch staticParams');
 
     const { sitemap }: SitemapResponse<Sitemap> = await res.json();
