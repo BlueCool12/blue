@@ -171,8 +171,8 @@ img {
 
 /* Lexical 설정 */
 .lexical-theme {
-  font-family: 'Pretendard', -apple-system, sans-serif;  
-  color: inherit; 
+  font-family: 'Pretendard', -apple-system, sans-serif;
+  color: inherit;
   line-height: 1.6;
   word-break: break-all;
 }
@@ -210,7 +210,7 @@ img {
 .lexical-theme .editor-quote {
   margin: 1.5em 0;
   padding: 0.8em 1.2em;
-  border-left: 4px solid var(--theme-color-9); 
+  border-left: 4px solid var(--theme-color-9);
   background-color: var(--card-bg);
   font-style: italic;
   border-radius: 0 4px 4px 0;
@@ -240,38 +240,74 @@ img {
   overflow-x: auto;
   line-height: 1.5;
   display: block;
-  white-space: pre;
+  white-space: pre;  
+  width: 100%;
+  max-width: 100%;
+}
+
+/* 내부 span 태그 줄바꿈 막음 */
+.editor-code span {
+  white-space: pre !important;
+  display: inline !important;  
 }
 
 /* 코드 블록 뱃지 */
-.editor-code::before {    
-    content: attr(data-language); 
-    
-    position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
-        
-    background-color: rgba(56, 139, 253, 0.15);
-    color: #58a6ff;
-    font-size: 0.75rem;
-    font-weight: bold;
-    padding: 0.2rem 0.6rem;
-    border-radius: 0.4rem;
-    text-transform: uppercase;
-    pointer-events: none;
+.editor-code::before {
+  content: attr(data-language);
+
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+
+  background-color: rgba(56, 139, 253, 0.15);
+  color: #58a6ff;
+  font-size: 0.75rem;
+  font-weight: bold;
+  padding: 0.2rem 0.6rem;
+  border-radius: 0.4rem;
+  text-transform: uppercase;
+  pointer-events: none;
 }
 
 /* Syntax Highlighting (색상 유지) */
-.editor-token-keyword { color: #c678dd; font-weight: bold; }
-.editor-token-function { color: #61afef; }
-.editor-token-string { color: #98c379; }
+.editor-token-keyword {
+  color: #c678dd;
+  font-weight: bold;
+}
+
+.editor-token-function {
+  color: #61afef;
+}
+
+.editor-token-string {
+  color: #98c379;
+}
+
 .editor-token-boolean,
-.editor-token-number { color: #d19a66; }
+.editor-token-number {
+  color: #d19a66;
+}
+
 .editor-token-operator,
-.editor-token-punctuation { color: #abb2bf; }
+.editor-token-punctuation {
+  color: #abb2bf;
+}
+
 .editor-token-class,
 .editor-token-builtin,
-.editor-token-type { color: #e5c07b; }
-.editor-token-attr { color: #d19a66; }
-.editor-token-char { color: #56b6c2; }
-.editor-token-comment { color: #5c6370; font-style: italic; }
+.editor-token-type {
+  color: #e5c07b;
+}
+
+.editor-token-attr {
+  color: #d19a66;
+}
+
+.editor-token-char {
+  color: #56b6c2;
+}
+
+.editor-token-comment {
+  color: #5c6370;
+  font-style: italic;
+}
