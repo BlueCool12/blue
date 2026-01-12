@@ -94,7 +94,7 @@ export default async function PostDetail({ params }: PageProps) {
                 </header>
 
                 <div
-                    className={styles.content}
+                    className={`${styles.content} lexical-theme`}
                     dangerouslySetInnerHTML={{ __html: post.content }}
                 />
             </article>
