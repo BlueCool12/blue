@@ -228,13 +228,6 @@ img {
 }
 
 /* 4. 코드 블록 (Code Block) - 다크 테마 고정 */
-@keyframes fade-out-on-scroll {
-  to { 
-    opacity: 0; 
-    visibility: hidden;
-  }
-}
-
 .editor-code {
   background-color: #272c34 !important;
   color: #eff1f5 !important;
@@ -261,11 +254,9 @@ img {
 /* 코드 블록 뱃지 */
 .editor-code::before {
   content: attr(data-language);
-
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
-
   background-color: #272c34;
   border: 1px solid rgba(88, 166, 255, 0.4);
   color: #58a6ff;
@@ -275,11 +266,18 @@ img {
   border-radius: 0.4rem;
   text-transform: uppercase;
   pointer-events: none;
-
+  
   animation-name: fade-out-on-scroll;
   animation-timeline: scroll(nearest inline);
   animation-range: 0px 50px;
   animation-fill-mode: both;
+}
+
+@keyframes fade-out-on-scroll {
+  to { 
+    opacity: 0; 
+    visibility: hidden;
+  }
 }
 
 /* Syntax Highlighting (색상 유지) */
