@@ -7,6 +7,7 @@ import clsx from 'clsx';
 import { MdOutlineMail } from 'react-icons/md';
 import ProjectTabs from './ProjectTabs';
 import { FaGithub } from 'react-icons/fa';
+import { SiNotion } from 'react-icons/si';
 
 const careers = [
     { date: '2025.03 ~ Now', title: '바로연' },
@@ -54,6 +55,13 @@ const About = () => {
                                 <FaGithub size={24} />
                                 <a href='https://github.com/BlueCool12' target='_blank' rel='noopener noreferrer'>
                                     github.com/BlueCool12
+                                </a>
+                            </div>
+
+                            <div style={{ display: 'flex', alignItems: 'center' }}>
+                                <SiNotion size={24} />
+                                <a href='https://branch-grouse-fde.notion.site/Backend-Developer-2e9381b7d1078089959de45d0f34014d?source=copy_link' target='_blank' rel='noopener noreferrer'>
+                                    View Portfolio
                                 </a>
                             </div>
                         </div>
