@@ -1,3 +1,5 @@
+'use client';
+
 import { pageViewApi } from "@/lib/api/pageViewApi";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
