@@ -13,6 +13,11 @@ const PageViewInner = () => {
     useEffect(() => {
         if (!pathname) return;        
 
+        const isPostDetail = /^\/posts\/.+/.test(pathname);
+        if (isPostDetail) {
+            return;
+        }
+
         const currentUrl = `${pathname}${searchParams?.toString() ? `?${searchParams.toString()}` : ''}`;
 
         pageViewApi.logPageView({

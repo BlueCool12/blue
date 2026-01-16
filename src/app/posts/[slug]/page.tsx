@@ -16,6 +16,7 @@ import { CommentSkeleton } from '@/components/comments/CommentSkeleton';
 
 import { postService } from '@/services/postService';
 import { getApiBase } from "@/lib/api/apiBase";
+import { PostViewTracker } from '@/components/posts/PostViewTracker';
 
 type Sitemap = { key: string; lastModified: string };
 type SitemapResponse<T> = { sitemap: T[] };
@@ -73,6 +74,8 @@ export default async function PostDetail({ params }: PageProps) {
 
     return (
         <>
+            <PostViewTracker slug={slug} />
+
             <ScrollProgress />
 
             <article id='main-content' className={styles.article}>
