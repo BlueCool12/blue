@@ -1,3 +1,5 @@
+'use client';
+
 import { useTrackPageView } from "@/hooks/useTrackPageView";
 
 interface Props {
