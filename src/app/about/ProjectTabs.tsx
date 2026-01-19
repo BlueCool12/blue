@@ -58,7 +58,7 @@ const projects = [
         members: '1명',
         period: '2025.06 ~ 2025.08 (3개월)',
         link: 'https://www.pyomin.com',
-        pdf: undefined,
+        pdf: 'https://pyomin.com/pdfs/bluecool.pdf',
         stack: [
             { name: 'Java', color: '#f89820' },
             { name: 'Spring', color: '#6db33f' },
