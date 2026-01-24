@@ -21,7 +21,7 @@ const projects = [
                 프론트엔드 전반을 담당하며 <strong>RTK Query</strong>를 활용해 백엔드와의 데이터 통신을 구현하였습니다.<br /><br />
                 <strong>react-signature</strong> 기반 전자서명과 관련 API를 구현하였습니다.<br /><br />
                 팝업을 등록, 수정, 삭제하고 위치 및 노출 여부를 제어할 수 있는 <strong>팝업 관리 기능</strong>을 구현하였습니다.<br /><br />
-                <strong>SunEditor</strong> 기반 콘텐츠 관리 기능을 구축해 <strong>SEO 최적화</strong> 글 작성/운영을 지원하였습니다.<br />
+                <strong>SunEditor</strong> 기반 콘텐츠 관리 기능을 구축해 <strong>SEO</strong>를 위한 글 작성/운영을 지원하였습니다.<br />
             </>
         ),
         image: baroyeonImage,
@@ -43,15 +43,16 @@ const projects = [
         subtitle: '개인 블로그 프로젝트',
         description: (
             <>
-                관리자(React + Nest.js)와 블로그(Next.js + Spring Boot)서버를 구축하였습니다.<br /><br />
-                <strong>[Admin]</strong><br />
-                <strong>JWT</strong> 기반의 토큰 인증을 통해 관리자 로그인 기능을 개발하였습니다.<br /><br />
-                <strong>CKEditor</strong>를 활용해 글 작성 및 파일 업로드 기능을 구현하였고 사용자 행동 분석을 위해 <strong>페이지 조회 로그 기록 시스템</strong>을 구축하였습니다.<br /><br />
-                <strong>Prisma</strong>를 이용해 데이터베이스 스키마 정의 및 마이그레이션을 체계적으로 관리하였습니다.<br /><br />
-                <strong>[User]</strong><br />
-                기존 React 기반 프로젝트를 SEO 최적화를 위해 <strong>Next.js</strong>로 마이그레이션하고 <strong>다크 모드와 반응형 UI</strong>를 구현하였습니다.<br /><br />
-                Next.js의 <strong>MetadataRoute</strong> 기능을 통해 검색 엔진 최적화를 위한 <strong>Sitemap</strong> 과 <strong>RSS</strong>, PWA 지원을 위한 <strong>Manifest</strong>를 구성하였습니다.<br /><br />
+                관리자(React + Nest.js)와 유저(Next.js + Spring Boot)서버를 분리하여 <strong>블로그 및 CMS</strong>를 구현하였습니다.<br /><br />
+                [ADMIN]<br />
+                <strong>OOP 아키텍처</strong>를 도입해 복잡한 관리자 로직의 유지보수성과 확장성을 개선하였습니다.<br /><br />
+                <strong>JWT</strong> 기반 토큰 인증 방식을 적용하여 관리자 로그인 및 권한 검증 기능을 개발하였습니다.<br /><br />
+                <strong>Lexical</strong> 기반 커스텀 리치 텍스트 에디터를 개발하여 콘텐츠 작성과 관리를 효율적으로 할 수 있도록 구현하였습니다.<br /><br />
+                [USER]<br />
+                기존 React 기반 구조를 검색 엔진 최적화를 위해 <strong>Next.js</strong>로 마이그레이션하고 <strong>다크 모드와 반응형 UI</strong>를 구현하였습니다.<br /><br />
+                Next.js의 <strong>MetadataRoute</strong> 기능을 통해 SEO를 위한 <strong>Sitemap</strong> 과 <strong>RSS</strong>, PWA 지원을 위한 <strong>Manifest</strong>를 구성하였습니다.<br /><br />
                 <strong>useQuery</strong>를 활용하여 캐시 전략을 구성하고 <strong>Google Adsense</strong>로 페이지 단위 수익화를 구현하였습니다.<br /><br />
+                <strong>사용자 행동 분석</strong>을 위해 페이지 조회 이벤트에 대한 로그 데이터를 수집하는 시스템을 구축하였습니다.<br /><br />
             </>
         ),
         image: bluecoolImage,
@@ -62,11 +63,11 @@ const projects = [
         stack: [
             { name: 'Java', color: '#f89820' },
             { name: 'Spring', color: '#6db33f' },
-            { name: 'Postgresql', color: '#4169E1' },
             { name: 'TypeScript', color: '#3178c6' },
+            { name: 'NestJS', color: '#ea2845' },
             { name: 'React', color: '#61dafb' },
-            { name: 'Next.js', color: '#000000' },
-            { name: 'Styled', color: '#db7093' },
+            { name: 'Next.js', color: '#000000' },            
+            { name: 'Postgresql', color: '#4169E1' },
         ]
     },
     {
