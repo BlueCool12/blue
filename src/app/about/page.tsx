@@ -10,7 +10,7 @@ import { FaGithub } from 'react-icons/fa';
 import { SiNotion } from 'react-icons/si';
 
 const careers = [
-    { date: '2025.03 ~ Now', title: '바로연' },
+    { date: '2025.03 ~ 2025.11', title: '바로연' },
     { date: '2024.03 ~ 2024.08', title: '중앙정보처리학원' },
 ];
 
@@ -42,7 +42,7 @@ const About = () => {
                     <div className={styles['hero-section__text-content']}>
                         <p className={styles['hero-section__intro']}>안녕하세요 👋</p>
                         <h1 className={styles['hero-section__title']}>
-                            저는 풀스택 개발자 <br />
+                            저는 백엔드 개발자 <br />
                             <strong>BlueCool</strong> 입니다.
                         </h1>
                         <div className={styles['hero-section__email']}>
@@ -61,7 +61,7 @@ const About = () => {
                             <div style={{ display: 'flex', alignItems: 'center' }}>
                                 <SiNotion size={24} />
                                 <a href='https://branch-grouse-fde.notion.site/Backend-Developer-2e9381b7d1078089959de45d0f34014d?source=copy_link' target='_blank' rel='noopener noreferrer'>
-                                    View Portfolio
+                                    Portfolio
                                 </a>
                             </div>
                         </div>
