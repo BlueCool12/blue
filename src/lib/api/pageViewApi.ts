@@ -1,11 +1,12 @@
 import api from "./axiosInstance";
 
-import { ensureSessionId } from "@/lib/utils/session";
+import { ensureClientId, ensureSessionId } from "@/lib/utils/identifier";
 
 export const pageViewApi = {
 
     logPageView: async ({ url, referrer, slug }: { url: string; referrer?: string; slug?: string | null }): Promise<void> => {
         try {
+            const clientId = ensureClientId();
             const sessionId = ensureSessionId();
 
             await api.post(
@@ -18,6 +19,7 @@ export const pageViewApi = {
                     headers: {
                         "Content-Type": "application/json",
                         "X-Referrer": referrer ?? '',
+                        "X-Client-Id": clientId,
                         "X-Session-Id": sessionId,
                     },
                 }
