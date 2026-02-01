@@ -21,6 +21,8 @@ export const commentService = {
                 children: comment.children?.map(formatComment) ?? [],
             });
 
+            console.log(result);
+
             return result.map(formatComment);
         } catch {
             return [];

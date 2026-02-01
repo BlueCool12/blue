@@ -1,5 +1,6 @@
 export interface Comment {
     id: number;
+    adminId: number;
     postId: number;
     parentId?: number;
     nickname: string;
