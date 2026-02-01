@@ -27,26 +27,19 @@ export default function MorePosts({ size, categorySlug = null }: Props) {
         isFetchingNextPage,
     } = useInfinitePosts({
         category: categorySlug,
-        size,        
+        size,
     });
 
     useEffect(() => {
         const el = sentinelRef.current;
-        if (!el) return;
+        if (!el || !hasNextPage || isFetchingNextPage) return;
 
-        const io = new IntersectionObserver(async (entries) => {
-            const [entry] = entries;
-            if (!entry.isIntersecting || isFetchingNextPage) return;
-
-            io.unobserve(entry.target);
-            try {
-                if (hasNextPage) {
-                    await fetchNextPage();
-                }
-            } finally {
-                if (document.contains(entry.target)) io.observe(entry.target);
-            }
-        }, { rootMargin: '200px', threshold: 0 });
+        const io = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) fetchNextPage();
+        }, {
+            rootMargin: '200px',
+            threshold: 0
+        });
 
         io.observe(el);
         return () => io.disconnect();
@@ -75,11 +68,11 @@ export default function MorePosts({ size, categorySlug = null }: Props) {
                 </li>
             ))}
 
-            {(isFetchingNextPage) && (
-                <LoadingSpinner />
-            )}
+            {(isFetchingNextPage) && (<LoadingSpinner />)}
 
-            <div ref={sentinelRef} style={{ height: 1 }} />
+            {!isFetchingNextPage && hasNextPage && (
+                <div ref={sentinelRef} style={{ height: '10px', visibility: 'hidden' }} />
+            )}
         </>
     );
 };
