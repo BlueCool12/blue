@@ -1,72 +1,72 @@
 .sidebar {
-    position: fixed;
-    top: 10rem;
-    right: calc((100vw - 800px) / 2 - 18rem);
-    text-align: center;
-    width: 180px;
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    padding: 16px;
-    border-radius: 8px;
-    box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
-    z-index: 10;
+  position: fixed;
+  top: 10rem;
+  right: calc((100vw - 800px) / 2 - 18rem);
+  text-align: center;
+  width: 180px;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
+  z-index: 10;
 }
 
 .title {
-    margin-bottom: 12px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 1rem;    
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1rem;
 }
 
 .list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .link {
-    display: block;
-    padding: 0.8rem 0;
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--text-color);
-    text-decoration: none;    
-    text-transform: uppercase;
-    justify-self: center;
-    transition: color 0.2s ease;
+  display: block;
+  padding: 0.8rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-color);
+  text-decoration: none;
+  text-transform: uppercase;
+  justify-self: center;
+  transition: color 0.2s ease;
 }
 
 .link:hover {
-    color: var(--theme-color-6);
+  color: var(--theme-color-6);
 }
 
 .subList {
-    list-style: none;
+  list-style: none;
 }
 
-.subLink {    
-    padding: 0 1rem 0.6rem;
-    font-size: 1rem;
-    font-weight: 600;
-    justify-self: center;
-    display: flex;
-    align-items: center;
-    gap: 0.1rem;
-    color: var(--text-color);
+.subLink {
+  padding: 0 1rem 0.6rem;
+  font-size: 1rem;
+  font-weight: 600;
+  justify-self: center;
+  display: flex;
+  align-items: center;
+  gap: 0.1rem;
+  color: var(--text-color);
 }
 
 .subLink:hover {
-    color: var(--theme-color-6);
+  color: var(--theme-color-6);
 }
 
 .active {
-    color: var(--theme-color-6);
+  color: var(--theme-color-6);
 }
 
-@media (max-width: 768px) {
-    .sidebar {
-        display: none;
-    }
+@media (max-width: 1200px) {
+  .sidebar {
+    display: none;
+  }
 }

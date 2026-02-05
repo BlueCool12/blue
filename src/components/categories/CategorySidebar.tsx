@@ -1,59 +1,69 @@
+'use client';
+
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
-import styles from './CategorySidebar.module.css';
-
+import styles from '@/components/categories/CategorySidebar.module.css';
 import { MdOutlineNumbers } from 'react-icons/md';
 
 import { Category } from '@/types/category';
 
 interface Props {
-    categories: Category[];
-    categorySlug: string | null;
+  categories: Category[];
 }
 
-export const CategorySidebar = ({ categories, categorySlug }: Props) => {
+export const CategorySidebar = ({ categories }: Props) => {
 
-    return (
-        <aside className={styles.sidebar}>
-            <nav>
-                <h3
-                    className={`${styles.title} ${categorySlug === null ? styles.active : ''}`}
-                >
-                    <Link href="/posts">ALL</Link>
-                </h3>
+  const pathname = usePathname();
 
-                <ul className={styles.list}>
-                    {categories.map((parent) => {
-                        const children = parent.children ?? [];
-                        const isActiveParent = children.some((child) => child.slug === categorySlug);
+  const getCurrentSlug = (path: string) => {
+    const match = path.match(/\/category\/([^/]+)/);
+    return match ? decodeURIComponent(match[1]) : null;
+  }
 
-                        return (
-                            <li key={parent.slug}>
-                                <details open={isActiveParent}>
-                                    <summary className={`${styles.link} ${isActiveParent ? styles.active : ''}`}>
-                                        {parent.name}
-                                    </summary>
+  const currentSlug = getCurrentSlug(pathname);
 
-                                    {children.length > 0 && (
-                                        <ul className={styles.subList}>
-                                            {children.map((child) => (
-                                                <li key={child.slug}>
-                                                    <Link
-                                                        className={`${styles.subLink} ${categorySlug === child.slug ? styles.active : ''}`}
-                                                        href={`/posts/category/${child.slug}`}
-                                                    >
-                                                        <MdOutlineNumbers />{child.name}
-                                                    </Link>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    )}
-                                </details>
-                            </li>
-                        );
-                    })}
-                </ul>
-            </nav>
-        </aside>
-    );
+  return (
+    <aside className={styles.sidebar}>
+      <nav>
+        <h3
+          className={`${styles.title} ${currentSlug === null ? styles.active : ''}`}
+        >
+          <Link href="/posts">ALL</Link>
+        </h3>
+
+        <ul className={styles.list}>
+          {categories.map((parent) => {
+            const children = parent.children ?? [];
+            const isActiveParent = children.some((child) => child.slug === currentSlug);
+
+            return (
+              <li key={parent.slug}>
+                <details open={isActiveParent}>
+                  <summary className={`${styles.link} ${isActiveParent ? styles.active : ''}`}>
+                    {parent.name}
+                  </summary>
+
+                  {children.length > 0 && (
+                    <ul className={styles.subList}>
+                      {children.map((child) => (
+                        <li key={child.slug}>
+                          <Link
+                            className={`${styles.subLink} ${currentSlug === child.slug ? styles.active : ''}`}
+                            href={`/posts/category/${child.slug}`}
+                          >
+                            <MdOutlineNumbers />{child.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </details>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+    </aside>
+  );
 };

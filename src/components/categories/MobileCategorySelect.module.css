@@ -1,29 +1,42 @@
 .wrapper {
-    position: relative;
-    padding: 0.75rem 0;
-    margin: 0 1rem;
-    border-bottom: 1px solid var(--border-color);
+  position: relative;
+  width: 92%;
+  justify-self: center;
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    width: 91%;
+  }
 }
 
 .select {
-    width: 100%;
-    padding: 0.5rem 1rem 0.5rem;
-    font-size: 0.9rem;
-    border-radius: 6px;
-    color: var(--text-color);
-    border: 1px solid var(--border-color);
-    background: transparent;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
+  width: 100%;
+  padding: 0.8rem 1rem;
+  font-size: 0.9rem;
+  border-radius: 8px;
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  background-color: var(--card-bg);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+}
+
+.select:focus {
+  outline: none;
+  border-color: var(--theme-color-5);  
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .icon {
-    position: absolute;
-    right: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    pointer-events: none;
-    color: var(--text-color);
-    font-size: 1.2rem;
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--text-color);
+  font-size: 1.2rem;
 }

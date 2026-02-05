@@ -2,12 +2,10 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 import styles from '@/app/posts/page.module.css';
+import AdsenseAd from '@/components/AdsenseAd';
 import { EmptyState } from '@/components/posts/EmptyState';
-import { CategorySidebar } from '@/components/categories/CategorySidebar';
-import MobileCategorySelect from '@/components/categories/MobileCategorySelect';
 import MorePosts from "@/app/posts/MorePosts";
 
-import { categoryService } from '@/services/categoryService';
 import { postService } from '@/services/postService';
 
 export const revalidate = 86400;
@@ -46,27 +44,16 @@ export default async function Page({ searchParams }: Props) {
   const currentPage = Number(page) || 0;
   const PAGE_SIZE = 10;
 
-  const [initial, categories] = await Promise.all([
-    postService.getAllPosts({ page: currentPage, size: PAGE_SIZE, category: null }),
-    categoryService.getCategories(),
-  ]);
+  const initial = await postService.getAllPosts({
+    page: currentPage,
+    size: PAGE_SIZE,
+    category: null
+  });
 
   const posts = initial.posts ?? [];
 
   return (
-    <>
-      <div className={styles['posts--mobile']}>
-        <MobileCategorySelect
-          categories={categories}
-          current={null}
-        />
-      </div>
-
-      <CategorySidebar
-        categories={categories}
-        categorySlug={null}
-      />
-
+    <>      
       <section className={styles.section}>
         {posts.length === 0 ? (
           <EmptyState message="열심히 공부 중입니다..." />
@@ -108,6 +95,8 @@ export default async function Page({ searchParams }: Props) {
             </Link>
           </div>
         )}
+
+        <AdsenseAd />
       </section >
     </>
   );
