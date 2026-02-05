@@ -3,20 +3,21 @@
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 
-import styles from './page.module.css';
+import styles from '@/app/posts/page.module.css';
 
 import { LoadingSpinner } from "@/components/common/LoadingSpinner";
 
-import { useInfinitePosts } from "@/hooks/queries/posts/useInfinitePosts";
-
 import type { PagedPost, Post } from "@/types/post";
+
+import { useInfinitePosts } from "@/hooks/queries/posts/useInfinitePosts";
 
 type Props = {
     size: number;
     categorySlug?: string | null;
+    initialPage?: number;
 };
 
-export default function MorePosts({ size, categorySlug = null }: Props) {
+export default function MorePosts({ size, categorySlug = null, initialPage = 0 }: Props) {
 
     const sentinelRef = useRef<HTMLDivElement | null>(null);
 
@@ -28,6 +29,7 @@ export default function MorePosts({ size, categorySlug = null }: Props) {
     } = useInfinitePosts({
         category: categorySlug,
         size,
+        initialPage
     });
 
     useEffect(() => {
