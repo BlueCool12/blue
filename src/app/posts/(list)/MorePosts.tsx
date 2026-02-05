@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 
-import styles from '@/app/posts/page.module.css';
+import styles from '@/app/posts/(list)/page.module.css';
 
 import { LoadingSpinner } from "@/components/common/LoadingSpinner";
 

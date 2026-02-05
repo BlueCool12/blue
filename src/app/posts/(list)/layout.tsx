@@ -1,4 +1,4 @@
-import styles from '@/app/posts/page.module.css';
+import styles from '@/app/posts/(list)/page.module.css';
 import MobileCategorySelect from "@/components/categories/MobileCategorySelect";
 import { CategorySidebar } from "@/components/categories/CategorySidebar";
 

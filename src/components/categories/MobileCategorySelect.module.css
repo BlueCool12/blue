@@ -1,7 +1,6 @@
 .wrapper {
   position: relative;
   width: 92%;
-  justify-self: center;
 }
 
 @media (max-width: 768px) {
