@@ -1,22 +1,21 @@
 import { Suspense } from 'react';
 
-import type { Metadata } from 'next';
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-import styles from '../../page.module.css';
+import styles from '@/app/posts/page.module.css';
+import MorePosts from "@/app/posts/MorePosts";
+import { PostListSkeleton } from '@/components/posts/PostListSkeleton';
 
-import MorePosts from "../../MorePosts";
 import { EmptyState } from '@/components/posts/EmptyState';
 import { CategorySidebar } from '@/components/categories/CategorySidebar';
 import MobileCategorySelect from '@/components/categories/MobileCategorySelect';
-import { PostListSkeleton } from '@/components/posts/PostListSkeleton';
 
 import { categoryService } from '@/services/categoryService';
 import { postService } from '@/services/postService';
 
 export const revalidate = 86400;
-export const dynamic = 'force-static';
 export const dynamicParams = true;
 
 export async function generateStaticParams() {
@@ -30,6 +29,7 @@ export async function generateStaticParams() {
 
 type Props = {
     params: Promise<{ category: string }>;
+    searchParams: Promise<{ page?: string }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -61,15 +61,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
 }
 
-export default async function CategoryPage({ params }: Props) {
+export default async function CategoryPage({ params, searchParams }: Props) {
     const { category } = await params;
+    const { page } = await searchParams;
+
     const decoded = decodeURIComponent(category);
     if (!decoded) notFound();
 
+    const currentPage = Number(page) || 0;
     const PAGE_SIZE = 10;
 
     const [initial, categories] = await Promise.all([
-        postService.getAllPosts({ page: 0, size: PAGE_SIZE, category: decoded }),
+        postService.getAllPosts({ page: currentPage, size: PAGE_SIZE, category: decoded }),
         categoryService.getCategories(),
     ]);
 
@@ -115,10 +118,25 @@ export default async function CategoryPage({ params }: Props) {
 
                         {initial.hasNext && (
                             <Suspense fallback={<PostListSkeleton count={3} />}>
-                                <MorePosts size={PAGE_SIZE} categorySlug={decoded} />
+                                <MorePosts
+                                    size={PAGE_SIZE}
+                                    categorySlug={decoded}
+                                    initialPage={currentPage}
+                                />
                             </Suspense>
                         )}
                     </ul>
+                )}
+
+                {initial.hasNext && (
+                    <div className={styles['sr-only']}>
+                        <Link
+                            href={`/posts/category/${encodeURIComponent(decoded)}?page=${currentPage + 1}`}
+                            rel='next'
+                        >
+                            다음 페이지
+                        </Link>
+                    </div>
                 )}
             </section >
         </>

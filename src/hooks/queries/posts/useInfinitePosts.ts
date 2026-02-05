@@ -5,16 +5,18 @@ import { PagedPost } from "@/types/post";
 type Options = {
     category?: string | null;
     size: number;
+    initialPage?: number;
 }
 
 export const useInfinitePosts = ({
     category = null,
     size = 10,
+    initialPage = 0,
 }: Options) => {
 
     return useInfiniteQuery<PagedPost>({
         queryKey: ['posts', category, size],
-        initialPageParam: 1,
+        initialPageParam: initialPage + 1,
         queryFn: ({ pageParam }) =>
             postService.getAllPosts({ category, page: pageParam as number, size }),
         getNextPageParam: (page) => {
