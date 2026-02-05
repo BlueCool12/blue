@@ -1,5 +1,5 @@
-import page from '@/app/posts/page.module.css';
-import styles from '@/app/posts/category/[category]/loading.module.css';
+import page from '@/app/posts/(list)/page.module.css';
+import styles from '@/app/posts/(list)/category/[category]/loading.module.css';
 
 export default function Loading() {
   return (

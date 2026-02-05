@@ -81,7 +81,8 @@
 }
 
 .posts--mobile {
-  display: block;
+  display: flex;
+  justify-content: center;
   position: sticky;
   top: 100px;
   z-index: 50;

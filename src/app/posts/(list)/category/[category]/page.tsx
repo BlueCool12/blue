@@ -1,59 +1,84 @@
-import type { Metadata } from 'next';
+import { Suspense } from 'react';
+
 import Link from 'next/link';
+import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 
-import styles from '@/app/posts/page.module.css';
 import AdsenseAd from '@/components/AdsenseAd';
+import styles from '@/app/posts/(list)/page.module.css';
+import MorePosts from "@/app/posts/(list)/MorePosts";
+import { PostListSkeleton } from '@/components/posts/PostListSkeleton';
 import { EmptyState } from '@/components/posts/EmptyState';
-import MorePosts from "@/app/posts/MorePosts";
 
+import { categoryService } from '@/services/categoryService';
 import { postService } from '@/services/postService';
 
 export const revalidate = 86400;
+export const dynamicParams = true;
 
-export async function generateMetadata(): Promise<Metadata> {
-  const title = '전체 글 목록';
-  const description = 'BlueCool 블로그의 전체글 목록입니다. 다양한 기술과 개발 이야기를 확인해보세요.';
+export async function generateStaticParams() {
+  const categories = await categoryService.getCategories();
+  const allChildren = categories?.flatMap((parent) => parent.children ?? []) ?? [];
+
+  return allChildren.map((cat) => ({
+    category: cat.slug,
+  }));
+}
+
+type Props = {
+  params: Promise<{ category: string }>;
+  searchParams: Promise<{ page?: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { category } = await params;
+
+  const decoded = decodeURIComponent(category);
+  if (!decoded) return notFound();
+
+  const title = `${decoded.toUpperCase()} 카테고리 글 목록`;
+  const description = `BlueCool 블로그의 "${decoded}" 카테고리 글 목록입니다.`;
 
   return {
     title,
     description,
     alternates: {
-      canonical: '/posts',
+      canonical: `/posts/category/${encodeURIComponent(decoded)}`,
     },
     openGraph: {
       title,
       description,
       type: 'website',
-      url: 'https://pyomin.com/posts',
+      url: `https://pyomin.com/posts/category/${encodeURIComponent(decoded)}`,
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
     },
-  }
-};
+  };
+}
 
-type Props = {
-  searchParams: Promise<{ page?: string }>;
-};
-
-export default async function Page({ searchParams }: Props) {
-
+export default async function CategoryPage({ params, searchParams }: Props) {
+  const { category } = await params;
   const { page } = await searchParams;
+
+  const decoded = decodeURIComponent(category);
+  if (!decoded) notFound();
+
   const currentPage = Number(page) || 0;
   const PAGE_SIZE = 10;
 
   const initial = await postService.getAllPosts({
     page: currentPage,
     size: PAGE_SIZE,
-    category: null
+    category: decoded
   });
 
   const posts = initial.posts ?? [];
 
   return (
-    <>      
+    <>
       <section className={styles.section}>
         {posts.length === 0 ? (
           <EmptyState message="열심히 공부 중입니다..." />
@@ -79,18 +104,23 @@ export default async function Page({ searchParams }: Props) {
             ))}
 
             {initial.hasNext && (
-              <MorePosts
-                size={PAGE_SIZE}
-                categorySlug={null}
-                initialPage={currentPage}
-              />
+              <Suspense fallback={<PostListSkeleton count={3} />}>
+                <MorePosts
+                  size={PAGE_SIZE}
+                  categorySlug={decoded}
+                  initialPage={currentPage}
+                />
+              </Suspense>
             )}
           </ul>
         )}
 
         {initial.hasNext && (
           <div className={styles['sr-only']}>
-            <Link href={`/posts?page=${currentPage + 1}`} rel='next'>
+            <Link
+              href={`/posts/category/${encodeURIComponent(decoded)}?page=${currentPage + 1}`}
+              rel='next'
+            >
               다음 페이지
             </Link>
           </div>
@@ -100,4 +130,4 @@ export default async function Page({ searchParams }: Props) {
       </section >
     </>
   );
-};
+}
