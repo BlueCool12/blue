@@ -84,6 +84,23 @@
   color: var(--link-hover-color);
 }
 
+.header__icon--playing {
+  color: var(--theme-color-9);
+  animation: musicPlaying 1.2s ease-in-out infinite;
+}
+
+@keyframes musicPlaying {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+}
+
 .header__menu-toggle {
   display: none;
   color: var(--header-text-color);
@@ -149,3 +166,136 @@
 }
 
 /* MOBILE 네비바 */
+
+/* Music Player */
+
+.music-player-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.music-player__popover {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 32px;
+  padding: 18px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  min-width: 200px;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.music-player__popover-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.music-player__popover-image {
+  object-fit: cover;
+}
+
+.music-player__title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--header-text-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.music-player__separator {
+  width: 100%;
+  height: 1px;
+  background-color: var(--border-color);
+  margin: 4px 0;
+}
+
+.music-player__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.music-player__control-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--header-text-color);
+  transition: color 0.2s, transform 0.1s;
+}
+
+.music-player__control-btn:hover {
+  color: var(--link-hover-color);
+  transform: scale(1.1);
+}
+
+.music-player__control-btn--main {
+  color: var(--theme-color-9);
+}
+
+.music-player__volume-wrapper {
+  width: 100%;
+  padding: 4px 0 8px;
+  display: flex;
+  align-items: center;
+}
+
+.music-player__volume-slider {
+  width: 100%;
+  height: 4px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--border-color);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+
+.music-player__volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  background: var(--theme-color-9);
+  border-radius: 50%;
+  transition: transform 0.1s;
+}
+
+.music-player__volume-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.music-player__volume-slider::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  background: var(--theme-color-9);
+  border-radius: 50%;
+  border: none;
+  transition: transform 0.1s;
+}
+
+.music-player__volume-slider::-moz-range-thumb:hover {
+  transform: scale(1.2);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

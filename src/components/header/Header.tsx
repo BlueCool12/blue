@@ -5,6 +5,8 @@ import styles from './Header.module.css';
 import { ThemeAwareLogo } from './ThemeAwareLogo';
 import { ThemeSwitcher } from './ThemeSwitcher';
 import { MobileMenu } from './MobileMenu';
+import { MusicPlayer } from './MusicPlayer';
+
 
 export const Header: React.FC = () => {
 
@@ -35,6 +37,7 @@ export const Header: React.FC = () => {
                     {/* PC 네비바 */}
 
                     <div className={styles['header__icons']}>
+                        <MusicPlayer />
                         <ThemeSwitcher />
                         <MobileMenu />
                     </div>
