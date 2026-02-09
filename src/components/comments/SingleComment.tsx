@@ -1,5 +1,5 @@
 import { commentService } from "@/services/commentService";
-import { Comment } from "@/types/comment";
+import { Comment, COMMENT_STATUS } from "@/types/comment";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import styled from "styled-components";
@@ -97,7 +97,7 @@ export const SingleComment: React.FC<SingleCommentProps> = ({ comment, postId, r
                 )}
               </CommentAuthor>
 
-              {!isAdmin && (
+              {!isAdmin && comment.status !== COMMENT_STATUS.DELETED && (
                 <ButtonGroup>
                   <CommentEditButton onClick={handleEditClick} aria-label="댓글 수정">
                     <MdOutlineEdit size={14} />
@@ -115,7 +115,7 @@ export const SingleComment: React.FC<SingleCommentProps> = ({ comment, postId, r
         )}
 
         <CommentFooter $isEditing={isEditing} $isReply={depth > 0}>
-          {!comment.isDeleted && (
+          {comment.status !== COMMENT_STATUS.DELETED && (
             <>
               <ReplyButton onClick={() => setIsReplying(!isReplying)}>
                 <MdSubdirectoryArrowRight size={14} />답글 달기

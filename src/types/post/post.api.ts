@@ -2,8 +2,6 @@ export interface PostListResponse {
     id: number;
     title: string;
     category: string;
-    isPublic: boolean;
-    isDeleted: boolean;
     slug: string;
     coverPath: string;
     contentSummary: string;
@@ -33,8 +31,6 @@ export interface PostDetailResponse {
         name: string;
         slug: string;
     };
-    isPublic: boolean;
-    isDeleted: boolean;
     slug: string;
     createdAt: string;
     updatedAt: string;

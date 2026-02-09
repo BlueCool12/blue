@@ -15,13 +15,9 @@ export const commentService = {
 
             const formatComment = (comment: Comment): Comment => ({
                 ...comment,
-                nickname: comment.isDeleted ? "알 수 없음" : comment.nickname,
-                content: comment.isDeleted ? "삭제된 댓글입니다." : comment.content,
                 createdAt: formatDate(comment.createdAt),
                 children: comment.children?.map(formatComment) ?? [],
             });
-
-            console.log(result);
 
             return result.map(formatComment);
         } catch {
