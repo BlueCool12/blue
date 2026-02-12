@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 
-import { highlightCodeBlocksWithShiki } from "@/lib/utils/highlight";
+import { highlightCodeBlocks } from "@/lib/utils/highlight";
 import { formatDate } from "@/lib/utils/format";
 import { postApi } from "@/lib/api/postApi";
 
@@ -39,7 +39,7 @@ export const postService = {
     getPostBySlug: async (slug: string): Promise<PostDetail> => {
         try {
             const response: PostDetailResponse = await postApi.getPostBySlug(slug);
-            const highlightedContent = await highlightCodeBlocksWithShiki(response.content);
+            const highlightedContent = await highlightCodeBlocks(response.content);
             const formattedCreatedAt = formatDate(response.createdAt);
 
             const postDetail: PostDetail = {
