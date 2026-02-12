@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 
 import styles from './page.module.css';
+import 'prismjs/themes/prism-tomorrow.css';
 
 import CommentSectionWrapper from '@/components/comments/CommentSectionWrapper';
 import { ScrollProgress } from '@/components/posts/ScrollProgress';
