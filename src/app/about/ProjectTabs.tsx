@@ -40,14 +40,18 @@ const projects = [
     },
     {
         title: 'BlueCool',
-        subtitle: '개인 블로그 프로젝트',
+        subtitle: '개인 블로그 및 CMS 프로젝트',
         description: (
             <>
-                관리자(React + Nest.js)와 유저(Next.js + Spring Boot)서버를 분리하여 <strong>블로그 및 CMS</strong>를 구현하였습니다.<br /><br />
+                관리자(React + Nest.js), 유저(Next.js + Spring Boot), AI(Python + FastAPI) 서버를 분리한 <strong>블로그 및 CMS</strong>아키텍처를 설계하였습니다.<br /><br />
                 [ADMIN]<br />
                 <strong>OOP 아키텍처</strong>를 도입해 복잡한 관리자 로직의 유지보수성과 확장성을 개선하였습니다.<br /><br />
-                <strong>JWT</strong> 기반 토큰 인증 방식을 적용하여 관리자 로그인 및 권한 검증 기능을 개발하였습니다.<br /><br />
-                <strong>Lexical</strong> 기반 커스텀 리치 텍스트 에디터를 개발하여 콘텐츠 작성과 관리를 효율적으로 할 수 있도록 구현하였습니다.<br /><br />
+                <strong>JWT</strong> 기반 토큰 인증을 적용하여 관리자 로그인 및 권한 검증 시스템을 구현하였습니다.<br /><br />
+                <strong>Lexical</strong> 기반의 커스텀 리치 텍스트 에디터를 개발하여 콘텐츠 작성 및 관리 효율성을 높였습니다.<br /><br />
+                [AI]<br />
+                <strong>FastAPI</strong>기반 AI 마이크로서비스 서버를 별도로 구축하였습니다.<br /><br />
+                <strong>LangChain</strong>을 활용하여 블로그 콘텐츠 자동화 기능을 구현하였습니다.<br /><br />
+                블로그 글 본문을 임베딩 처리 후 <strong>Vector DB(Qdrant)</strong>에 저장하여 의미 기반 검색 및 RAG 구조를 설계하였습니다.<br /><br />
                 [USER]<br />
                 기존 React 기반 구조를 검색 엔진 최적화를 위해 <strong>Next.js</strong>로 마이그레이션하고 <strong>다크 모드와 반응형 UI</strong>를 구현하였습니다.<br /><br />
                 Next.js의 <strong>MetadataRoute</strong> 기능을 통해 SEO를 위한 <strong>Sitemap</strong> 과 <strong>RSS</strong>, PWA 지원을 위한 <strong>Manifest</strong>를 구성하였습니다.<br /><br />
@@ -58,7 +62,7 @@ const projects = [
         image: bluecoolImage,
         members: '1명',
         period: '2025.06 ~ 2025.08 (3개월)',
-        link: 'https://www.pyomin.com',
+        link: 'https://pyomin.com',
         pdf: 'https://pyomin.com/pdfs/bluecool.pdf',
         stack: [
             { name: 'Java', color: '#f89820' },
@@ -66,7 +70,7 @@ const projects = [
             { name: 'TypeScript', color: '#3178c6' },
             { name: 'NestJS', color: '#ea2845' },
             { name: 'React', color: '#61dafb' },
-            { name: 'Next.js', color: '#000000' },            
+            { name: 'Next.js', color: '#000000' },
             { name: 'Postgresql', color: '#4169E1' },
         ]
     },
