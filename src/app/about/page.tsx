@@ -42,9 +42,10 @@ const About = () => {
                     <div className={styles['hero-section__text-content']}>
                         <p className={styles['hero-section__intro']}>안녕하세요 👋</p>
                         <h1 className={styles['hero-section__title']}>
-                            저는 백엔드 개발자 <br />
-                            <strong>BlueCool</strong> 입니다.
+                            백엔드 개발자 <strong>BlueCool</strong> 입니다 <br />
+                            지속적인 개선과 성장을 즐깁니다
                         </h1>
+
                         <div className={styles['hero-section__email']}>
                             <div>
                                 <MdOutlineMail size={24} />
