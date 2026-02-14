@@ -66,12 +66,20 @@ const projects = [
         pdf: 'https://pyomin.com/pdfs/bluecool.pdf',
         stack: [
             { name: 'Java', color: '#f89820' },
-            { name: 'Spring', color: '#6db33f' },
             { name: 'TypeScript', color: '#3178c6' },
+            { name: 'Python', color: '#3776ab' },
+            { name: 'Spring', color: '#6db33f' },
             { name: 'NestJS', color: '#ea2845' },
-            { name: 'React', color: '#61dafb' },
-            { name: 'Next.js', color: '#000000' },
+            { name: 'FastAPI', color: '#05998b' },
+            { name: 'JPA', color: '#59666c' },
+            { name: 'TypeORM', color: '#e535ab' },
+            { name: 'SQLAlchemy', color: '#d71f00' },
+            { name: 'LangChain', color: '#1c3c3c' },
             { name: 'Postgresql', color: '#4169E1' },
+            { name: 'Qdrant', color: '#ff4d4d' },
+            { name: 'Next.js', color: '#000000' },
+            { name: 'React', color: '#61dafb' },
+            { name: 'MUI', color: '#007fff' },
         ]
     },
     {
@@ -94,6 +102,7 @@ const projects = [
         stack: [
             { name: 'Java', color: '#f89820' },
             { name: 'Spring', color: '#6db33f' },
+            { name: 'MyBatis', color: '#c70d2c' },
             { name: 'MariaDB', color: '#003545' },
             { name: 'JavaScript', color: '#f7df1e' },
             { name: 'Thymeleaf', color: '#005F0F' },
