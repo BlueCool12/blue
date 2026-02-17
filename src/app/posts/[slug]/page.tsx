@@ -82,8 +82,8 @@ export default async function PostDetail({ params }: PageProps) {
             <article id='main-content' className={styles.article}>
                 <header className={styles.header}>
                     <div className={styles.meta}>
-                        <time className={styles.date} dateTime={post.createdAt}>
-                            {post.createdAtText}
+                        <time className={styles.date} dateTime={post.publishedAt}>
+                            {post.publishedAtText}
                         </time>
 
                         <Link href={`/posts/category/${encodeURIComponent(post.category.slug)}`}>

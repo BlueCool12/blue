@@ -8,6 +8,7 @@ export interface PostListResponse {
     description?: string;
     createdAt: string;
     updatedAt: string;
+    publishedAt: string;
 }
 
 export interface PageResponse<T> {
@@ -34,6 +35,7 @@ export interface PostDetailResponse {
     slug: string;
     createdAt: string;
     updatedAt: string;
+    publishedAt: string;
     previousPost?: PostSummaryResponse | null;
     nextPost?: PostSummaryResponse | null;
 }
@@ -43,5 +45,6 @@ export interface PostLatest {
     title: string;
     slug: string;
     createdAt: string;
-    createdAtText: string;
+    publishedAt: string;
+    publishedAtText: string;
 }

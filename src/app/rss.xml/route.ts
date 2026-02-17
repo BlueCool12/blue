@@ -27,7 +27,7 @@ async function fetchPosts(): Promise<PostListResponse[]> {
 
 export async function GET() {
     const posts = await fetchPosts();
-    posts.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+    posts.sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
 
     const latestPostDate = posts.length > 0
         ? new Date(posts[0].updatedAt).toUTCString()
@@ -39,7 +39,7 @@ export async function GET() {
             <link>${SITE_URL}/posts/${post.slug}</link>            
             <guid isPermaLink="true">${SITE_URL}/posts/${post.slug}</guid>
             <description><![CDATA[${post.description || ''}]]></description>
-            <pubDate>${new Date(post.createdAt).toUTCString()}</pubDate>            
+            <pubDate>${new Date(post.publishedAt).toUTCString()}</pubDate>            
             <category><![CDATA[${post.category}]]></category>
 
             <media:content url="${FALLBACK_IMG}" medium="image" />
