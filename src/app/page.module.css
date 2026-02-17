@@ -436,20 +436,6 @@
     display: flex;
     gap: 1.5rem;
     margin-top: 12px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-color: var(--theme-color-9);
-}
-
-.troubleshooting-posts::-webkit-scrollbar {
-    height: 6px;    
-}
-
-.troubleshooting-posts::-webkit-scrollbar-thumb {
-    background: var(--theme-color-9);
-    border-radius: 8px;
 }
 
 .troubleshooting-posts__card {
@@ -493,6 +479,7 @@
 
     display: -webkit-box;
     -webkit-line-clamp: 1;
+    line-clamp: 1;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
@@ -505,6 +492,7 @@
     opacity: 0.8;
     display: -webkit-box;
     -webkit-line-clamp: 3;
+    line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }

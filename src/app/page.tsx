@@ -5,6 +5,7 @@ import styles from '@/app/page.module.css';
 
 import { MdOutlineChevronRight } from 'react-icons/md';
 import HeroClient from '@/components/HeroClient';
+import HorizontalScrollSection from '@/components/common/HorizontalScrollSection';
 
 import { getDailySeed, seededShuffle } from '@/lib/utils/dailyShuffle';
 
@@ -126,8 +127,8 @@ export default async function Home() {
                                 <div className={styles['recent-posts__content']}>
                                     <h3 className={styles['recent-posts__card-title']}>{post.title}</h3>
 
-                                    <time className={styles['recent-posts__date']} dateTime={post.createdAt}>
-                                        {post.createdAtText}
+                                    <time className={styles['recent-posts__date']} dateTime={post.publishedAt}>
+                                        {post.publishedAtText}
                                     </time>
                                 </div>
                             </article>
@@ -154,8 +155,8 @@ export default async function Home() {
                     </Link>
                 </div>
 
-                <div className={styles['troubleshooting-posts']}>
-                    {troubleshootingPosts?.posts.map((post) => {                        
+                <HorizontalScrollSection containerClassName={styles['troubleshooting-posts']}>
+                    {troubleshootingPosts?.posts.map((post) => {
                         return (
                             <article key={post.slug} className={styles['troubleshooting-posts__card']}>
                                 <Link
@@ -177,15 +178,15 @@ export default async function Home() {
                                             {post.title}
                                         </h3>
                                         <p className={styles['troubleshooting-posts__summary']}>{post.contentSummary}</p>
-                                        <time className={styles['troubleshooting-posts__date']} dateTime={post.createdAt}>
-                                            {post.createdAtText}
+                                        <time className={styles['troubleshooting-posts__date']} dateTime={post.publishedAt}>
+                                            {post.publishedAtText}
                                         </time>
                                     </div>
                                 </Link>
                             </article>
                         );
                     })}
-                </div>
+                </HorizontalScrollSection>
             </section>
             {/* Troubleshooting Posts Section */}
         </div>
