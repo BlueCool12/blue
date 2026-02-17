@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { LoadingSpinner } from "@/components/common/LoadingSpinner";
 
 import styles from '@/app/posts/[slug]/page.module.css';
+import 'prismjs/themes/prism-tomorrow.css';
 
 interface PostPreviewData {
   title: string;

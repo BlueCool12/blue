@@ -5,7 +5,8 @@ export interface Post {
     contentSummary: string;
     coverPath: string;
     createdAt: string;
-    createdAtText: string;
+    publishedAt: string;
+    publishedAtText: string;
 }
 
 export interface PagedPost {
@@ -30,7 +31,8 @@ export interface PostDetail {
     };
     content: string;
     createdAt: string;
-    createdAtText: string;
+    publishedAt: string;
+    publishedAtText: string;
     previousPost?: PostSummary | null;
     nextPost?: PostSummary | null;
 }

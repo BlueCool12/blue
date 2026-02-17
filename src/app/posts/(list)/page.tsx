@@ -71,7 +71,7 @@ export default async function Page({ searchParams }: Props) {
                     <p className={styles.content}>{post.contentSummary}</p>
 
                     <footer className={styles.meta}>
-                      <time dateTime={post.createdAt}>{post.createdAtText}</time>
+                      <time dateTime={post.publishedAt}>{post.publishedAtText}</time>
                     </footer>
                   </Link>
                 </article>

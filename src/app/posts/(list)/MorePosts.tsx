@@ -61,8 +61,8 @@ export default function MorePosts({ size, categorySlug = null, initialPage = 0 }
                             </header>
                             <p className={styles.content}>{post.contentSummary}</p>
                             <footer className={styles.meta}>
-                                <time dateTime={post.createdAt}>
-                                    {post.createdAtText ?? post.createdAt}
+                                <time dateTime={post.publishedAt}>
+                                    {post.publishedAtText ?? post.publishedAt}
                                 </time>
                             </footer>
                         </Link>

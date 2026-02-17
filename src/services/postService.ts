@@ -26,8 +26,9 @@ export const postService = {
             contentSummary: post.contentSummary,
             coverPath: post.coverPath,
             createdAt: post.createdAt,
-            createdAtText: formatDate(post.createdAt),
-        }));
+            publishedAt: post.publishedAt,
+            publishedAtText: formatDate(post.publishedAt),
+        }));        
 
         return {
             posts,
@@ -40,12 +41,12 @@ export const postService = {
         try {
             const response: PostDetailResponse = await postApi.getPostBySlug(slug);
             const highlightedContent = await highlightCodeBlocks(response.content);
-            const formattedCreatedAt = formatDate(response.createdAt);
+            const formattedPublihsedAt = formatDate(response.publishedAt);
 
             const postDetail: PostDetail = {
                 ...response,
                 content: highlightedContent,
-                createdAtText: formattedCreatedAt,
+                publishedAtText: formattedPublihsedAt,
             };
 
             return postDetail;
@@ -58,7 +59,7 @@ export const postService = {
         const result = await postApi.getLatestPosts();
         return result.map((post) => ({
             ...post,
-            createdAtText: formatDate(post.createdAt),
+            publishedAtText: formatDate(post.publishedAt),
         }));
     },
 };
