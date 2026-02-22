@@ -42,7 +42,7 @@ export default function MobileCategorySelect({ categories }: Props) {
               <optgroup key={parent.slug} label={parent.name}>
                 {(parent.children ?? []).map((child) => (
                   <option key={child.slug} value={child.slug}>
-                    {child.name}
+                    {child.name} ({child.postCount})
                   </option>
                 ))}
               </optgroup>

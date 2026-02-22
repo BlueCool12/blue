@@ -52,7 +52,7 @@ export const CategorySidebar = ({ categories }: Props) => {
                             className={`${styles.subLink} ${currentSlug === child.slug ? styles.active : ''}`}
                             href={`/posts/category/${child.slug}`}
                           >
-                            <MdOutlineNumbers />{child.name}
+                            <MdOutlineNumbers />{child.name} <span className={styles.count}>({child.postCount})</span>
                           </Link>
                         </li>
                       ))}
