@@ -1,7 +1,6 @@
 export interface CategoryListResponse {
-    id: number;
     name: string;
     slug: string;
-    parentId: number | null;
+    postCount: number;
     children: CategoryListResponse[];
 }
