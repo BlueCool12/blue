@@ -52,6 +52,7 @@ const projects = [
                 <strong>FastAPI</strong>기반 AI 마이크로서비스 서버를 별도로 구축하였습니다.<br /><br />
                 <strong>LangChain</strong>을 활용하여 블로그 콘텐츠 자동화 기능을 구현하였습니다.<br /><br />
                 블로그 글 본문을 임베딩 처리 후 <strong>Vector DB(Qdrant)</strong>에 저장하여 의미 기반 검색 및 RAG 구조를 설계하였습니다.<br /><br />
+                <strong>RabbitMQ</strong>와 <strong>Redis</strong>를 활용해 비동기 작업 큐 및 상태 관리 시스템을 구축하였습니다.<br /><br />
                 [USER]<br />
                 기존 React 기반 구조를 검색 엔진 최적화를 위해 <strong>Next.js</strong>로 마이그레이션하고 <strong>다크 모드와 반응형 UI</strong>를 구현하였습니다.<br /><br />
                 Next.js의 <strong>MetadataRoute</strong> 기능을 통해 SEO를 위한 <strong>Sitemap</strong> 과 <strong>RSS</strong>, PWA 지원을 위한 <strong>Manifest</strong>를 구성하였습니다.<br /><br />
@@ -76,6 +77,8 @@ const projects = [
             { name: 'SQLAlchemy', color: '#d71f00' },
             { name: 'LangChain', color: '#1c3c3c' },
             { name: 'Postgresql', color: '#4169E1' },
+            { name: 'Redis', color: '#D82C20' },
+            { name: 'RabbitMQ', color: '#FF6600' },
             { name: 'Qdrant', color: '#ff4d4d' },
             { name: 'Next.js', color: '#000000' },
             { name: 'React', color: '#61dafb' },
