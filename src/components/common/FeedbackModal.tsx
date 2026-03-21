@@ -1,49 +1,57 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MdOutlineSend, MdKeyboardArrowDown } from 'react-icons/md';
 
 import styled from 'styled-components';
+import { toast } from 'react-toastify';
+import { useFeedbackCategories } from '@/hooks/queries/feedbacks/useFeedbackCategories';
+import { useSubmitFeedback } from '@/hooks/queries/feedbacks/useSubmitFeedback';
 
 interface FeedbackModalProps {
   onClose: () => void;
 }
 
-type FeedbackCategory = 'TYPO' | 'ERROR' | 'COMMENT_DELETE' | 'OTHER';
-
-const categoryLabels: Record<FeedbackCategory, string> = {
-  TYPO: '오타 제보',
-  ERROR: '잘못된 내용 수정 요청',
-  COMMENT_DELETE: '댓글 삭제 요청',
-  OTHER: '기타 건의사항'
-};
-
 export const FeedbackModal = ({ onClose }: FeedbackModalProps) => {
-  const [category, setCategory] = useState<FeedbackCategory>('TYPO');
+  const { data: categories } = useFeedbackCategories();
+  const { mutateAsync: submitFeedback } = useSubmitFeedback();
+
+  const [categoryId, setCategoryId] = useState<number | null>(null);
   const [content, setContent] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
+  useEffect(() => {
+    if (categories && categories.length > 0 && categoryId === null) {
+      setCategoryId(categories[0].id);
+    }
+  }, [categories, categoryId]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (!categoryId) {
+      toast.warn('카테고리를 선택해주세요.');
+      return;
+    }
+
     if (!content.trim()) {
-      alert('내용을 입력해주세요.');
+      toast.warn('내용을 입력해주세요.');
       return;
     }
 
     setIsSubmitting(true);
     try {
-      // TODO: Connect to backend API
-      console.log('Submitting feedback:', { category, content });
+      await submitFeedback({
+        categoryId,
+        content,
+        pageUrl: window.location.href,
+      });
 
-      // Mock API delay
-      await new Promise(resolve => setTimeout(resolve, 500));
-
-      alert('소중한 의견 감사합니다!');
+      toast.success('소중한 의견 감사합니다!');
       onClose();
     } catch (error) {
-      alert('일시적인 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+      toast.error('일시적인 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
       console.error('Feedback submission failed:', error);
     } finally {
       setIsSubmitting(false);
@@ -67,21 +75,21 @@ export const FeedbackModal = ({ onClose }: FeedbackModalProps) => {
               setIsDropdownOpen(!isDropdownOpen);
             }}>
               <SelectHeader $isOpen={isDropdownOpen}>
-                {categoryLabels[category]}
+                {categories?.find(c => c.id === categoryId)?.name || '카테고리 선택'}
                 <MdKeyboardArrowDown size={20} />
               </SelectHeader>
-              {isDropdownOpen && (
+              {isDropdownOpen && categories && (
                 <DropdownList>
-                  {(Object.keys(categoryLabels) as FeedbackCategory[]).map((cat) => (
+                  {categories.map((cat) => (
                     <DropdownItem
-                      key={cat}
-                      $isSelected={category === cat}
+                      key={cat.id}
+                      $isSelected={categoryId === cat.id}
                       onClick={() => {
-                        setCategory(cat);
+                        setCategoryId(cat.id);
                         setIsDropdownOpen(false);
                       }}
                     >
-                      {categoryLabels[cat]}
+                      {cat.name}
                     </DropdownItem>
                   ))}
                 </DropdownList>
