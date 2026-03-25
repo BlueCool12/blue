@@ -62,7 +62,7 @@ const About = () => {
 
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 <SiNotion size={24} />
-                <a href='https://branch-grouse-fde.notion.site/Backend-Developer-2e9381b7d1078089959de45d0f34014d?source=copy_link' target='_blank' rel='noopener noreferrer'>
+                <a href='https://www.notion.so/Backend-Developer-2e9381b7d1078089959de45d0f34014d?source=copy_link' target='_blank' rel='noopener noreferrer'>
                   portfolio
                 </a>
               </div>
