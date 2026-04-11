@@ -19,7 +19,7 @@ jobs:
       contents: read
       packages: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Add host key (known_hosts)
         run: |
@@ -29,24 +29,24 @@ jobs:
           chmod 644 ~/.ssh/known_hosts
 
       - name: Setup SSH agent (for remote builder)
-        uses: webfactory/ssh-agent@v0.7.0
+        uses: webfactory/ssh-agent@v0.10.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Setup buildx (remote on Pi)
         id: buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@v4
         with:
           endpoint: ssh://${{ secrets.RASPBERRY_USER }}@${{ secrets.RASPBERRY_HOST }}:${{ secrets.RASPBERRY_PORT }}      
 
-      - uses: docker/login-action@v3
+      - uses: docker/login-action@v4
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}      
 
       - name: Build & Push
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v7
         with:          
           builder: ${{ steps.buildx.outputs.name }}
           context: .          
@@ -69,7 +69,7 @@ jobs:
     needs: build
     steps:
       - name: Setup SSH
-        uses: webfactory/ssh-agent@v0.7.0
+        uses: webfactory/ssh-agent@v0.10.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 

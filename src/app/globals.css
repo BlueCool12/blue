@@ -173,6 +173,7 @@ img {
 .lexical-theme {
   font-family: 'Pretendard', -apple-system, sans-serif;
   color: inherit;
+  font-size: 17px;
   line-height: 1.6;
   word-break: break-all;
 }
@@ -216,6 +217,37 @@ img {
   border-radius: 0 4px 4px 0;
 }
 
+.lexical-theme .editor-text-bold {
+  font-weight: bold;
+}
+
+/* 인라인 코드 */
+code,
+.lexical-theme .editor-textCode,
+.lexical-theme .editor-text-code {
+  background-color: var(--theme-color-1);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-family: 'Fira Code', Consolas, monospace;
+  font-size: 0.85em;
+  color: var(--theme-color-9);
+}
+
+html[data-theme='dark'] code,
+html[data-theme='dark'] .lexical-theme .editor-textCode,
+html[data-theme='dark'] .lexical-theme .editor-text-code {
+  background-color: rgba(169, 226, 240, 0.15);
+  /* theme-color-4 transparent */
+  color: var(--theme-color-4);
+}
+
+pre code,
+.editor-code code {
+  background-color: transparent !important;
+  padding: 0 !important;
+  color: inherit !important;
+}
+
 /* 3. 목록 (List) */
 .lexical-theme .editor-list-ul,
 .lexical-theme .editor-list-ol {
@@ -240,7 +272,7 @@ img {
   overflow-x: auto;
   line-height: 1.5;
   display: block;
-  white-space: pre;  
+  white-space: pre;
   width: 100%;
   max-width: 100%;
 }
@@ -248,7 +280,7 @@ img {
 /* 내부 span 태그 줄바꿈 막음 */
 .editor-code span {
   white-space: pre !important;
-  display: inline !important;  
+  display: inline !important;
 }
 
 /* 코드 블록 뱃지 */
@@ -266,7 +298,7 @@ img {
   border-radius: 0.4rem;
   text-transform: uppercase;
   pointer-events: none;
-  
+
   animation-name: fade-out-on-scroll;
   animation-timeline: scroll(nearest inline);
   animation-range: 0px 50px;
@@ -274,8 +306,8 @@ img {
 }
 
 @keyframes fade-out-on-scroll {
-  to { 
-    opacity: 0; 
+  to {
+    opacity: 0;
     visibility: hidden;
   }
 }
