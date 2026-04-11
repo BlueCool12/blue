@@ -6,7 +6,6 @@
 .container {
   display: flex;
   gap: 1.5rem;
-  margin-top: 12px;
   overflow-x: auto;
   overflow-y: hidden;
   scroll-snap-type: x mandatory;

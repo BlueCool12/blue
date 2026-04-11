@@ -189,7 +189,7 @@ export default async function Home() {
       <section className={styles['recent-posts']}>
         <div className={styles['recent-posts__header']}>
           <div className={styles['recent-posts__heading']}>
-            <Link href='/posts/category/troubleshooting' className={styles['recent-posts__title']}>Troubleshooting 🛠️</Link>
+            <Link href='/posts/category/troubleshooting' className={styles['recent-posts__title']}>트러블슈팅 🛠️</Link>
             <p className={styles['recent-posts__subtitle']}>실제 서비스에서 마주한 문제들을 분석하고 해결 과정에서 얻은 경험들을 공유합니다</p>
           </div>
 
