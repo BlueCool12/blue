@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useState, useEffect } from 'react';
 
 import styles from '@/components/categories/CategorySidebar.module.css';
 import { MdOutlineNumbers } from 'react-icons/md';
@@ -23,6 +24,15 @@ export const CategorySidebar = ({ categories }: Props) => {
 
   const currentSlug = getCurrentSlug(pathname);
 
+  const [openSlug, setOpenSlug] = useState<string | null>(null);
+
+  useEffect(() => {
+    const parent = categories.find(p => p.children?.some(child => child.slug === currentSlug));
+    if (parent) {
+      setOpenSlug(parent.slug);
+    }
+  }, [categories, currentSlug]);
+
   return (
     <aside className={styles.sidebar}>
       <nav>
@@ -35,16 +45,22 @@ export const CategorySidebar = ({ categories }: Props) => {
         <ul className={styles.list}>
           {categories.map((parent) => {
             const children = parent.children ?? [];
-            const isActiveParent = children.some((child) => child.slug === currentSlug);
+            const isOpen = openSlug === parent.slug;
 
             return (
               <li key={parent.slug}>
-                <details open={isActiveParent}>
-                  <summary className={`${styles.link} ${isActiveParent ? styles.active : ''}`}>
-                    {parent.name}
-                  </summary>
+                <button 
+                  className={`${styles.link} ${isOpen ? styles.active : ''}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setOpenSlug(isOpen ? null : parent.slug);
+                  }}
+                >
+                  {parent.name}
+                </button>
 
-                  {children.length > 0 && (
+                {children.length > 0 && (
+                  <div className={`${styles.subListWrapper} ${isOpen ? styles.open : ''}`}>
                     <ul className={styles.subList}>
                       {children.map((child) => (
                         <li key={child.slug}>
@@ -57,8 +73,8 @@ export const CategorySidebar = ({ categories }: Props) => {
                         </li>
                       ))}
                     </ul>
-                  )}
-                </details>
+                  </div>
+                )}
               </li>
             );
           })}

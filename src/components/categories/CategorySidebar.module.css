@@ -28,6 +28,7 @@
 
 .link {
   display: block;
+  width: 100%;
   padding: 0.8rem 0;
   font-size: 1rem;
   font-weight: 600;
@@ -42,8 +43,22 @@
   color: var(--theme-color-6);
 }
 
+.subListWrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease-out, opacity 0.3s ease-out;
+  opacity: 0;
+}
+
+.subListWrapper.open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
 .subList {
   list-style: none;
+  overflow: hidden;
+  min-height: 0;
 }
 
 .subLink {
