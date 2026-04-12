@@ -27,6 +27,9 @@ export const Header: React.FC = () => {
                                 <Link href='/about' prefetch={false}>ABOUT</Link>
                             </li>
                             <li className={styles['desktop-nav__item']}>
+                                <Link href='/portfolio' prefetch={false}>PORTFOLIO</Link>
+                            </li>
+                            <li className={styles['desktop-nav__item']}>
                                 <Link href='/posts' prefetch={false}>POSTS</Link>
                             </li>
                             <li className={styles['desktop-nav__item']}>

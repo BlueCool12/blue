@@ -60,6 +60,7 @@ export function MobileMenu() {
 
                     <ul className={styles['mobile-menu__nav']}>
                         <li><Link href='/about' prefetch={false} onClick={() => setOpen(false)}>ABOUT</Link></li>
+                        <li><Link href='/portfolio' prefetch={false} onClick={() => setOpen(false)}>PORTFOLIO</Link></li>
                         <li><Link href='/posts' prefetch={false} onClick={() => setOpen(false)}>POSTS</Link></li>
                         <li><Link href='/guestbooks' prefetch={false} onClick={() => setOpen(false)}>GUESTBOOK</Link></li>
                     </ul>
