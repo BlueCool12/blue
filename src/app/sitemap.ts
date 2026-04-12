@@ -9,7 +9,8 @@ const SITE_URL = 'https://pyomin.com';
 const staticPagesInfo = [
     { path: '/', changeFrequency: 'weekly', priority: 1.0, lastModified: undefined },
     { path: '/posts', changeFrequency: 'weekly', priority: 0.7, lastModified: undefined },
-    { path: '/about', changeFrequency: 'yearly', priority: 0.5, lastModified: '2025-09-05T00:00:00.000Z' },
+    { path: '/about', changeFrequency: 'yearly', priority: 0.5, lastModified: '2026-04-12T15:41:00.000Z' },
+    { path: '/portfolio', changeFrequency: 'yearly', priority: 0.5, lastModified: '2026-04-12T15:41:00.000Z' },
     { path: '/guestbooks', changeFrequency: 'yearly', priority: 0.5, lastModified: '2025-07-01T00:00:00.000Z' },
 ] as const;
 

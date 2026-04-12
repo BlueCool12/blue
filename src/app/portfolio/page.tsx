@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import ProjectTabs from './ProjectTabs';
+import ProjectGallery from './ProjectGallery';
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 const Portfolio = () => {
     return (
         <div className={styles['wrapper']}>
-            <ProjectTabs />
+            <ProjectGallery />
         </div>
     );
 };
