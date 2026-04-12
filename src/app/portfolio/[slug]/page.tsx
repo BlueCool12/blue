@@ -1,12 +1,6 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import Link from 'next/link';
-import {
-    MdArrowBack,
-    MdArrowForward,
-    MdOutlineTravelExplore,
-    MdPictureAsPdf
-} from 'react-icons/md';
+import { MdOutlineTravelExplore, MdPictureAsPdf } from 'react-icons/md';
 import { projects } from '../data/projects';
 import styles from './page.module.css';
 import ProjectCarousel from './ProjectCarousel';
@@ -45,10 +39,7 @@ export default async function ProjectDetailPage({ params }: Props) {
 
     if (!project) {
         notFound();
-    }
-
-    const prevProject = projectIndex > 0 ? projects[projectIndex - 1] : null;
-    const nextProject = projectIndex < projects.length - 1 ? projects[projectIndex + 1] : null;
+    }    
 
     return (
         <div className={styles['wrapper']}>
