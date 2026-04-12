@@ -21,6 +21,7 @@ export interface Project {
     images: StaticImageData[];
     members: string;
     period: string;
+    lastModified: string;
     link?: string;
     pdf?: string;
     stack: { name: string; color: string }[];
@@ -43,6 +44,7 @@ export const projects: Project[] = [
         images: [baroyeonImage, baroyeonImage2, baroyeonImage3],
         members: '2명',
         period: '2025.04 ~ 2025.06 (3개월)',
+        lastModified: '2025-06-30T00:00:00.000Z',
         link: 'https://www.baroyeon.net/',
         stack: [
             { name: 'JavaScript', color: '#f7df1e' },
@@ -75,6 +77,7 @@ export const projects: Project[] = [
         images: [bluecoolImage1, bluecoolImage2, bluecoolImage3, bluecoolImage4, bluecoolImage5, bluecoolImage6],
         members: '1명',
         period: '2025.06 ~ 2025.08 (3개월)',
+        lastModified: '2026-04-12T15:41:00.000Z',
         link: 'https://pyomin.com',
         pdf: 'https://pyomin.com/pdfs/bluecool.pdf',
         stack: [
@@ -112,6 +115,7 @@ export const projects: Project[] = [
         images: [tourstoryImage],
         members: '6명',
         period: '2024.07 ~ 2024.08 (2개월)',
+        lastModified: '2024-08-31T00:00:00.000Z',
         link: 'https://tourstory.pyomin.com',
         pdf: 'https://pyomin.com/pdfs/tourstory.pdf',
         stack: [

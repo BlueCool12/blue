@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 
 import { getApiBase } from "@/lib/api/apiBase";
+import { projects } from "./portfolio/data/projects";
 
 export const revalidate = 86400;
 
@@ -59,5 +60,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.8,
     }));
 
-    return [...staticPages, ...categoryPages, ...postPages];
+    const portfolioPages: MetadataRoute.Sitemap = projects.map((project) => ({
+        url: `${SITE_URL}/portfolio/${project.slug}`,
+        lastModified: project.lastModified,
+        changeFrequency: 'monthly',
+        priority: 0.6,
+    }));
+
+    return [...staticPages, ...categoryPages, ...postPages, ...portfolioPages];
 }
