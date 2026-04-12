@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 
 import { getApiBase } from "@/lib/api/apiBase";
+import { projects } from "./portfolio/data/projects";
 
 export const revalidate = 86400;
 
@@ -9,7 +10,8 @@ const SITE_URL = 'https://pyomin.com';
 const staticPagesInfo = [
     { path: '/', changeFrequency: 'weekly', priority: 1.0, lastModified: undefined },
     { path: '/posts', changeFrequency: 'weekly', priority: 0.7, lastModified: undefined },
-    { path: '/about', changeFrequency: 'yearly', priority: 0.5, lastModified: '2025-09-05T00:00:00.000Z' },
+    { path: '/about', changeFrequency: 'yearly', priority: 0.5, lastModified: '2026-04-12T15:41:00.000Z' },
+    { path: '/portfolio', changeFrequency: 'yearly', priority: 0.5, lastModified: '2026-04-12T15:41:00.000Z' },
     { path: '/guestbooks', changeFrequency: 'yearly', priority: 0.5, lastModified: '2025-07-01T00:00:00.000Z' },
 ] as const;
 
@@ -58,5 +60,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.8,
     }));
 
-    return [...staticPages, ...categoryPages, ...postPages];
+    const portfolioPages: MetadataRoute.Sitemap = projects.map((project) => ({
+        url: `${SITE_URL}/portfolio/${project.slug}`,
+        lastModified: project.lastModified,
+        changeFrequency: 'monthly',
+        priority: 0.6,
+    }));
+
+    return [...staticPages, ...categoryPages, ...postPages, ...portfolioPages];
 }
