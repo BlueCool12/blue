@@ -2,33 +2,82 @@ import { Metadata } from 'next';
 import Image from 'next/image';
 
 import styles from './page.module.css';
-import clsx from 'clsx';
 
-import { MdOutlineMail } from 'react-icons/md';
-import ProjectTabs from './ProjectTabs';
+import { MdOutlineMail, MdLaunch } from 'react-icons/md';
 import { FaGithub } from 'react-icons/fa';
 import { SiNotion } from 'react-icons/si';
 
-const careers = [
-  { date: '2026.04 ~ Now', title: '웰메이드컴퓨터' },
-  { date: '2025.03 ~ 2025.11', title: '바로연' },
-  { date: '2024.03 ~ 2024.08', title: '중앙정보처리학원' },
+const experiences = [
+  {
+    date: '2026.04 ~ Now',
+    title: '웰메이드 컴퓨터',
+    position: '소프트웨어 엔지니어',
+    subtitle: 'AI 인프라 클라우드 플랫폼',
+    link: 'https://wmcom.ai',
+    descriptions: [
+      '클라우드 솔루션 개발'
+    ]
+  },
+  {
+    date: '2025.03 ~ 2025.11',
+    title: '바로연',
+    position: '웹 개발자',
+    subtitle: '결혼 정보 서비스',
+    link: 'https://www.baroyeon.net',
+    descriptions: [
+      '공식 웹사이트 리뉴얼 및 SEO 설정',
+      '전자 계약 시스템 개발',
+      '관리자 페이지 CMS 개발'
+    ]
+  },
+];
+
+const activities = [
+  {
+    date: '2024.03 ~ 2024.08',
+    title: '중앙정보처리학원',
+    subtitle: '자바(JAVA) 풀스택 개발자 취업캠프',
+    link: 'https://tourstory.pyomin.com',
+    descriptions: [
+      'Spring Boot 기반 풀스택 역량 습득',
+      '프로젝트 아키텍처 설계 주도 경험',
+    ]
+  },
+];
+
+const skills = [
+  {
+    category: 'Backend',
+    items: ['Node.js', 'Express', 'Prisma', 'tRPC']
+  },
+  {
+    category: 'DevOps',
+    items: ['MySQL', 'MS SQL', 'Linux', 'Kubernetes', 'Nginx', 'IIS']
+  },
+  {
+    category: 'Frontend',
+    items: ['JavaScript', 'TypeScript', 'React', 'Next.js']
+  },
+  {
+    category: 'Tools',
+    items: ['Visual Studio Code', 'Git']
+  }
 ];
 
 export const metadata: Metadata = {
   title: 'About',
-  description: 'BlueCool12의 이력과 프로젝트를 소개합니다.',
+  description: 'BlueCool12의 이력을 소개합니다.',
   alternates: {
     canonical: '/about',
   },
   openGraph: {
     title: 'About',
-    description: 'BlueCool12의 이력과 프로젝트를 소개합니다.',
+    description: 'BlueCool12의 이력을 소개합니다.',
     url: 'https://pyomin.com/about',
   },
   twitter: {
     title: 'About',
-    description: 'BlueCool12의 이력과 프로젝트를 소개합니다.',
+    description: 'BlueCool12의 이력을 소개합니다.',
   },
 }
 
@@ -43,8 +92,8 @@ const About = () => {
           <div className={styles['hero-section__text-content']}>
             <p className={styles['hero-section__intro']}>안녕하세요 👋</p>
             <h1 className={styles['hero-section__title']}>
-              백엔드 개발자 <strong>BLUECOOL</strong> 입니다 <br />
-              지속적인 개선과 성장을 즐깁니다
+              백엔드 개발자 <br className={styles['mobile-break']} /> <strong>BLUECOOL</strong> 입니다 <br />
+              지속적인 개선과 성장을 <br className={styles['mobile-break']} />목표로 합니다
             </h1>
 
             <div className={styles['hero-section__email']}>
@@ -84,26 +133,80 @@ const About = () => {
       </section>
       {/* Hero Section */}
 
-      {/* Career Section */}
+      {/* Experience Section */}
       <section className={styles['career-section']}>
-        <div className={styles['career-section__line']} />
-        {careers.map((career, index) => (
+        <h2 className={styles['section-title']}>Experience</h2>
+        {experiences.map((item, index) => (
           <div key={index} className={styles['career-section__item']}>
-            <div className={clsx(styles['career-section__dot'], {
-              [styles['career-section__dot--last']]: index !== 0,
-            })} />
-            <div className={clsx(styles['career-section__content'], {
-              [styles['career-section__content--left']]: index % 2 === 0,
-            })}>
-              <div className={styles['career-section__date']}>{career.date}</div>
-              <h4 className={styles['career-section__title']}>{career.title}</h4>
+            <div className={styles['career-section__info']}>
+              <div className={styles['career-section__date']}>{item.date}</div>
+              <div className={styles['career-section__header']}>
+                <h4 className={styles['career-section__title']}>{item.title}</h4>
+                {item.link && (
+                  <a href={item.link} target="_blank" rel="noopener noreferrer" className={styles['career-section__link']} aria-label={`${item.title} 서비스 방문`}>
+                    <MdLaunch size={18} />
+                  </a>
+                )}
+              </div>
+              <p className={styles['career-section__position']}>{item.position}</p>
+            </div>
+            <div className={styles['career-section__content']}>
+              {item.subtitle && <p className={styles['career-section__subtitle']}>{item.subtitle}</p>}
+              <ul className={styles['career-section__descriptions']}>
+                {item.descriptions.map((desc, i) => (
+                  <li key={i}>{desc}</li>
+                ))}
+              </ul>
             </div>
           </div>
         ))}
       </section>
-      {/* Career Section */}
 
-      <ProjectTabs />
+      {/* Activity Section */}
+      <section className={styles['career-section']}>
+        <h2 className={styles['section-title']}>Activity</h2>
+        {activities.map((item, index) => (
+          <div key={index} className={styles['career-section__item']}>
+            <div className={styles['career-section__info']}>
+              <div className={styles['career-section__date']}>{item.date}</div>
+              <h4 className={styles['career-section__title']}>{item.title}</h4>
+              {item.link && (
+                <div className={styles['career-section__portfolio-link-wrapper']}>
+                  <a href={item.link} target="_blank" rel="noopener noreferrer" className={styles['career-section__portfolio-link']}>
+                    <MdLaunch size={14} style={{ marginRight: '4px' }} />
+                    팀 프로젝트
+                  </a>
+                </div>
+              )}
+            </div>
+            <div className={styles['career-section__content']}>
+              {item.subtitle && <p className={styles['career-section__subtitle']}>{item.subtitle}</p>}
+              <ul className={styles['career-section__descriptions']}>
+                {item.descriptions.map((desc, i) => (
+                  <li key={i}>{desc}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </section>
+
+      {/* Skills Section */}
+      <section className={styles['skills-section']}>
+        <h2 className={styles['section-title']}>Skills</h2>
+        <div className={styles['skills-grid']}>
+          {skills.map((group, index) => (
+            <div key={index} className={styles['skills-group']}>
+              <h3 className={styles['skills-group__title']}>{group.category}</h3>
+              <div className={styles['skills-container']}>
+                {group.items.map((skill, i) => (
+                  <span key={i} className={styles['skill-tag']}>{skill}</span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
 
     </div>
   );

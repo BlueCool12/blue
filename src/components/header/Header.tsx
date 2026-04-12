@@ -1,3 +1,6 @@
+'use client';
+
+import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
 import styles from './Header.module.css';
@@ -9,6 +12,12 @@ import { MusicPlayer } from './MusicPlayer';
 
 
 export const Header: React.FC = () => {
+    const pathname = usePathname();
+
+    const getNavItemClass = (targetPath: string) => {
+        const isActive = pathname.startsWith(targetPath);
+        return `${styles['desktop-nav__item']} ${isActive ? styles['desktop-nav__item--active'] : ''}`;
+    };
 
     return (
         <>
@@ -23,13 +32,16 @@ export const Header: React.FC = () => {
                     {/* PC 네비바 */}
                     <nav className={styles['desktop-nav']}>
                         <ul className={styles['desktop-nav__list']}>
-                            <li className={styles['desktop-nav__item']}>
+                            <li className={getNavItemClass('/about')}>
                                 <Link href='/about' prefetch={false}>ABOUT</Link>
                             </li>
-                            <li className={styles['desktop-nav__item']}>
+                            <li className={getNavItemClass('/portfolio')}>
+                                <Link href='/portfolio' prefetch={false}>PORTFOLIO</Link>
+                            </li>
+                            <li className={getNavItemClass('/posts')}>
                                 <Link href='/posts' prefetch={false}>POSTS</Link>
                             </li>
-                            <li className={styles['desktop-nav__item']}>
+                            <li className={getNavItemClass('/guestbooks')}>
                                 <Link href='/guestbooks' prefetch={false}>GUESTBOOK</Link>
                             </li>
                         </ul>
