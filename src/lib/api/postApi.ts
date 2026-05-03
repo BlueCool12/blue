@@ -30,5 +30,27 @@ export const postApi = {
     getLatestPosts: async (): Promise<PostLatest[]> => {
         const response = await fetch(`${getApiBase()}/posts/latest`);
         return response.json();
-    }
+    },
+
+    searchPosts: async ({
+        keyword,
+        category,
+        page,
+        size,
+    }: {
+        keyword: string;
+        category?: string | null;
+        page: number;
+        size: number;
+    }): Promise<PageResponse<PostListResponse>> => {
+        const params = new URLSearchParams();
+        params.set('keyword', keyword);
+        if (category) params.set('category', category);
+        params.set('page', page.toString());
+        params.set('size', size.toString());
+
+        const response = await fetch(`${getApiBase()}/posts/search?${params.toString()}`);
+        if (!response.ok) throw new Error(`GET /posts/search 실패: ${response.status}`);
+        return response.json();
+    },
 }
