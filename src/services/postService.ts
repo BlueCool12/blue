@@ -62,4 +62,36 @@ export const postService = {
             publishedAtText: formatDate(post.publishedAt),
         }));
     },
+
+    searchPosts: async ({
+        keyword,
+        category,
+        page = 0,
+        size = 10,
+    }: {
+        keyword: string;
+        category?: string | null;
+        page: number;
+        size: number;
+    }): Promise<PagedPost> => {
+        const result: PageResponse<PostListResponse> = await postApi.searchPosts({ keyword, category, page, size });
+
+        const posts: Post[] = result.content.map((post) => ({
+            id: post.id,
+            title: post.title,
+            category: post.category,
+            slug: post.slug,
+            contentSummary: post.contentSummary,
+            coverPath: post.coverPath,
+            createdAt: post.createdAt,
+            publishedAt: post.publishedAt,
+            publishedAtText: formatDate(post.publishedAt),
+        }));
+
+        return {
+            posts,
+            current: result.number,
+            hasNext: result.hasNext,
+        };
+    },
 };

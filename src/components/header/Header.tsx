@@ -9,6 +9,7 @@ import { ThemeAwareLogo } from './ThemeAwareLogo';
 import { ThemeSwitcher } from './ThemeSwitcher';
 import { MobileMenu } from './MobileMenu';
 import { MusicPlayer } from './MusicPlayer';
+import { SearchBar } from './SearchBar';
 
 
 export const Header: React.FC = () => {
@@ -49,6 +50,7 @@ export const Header: React.FC = () => {
                     {/* PC 네비바 */}
 
                     <div className={styles['header__icons']}>
+                        <SearchBar />
                         <MusicPlayer />
                         <ThemeSwitcher />
                         <MobileMenu />
