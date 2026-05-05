@@ -135,10 +135,8 @@ export default async function RootLayout({
           }}
         />
         {/* JSON-LD */}
-        <Script
-          id="jsonld-website"
+        <script
           type="application/ld+json"
-          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
