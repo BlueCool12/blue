@@ -20,6 +20,8 @@ export default function Error({
     const t = useTranslations('ErrorPage');
     const router = useRouter();
 
+    const isDev = process.env.NODE_ENV === 'development';
+
     return (
         <ErrorWrapper>
 
@@ -31,7 +33,10 @@ export default function Error({
                     height={278}
                     priority
                 />
-                <Title>{error?.message || t('defaultMessage')}</Title>
+                <Title>{t('defaultMessage')}</Title>
+                {isDev && error?.message && (
+                    <DevDetail>{error.message}</DevDetail>
+                )}
             </TitleSection>
 
             <ActionNav>
@@ -66,7 +71,22 @@ const TitleSection = styled.section`
 `;
 
 const Title = styled.h1`
-    font-size: 1.5rem;       
+    font-size: 1.5rem;
+`;
+
+const DevDetail = styled.pre`
+    margin: 0;
+    padding: 0.75rem 1rem;
+    max-width: 100%;
+    overflow-x: auto;
+    font-size: 0.85rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    color: var(--text-color);
+    background-color: var(--card-bg);
+    border: 1px dashed var(--border-color);
+    border-radius: 0.5rem;
+    white-space: pre-wrap;
+    word-break: break-word;
 `;
 
 const ActionNav = styled.nav`
