@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 import { MdOutlineSend, MdKeyboardArrowDown } from 'react-icons/md';
 
 import styled from 'styled-components';
@@ -13,6 +14,7 @@ interface FeedbackModalProps {
 }
 
 export const FeedbackModal = ({ onClose }: FeedbackModalProps) => {
+  const t = useTranslations('Feedback');
   const { data: categories } = useFeedbackCategories();
   const { mutateAsync: submitFeedback } = useSubmitFeedback();
 
@@ -31,12 +33,12 @@ export const FeedbackModal = ({ onClose }: FeedbackModalProps) => {
     e.preventDefault();
 
     if (!categoryId) {
-      toast.warn('카테고리를 선택해주세요.');
+      toast.warn(t('toastCategoryRequired'));
       return;
     }
 
     if (!content.trim()) {
-      toast.warn('내용을 입력해주세요.');
+      toast.warn(t('toastContentRequired'));
       return;
     }
 
@@ -48,10 +50,10 @@ export const FeedbackModal = ({ onClose }: FeedbackModalProps) => {
         pageUrl: window.location.href,
       });
 
-      toast.success('소중한 의견 감사합니다!');
+      toast.success(t('toastSuccess'));
       onClose();
     } catch (error) {
-      toast.error('일시적인 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+      toast.error(t('toastError'));
       console.error('Feedback submission failed:', error);
     } finally {
       setIsSubmitting(false);
@@ -65,7 +67,7 @@ export const FeedbackModal = ({ onClose }: FeedbackModalProps) => {
         if (isDropdownOpen) setIsDropdownOpen(false);
       }}>
         <Header>
-          <Title>피드백 보내기</Title>
+          <Title>{t('modalTitle')}</Title>
         </Header>
 
         <Form onSubmit={handleSubmit}>
@@ -75,7 +77,7 @@ export const FeedbackModal = ({ onClose }: FeedbackModalProps) => {
               setIsDropdownOpen(!isDropdownOpen);
             }}>
               <SelectHeader $isOpen={isDropdownOpen}>
-                {categories?.find(c => c.id === categoryId)?.name || '카테고리 선택'}
+                {categories?.find(c => c.id === categoryId)?.name || t('categoryPlaceholder')}
                 <MdKeyboardArrowDown size={20} />
               </SelectHeader>
               {isDropdownOpen && categories && (
@@ -99,7 +101,7 @@ export const FeedbackModal = ({ onClose }: FeedbackModalProps) => {
 
           <ContentWrapper>
             <TextArea
-              placeholder={`피드백 내용을 적어주세요 :D\n조금만 작성해도 큰 도움이 돼요!`}
+              placeholder={t('contentPlaceholder')}
               value={content}
               onChange={(e) => setContent(e.target.value)}
             />
@@ -107,7 +109,7 @@ export const FeedbackModal = ({ onClose }: FeedbackModalProps) => {
 
           <ButtonGroup>
             <SubmitButton type="submit" disabled={isSubmitting}>
-              {isSubmitting ? '전송 중...' : <MdOutlineSend />}
+              {isSubmitting ? t('submitting') : <MdOutlineSend />}
             </SubmitButton>
           </ButtonGroup>
         </Form>

@@ -1,9 +1,10 @@
 'use client';
 
 import { useEffect, useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 import { LoadingSpinner } from "@/components/common/LoadingSpinner";
 
-import styles from '@/app/posts/[slug]/page.module.css';
+import styles from '@/app/[locale]/posts/[slug]/page.module.css';
 import 'prismjs/themes/prism-tomorrow.css';
 
 interface PostPreviewData {
@@ -14,6 +15,7 @@ interface PostPreviewData {
 }
 
 export default function PreviewPage() {
+  const t = useTranslations('Posts');
   const [post, setPost] = useState<PostPreviewData | null>(null);
 
   useEffect(() => {
@@ -45,7 +47,7 @@ export default function PreviewPage() {
         <div className={styles.meta}>
           <time className={styles.date}>{post.createdAt}</time>
           <span className={styles.category}>
-            {post?.category || '임시 카테고리'}
+            {post?.category || t('previewCategoryPlaceholder')}
           </span>
         </div>
 

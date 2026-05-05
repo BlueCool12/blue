@@ -1,14 +1,16 @@
+import { getTranslations } from 'next-intl/server';
 import styles from './PostListSkeleton.module.css';
 
 type Props = { count?: number };
 
-export function PostListSkeleton({ count = 3 }: Props) {
+export async function PostListSkeleton({ count = 3 }: Props) {
+    const t = await getTranslations('Posts');
     return (
         <ul
             className={styles['post-list-skeleton']}
             role="status"
             aria-live="polite"
-            aria-label="목록 불러오는 중"
+            aria-label={t('listSkeletonAria')}
         >
             {Array.from({ length: count }).map((_, i) => (
                 <li key={i} className={styles['post-list-skeleton__item']}>

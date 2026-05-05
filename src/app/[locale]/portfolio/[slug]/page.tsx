@@ -1,45 +1,53 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { getTranslations } from 'next-intl/server';
 import { MdOutlineTravelExplore, MdPictureAsPdf } from 'react-icons/md';
 import { projects } from '../data/projects';
+import { localizedAlternates } from '@/i18n/metadata';
 import styles from './page.module.css';
 import ProjectCarousel from './ProjectCarousel';
 
 interface Props {
     params: Promise<{
+        locale: string;
         slug: string;
     }>;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const { slug } = await params;
+    const { locale, slug } = await params;
     const project = projects.find((p) => p.slug === slug);
+    const t = await getTranslations({ locale, namespace: 'Portfolio' });
 
     if (!project) {
         return {
-            title: 'Project Not Found',
+            title: t('notFoundTitle'),
         };
     }
 
+    const alternates = localizedAlternates(locale, `/portfolio/${slug}`);
     return {
-        title: `${project.title} | Portfolio`,
+        title: `${project.title} | ${t('metaTitle')}`,
         description: project.subtitle,
+        alternates,
         openGraph: {
             title: project.title,
             description: project.subtitle,
+            url: `https://pyomin.com${alternates.canonical}`,
             images: [project.images[0].src],
         },
     };
 }
 
 export default async function ProjectDetailPage({ params }: Props) {
-    const { slug } = await params;
+    const { locale, slug } = await params;
     const projectIndex = projects.findIndex((p) => p.slug === slug);
     const project = projects[projectIndex];
 
     if (!project) {
         notFound();
-    }    
+    }
+    const t = await getTranslations({ locale, namespace: 'Portfolio' });
 
     return (
         <div className={styles['wrapper']}>
@@ -97,13 +105,13 @@ export default async function ProjectDetailPage({ params }: Props) {
                         {project.link && (
                             <a href={project.link} target="_blank" rel="noopener noreferrer" className={`${styles['link-button']} ${styles['link-button--primary']}`}>
                                 <MdOutlineTravelExplore size={24} />
-                                웹사이트 방문
+                                {t('visitWebsite')}
                             </a>
                         )}
                         {project.pdf && (
                             <a href={project.pdf} target="_blank" rel="noopener noreferrer" className={`${styles['link-button']} ${styles['link-button--secondary']}`}>
                                 <MdPictureAsPdf size={24} />
-                                프로젝트 소개
+                                {t('projectIntro')}
                             </a>
                         )}
                     </div>

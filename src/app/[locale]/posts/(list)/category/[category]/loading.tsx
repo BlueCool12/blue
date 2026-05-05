@@ -1,16 +1,17 @@
-import page from '@/app/posts/(list)/page.module.css';
-import styles from '@/app/posts/(list)/category/[category]/loading.module.css';
+import { getTranslations } from 'next-intl/server';
+import page from '@/app/[locale]/posts/(list)/page.module.css';
+import styles from '@/app/[locale]/posts/(list)/category/[category]/loading.module.css';
 
-export default function Loading() {
+export default async function Loading() {
+  const t = await getTranslations('Posts');
   return (
     <>
-      {/* 본문 목록 스켈레톤 */}
       <section className={page.section} aria-busy="true">
         <ul
           className={styles['post-list-skeleton']}
           role="status"
           aria-live="polite"
-          aria-label="목록 불러오는 중"
+          aria-label={t('listSkeletonAria')}
         >
           {Array.from({ length: 7 }).map((_, i) => (
             <li key={i} className={styles['post-list-skeleton__item']}>

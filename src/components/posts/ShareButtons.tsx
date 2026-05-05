@@ -1,6 +1,7 @@
 'use client';
 
 import styled from 'styled-components';
+import { useTranslations } from 'next-intl';
 import { FaFacebookF, FaTwitter, FaLink } from 'react-icons/fa';
 import { SiNaver } from 'react-icons/si';
 
@@ -14,6 +15,7 @@ interface ShareButtonsProps {
 }
 
 const ShareButtons = ({ title, slug }: ShareButtonsProps) => {
+    const t = useTranslations('Share');
     const { isMobile, ready } = useIsMobile();
 
     const shareUrl = `https://pyomin.com/posts/${slug}`;
@@ -21,9 +23,9 @@ const ShareButtons = ({ title, slug }: ShareButtonsProps) => {
     const handleCopy = async () => {
         try {
             await navigator.clipboard.writeText(shareUrl);
-            toast.success('링크가 복사되었습니다 ^__^');
+            toast.success(t('linkCopied'));
         } catch {
-            toast.error('복사 실패 ㅠ__ㅠ');
+            toast.error(t('copyFailed'));
         }
     };
 
@@ -41,7 +43,7 @@ const ShareButtons = ({ title, slug }: ShareButtonsProps) => {
                     if (typeof shareError.message === 'string' && shareError.message.includes('cancel')) return;
                 }
 
-                toast.error('공유 실패 ㅠ__ㅠ');
+                toast.error(t('shareFailed'));
             }
         } else {
             handleCopy();
@@ -54,30 +56,30 @@ const ShareButtons = ({ title, slug }: ShareButtonsProps) => {
         <Wrapper>
 
             {isMobile ? (
-                <ShareButton aria-label='공유' title='공유' onClick={handleNativeShare}>
+                <ShareButton aria-label={t('shareLabel')} title={t('shareLabel')} onClick={handleNativeShare}>
                     <MdIosShare />
                 </ShareButton>
             ) : (
                 <>
-                    <ShareButton aria-label='페이스북 공유' title='페이스북 공유' onClick={() =>
+                    <ShareButton aria-label={t('facebook')} title={t('facebook')} onClick={() =>
                         window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`, '_blank')
                     }>
                         <FaFacebookF />
                     </ShareButton>
 
-                    <ShareButton aria-label='트위터 공유' title='트위터 공유' onClick={() =>
+                    <ShareButton aria-label={t('twitter')} title={t('twitter')} onClick={() =>
                         window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(shareUrl)}`, '_blank')
                     }>
                         <FaTwitter />
                     </ShareButton>
 
-                    <ShareButton aria-label='네이버 공유' title='네이버 공유' onClick={() =>
+                    <ShareButton aria-label={t('naver')} title={t('naver')} onClick={() =>
                         window.open(`https://share.naver.com/web/shareView.nhn?url=${encodeURIComponent(shareUrl)}&title=${encodeURIComponent(title)}`, '_blank')
                     }>
                         <SiNaver />
                     </ShareButton>
 
-                    <ShareButton aria-label='링크 공유' title='링크 공유' onClick={handleCopy}>
+                    <ShareButton aria-label={t('linkShare')} title={t('linkShare')} onClick={handleCopy}>
                         <FaLink />
                     </ShareButton>
                 </>
