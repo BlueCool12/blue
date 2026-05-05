@@ -1,5 +1,8 @@
 import { Metadata } from 'next';
 import Image from 'next/image';
+import { getTranslations } from 'next-intl/server';
+
+import { localizedAlternates } from '@/i18n/metadata';
 
 import styles from './page.module.css';
 
@@ -64,24 +67,32 @@ const skills = [
   }
 ];
 
-export const metadata: Metadata = {
-  title: 'About',
-  description: 'BlueCool12의 이력을 소개합니다.',
-  alternates: {
-    canonical: '/about',
-  },
-  openGraph: {
-    title: 'About',
-    description: 'BlueCool12의 이력을 소개합니다.',
-    url: 'https://pyomin.com/about',
-  },
-  twitter: {
-    title: 'About',
-    description: 'BlueCool12의 이력을 소개합니다.',
-  },
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'AboutPage' });
+  const alternates = localizedAlternates(locale, '/about');
+  return {
+    title: t('metaTitle'),
+    description: t('metaDescription'),
+    alternates,
+    openGraph: {
+      title: t('metaTitle'),
+      description: t('metaDescription'),
+      url: `https://pyomin.com${alternates.canonical}`,
+    },
+    twitter: {
+      title: t('metaTitle'),
+      description: t('metaDescription'),
+    },
+  };
 }
 
-const About = () => {
+const About = async () => {
+  const t = await getTranslations('AboutPage');
 
   return (
     <div className={styles['wrapper']}>
@@ -90,10 +101,11 @@ const About = () => {
       <section className={styles['hero-section']}>
         <div className={styles['hero-section__card']}>
           <div className={styles['hero-section__text-content']}>
-            <p className={styles['hero-section__intro']}>안녕하세요 👋</p>
+            <p className={styles['hero-section__intro']}>{t('heroIntro')}</p>
             <h1 className={styles['hero-section__title']}>
-              백엔드 개발자 <br className={styles['mobile-break']} /> <strong>BLUECOOL</strong> 입니다 <br />
-              지속적인 개선과 성장을 <br className={styles['mobile-break']} />목표로 합니다
+              {t.rich('heroTitleLineA', { brand: (chunks) => <strong>{chunks}</strong> })}
+              <br />
+              {t('heroTitleLineB')}
             </h1>
 
             <div className={styles['hero-section__email']}>
@@ -122,7 +134,7 @@ const About = () => {
           <div className={styles['hero-section__mascot-wrapper']}>
             <Image
               src='/images/about.webp'
-              alt="BlueCool12 마스코트 이미지"
+              alt={t('mascotAlt')}
               width={160}
               height={160}
               className={styles['hero-section__mascot']}
@@ -143,7 +155,7 @@ const About = () => {
               <div className={styles['career-section__header']}>
                 <h4 className={styles['career-section__title']}>{item.title}</h4>
                 {item.link && (
-                  <a href={item.link} target="_blank" rel="noopener noreferrer" className={styles['career-section__link']} aria-label={`${item.title} 서비스 방문`}>
+                  <a href={item.link} target="_blank" rel="noopener noreferrer" className={styles['career-section__link']} aria-label={t('serviceVisitAria', { title: item.title })}>
                     <MdLaunch size={18} />
                   </a>
                 )}
@@ -174,7 +186,7 @@ const About = () => {
                 <div className={styles['career-section__portfolio-link-wrapper']}>
                   <a href={item.link} target="_blank" rel="noopener noreferrer" className={styles['career-section__portfolio-link']}>
                     <MdLaunch size={14} style={{ marginRight: '4px' }} />
-                    팀 프로젝트
+                    {t('teamProjectLabel')}
                   </a>
                 </div>
               )}

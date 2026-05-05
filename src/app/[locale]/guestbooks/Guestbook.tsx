@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useTheme } from 'next-themes';
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 
 import styles from './Guestbook.module.css';
@@ -10,6 +11,7 @@ import { LoadingSpinner } from '@/components/common/LoadingSpinner';
 
 export default function GuestbookPage() {
 
+    const t = useTranslations('GuestbookPage');
     const ref = useRef<HTMLDivElement>(null);
     const { theme } = useTheme();
     const [mounted, setMounted] = useState(false);
@@ -56,14 +58,14 @@ export default function GuestbookPage() {
     return (
         <div className={styles.container}>            
             <Image
-                alt='방명록 이미지'
+                alt={t('imageAlt')}
                 src='/images/guestbooks.webp'
                 width={200}
                 height={200}
                 className={styles.image}
                 priority
             />
-            <button className={styles.button} onClick={scrollToComments}>✍️ 방명록 남기러 가기</button>
+            <button className={styles.button} onClick={scrollToComments}>{t('writeButton')}</button>
 
             {isLoading && (
                 <LoadingSpinner />

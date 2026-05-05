@@ -1,8 +1,11 @@
+import { getTranslations } from 'next-intl/server';
+
 import styles from './Footer.module.css';
 
 import { MdRssFeed } from 'react-icons/md';
 
-export const Footer = () => {
+export const Footer = async () => {
+    const t = await getTranslations('Footer');
 
     return (
         <>
@@ -36,16 +39,16 @@ export const Footer = () => {
                         <a
                             className={styles['footer__rss-link']}
                             href="/rss.xml"
-                            title='RSS 피드 구독 링크'
+                            title={t('rssAriaLabel')}
                             target="_blank"
                             rel="noopener noreferrer"
-                            aria-label="RSS 피드 구독 링크"
+                            aria-label={t('rssAriaLabel')}
                         >
                             <MdRssFeed size={24} />
                         </a>
                     </div>
 
-                    <p className={styles['footer__text']}>© 2025 BlueCool12 All rights reserved.</p>
+                    <p className={styles['footer__text']}>© 2025-2026 BlueCool12 All rights reserved.</p>
                 </div>
             </footer >
         </>
