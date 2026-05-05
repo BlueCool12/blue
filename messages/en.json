@@ -120,7 +120,7 @@
     "reply": "Reply"
   },
   "Feedback": {
-    "title": "Footer report / Leave feedback",
+    "title": "Report an issue / Leave feedback",
     "modalTitle": "Send feedback",
     "categoryPlaceholder": "Select a category",
     "contentPlaceholder": "Write your feedback :D\nEven a few words help a lot!",

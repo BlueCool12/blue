@@ -120,7 +120,7 @@
     "reply": "返信する"
   },
   "Feedback": {
-    "title": "フッター報告 / フィードバック",
+    "title": "不具合報告 / フィードバック",
     "modalTitle": "フィードバックを送る",
     "categoryPlaceholder": "カテゴリーを選択",
     "contentPlaceholder": "フィードバックを入力してください :D\n少しの内容でも大きな助けになります！",
