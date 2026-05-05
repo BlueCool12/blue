@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useState, useRef, useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 import { MdSkipNext, MdSkipPrevious, MdPauseCircle, MdPlayCircle, MdOutlineMusicNote, MdOutlineGraphicEq } from 'react-icons/md';
 import styles from './Header.module.css';
 
@@ -21,6 +22,7 @@ const PLAYLIST = [
 ];
 
 export function MusicPlayer() {
+  const t = useTranslations('MusicPlayer');
   const [isPlaying, setIsPlaying] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [volume, setVolume] = useState(50);
@@ -112,7 +114,7 @@ export function MusicPlayer() {
       />
       <button
         onClick={toggleMenu}
-        aria-label="음악 플레이어 열기"
+        aria-label={t('openAria')}
       >
         {isPlaying ? (
           <MdOutlineGraphicEq size={24} className={`${styles['header__icon']} ${styles['header__icon--playing']}`} />
@@ -126,7 +128,7 @@ export function MusicPlayer() {
           <div className={styles['music-player__popover-content']}>
             <Image
               src="/images/music.webp"
-              alt="Now Playing"
+              alt={t('nowPlayingAlt')}
               width={140}
               height={140}
               className={styles['music-player__popover-image']}
@@ -139,7 +141,7 @@ export function MusicPlayer() {
             <div className={styles['music-player__controls']}>
               <button
                 className={styles['music-player__control-btn']}
-                aria-label="이전 곡"
+                aria-label={t('prev')}
                 onClick={handlePrev}
               >
                 <MdSkipPrevious size={28} />
@@ -147,13 +149,13 @@ export function MusicPlayer() {
               <button
                 onClick={togglePlay}
                 className={`${styles['music-player__control-btn']} ${styles['music-player__control-btn--main']}`}
-                aria-label={isPlaying ? '일시정지' : '재생'}
+                aria-label={isPlaying ? t('pause') : t('play')}
               >
                 {isPlaying ? <MdPauseCircle size={32} /> : <MdPlayCircle size={32} />}
               </button>
               <button
                 className={styles['music-player__control-btn']}
-                aria-label="다음 곡"
+                aria-label={t('next')}
                 onClick={handleNext}
               >
                 <MdSkipNext size={28} />
@@ -168,7 +170,7 @@ export function MusicPlayer() {
                 value={volume}
                 onChange={handleVolumeChange}
                 className={styles['music-player__volume-slider']}
-                aria-label="음량 조절"
+                aria-label={t('volume')}
               />
             </div>
           </div>
