@@ -1,0 +1,156 @@
+{
+  "Site": {
+    "title": "BLUECOOL",
+    "description": "BlueCoolは、実践的なWeb開発からサーバー運用、DevOps環境構築まで多様なインサイトを伝える開発者ブログです。",
+    "ogDescription": "開発者BlueCoolが伝える実践的なWeb開発とサーバー運用の話",
+    "keywords": ["BlueCool", "BlueCool12", "開発者ブログ", "フルスタック開発者", "Web開発", "フロントエンド", "バックエンド", "DevOps"],
+    "ogLocale": "ja_JP",
+    "htmlLang": "ja-JP",
+    "ogImageAlt": "BlueCool メイン画像"
+  },
+  "Header": {
+    "about": "ABOUT",
+    "portfolio": "PORTFOLIO",
+    "posts": "POSTS",
+    "guestbook": "GUESTBOOK",
+    "home": "ホーム",
+    "language": "言語",
+    "mobileMenuOpen": "モバイルメニューを開く",
+    "mobileMenuClose": "モバイルメニューを閉じる",
+    "mobileMenuAria": "モバイルメニュー",
+    "mobileLogoAlt": "モバイルメニューロゴ",
+    "searchAria": "検索",
+    "logoAlt": "ヘッダーロゴ"
+  },
+  "MusicPlayer": {
+    "openAria": "音楽プレーヤーを開く",
+    "nowPlayingAlt": "Now Playing",
+    "prev": "前の曲",
+    "next": "次の曲",
+    "play": "再生",
+    "pause": "一時停止",
+    "volume": "音量"
+  },
+  "ErrorPage": {
+    "imageAlt": "エラー画像",
+    "defaultMessage": "予期しないエラーが発生しました。",
+    "homeButton": "ホーム",
+    "retryButton": "再試行"
+  },
+  "NotFoundPage": {
+    "imageAlt": "ページが見つかりません画像",
+    "description": "ページが見つかりません",
+    "homeButton": "ホーム",
+    "backButton": "前のページ"
+  },
+  "Posts": {
+    "emptyStateAlt": "投稿がない時のイラスト",
+    "prevNextNavAria": "前後の記事ナビゲーション",
+    "prevLabel": "前の記事",
+    "nextLabel": "次の記事",
+    "prevEmpty": "(· . · ) 前の記事はありません",
+    "nextEmpty": "次の記事はありません ( · . ·)",
+    "listSkeletonAria": "リストを読み込み中",
+    "decorativeLogo": "装飾ロゴ",
+    "searchTooShort": "検索キーワードは2文字以上入力してください。",
+    "categoryAllOption": "すべて",
+    "categorySelectAria": "カテゴリーを選択",
+    "searchPlaceholder": "検索キーワードを入力",
+    "searchInputAria": "投稿を検索",
+    "clearKeywordAria": "検索キーワードをクリア",
+    "mobileCategoryAria": "投稿カテゴリーを選択",
+    "listMetaTitle": "すべての記事",
+    "listMetaDescription": "BlueCoolブログの全記事一覧です。技術と開発に関する多様なストーリーをご覧ください。",
+    "categoryMetaTitle": "{category} カテゴリーの記事",
+    "categoryMetaDescription": "BlueCoolブログの「{category}」カテゴリーの記事一覧です。",
+    "emptyMessage": "勉強中です...",
+    "nextPageLink": "次のページ",
+    "searchMetaTitle": "検索",
+    "searchResultsMetaTitle": "「{keyword}」の検索結果",
+    "searchImageAlt": "検索イラスト",
+    "searchHint": "キーワードを入力してください。",
+    "searchEmptyMessage": "「{keyword}」に該当する結果はありません。",
+    "previewCategoryPlaceholder": "プレビューカテゴリー"
+  },
+  "Portfolio": {
+    "metaTitle": "Portfolio",
+    "metaDescription": "BlueCool12のプロジェクトポートフォリオを紹介します。",
+    "notFoundTitle": "Project Not Found",
+    "visitWebsite": "ウェブサイトを訪問",
+    "projectIntro": "プロジェクト紹介"
+  },
+  "Share": {
+    "linkCopied": "リンクをコピーしました ^__^",
+    "copyFailed": "コピーに失敗 ㅠ__ㅠ",
+    "shareFailed": "シェアに失敗 ㅠ__ㅠ",
+    "shareLabel": "シェア",
+    "facebook": "Facebookでシェア",
+    "twitter": "Twitterでシェア",
+    "naver": "Naverでシェア",
+    "linkShare": "リンクをコピー"
+  },
+  "Feedback": {
+    "title": "フッター報告 / フィードバック",
+    "modalTitle": "フィードバックを送る",
+    "categoryPlaceholder": "カテゴリーを選択",
+    "contentPlaceholder": "フィードバックを入力してください :D\n少しの内容でも大きな助けになります！",
+    "submitting": "送信中...",
+    "toastCategoryRequired": "カテゴリーを選択してください。",
+    "toastContentRequired": "内容を入力してください。",
+    "toastSuccess": "貴重なご意見ありがとうございます！",
+    "toastError": "一時的なエラーが発生しました。しばらくしてから再度お試しください。"
+  },
+  "Footer": {
+    "rssAriaLabel": "RSSフィードを購読"
+  },
+  "Settings": {
+    "openAria": "設定を開く",
+    "themeLabel": "テーマ",
+    "themeLight": "ライト",
+    "themeDark": "ダーク",
+    "languageLabel": "言語"
+  },
+  "GuestbookPage": {
+    "metaTitle": "ゲストブック",
+    "metaDescription": "BlueCoolブログのゲストブックページです。",
+    "imageAlt": "ゲストブック画像",
+    "writeButton": "✍️ メッセージを残す"
+  },
+  "AboutPage": {
+    "metaTitle": "About",
+    "metaDescription": "BlueCool12のキャリアを紹介します。",
+    "mascotAlt": "BlueCool12 マスコット画像",
+    "heroIntro": "こんにちは 👋",
+    "heroTitleLineA": "バックエンド開発者の <brand>BLUECOOL</brand> です",
+    "heroTitleLineB": "継続的な改善と成長を目指します",
+    "serviceVisitAria": "{title} を見る",
+    "teamProjectLabel": "チームプロジェクト"
+  },
+  "HomePage": {
+    "heroImageAlt": "メインページ画像",
+    "heroVisitorText": "ブログを訪れてくださった皆さま",
+    "heroAboutToggleAria": "About Me 表示切替",
+    "greetings": [
+      "ようこそ :D",
+      "はじめまして XD",
+      "お越しください ^o^",
+      "一緒に学びましょう =D",
+      "良い一日を :>",
+      "愛しています :p",
+      "ありがとうございます =]",
+      "お幸せに =D",
+      "感謝しています ^_^"
+    ],
+    "dailyPickSubtitle": "毎日新しい3つのトピック",
+    "latestPostsTitle": "最新記事 🌟",
+    "latestPostsSubtitle": "新しく投稿された記事をチェック！",
+    "latestPostsAllAria": "すべての記事を見る",
+    "retrospectiveTitle": "振り返り 📝",
+    "retrospectiveSubtitle": "歩んできた道を振り返り、より良くなるための記録を残します",
+    "retrospectiveMoreAria": "振り返り記事をもっと見る",
+    "troubleshootingTitle": "トラブルシューティング 🛠️",
+    "troubleshootingSubtitle": "実際のサービスで遭遇した問題を分析し、解決過程で得た経験を共有します",
+    "troubleshootingMoreAria": "トラブルシューティング記事をもっと見る",
+    "thumbnailAlt": "{title} のサムネイル"
+  }
+}
