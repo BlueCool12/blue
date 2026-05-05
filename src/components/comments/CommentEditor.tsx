@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import styled from 'styled-components';
 
+import { useTranslations } from "next-intl";
 import { MdOutlineModeComment, MdOutlineSend } from "react-icons/md";
 import { toast } from "react-toastify";
 
@@ -19,6 +20,7 @@ interface Props {
 
 export const CommentEditor: React.FC<Props> = ({ postId }) => {
 
+  const t = useTranslations('Comments');
   const comments = useComments(postId);
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
@@ -33,12 +35,12 @@ export const CommentEditor: React.FC<Props> = ({ postId }) => {
     const trimmedContent = form.content.trim();
 
     if (!/^\d{4}$/.test(trimmedPassword)) {
-      toast.error('숫자 4자리의 비밀번호를 입력해주세요.');
+      toast.error(t('passwordRequired4Digit'));
       return;
     }
 
     if (!trimmedContent) {
-      toast.error('내용을 적어주세요.');
+      toast.error(t('contentRequired'));
       return;
     }
 
@@ -53,12 +55,12 @@ export const CommentEditor: React.FC<Props> = ({ postId }) => {
         content: trimmedContent,
       });
 
-      toast.success('댓글이 등록되었습니다!');
+      toast.success(t('submitSuccess'));
       setForm({ nickname: '', content: '', password: '' });
       setOpen(false);
       comments.refetch();
     } catch {
-      toast.error('댓글 등록에 실패했습니다.');
+      toast.error(t('submitFailed'));
     } finally {
       setLoading(false);
     }
@@ -68,7 +70,7 @@ export const CommentEditor: React.FC<Props> = ({ postId }) => {
     <>
       <FloatingButton
         onClick={() => setOpen(prev => !prev)}
-        aria-label="댓글 작성하기"
+        aria-label={t('writeAria')}
       >
         <MdOutlineModeComment />
       </FloatingButton>
@@ -77,12 +79,12 @@ export const CommentEditor: React.FC<Props> = ({ postId }) => {
         <Overlay onClick={() => setOpen(false)}>
           <EditorBox onClick={e => e.stopPropagation()}>
             <Header>
-              <Title>댓글 작성하기</Title>
+              <Title>{t('writeTitle')}</Title>
             </Header>
 
             <NicknamePasswordWrapper>
               <NicknameInput
-                placeholder="닉네임 (선택)"
+                placeholder={t('nicknamePlaceholder')}
                 maxLength={10}
                 name="nickname"
                 value={form.nickname}
@@ -90,7 +92,7 @@ export const CommentEditor: React.FC<Props> = ({ postId }) => {
               />
               <PasswordInput
                 type="password"
-                placeholder="비밀번호"
+                placeholder={t('passwordPlaceholder')}
                 maxLength={4}
                 name="password"
                 value={form.password}
@@ -100,7 +102,7 @@ export const CommentEditor: React.FC<Props> = ({ postId }) => {
 
             <ContentWrapper>
               <TextArea
-                placeholder="소중한 의견 남겨주세요 :D"
+                placeholder={t('editorPlaceholder')}
                 name="content"
                 value={form.content}
                 onChange={handleChange("content")}
@@ -112,7 +114,7 @@ export const CommentEditor: React.FC<Props> = ({ postId }) => {
             </ContentWrapper>
 
             <SubmitButton onClick={handleSubmit} disabled={loading} aria-disabled={loading}>
-              {loading ? "전송 중..." : (<MdOutlineSend />)}
+              {loading ? t('submitting') : (<MdOutlineSend />)}
             </SubmitButton>
 
           </EditorBox>

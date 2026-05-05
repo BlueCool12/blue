@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+import { useTranslations } from "next-intl";
 import { toast } from "react-toastify";
 
 import { getRandomAnonymousNickname } from "@/lib/utils/getRandomAnonymousNickname";
@@ -22,16 +23,17 @@ export const CommentForm: React.FC<Props> = ({
     loading = false,
     maxLength = 200,
 }) => {
+    const t = useTranslations('Comments');
     const { form, handleChange, isOver } = useCommentForm(initialValues, maxLength);
 
     const handleSubmit = () => {
         if (!/^\d{4}$/.test(form.password.trim())) {
-            toast.error('비밀번호는 숫자 4자리여야 합니다.');
+            toast.error(t('passwordRequired4Digit'));
             return;
         }
 
         if (!form.content.trim()) {
-            toast.error('내용을 입력해주세요.');
+            toast.error(t('contentRequired'));
             return;
         }
 
@@ -50,14 +52,14 @@ export const CommentForm: React.FC<Props> = ({
                 <NicknameInput
                     value={form.nickname}
                     onChange={handleChange("nickname")}
-                    placeholder="닉네임 (선택)"
+                    placeholder={t('nicknamePlaceholder')}
                     maxLength={10}
                 />
                 <PasswordInput
                     type="password"
                     value={form.password}
                     onChange={handleChange("password")}
-                    placeholder="비밀번호"
+                    placeholder={t('passwordPlaceholder')}
                     maxLength={4}
                 />
             </TopInputWrapper>
@@ -66,7 +68,7 @@ export const CommentForm: React.FC<Props> = ({
                 <TextArea
                     value={form.content}
                     onChange={handleChange("content")}
-                    placeholder={placeholder || "내용을 입력하세요"}
+                    placeholder={placeholder || t('contentPlaceholder')}
                 />
 
                 <CharCount isOver={isOver}>
@@ -76,9 +78,9 @@ export const CommentForm: React.FC<Props> = ({
 
             <InputWrapper>
                 <SubmitButton onClick={handleSubmit} type="button" disabled={loading}>
-                    {loading ? "전송 중..." : "등록"}
+                    {loading ? t('submitting') : t('submit')}
                 </SubmitButton>
-                {onCancel && <CancelButton onClick={onCancel}>취소</CancelButton>}
+                {onCancel && <CancelButton onClick={onCancel}>{t('cancel')}</CancelButton>}
             </InputWrapper>
         </FormWrapper>
     );
@@ -105,8 +107,8 @@ const NicknameInput = styled.input`
   border: 1px solid var(--border-color);
 `;
 
-const PasswordInput = styled.input` 
-  width: 30%; 
+const PasswordInput = styled.input`
+  width: 30%;
   padding: 0.5rem;
   font-size: 0.9rem;
   border-radius: 0.5rem;
@@ -152,7 +154,7 @@ const SubmitButton = styled.button`
     background-color: var(--theme-color-9);
     color: #fff;
     border: none;
-    border-radius: 0.5rem;    
+    border-radius: 0.5rem;
 
     &:hover {
         background-color: var(--theme-color-8);
@@ -164,7 +166,7 @@ const CancelButton = styled.button`
     background-color: #ccc;
     color: #333;
     border: none;
-    border-radius: 0.5rem;    
+    border-radius: 0.5rem;
 
     &:hover {
         background-color: #bbb;

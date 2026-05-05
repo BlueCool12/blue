@@ -1,6 +1,7 @@
 import { commentService } from "@/services/commentService";
 import { Comment, COMMENT_STATUS } from "@/types/comment";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { toast } from "react-toastify";
 import styled from "styled-components";
 import { CommentForm } from "./CommentForm";
@@ -14,35 +15,36 @@ interface SingleCommentProps {
 }
 
 export const SingleComment: React.FC<SingleCommentProps> = ({ comment, postId, refetch, depth = 0 }) => {
+  const t = useTranslations('Comments');
   const [isEditing, setIsEditing] = useState(false);
   const [isReplying, setIsReplying] = useState(false);
 
   const isAdmin = comment.adminId !== null;
 
   const handleDelete = async () => {
-    const input = prompt("⬇️ 비밀번호를 입력해 주세요 ⬇️");
+    const input = prompt(t('passwordPrompt'));
     if (!input) return;
-    if (!/^\d{4}$/.test(input)) return toast.error('비밀번호는 4자리 숫자입니다.');
+    if (!/^\d{4}$/.test(input)) return toast.error(t('passwordIs4Digit'));
 
     try {
       await commentService.deleteComment({ postId, commentId: comment.id, password: input });
-      toast.success("댓글이 삭제되었습니다.");
+      toast.success(t('deleteSuccess'));
       refetch();
     } catch {
-      toast.error("댓글 삭제에 실패했습니다.");
+      toast.error(t('deleteFailed'));
     }
   };
 
   const handleEditClick = async () => {
-    const input = prompt("⬇️ 비밀번호를 입력해 주세요 ⬇️");
+    const input = prompt(t('passwordPrompt'));
     if (!input) return;
-    if (!/^\d{4}$/.test(input)) return toast.error('비밀번호는 4자리 숫자입니다.');
+    if (!/^\d{4}$/.test(input)) return toast.error(t('passwordIs4Digit'));
 
     const matched = await commentService.verifyCommentPassword(comment.id, input);
     if (matched) {
       setIsEditing(true);
     } else {
-      toast.error("비밀번호가 일치하지 않습니다.");
+      toast.error(t('passwordMismatch'));
     }
   };
 
@@ -52,11 +54,11 @@ export const SingleComment: React.FC<SingleCommentProps> = ({ comment, postId, r
         comment.id,
         { nickname: data.nickname, password: data.password, content: data.content }
       );
-      toast.success("댓글이 수정되었습니다.");
+      toast.success(t('editSuccess'));
       setIsEditing(false);
       refetch();
     } catch {
-      toast.error("댓글 수정에 실패했습니다.");
+      toast.error(t('editFailed'));
     }
   };
 
@@ -68,11 +70,11 @@ export const SingleComment: React.FC<SingleCommentProps> = ({ comment, postId, r
         ...data,
       });
 
-      toast.success('답글이 등록되었습니다.');
+      toast.success(t('replySuccess'));
       setIsReplying(false);
       refetch();
     } catch {
-      toast.error('답글 등록에 실패했습니다.');
+      toast.error(t('replyFailed'));
     }
   };
 
@@ -91,7 +93,7 @@ export const SingleComment: React.FC<SingleCommentProps> = ({ comment, postId, r
               <CommentAuthor $isAdmin={isAdmin}>
                 {comment.nickname}
                 {isAdmin && (
-                  <AdminBadge aria-label="관리자 계정 인증 배지">
+                  <AdminBadge aria-label={t('adminBadgeAria')}>
                     <MdStars size={16} />
                   </AdminBadge>
                 )}
@@ -99,11 +101,11 @@ export const SingleComment: React.FC<SingleCommentProps> = ({ comment, postId, r
 
               {!isAdmin && comment.status !== COMMENT_STATUS.DELETED && (
                 <ButtonGroup>
-                  <CommentEditButton onClick={handleEditClick} aria-label="댓글 수정">
+                  <CommentEditButton onClick={handleEditClick} aria-label={t('editAria')}>
                     <MdOutlineEdit size={14} />
                   </CommentEditButton>
 
-                  <CommentDeleteButton onClick={handleDelete} aria-label="댓글 삭제">
+                  <CommentDeleteButton onClick={handleDelete} aria-label={t('deleteAria')}>
                     <MdOutlineDelete size={14} />
                   </CommentDeleteButton>
                 </ButtonGroup>
@@ -118,7 +120,7 @@ export const SingleComment: React.FC<SingleCommentProps> = ({ comment, postId, r
           {comment.status !== COMMENT_STATUS.DELETED && (
             <>
               <ReplyButton onClick={() => setIsReplying(!isReplying)}>
-                <MdSubdirectoryArrowRight size={14} />답글 달기
+                <MdSubdirectoryArrowRight size={14} />{t('reply')}
               </ReplyButton>
 
               <CommentDate>{comment.createdAt}</CommentDate>
