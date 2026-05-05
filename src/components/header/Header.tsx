@@ -1,5 +1,6 @@
 'use client';
 
+import { Suspense } from 'react';
 import { useTranslations } from 'next-intl';
 
 import { Link, usePathname } from '@/i18n/navigation';
@@ -54,7 +55,9 @@ export const Header: React.FC = () => {
                     <div className={styles['header__icons']}>
                         <SearchBar />
                         <MusicPlayer />
-                        <SettingsMenu />
+                        <Suspense fallback={null}>
+                            <SettingsMenu />
+                        </Suspense>
                         <MobileMenu />
                     </div>
 

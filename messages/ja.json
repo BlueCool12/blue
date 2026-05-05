@@ -38,7 +38,7 @@
     "retryButton": "再試行"
   },
   "NotFoundPage": {
-    "imageAlt": "ページが見つかりません画像",
+    "imageAlt": "404ページのイラスト",
     "description": "ページが見つかりません",
     "homeButton": "ホーム",
     "backButton": "前のページ"
@@ -153,7 +153,7 @@
     "heroIntro": "こんにちは 👋",
     "heroTitleLineA": "バックエンド開発者の <brand>BLUECOOL</brand> です",
     "heroTitleLineB": "継続的な改善と成長を目指します",
-    "serviceVisitAria": "{title} を見る",
+    "serviceVisitAria": "{title} のサイトを訪問",
     "teamProjectLabel": "チームプロジェクト"
   },
   "HomePage": {
@@ -163,7 +163,7 @@
     "greetings": [
       "ようこそ :D",
       "はじめまして XD",
-      "お越しください ^o^",
+      "いらっしゃい ^o^",
       "一緒に学びましょう =D",
       "良い一日を :>",
       "愛しています :p",
@@ -171,7 +171,7 @@
       "お幸せに =D",
       "感謝しています ^_^"
     ],
-    "dailyPickSubtitle": "毎日新しい3つのトピック",
+    "dailyPickSubtitle": "毎日出会える3つの新しいトピック",
     "latestPostsTitle": "最新記事 🌟",
     "latestPostsSubtitle": "新しく投稿された記事をチェック！",
     "latestPostsAllAria": "すべての記事を見る",
