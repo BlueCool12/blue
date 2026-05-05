@@ -71,7 +71,7 @@ export default function GuestbookPage() {
                 <LoadingSpinner />
             )}
 
-            <div ref={ref} />
+            <div ref={ref} lang="ko" />
         </div>
     );
 }

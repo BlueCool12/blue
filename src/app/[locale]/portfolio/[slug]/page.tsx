@@ -79,7 +79,7 @@ export default async function ProjectDetailPage({ params }: Props) {
                     {/* Description Section */}
                     <section className={styles['description-section']}>
                         <span className={styles['section-label']}>Overview</span>
-                        <div className={styles['description-text']}>
+                        <div lang="ko" className={styles['description-text']}>
                             {project.description}
                         </div>
                     </section>

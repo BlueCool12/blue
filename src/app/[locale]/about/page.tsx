@@ -149,7 +149,7 @@ const About = async () => {
       <section className={styles['career-section']}>
         <h2 className={styles['section-title']}>Experience</h2>
         {experiences.map((item, index) => (
-          <div key={index} className={styles['career-section__item']}>
+          <div key={index} lang="ko" className={styles['career-section__item']}>
             <div className={styles['career-section__info']}>
               <div className={styles['career-section__date']}>{item.date}</div>
               <div className={styles['career-section__header']}>
@@ -178,7 +178,7 @@ const About = async () => {
       <section className={styles['career-section']}>
         <h2 className={styles['section-title']}>Activity</h2>
         {activities.map((item, index) => (
-          <div key={index} className={styles['career-section__item']}>
+          <div key={index} lang="ko" className={styles['career-section__item']}>
             <div className={styles['career-section__info']}>
               <div className={styles['career-section__date']}>{item.date}</div>
               <h4 className={styles['career-section__title']}>{item.title}</h4>

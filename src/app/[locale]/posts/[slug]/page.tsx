@@ -80,7 +80,7 @@ export default async function PostDetail({ params }: PageProps) {
 
             <ScrollProgress />
 
-            <article id='main-content' className={styles.article}>
+            <article id='main-content' lang="ko" className={styles.article}>
                 <header className={styles.header}>
                     <div className={styles.meta}>
                         <time className={styles.date} dateTime={post.publishedAt}>

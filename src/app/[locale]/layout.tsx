@@ -108,9 +108,8 @@ export default async function RootLayout({
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'Site' });
 
-  // 본문은 한국어 그대로 두고 브라우저 자동번역에 의존하므로 lang은 ko 고정.
   return (
-    <html lang="ko" suppressHydrationWarning className={`${pretendard.variable}`}>
+    <html lang={locale} suppressHydrationWarning className={`${pretendard.variable}`}>
       <body>
         {/* 구글 애드센스 */}
         <script
