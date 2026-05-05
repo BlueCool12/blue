@@ -1,6 +1,7 @@
 'use client';
 
 import styled from "styled-components";
+import { useTranslations } from "next-intl";
 
 import { CommentEditor } from "./CommentEditor";
 import { SingleComment } from "./SingleComment";
@@ -13,15 +14,16 @@ interface Props {
 
 export const CommentSection: React.FC<Props> = ({ postId }) => {
 
+  const t = useTranslations('Comments');
   const comments = useComments(postId);
 
   return (
     <Section>
       <CommentList>
         {comments.isError ? (
-          <CommentItem>댓글을 불러오는 데 실패했습니다. 새로고침 해주세요.</CommentItem>
+          <CommentItem>{t('loadFailed')}</CommentItem>
         ) : comments.data?.length === 0 ? (
-          <EmptyComment>첫 댓글을 남겨보세요! ( =&#39;X&#39;= )</EmptyComment>
+          <EmptyComment>{t('emptyMessage')}</EmptyComment>
         ) : (
           comments.data?.map((comment) => (
             <SingleComment

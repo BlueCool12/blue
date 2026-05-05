@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
+import { useRouter } from "@/i18n/navigation";
 import { toast } from 'react-toastify';
 import { MdSearch, MdClose, MdOutlineArrowDropDown } from 'react-icons/md';
 
@@ -20,6 +21,7 @@ export function SearchFilters({
   initialKeyword = '',
   initialCategory = '',
 }: Props) {
+  const t = useTranslations('Posts');
   const router = useRouter();
   const [keyword, setKeyword] = useState(initialKeyword);
   const [category, setCategory] = useState(initialCategory);
@@ -36,7 +38,7 @@ export function SearchFilters({
     const trimmed = keyword.trim();
     if (!trimmed) return;
     if (trimmed.length < 2) {
-      toast.warning('검색어는 2글자 이상 입력해주세요.');
+      toast.warning(t('searchTooShort'));
       return;
     }
     goSearch(trimmed, category);
@@ -58,9 +60,9 @@ export function SearchFilters({
             className={styles.select}
             value={category}
             onChange={(e) => handleCategoryChange(e.target.value)}
-            aria-label="카테고리 선택"
+            aria-label={t('categorySelectAria')}
           >
-            <option value="">전체</option>
+            <option value="">{t('categoryAllOption')}</option>
             {categories.map((parent) =>
               (parent.children ?? []).length > 0 ? (
                 <optgroup key={parent.slug} label={parent.name}>
@@ -83,17 +85,17 @@ export function SearchFilters({
           <input
             type="search"
             className={styles.input}
-            placeholder="검색어를 입력하세요"
+            placeholder={t('searchPlaceholder')}
             value={keyword}
             onChange={(e) => setKeyword(e.target.value)}
-            aria-label="게시글 검색"
+            aria-label={t('searchInputAria')}
           />
           {keyword && (
             <button
               type="button"
               className={styles.clear}
               onClick={() => setKeyword('')}
-              aria-label="검색어 지우기"
+              aria-label={t('clearKeywordAria')}
             >
               <MdClose />
             </button>

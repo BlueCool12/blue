@@ -1,15 +1,17 @@
 import styles from './EmptyState.module.css';
 
 import Image from 'next/image';
+import { getTranslations } from 'next-intl/server';
 
-export const EmptyState = ({ message }: { message?: string }) => {
+export const EmptyState = async ({ message }: { message?: string }) => {
+  const t = await getTranslations('Posts');
 
   return (
 
     <section className={styles['empty-state']}>
       <Image
         src='/images/empty.webp'
-        alt="글이 없을때의 일러스트"
+        alt={t('emptyStateAlt')}
         className={styles['empty-state__illustration']}
         width={320}
         height={320}

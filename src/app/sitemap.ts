@@ -1,11 +1,10 @@
 import type { MetadataRoute } from "next";
 
 import { getApiBase } from "@/lib/api/apiBase";
-import { projects } from "./portfolio/data/projects";
+import { projects } from "@/app/[locale]/portfolio/data/projects";
+import { SITE_URL, sitemapLanguages } from "@/i18n/metadata";
 
 export const revalidate = 86400;
-
-const SITE_URL = 'https://pyomin.com';
 
 const staticPagesInfo = [
     { path: '/', changeFrequency: 'weekly', priority: 1.0, lastModified: undefined },
@@ -43,29 +42,42 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         url: `${SITE_URL}${path}`,
         lastModified: lastModified ?? latestPostDateISO,
         changeFrequency,
-        priority
+        priority,
+        alternates: { languages: sitemapLanguages(path) },
     }));
 
-    const categoryPages: MetadataRoute.Sitemap = categories.map((category) => ({
-        url: `${SITE_URL}/posts/category/${encodeURIComponent(category.key)}`,
-        lastModified: category.lastModified,
-        changeFrequency: 'monthly',
-        priority: 0.6,
-    }));
+    const categoryPages: MetadataRoute.Sitemap = categories.map((category) => {
+        const path = `/posts/category/${encodeURIComponent(category.key)}`;
+        return {
+            url: `${SITE_URL}${path}`,
+            lastModified: category.lastModified,
+            changeFrequency: 'monthly',
+            priority: 0.6,
+            alternates: { languages: sitemapLanguages(path) },
+        };
+    });
 
-    const postPages: MetadataRoute.Sitemap = posts.map((post) => ({
-        url: `${SITE_URL}/posts/${encodeURIComponent(post.key)}`,
-        lastModified: post.lastModified,
-        changeFrequency: 'monthly',
-        priority: 0.8,
-    }));
+    const postPages: MetadataRoute.Sitemap = posts.map((post) => {
+        const path = `/posts/${encodeURIComponent(post.key)}`;
+        return {
+            url: `${SITE_URL}${path}`,
+            lastModified: post.lastModified,
+            changeFrequency: 'monthly',
+            priority: 0.8,
+            alternates: { languages: sitemapLanguages(path) },
+        };
+    });
 
-    const portfolioPages: MetadataRoute.Sitemap = projects.map((project) => ({
-        url: `${SITE_URL}/portfolio/${project.slug}`,
-        lastModified: project.lastModified,
-        changeFrequency: 'monthly',
-        priority: 0.6,
-    }));
+    const portfolioPages: MetadataRoute.Sitemap = projects.map((project) => {
+        const path = `/portfolio/${project.slug}`;
+        return {
+            url: `${SITE_URL}${path}`,
+            lastModified: project.lastModified,
+            changeFrequency: 'monthly',
+            priority: 0.6,
+            alternates: { languages: sitemapLanguages(path) },
+        };
+    });
 
     return [...staticPages, ...categoryPages, ...postPages, ...portfolioPages];
 }

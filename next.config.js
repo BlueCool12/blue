@@ -1,4 +1,5 @@
 const path = require('path');
+const createNextIntlPlugin = require('next-intl/plugin');
 const withPWA = require('next-pwa')({
   dest: 'public',
   register: true,
@@ -6,6 +7,8 @@ const withPWA = require('next-pwa')({
   runtimeCaching: require('next-pwa/cache'),
   disable: process.env.NODE_ENV === 'development',
 });
+
+const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -42,4 +45,4 @@ const nextConfig = {
   }
 };
 
-module.exports = withPWA(nextConfig);
+module.exports = withNextIntl(withPWA(nextConfig));

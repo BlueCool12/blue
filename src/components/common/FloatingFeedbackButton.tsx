@@ -2,18 +2,25 @@
 
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useTranslations } from 'next-intl';
 import { MdOutlineWavingHand } from 'react-icons/md';
 import { FeedbackModal } from '@/components/common/FeedbackModal';
 
 export const FloatingFeedbackButton = () => {
+  const t = useTranslations('Feedback');
   const [isOpen, setIsOpen] = useState(false);
-
-  // Click outside is now handled by the modal's overlay.
 
   return (
     <>
-      <ButtonContainer onClick={() => setIsOpen(prev => !prev)} title="푸터 제보 / 피드백 남기기">
-        <MdOutlineWavingHand />
+      <ButtonContainer
+        type="button"
+        onClick={() => setIsOpen(prev => !prev)}
+        title={t('title')}
+        aria-label={t('title')}
+        aria-haspopup="dialog"
+        aria-expanded={isOpen}
+      >
+        <MdOutlineWavingHand aria-hidden="true" />
       </ButtonContainer>
 
       {isOpen && (
