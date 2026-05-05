@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { useTheme } from 'next-themes';
+import { useSearchParams } from 'next/navigation';
 import {
     MdOutlineSettings,
     MdOutlineDarkMode,
@@ -24,6 +25,7 @@ export const SettingsMenu: React.FC = () => {
     const t = useTranslations('Settings');
     const locale = useLocale();
     const pathname = usePathname();
+    const searchParams = useSearchParams();
     const router = useRouter();
     const { resolvedTheme, setTheme } = useTheme();
 
@@ -54,7 +56,11 @@ export const SettingsMenu: React.FC = () => {
     }, [open]);
 
     const selectLocale = (next: string) => {
-        if (next !== locale) router.replace(pathname, { locale: next });
+        if (next !== locale) {
+            const query = searchParams.toString();
+            const href = query ? `${pathname}?${query}` : pathname;
+            router.replace(href, { locale: next });
+        }
         setOpen(false);
     };
 

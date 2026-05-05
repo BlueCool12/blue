@@ -12,8 +12,15 @@ export const FloatingFeedbackButton = () => {
 
   return (
     <>
-      <ButtonContainer onClick={() => setIsOpen(prev => !prev)} title={t('title')}>
-        <MdOutlineWavingHand />
+      <ButtonContainer
+        type="button"
+        onClick={() => setIsOpen(prev => !prev)}
+        title={t('title')}
+        aria-label={t('title')}
+        aria-haspopup="dialog"
+        aria-expanded={isOpen}
+      >
+        <MdOutlineWavingHand aria-hidden="true" />
       </ButtonContainer>
 
       {isOpen && (
