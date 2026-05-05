@@ -149,22 +149,22 @@ const About = async () => {
       <section className={styles['career-section']}>
         <h2 className={styles['section-title']}>Experience</h2>
         {experiences.map((item, index) => (
-          <div key={index} lang="ko" className={styles['career-section__item']}>
+          <div key={index} className={styles['career-section__item']}>
             <div className={styles['career-section__info']}>
               <div className={styles['career-section__date']}>{item.date}</div>
               <div className={styles['career-section__header']}>
-                <h4 className={styles['career-section__title']}>{item.title}</h4>
+                <h4 lang="ko" className={styles['career-section__title']}>{item.title}</h4>
                 {item.link && (
                   <a href={item.link} target="_blank" rel="noopener noreferrer" className={styles['career-section__link']} aria-label={t('serviceVisitAria', { title: item.title })}>
                     <MdLaunch size={18} />
                   </a>
                 )}
               </div>
-              <p className={styles['career-section__position']}>{item.position}</p>
+              <p lang="ko" className={styles['career-section__position']}>{item.position}</p>
             </div>
             <div className={styles['career-section__content']}>
-              {item.subtitle && <p className={styles['career-section__subtitle']}>{item.subtitle}</p>}
-              <ul className={styles['career-section__descriptions']}>
+              {item.subtitle && <p lang="ko" className={styles['career-section__subtitle']}>{item.subtitle}</p>}
+              <ul lang="ko" className={styles['career-section__descriptions']}>
                 {item.descriptions.map((desc, i) => (
                   <li key={i}>{desc}</li>
                 ))}
@@ -178,10 +178,10 @@ const About = async () => {
       <section className={styles['career-section']}>
         <h2 className={styles['section-title']}>Activity</h2>
         {activities.map((item, index) => (
-          <div key={index} lang="ko" className={styles['career-section__item']}>
+          <div key={index} className={styles['career-section__item']}>
             <div className={styles['career-section__info']}>
               <div className={styles['career-section__date']}>{item.date}</div>
-              <h4 className={styles['career-section__title']}>{item.title}</h4>
+              <h4 lang="ko" className={styles['career-section__title']}>{item.title}</h4>
               {item.link && (
                 <div className={styles['career-section__portfolio-link-wrapper']}>
                   <a href={item.link} target="_blank" rel="noopener noreferrer" className={styles['career-section__portfolio-link']}>
@@ -192,8 +192,8 @@ const About = async () => {
               )}
             </div>
             <div className={styles['career-section__content']}>
-              {item.subtitle && <p className={styles['career-section__subtitle']}>{item.subtitle}</p>}
-              <ul className={styles['career-section__descriptions']}>
+              {item.subtitle && <p lang="ko" className={styles['career-section__subtitle']}>{item.subtitle}</p>}
+              <ul lang="ko" className={styles['career-section__descriptions']}>
                 {item.descriptions.map((desc, i) => (
                   <li key={i}>{desc}</li>
                 ))}
