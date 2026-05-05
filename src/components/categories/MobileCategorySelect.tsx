@@ -1,6 +1,8 @@
 'use client';
 
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
+import { useTranslations } from "next-intl";
+import { useRouter } from "@/i18n/navigation";
 
 import styles from '@/components/categories/MobileCategorySelect.module.css';
 import { MdOutlineArrowDropDown } from "react-icons/md";
@@ -13,6 +15,7 @@ type Props = {
 
 export default function MobileCategorySelect({ categories }: Props) {
 
+  const t = useTranslations('Posts');
   const router = useRouter();
   const params = useParams();
 
@@ -31,7 +34,7 @@ export default function MobileCategorySelect({ categories }: Props) {
         <select
           className={styles.select}
           value={current}
-          aria-label="글 카테고리 선택"
+          aria-label={t('mobileCategoryAria')}
           onChange={(e) =>
             handleChange(e.target.value)
           }

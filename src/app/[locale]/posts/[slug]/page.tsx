@@ -2,7 +2,9 @@ import { Suspense } from 'react';
 
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
+
+import { localizedAlternates } from '@/i18n/metadata';
 
 import styles from './page.module.css';
 import 'prismjs/themes/prism-tomorrow.css';
@@ -23,7 +25,7 @@ type Sitemap = { key: string; lastModified: string };
 type SitemapResponse<T> = { sitemap: T[] };
 
 interface PageProps {
-    params: Promise<{ slug: string }>;
+    params: Promise<{ locale: string; slug: string }>;
 }
 
 export const revalidate = 86400;
@@ -42,21 +44,20 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-    const { slug: rawSlug } = await params;
+    const { locale, slug: rawSlug } = await params;
     const slug = decodeURIComponent(rawSlug);
     const post = await postService.getPostBySlug(slug);
+    const alternates = localizedAlternates(locale, `/posts/${slug}`);
 
     return {
         title: post.title,
         description: post.description,
-        alternates: {
-            canonical: `/posts/${slug}`,
-        },
+        alternates,
         openGraph: {
             title: post.title,
             description: post.description,
             type: 'article',
-            url: `https://pyomin.com/posts/${slug}`,
+            url: `https://pyomin.com${alternates.canonical}`,
         },
         twitter: {
             card: 'summary_large_image',

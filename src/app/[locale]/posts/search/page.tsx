@@ -2,9 +2,10 @@ import { Suspense } from 'react';
 
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
+import { getTranslations } from 'next-intl/server';
 
-import styles from '@/app/posts/(list)/page.module.css';
+import styles from '@/app/[locale]/posts/(list)/page.module.css';
 import searchStyles from './page.module.css';
 import { EmptyState } from '@/components/posts/EmptyState';
 import { PostListSkeleton } from '@/components/posts/PostListSkeleton';
@@ -15,12 +16,17 @@ import { categoryService } from '@/services/categoryService';
 import { postService } from '@/services/postService';
 
 type Props = {
+  params: Promise<{ locale: string }>;
   searchParams: Promise<{ keyword?: string; category?: string; page?: string }>;
 };
 
-export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
+export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
+  const { locale } = await params;
   const { keyword } = await searchParams;
-  const title = keyword ? `"${keyword}" 검색 결과` : '검색';
+  const t = await getTranslations({ locale, namespace: 'Posts' });
+  const title = keyword
+    ? t('searchResultsMetaTitle', { keyword })
+    : t('searchMetaTitle');
 
   return {
     title,
@@ -28,8 +34,10 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
   };
 }
 
-export default async function SearchPage({ searchParams }: Props) {
+export default async function SearchPage({ params, searchParams }: Props) {
+  const { locale } = await params;
   const { keyword = '', category = '', page } = await searchParams;
+  const t = await getTranslations({ locale, namespace: 'Posts' });
   const trimmed = keyword.trim();
   const currentPage = Number(page) || 0;
   const PAGE_SIZE = 10;
@@ -51,12 +59,12 @@ export default async function SearchPage({ searchParams }: Props) {
         <div className={searchStyles.placeholder}>
           <Image
             src="/images/search.webp"
-            alt="검색하는 일러스트"
+            alt={t('searchImageAlt')}
             width={160}
             height={160}
             priority
           />
-          <p className={searchStyles.hint}>검색어를 입력해 보세요.</p>
+          <p className={searchStyles.hint}>{t('searchHint')}</p>
         </div>
       </section>
     );
@@ -76,7 +84,7 @@ export default async function SearchPage({ searchParams }: Props) {
       {filters}
 
       {posts.length === 0 ? (
-        <EmptyState message={`"${trimmed}"에 대한 검색 결과가 없습니다.`} />
+        <EmptyState message={t('searchEmptyMessage', { keyword: trimmed })} />
       ) : (
         <ul className={styles.wrapper}>
           {posts.map((post) => (

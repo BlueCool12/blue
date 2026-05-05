@@ -1,19 +1,21 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
-import Link from 'next/link';
+import { useTranslations } from 'next-intl';
+
+import { Link, usePathname } from '@/i18n/navigation';
 
 import styles from './Header.module.css';
 
 import { ThemeAwareLogo } from './ThemeAwareLogo';
-import { ThemeSwitcher } from './ThemeSwitcher';
 import { MobileMenu } from './MobileMenu';
 import { MusicPlayer } from './MusicPlayer';
 import { SearchBar } from './SearchBar';
+import { SettingsMenu } from './SettingsMenu';
 
 
 export const Header: React.FC = () => {
     const pathname = usePathname();
+    const t = useTranslations('Header');
 
     const getNavItemClass = (targetPath: string) => {
         const isActive = pathname.startsWith(targetPath);
@@ -34,16 +36,16 @@ export const Header: React.FC = () => {
                     <nav className={styles['desktop-nav']}>
                         <ul className={styles['desktop-nav__list']}>
                             <li className={getNavItemClass('/about')}>
-                                <Link href='/about' prefetch={false}>ABOUT</Link>
+                                <Link href='/about' prefetch={false}>{t('about')}</Link>
                             </li>
                             <li className={getNavItemClass('/portfolio')}>
-                                <Link href='/portfolio' prefetch={false}>PORTFOLIO</Link>
+                                <Link href='/portfolio' prefetch={false}>{t('portfolio')}</Link>
                             </li>
                             <li className={getNavItemClass('/posts')}>
-                                <Link href='/posts' prefetch={false}>POSTS</Link>
+                                <Link href='/posts' prefetch={false}>{t('posts')}</Link>
                             </li>
                             <li className={getNavItemClass('/guestbooks')}>
-                                <Link href='/guestbooks' prefetch={false}>GUESTBOOK</Link>
+                                <Link href='/guestbooks' prefetch={false}>{t('guestbook')}</Link>
                             </li>
                         </ul>
                     </nav>
@@ -52,7 +54,7 @@ export const Header: React.FC = () => {
                     <div className={styles['header__icons']}>
                         <SearchBar />
                         <MusicPlayer />
-                        <ThemeSwitcher />
+                        <SettingsMenu />
                         <MobileMenu />
                     </div>
 

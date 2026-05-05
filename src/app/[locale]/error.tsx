@@ -3,7 +3,8 @@
 import styled from "styled-components";
 
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
+import { useRouter } from "@/i18n/navigation";
 
 import { OutlineButton } from "@/components/common/OutlineButton";
 import { MdOutlineHome, MdOutlineHistory } from 'react-icons/md';
@@ -16,6 +17,7 @@ export default function Error({
     reset: () => void;
 }) {
 
+    const t = useTranslations('ErrorPage');
     const router = useRouter();
 
     return (
@@ -24,17 +26,17 @@ export default function Error({
             <TitleSection>
                 <Image
                     src="/images/error.webp"
-                    alt="에러 이미지"
+                    alt={t('imageAlt')}
                     width={256}
                     height={278}
                     priority
                 />
-                <Title>{error?.message || '예상치 못한 오류가 발생했습니다.'}</Title>
+                <Title>{error?.message || t('defaultMessage')}</Title>
             </TitleSection>
 
             <ActionNav>
-                <OutlineButton type="button" icon={<MdOutlineHome size={24} />} label="메인 페이지" onClick={() => router.push('/')}></OutlineButton>
-                <OutlineButton type="button" icon={<MdOutlineHistory size={24} />} label="다시 시도" onClick={reset}></OutlineButton>
+                <OutlineButton type="button" icon={<MdOutlineHome size={24} />} label={t('homeButton')} onClick={() => router.push('/')}></OutlineButton>
+                <OutlineButton type="button" icon={<MdOutlineHistory size={24} />} label={t('retryButton')} onClick={reset}></OutlineButton>
             </ActionNav>
 
         </ErrorWrapper>

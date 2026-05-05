@@ -3,13 +3,15 @@
 import styles from './not-found.module.css';
 
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
+import { useRouter } from "@/i18n/navigation";
 
 import { OutlineButton } from "@/components/common/OutlineButton";
 import { MdOutlineHome, MdOutlineHistory } from 'react-icons/md';
 
 export default function NotFound() {
 
+    const t = useTranslations('NotFoundPage');
     const router = useRouter();
 
     return (
@@ -20,7 +22,7 @@ export default function NotFound() {
                 <div className={styles['notfound__image-wrapper']}>
                     <Image
                         src='/images/not_found.webp'
-                        alt="에러 이미지"
+                        alt={t('imageAlt')}
                         width={300}
                         height={300}
                         className={styles['notfound__image']}
@@ -28,11 +30,11 @@ export default function NotFound() {
                 </div>
             </section>
 
-            <p className={styles['notfound__description']}>페이지를 찾을 수 없습니다</p>
+            <p className={styles['notfound__description']}>{t('description')}</p>
 
             <nav className={styles['notfound__actions']}>
-                <OutlineButton type="button" icon={<MdOutlineHome size={24} />} label="메인 페이지" onClick={() => router.push('/')}></OutlineButton>
-                <OutlineButton type="button" icon={<MdOutlineHistory size={24} />} label="이전 페이지" onClick={() => router.back()}></OutlineButton>
+                <OutlineButton type="button" icon={<MdOutlineHome size={24} />} label={t('homeButton')} onClick={() => router.push('/')}></OutlineButton>
+                <OutlineButton type="button" icon={<MdOutlineHistory size={24} />} label={t('backButton')} onClick={() => router.back()}></OutlineButton>
             </nav>
 
         </div>

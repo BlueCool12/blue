@@ -1,7 +1,7 @@
 'use client';
 
 import Image, { StaticImageData } from 'next/image';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 import styles from './page.module.css';
 
 interface ProjectCardProps {

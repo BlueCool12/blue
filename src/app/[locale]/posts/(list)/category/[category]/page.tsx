@@ -1,15 +1,17 @@
 import { Suspense } from 'react';
 
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { getTranslations } from 'next-intl/server';
 
 import AdsenseAd from '@/components/AdsenseAd';
-import styles from '@/app/posts/(list)/page.module.css';
-import MorePosts from "@/app/posts/(list)/MorePosts";
+import styles from '@/app/[locale]/posts/(list)/page.module.css';
+import MorePosts from "@/app/[locale]/posts/(list)/MorePosts";
 import { PostListSkeleton } from '@/components/posts/PostListSkeleton';
 import { EmptyState } from '@/components/posts/EmptyState';
 
+import { localizedAlternates } from '@/i18n/metadata';
 import { categoryService } from '@/services/categoryService';
 import { postService } from '@/services/postService';
 
@@ -26,30 +28,31 @@ export async function generateStaticParams() {
 }
 
 type Props = {
-  params: Promise<{ category: string }>;
+  params: Promise<{ locale: string; category: string }>;
   searchParams: Promise<{ page?: string }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { category } = await params;
+  const { locale, category } = await params;
 
   const decoded = decodeURIComponent(category);
   if (!decoded) return notFound();
 
-  const title = `${decoded.toUpperCase()} 카테고리 글 목록`;
-  const description = `BlueCool 블로그의 "${decoded}" 카테고리 글 목록입니다.`;
+  const t = await getTranslations({ locale, namespace: 'Posts' });
+  const path = `/posts/category/${encodeURIComponent(decoded)}`;
+  const alternates = localizedAlternates(locale, path);
+  const title = t('categoryMetaTitle', { category: decoded.toUpperCase() });
+  const description = t('categoryMetaDescription', { category: decoded });
 
   return {
     title,
     description,
-    alternates: {
-      canonical: `/posts/category/${encodeURIComponent(decoded)}`,
-    },
+    alternates,
     openGraph: {
       title,
       description,
       type: 'website',
-      url: `https://pyomin.com/posts/category/${encodeURIComponent(decoded)}`,
+      url: `https://pyomin.com${alternates.canonical}`,
     },
     twitter: {
       card: 'summary_large_image',
@@ -60,12 +63,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function CategoryPage({ params, searchParams }: Props) {
-  const { category } = await params;
+  const { locale, category } = await params;
   const { page } = await searchParams;
 
   const decoded = decodeURIComponent(category);
   if (!decoded) notFound();
 
+  const t = await getTranslations({ locale, namespace: 'Posts' });
   const currentPage = Number(page) || 0;
   const PAGE_SIZE = 10;
 
@@ -81,7 +85,7 @@ export default async function CategoryPage({ params, searchParams }: Props) {
     <>
       <section className={styles.section}>
         {posts.length === 0 ? (
-          <EmptyState message="열심히 공부 중입니다..." />
+          <EmptyState message={t('emptyMessage')} />
         ) : (
           <ul className={styles.wrapper}>
             {posts.map((post) => (
@@ -121,7 +125,7 @@ export default async function CategoryPage({ params, searchParams }: Props) {
               href={`/posts/category/${encodeURIComponent(decoded)}?page=${currentPage + 1}`}
               rel='next'
             >
-              다음 페이지
+              {t('nextPageLink')}
             </Link>
           </div>
         )}

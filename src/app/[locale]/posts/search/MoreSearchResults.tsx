@@ -1,23 +1,24 @@
 'use client';
 
 import { useEffect, useRef } from "react";
-import Link from "next/link";
+import { Link } from '@/i18n/navigation';
 
-import styles from '@/app/posts/(list)/page.module.css';
+import styles from '@/app/[locale]/posts/(list)/page.module.css';
 
 import { LoadingSpinner } from "@/components/common/LoadingSpinner";
 
 import type { PagedPost, Post } from "@/types/post";
 
-import { useInfinitePosts } from "@/hooks/queries/posts/useInfinitePosts";
+import { useInfiniteSearchPosts } from "@/hooks/queries/posts/useInfiniteSearchPosts";
 
 type Props = {
+    keyword: string;
+    category?: string | null;
     size: number;
-    categorySlug?: string | null;
     initialPage?: number;
 };
 
-export default function MorePosts({ size, categorySlug = null, initialPage = 0 }: Props) {
+export default function MoreSearchResults({ keyword, category = null, size, initialPage = 0 }: Props) {
 
     const sentinelRef = useRef<HTMLDivElement | null>(null);
 
@@ -26,10 +27,11 @@ export default function MorePosts({ size, categorySlug = null, initialPage = 0 }
         fetchNextPage,
         hasNextPage,
         isFetchingNextPage,
-    } = useInfinitePosts({
-        category: categorySlug,
+    } = useInfiniteSearchPosts({
+        keyword,
+        category,
         size,
-        initialPage
+        initialPage,
     });
 
     useEffect(() => {

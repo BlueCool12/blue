@@ -1,30 +1,35 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
+import { getTranslations } from 'next-intl/server';
 
-import styles from '@/app/posts/(list)/page.module.css';
+import styles from '@/app/[locale]/posts/(list)/page.module.css';
 import AdsenseAd from '@/components/AdsenseAd';
 import { EmptyState } from '@/components/posts/EmptyState';
-import MorePosts from "@/app/posts/(list)/MorePosts";
+import MorePosts from "@/app/[locale]/posts/(list)/MorePosts";
 
+import { localizedAlternates } from '@/i18n/metadata';
 import { postService } from '@/services/postService';
 
 export const revalidate = 86400;
 
-export async function generateMetadata(): Promise<Metadata> {
-  const title = '전체 글 목록';
-  const description = 'BlueCool 블로그의 전체글 목록입니다. 다양한 기술과 개발 이야기를 확인해보세요.';
+type GenProps = { params: Promise<{ locale: string }> };
+
+export async function generateMetadata({ params }: GenProps): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'Posts' });
+  const alternates = localizedAlternates(locale, '/posts');
+  const title = t('listMetaTitle');
+  const description = t('listMetaDescription');
 
   return {
     title,
     description,
-    alternates: {
-      canonical: '/posts',
-    },
+    alternates,
     openGraph: {
       title,
       description,
       type: 'website',
-      url: 'https://pyomin.com/posts',
+      url: `https://pyomin.com${alternates.canonical}`,
     },
     twitter: {
       card: 'summary_large_image',
@@ -35,12 +40,15 @@ export async function generateMetadata(): Promise<Metadata> {
 };
 
 type Props = {
+  params: Promise<{ locale: string }>;
   searchParams: Promise<{ page?: string }>;
 };
 
-export default async function Page({ searchParams }: Props) {
+export default async function Page({ params, searchParams }: Props) {
 
+  const { locale } = await params;
   const { page } = await searchParams;
+  const t = await getTranslations({ locale, namespace: 'Posts' });
   const currentPage = Number(page) || 0;
   const PAGE_SIZE = 10;
 
@@ -53,10 +61,10 @@ export default async function Page({ searchParams }: Props) {
   const posts = initial.posts ?? [];
 
   return (
-    <>      
+    <>
       <section className={styles.section}>
         {posts.length === 0 ? (
-          <EmptyState message="열심히 공부 중입니다..." />
+          <EmptyState message={t('emptyMessage')} />
         ) : (
           <ul className={styles.wrapper}>
             {posts.map((post) => (
@@ -91,7 +99,7 @@ export default async function Page({ searchParams }: Props) {
         {initial.hasNext && (
           <div className={styles['sr-only']}>
             <Link href={`/posts?page=${currentPage + 1}`} rel='next'>
-              다음 페이지
+              {t('nextPageLink')}
             </Link>
           </div>
         )}

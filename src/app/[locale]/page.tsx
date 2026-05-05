@@ -1,7 +1,8 @@
 import Image from 'next/image';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
+import { getTranslations } from 'next-intl/server';
 
-import styles from '@/app/page.module.css';
+import styles from '@/app/[locale]/page.module.css';
 
 import { MdOutlineChevronRight } from 'react-icons/md';
 import HeroClient from '@/components/HeroClient';
@@ -34,7 +35,8 @@ async function getRetrospectivePosts(): Promise<PagedPost> {
 
 export default async function Home() {
 
-  const [latestPosts, categories, troubleshootingPosts, retrospectivePosts] = await Promise.all([
+  const [t, latestPosts, categories, troubleshootingPosts, retrospectivePosts] = await Promise.all([
+    getTranslations('HomePage'),
     getLatestPosts(),
     getCategories(),
     getTroubleshootingPosts(),
@@ -56,7 +58,7 @@ export default async function Home() {
         <div className={styles.hero__image}>
           <Image
             src='/images/main.webp'
-            alt='메인 페이지 이미지'
+            alt={t('heroImageAlt')}
             priority
             width={280}
             height={280}
@@ -74,7 +76,7 @@ export default async function Home() {
             <hr />
           </div>
 
-          <p className={styles['category-preview__subtitle']}>매일 새롭게 만나는 세 가지 주제</p>
+          <p className={styles['category-preview__subtitle']}>{t('dailyPickSubtitle')}</p>
         </div>
 
         <div className={styles['category-preview__wrapper']}>
@@ -109,17 +111,17 @@ export default async function Home() {
               href='/posts'
               className={styles['recent-posts__title']}
             >
-              최신 글 🌟
+              {t('latestPostsTitle')}
             </Link>
             <p className={styles['recent-posts__subtitle']}>
-              새로 올라온 글들을 확인해보세요!
+              {t('latestPostsSubtitle')}
             </p>
           </div>
 
           <Link
             href="/posts"
             className={styles['recent-posts__all-link']}
-            aria-label='전체 글 목록 보기'
+            aria-label={t('latestPostsAllAria')}
           >
             <MdOutlineChevronRight />
           </Link>
@@ -147,14 +149,14 @@ export default async function Home() {
       <section className={styles['recent-posts']}>
         <div className={styles['recent-posts__header']}>
           <div className={styles['recent-posts__heading']}>
-            <Link href='/posts/category/retrospective' className={styles['recent-posts__title']}>회고 📝</Link>
-            <p className={styles['recent-posts__subtitle']}>지나온 과정을 돌아보며 더 나아지기 위한 기록을 남깁니다</p>
+            <Link href='/posts/category/retrospective' className={styles['recent-posts__title']}>{t('retrospectiveTitle')}</Link>
+            <p className={styles['recent-posts__subtitle']}>{t('retrospectiveSubtitle')}</p>
           </div>
 
           <Link
             href="/posts/category/retrospective"
             className={styles['recent-posts__all-link']}
-            aria-label='회고 글 더 보기'
+            aria-label={t('retrospectiveMoreAria')}
           >
             <MdOutlineChevronRight />
           </Link>
@@ -166,7 +168,7 @@ export default async function Home() {
               <figure className={styles['retrospective-card__thumb']}>
                 <Image
                   src={post.coverPath ?? '/images/empty.webp'}
-                  alt={`${post.title} 썸네일`}
+                  alt={t('thumbnailAlt', { title: post.title })}
                   fill
                   style={{ objectFit: 'cover' }}
                 />
@@ -189,14 +191,14 @@ export default async function Home() {
       <section className={styles['recent-posts']}>
         <div className={styles['recent-posts__header']}>
           <div className={styles['recent-posts__heading']}>
-            <Link href='/posts/category/troubleshooting' className={styles['recent-posts__title']}>트러블슈팅 🛠️</Link>
-            <p className={styles['recent-posts__subtitle']}>실제 서비스에서 마주한 문제들을 분석하고 해결 과정에서 얻은 경험들을 공유합니다</p>
+            <Link href='/posts/category/troubleshooting' className={styles['recent-posts__title']}>{t('troubleshootingTitle')}</Link>
+            <p className={styles['recent-posts__subtitle']}>{t('troubleshootingSubtitle')}</p>
           </div>
 
           <Link
             href="/posts/category/troubleshooting"
             className={styles['recent-posts__all-link']}
-            aria-label='트러블슈팅 글 더 보기'
+            aria-label={t('troubleshootingMoreAria')}
           >
             <MdOutlineChevronRight />
           </Link>
@@ -214,7 +216,7 @@ export default async function Home() {
                   <figure className={styles['troubleshooting-posts__thumb']}>
                     <Image
                       src={post.coverPath ?? '/images/empty.webp'}
-                      alt={`${post.title} 썸네일`}
+                      alt={t('thumbnailAlt', { title: post.title })}
                       fill
                       style={{ objectFit: 'cover' }}
                     />

@@ -1,23 +1,14 @@
 'use client';
 
-import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { Link } from '@/i18n/navigation';
+import { useEffect, useMemo, useRef, useState } from "react";
 import { MdOutlineStar } from "react-icons/md";
-import styles from '@/app/page.module.css';
-
-const greetings = [
-    '환영합니다 :D',
-    '반가워요 XD',
-    '어서오세요 ^o^',
-    '함께 공부해요 =D',
-    '좋은 하루 되세요 :>',
-    "사랑합니다 :p",
-    '고맙습니다 =]',
-    '행복하세요 =D',
-    '감사합니다 ^_^',
-];
+import { useTranslations } from 'next-intl';
+import styles from '@/app/[locale]/page.module.css';
 
 export default function HeroClient() {
+    const t = useTranslations('HomePage');
+    const greetings = useMemo(() => t.raw('greetings') as string[], [t]);
 
     const [index, setIndex] = useState(0);
     const [displayedText, setDisplayedText] = useState('');
@@ -56,7 +47,7 @@ export default function HeroClient() {
         return () => {
             if (typingRef.current) clearTimeout(typingRef.current);
         };
-    }, [displayedText, isDeleting, index]);
+    }, [displayedText, isDeleting, index, greetings]);
 
     return (
         <>
@@ -73,7 +64,7 @@ export default function HeroClient() {
             </h1>
 
             <p className={styles.hero__description}>
-                블로그에 방문하신 여러분<br />
+                {t('heroVisitorText')}<br />
                 <span className={styles.greeting}>
                     {displayedText}
                 </span>
@@ -83,7 +74,7 @@ export default function HeroClient() {
                 <button
                     onClick={() => setVisible((prev) => !prev)}
                     className={styles['hero__about-button']}
-                    aria-label='About Me 보기 토글'
+                    aria-label={t('heroAboutToggleAria')}
                 >
                     <MdOutlineStar size={20} className={styles.starIcon} />
                 </button>

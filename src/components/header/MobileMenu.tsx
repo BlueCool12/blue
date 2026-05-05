@@ -1,7 +1,8 @@
 'use client';
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
+import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/navigation';
 import Image from "next/image";
 import { useTheme } from "next-themes";
 
@@ -10,6 +11,7 @@ import { MdOutlineClose, MdOutlineMenu } from "react-icons/md";
 
 export function MobileMenu() {
 
+    const t = useTranslations('Header');
     const [open, setOpen] = useState(false);
     const { resolvedTheme } = useTheme();
 
@@ -31,7 +33,7 @@ export function MobileMenu() {
             <button
                 className={styles['header__menu-toggle']}
                 onClick={() => setOpen(true)}
-                aria-label="모바일 메뉴 열기"
+                aria-label={t('mobileMenuOpen')}
             >
                 <MdOutlineMenu
                     size={24}
@@ -39,19 +41,19 @@ export function MobileMenu() {
             </button>
 
             {open && (
-                <div className={styles['mobile-menu']} role="dialog" aria-modal="true" aria-label="모바일 메뉴">
+                <div className={styles['mobile-menu']} role="dialog" aria-modal="true" aria-label={t('mobileMenuAria')}>
                     <div className={styles['mobile-menu__header']}>
                         <Link href='/' prefetch={false} onClick={() => setOpen(false)} className={styles['mobile-menu__logo']}>
                             <Image
                                 src={src}
-                                alt='모바일 메뉴 로고'
+                                alt={t('mobileLogoAlt')}
                                 width={31}
                                 height={36}
                                 priority
                             />
                         </Link>
 
-                        <button onClick={() => setOpen(false)} aria-label='모바일 메뉴 닫기'>
+                        <button onClick={() => setOpen(false)} aria-label={t('mobileMenuClose')}>
                             <MdOutlineClose
                                 size={24}
                             />
@@ -59,10 +61,10 @@ export function MobileMenu() {
                     </div>
 
                     <ul className={styles['mobile-menu__nav']}>
-                        <li><Link href='/about' prefetch={false} onClick={() => setOpen(false)}>ABOUT</Link></li>
-                        <li><Link href='/portfolio' prefetch={false} onClick={() => setOpen(false)}>PORTFOLIO</Link></li>
-                        <li><Link href='/posts' prefetch={false} onClick={() => setOpen(false)}>POSTS</Link></li>
-                        <li><Link href='/guestbooks' prefetch={false} onClick={() => setOpen(false)}>GUESTBOOK</Link></li>
+                        <li><Link href='/about' prefetch={false} onClick={() => setOpen(false)}>{t('about')}</Link></li>
+                        <li><Link href='/portfolio' prefetch={false} onClick={() => setOpen(false)}>{t('portfolio')}</Link></li>
+                        <li><Link href='/posts' prefetch={false} onClick={() => setOpen(false)}>{t('posts')}</Link></li>
+                        <li><Link href='/guestbooks' prefetch={false} onClick={() => setOpen(false)}>{t('guestbook')}</Link></li>
                     </ul>
                 </div >
             )}
