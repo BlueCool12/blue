@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1.6
 
 # -------- Builder --------
-FROM node:20-alpine AS builder
+FROM --platform=$BUILDPLATFORM node:20-alpine AS builder
 WORKDIR /app
 ENV NODE_OPTIONS=--dns-result-order=ipv4first
 RUN apk add --no-cache ca-certificates libc6-compat && update-ca-certificates
@@ -13,13 +13,6 @@ RUN --mount=type=cache,id=npm-cache,target=/root/.npm \
 
 # src
 COPY . .
-
-# 빌드 타임용 환경변수 getApiBase()
-ARG INTERNAL_API_BASE_URL
-ENV INTERNAL_API_BASE_URL=${INTERNAL_API_BASE_URL}
-
-ARG PUBLIC_API_BASE_URL
-ENV PUBLIC_API_BASE_URL=${PUBLIC_API_BASE_URL}
 
 ARG NEXT_PUBLIC_API_BASE_URL
 ENV NEXT_PUBLIC_API_BASE_URL=${NEXT_PUBLIC_API_BASE_URL}
