@@ -28,6 +28,11 @@ const nextConfig = {
       // 마이그레이션 이전에 발행된 게시글의 이미지
       {
         protocol: 'https',
+        hostname: 'bluecool.pyomin.com',
+        pathname: '/files/**',
+      },
+      {
+        protocol: 'https',
         hostname: 'api.pyomin.com',
         pathname: '/files/**',
       }
