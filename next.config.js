@@ -22,6 +22,12 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
+        hostname: 'pmini12.synology.me',
+        pathname: '/bluecool-media/**',
+      },
+      // 마이그레이션 이전에 발행된 게시글의 이미지
+      {
+        protocol: 'https',
         hostname: 'api.pyomin.com',
         pathname: '/files/**',
       }
