@@ -1,7 +1,6 @@
 import { Suspense } from 'react';
 
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
 import { getTranslations } from 'next-intl/server';
 
@@ -57,13 +56,6 @@ export default async function SearchPage({ params, searchParams }: Props) {
       <section className={styles.section}>
         {filters}
         <div className={searchStyles.placeholder}>
-          <Image
-            src="/images/search.webp"
-            alt={t('searchImageAlt')}
-            width={160}
-            height={160}
-            priority
-          />
           <p className={searchStyles.hint}>{t('searchHint')}</p>
         </div>
       </section>

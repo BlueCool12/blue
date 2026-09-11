@@ -5,6 +5,8 @@ import { useTheme } from "next-themes"
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 
+import styles from './Header.module.css';
+
 export function ThemeAwareLogo() {
 
     const t = useTranslations('Header');
@@ -18,7 +20,14 @@ export function ThemeAwareLogo() {
     const isLight = mounted ? resolvedTheme === 'light' : true;
 
     const src = isLight ? '/images/logo/logo.webp' : '/images/logo/logo_dark.webp';
-    const size = isLight ? { w: 50, h: 39 } : { w: 74, h: 40 };
 
-    return <Image src={src} alt={t('logoAlt')} width={size.w} height={size.h} priority />
+    return (
+        <span className={styles['header__logo']}>
+            <Image src={src} alt={t('logoAlt')} width={44} height={44} priority />
+            <span className={styles['header__logo-text']}>
+                <span className={styles['header__logo-text-line']}>BLUE</span>
+                <span className={styles['header__logo-text-line']}>COOL</span>
+            </span>
+        </span>
+    );
 }

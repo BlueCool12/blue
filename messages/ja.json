@@ -32,13 +32,11 @@
     "volume": "音量"
   },
   "ErrorPage": {
-    "imageAlt": "エラー画像",
     "defaultMessage": "予期しないエラーが発生しました。",
     "homeButton": "ホーム",
     "retryButton": "再試行"
   },
   "NotFoundPage": {
-    "imageAlt": "404ページのイラスト",
     "description": "ページが見つかりません",
     "homeButton": "ホーム",
     "backButton": "前のページ"
@@ -67,7 +65,6 @@
     "nextPageLink": "次のページ",
     "searchMetaTitle": "検索",
     "searchResultsMetaTitle": "「{keyword}」の検索結果",
-    "searchImageAlt": "検索イラスト",
     "searchHint": "キーワードを入力してください。",
     "searchEmptyMessage": "「{keyword}」に該当する結果はありません。",
     "previewCategoryPlaceholder": "プレビューカテゴリー"
@@ -142,24 +139,22 @@
   },
   "GuestbookPage": {
     "metaTitle": "ゲストブック",
-    "metaDescription": "BlueCoolブログのゲストブックページです。",
-    "imageAlt": "ゲストブック画像",
-    "writeButton": "✍️ メッセージを残す"
+    "metaDescription": "BlueCoolブログのゲストブックページです。"
   },
   "AboutPage": {
     "metaTitle": "About",
     "metaDescription": "BlueCool12のキャリアを紹介します。",
-    "mascotAlt": "BlueCool12 マスコット画像",
-    "heroIntro": "こんにちは 👋",
-    "heroTitleLineA": "バックエンド開発者の <brand>BLUECOOL</brand> です",
-    "heroTitleLineB": "継続的な改善と成長を目指します",
+    "profileAlt": "BLUECOOLのプロフィール写真",
+    "heroIntro": "こんにちは!",
+    "heroTitle": "Software Developer @BLUECOOL",
     "serviceVisitAria": "{title} のサイトを訪問",
     "teamProjectLabel": "チームプロジェクト"
   },
   "HomePage": {
-    "heroImageAlt": "メインページ画像",
     "heroVisitorText": "ブログを訪れてくださった皆さま",
-    "heroAboutToggleAria": "About Me 表示切替",
+    "heroGithubAria": "GitHub",
+    "heroLinkedinAria": "LinkedIn",
+    "heroNotionAria": "Notion",
     "greetings": [
       "ようこそ :D",
       "はじめまして XD",
@@ -172,13 +167,13 @@
       "感謝しています ^_^"
     ],
     "dailyPickSubtitle": "毎日出会える3つの新しいトピック",
-    "latestPostsTitle": "最新記事 🌟",
+    "latestPostsTitle": "最新記事",
     "latestPostsSubtitle": "新しく投稿された記事をチェック！",
     "latestPostsAllAria": "すべての記事を見る",
-    "retrospectiveTitle": "振り返り 📝",
+    "retrospectiveTitle": "振り返り",
     "retrospectiveSubtitle": "歩んできた道を振り返り、より良くなるための記録を残します",
     "retrospectiveMoreAria": "振り返り記事をもっと見る",
-    "troubleshootingTitle": "トラブルシューティング 🛠️",
+    "troubleshootingTitle": "トラブルシューティング",
     "troubleshootingSubtitle": "実際のサービスで遭遇した問題を分析し、解決過程で得た経験を共有します",
     "troubleshootingMoreAria": "トラブルシューティング記事をもっと見る",
     "thumbnailAlt": "{title} のサムネイル"

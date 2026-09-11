@@ -1,8 +1,6 @@
 'use client';
 
-import { Link } from '@/i18n/navigation';
 import { useEffect, useMemo, useRef, useState } from "react";
-import { MdOutlineStar } from "react-icons/md";
 import { useTranslations } from 'next-intl';
 import styles from '@/app/[locale]/page.module.css';
 
@@ -13,7 +11,6 @@ export default function HeroClient() {
     const [index, setIndex] = useState(0);
     const [displayedText, setDisplayedText] = useState('');
     const [isDeleting, setIsDeleting] = useState(false);
-    const [visible, setVisible] = useState(false);
 
     const typingRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -51,17 +48,7 @@ export default function HeroClient() {
 
     return (
         <>
-            <h1 className={styles.hero__title}>
-                {'Hello, World!'.split('').map((char, i) => (
-                    <span
-                        key={i}
-                        className={styles.letter}
-                        style={{ '--delay': `${i * 0.1}s` } as React.CSSProperties}
-                    >
-                        {char}
-                    </span>
-                ))}
-            </h1>
+            <h1 className={styles.hero__title}>Hello, World!</h1>
 
             <p className={styles.hero__description}>
                 {t('heroVisitorText')}<br />
@@ -69,19 +56,6 @@ export default function HeroClient() {
                     {displayedText}
                 </span>
             </p>
-
-            <div className={styles.hero__about}>
-                <button
-                    onClick={() => setVisible((prev) => !prev)}
-                    className={styles['hero__about-button']}
-                    aria-label={t('heroAboutToggleAria')}
-                >
-                    <MdOutlineStar size={20} className={styles.starIcon} />
-                </button>
-                <Link href={'/about'} className={`${styles['hero__about-label']} ${visible ? styles['hero__about-label--show'] : ''}`}>
-                    About Me
-                </Link>
-            </div>
         </>
     );
 };

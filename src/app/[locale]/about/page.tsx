@@ -7,7 +7,7 @@ import { localizedAlternates } from '@/i18n/metadata';
 import styles from './page.module.css';
 
 import { MdOutlineMail, MdLaunch } from 'react-icons/md';
-import { FaGithub } from 'react-icons/fa';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { SiNotion } from 'react-icons/si';
 
 const experiences = [
@@ -18,7 +18,9 @@ const experiences = [
     subtitle: 'AI 인프라 클라우드 플랫폼',
     link: 'https://wmcom.ai',
     descriptions: [
-      '클라우드 솔루션 개발'
+      '클라우드 솔루션 개발',
+      '웹 기반 NVIDIA Omniverse 플랫폼 개발',
+      'Digital Twin 실시간 데이터 처리'
     ]
   },
   {
@@ -28,7 +30,7 @@ const experiences = [
     subtitle: '결혼 정보 서비스',
     link: 'https://www.baroyeon.net',
     descriptions: [
-      '공식 웹사이트 리뉴얼 및 SEO 설정',
+      '공식 웹사이트 리뉴얼 및 SEO',
       '전자 계약 시스템 개발',
       '관리자 페이지 CMS 개발'
     ]
@@ -42,7 +44,7 @@ const activities = [
     subtitle: '자바(JAVA) 풀스택 개발자 취업캠프',
     link: 'https://tourstory.pyomin.com',
     descriptions: [
-      'Spring Boot 기반 풀스택 역량 습득',
+      'Spring Boot 기반 풀스택 역량',
       '프로젝트 아키텍처 설계 주도 경험',
     ]
   },
@@ -51,19 +53,23 @@ const activities = [
 const skills = [
   {
     category: 'Backend',
-    items: ['Node.js', 'Express', 'Prisma', 'tRPC']
+    items: ['TypeScript', 'NestJS', 'Python', 'FastAPI', 'Java', 'Spring Boot']
   },
   {
-    category: 'DevOps',
-    items: ['MySQL', 'MS SQL', 'Linux', 'Kubernetes', 'Nginx', 'IIS']
+    category: 'Database',
+    items: ['PostgreSQL', 'Qdrant']
   },
   {
     category: 'Frontend',
-    items: ['JavaScript', 'TypeScript', 'React', 'Next.js']
+    items: ['React', 'Next.js']
   },
   {
-    category: 'Tools',
-    items: ['Visual Studio Code', 'Git']
+    category: 'Infrastructure',
+    items: ['Docker', 'Kubernetes', 'AWS', 'Nginx', 'NVIDIA Omniverse']
+  },
+  {
+    category: 'Monitoring',
+    items: ['Prometheus', 'Grafana']
   }
 ];
 
@@ -100,46 +106,41 @@ const About = async () => {
       {/* Hero Section */}
       <section className={styles['hero-section']}>
         <div className={styles['hero-section__card']}>
-          <div className={styles['hero-section__text-content']}>
-            <p className={styles['hero-section__intro']}>{t('heroIntro')}</p>
-            <h1 className={styles['hero-section__title']}>
-              {t.rich('heroTitleLineA', { brand: (chunks) => <strong>{chunks}</strong> })}
-              <br />
-              {t('heroTitleLineB')}
-            </h1>
-
-            <div className={styles['hero-section__email']}>
-              <div>
-                <MdOutlineMail size={24} />
-                <a href="mailto:pmini1203@gmail.com">pmini1203@gmail.com</a>
-              </div>
-
-              <div>
-                <FaGithub size={24} />
-                <a href='https://github.com/BlueCool12' target='_blank' rel='noopener noreferrer'>
-                  github.com/BlueCool12
-                </a>
-              </div>
-
-              <div style={{ display: 'flex', alignItems: 'center' }}>
-                <SiNotion size={24} />
-                <a href='https://www.notion.so/Backend-Developer-2e9381b7d1078089959de45d0f34014d?source=copy_link' target='_blank' rel='noopener noreferrer'>
-                  portfolio
-                </a>
-              </div>
-            </div>
-
-          </div>
-
           <div className={styles['hero-section__mascot-wrapper']}>
             <Image
-              src='/images/about.webp'
-              alt={t('mascotAlt')}
+              src='/images/profile.png'
+              alt={t('profileAlt')}
               width={160}
               height={160}
               className={styles['hero-section__mascot']}
               priority
             />
+          </div>
+
+          <div className={styles['hero-section__text-content']}>
+            <p className={styles['hero-section__intro']}>
+              <Image src='/images/emoji/wave.png' alt='' width={24} height={24} className={styles['title-emoji']} />
+              {t('heroIntro')}
+            </p>
+            <h1 className={styles['hero-section__title']}>{t('heroTitle')}</h1>
+
+            <div className={styles['hero-section__email']}>
+              <a href="mailto:pmini1203@gmail.com" aria-label="Email">
+                <MdOutlineMail size={20} />
+              </a>
+
+              <a href='https://github.com/BlueCool12' target='_blank' rel='noopener noreferrer' aria-label="GitHub">
+                <FaGithub size={20} />
+              </a>
+
+              <a href='https://www.linkedin.com/in/bluecool/' target='_blank' rel='noopener noreferrer' aria-label="LinkedIn">
+                <FaLinkedin size={20} />
+              </a>
+
+              <a href='https://www.notion.so/Backend-Developer-2e9381b7d1078089959de45d0f34014d?source=copy_link' target='_blank' rel='noopener noreferrer' aria-label="Notion">
+                <SiNotion size={20} />
+              </a>
+            </div>
           </div>
         </div>
       </section>

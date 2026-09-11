@@ -16,8 +16,8 @@ export function MobileMenu() {
     const { resolvedTheme } = useTheme();
 
     const src = resolvedTheme === 'light'
-        ? '/images/logo/mobile_logo.webp'
-        : '/images/logo/mobile_logo_dark.webp';
+        ? '/images/logo/logo.webp'
+        : '/images/logo/logo_dark.webp';
 
     useEffect(() => {
         const mq = window.matchMedia('(min-width: 768px)');
@@ -47,8 +47,8 @@ export function MobileMenu() {
                             <Image
                                 src={src}
                                 alt={t('mobileLogoAlt')}
-                                width={31}
-                                height={36}
+                                width={40}
+                                height={40}
                                 priority
                             />
                         </Link>
