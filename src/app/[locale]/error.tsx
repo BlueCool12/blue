@@ -2,7 +2,6 @@
 
 import styled from "styled-components";
 
-import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 
@@ -26,13 +25,6 @@ export default function Error({
         <ErrorWrapper>
 
             <TitleSection>
-                <Image
-                    src="/images/error.webp"
-                    alt={t('imageAlt')}
-                    width={256}
-                    height={278}
-                    priority
-                />
                 <Title>{t('defaultMessage')}</Title>
                 {isDev && error?.message && (
                     <DevDetail>{error.message}</DevDetail>

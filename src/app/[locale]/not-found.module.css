@@ -37,21 +37,6 @@
     }
 }
 
-.notfound__image-wrapper {
-    width: 18rem;
-}
-
-@media (max-width: 768px) {
-    .notfound__image-wrapper {
-        width: 15rem;
-    }
-}
-
-.notfound__image {
-    width: 100%;
-    height: auto;
-}
-
 .notfound__description {
     font-size: 1.5rem;
     font-weight: 500;

@@ -2,7 +2,6 @@
 
 import styles from './not-found.module.css';
 
-import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 
@@ -19,15 +18,6 @@ export default function NotFound() {
 
             <section className={styles['notfound__title-section']}>
                 <h1 className={styles['notfound__title']}>404</h1>
-                <div className={styles['notfound__image-wrapper']}>
-                    <Image
-                        src='/images/not_found.webp'
-                        alt={t('imageAlt')}
-                        width={300}
-                        height={300}
-                        className={styles['notfound__image']}
-                    />
-                </div>
             </section>
 
             <p className={styles['notfound__description']}>{t('description')}</p>
