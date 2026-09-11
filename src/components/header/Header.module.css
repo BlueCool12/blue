@@ -2,28 +2,62 @@
   position: fixed;
   top: 0;
   width: 100%;
-  height: 80px;
+  height: var(--header-height-desktop);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   background: var(--header-bg);
   border-bottom: 1px solid var(--border-color);
   z-index: 9999;
 }
 
 .header__inner {
+  width: 100%;
   max-width: 1440px;
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 40px;
+  padding: var(--space-2) var(--space-10);
 }
 
 @media (max-width: 768px) {
   .header {
-    height: 64px;
+    height: var(--header-height-mobile);
   }
 
   .header__inner {
-    padding: 12px 24px;
+    padding: var(--space-1) var(--space-6);
+  }
+}
+
+.header__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.header__logo-text {
+  display: flex;
+  flex-direction: column;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-extrabold);
+  letter-spacing: 0.02em;
+  line-height: 1.15;
+  color: var(--header-text-color);
+}
+
+.header__logo-text-line:first-child {
+  transform: translateX(-8px);
+}
+
+.header__logo-text-line:last-child {
+  transform: translateX(8px);
+}
+
+@media (max-width: 768px) {
+  .header__logo-text {
+    font-size: 0.72rem;
   }
 }
 
@@ -41,7 +75,7 @@
 }
 
 .desktop-nav__item {
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
   color: var(--header-text-color);
   transition: color 0.2s;
 }
@@ -52,7 +86,7 @@
 
 .desktop-nav__item--active {
   color: var(--theme-color-9) !important;
-  font-weight: 800;
+  font-weight: var(--font-weight-extrabold);
 }
 
 @media (max-width: 768px) {
@@ -134,7 +168,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 32px 24px;
+  padding: var(--space-8) var(--space-6);
   background: var(--mobile-menu-bg);
   color: var(--mobile-menu-text-color);
 }
@@ -158,16 +192,16 @@
 
 .mobile-menu__nav {
   list-style: none;
-  padding: 4rem 0;
+  padding: var(--space-16) 0;
   text-align: center;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: var(--space-8);
 }
 
 .mobile-menu__nav li {
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
 }
 
 /* MOBILE 네비바 */
@@ -198,7 +232,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: var(--space-3);
 }
 
 .music-player__popover-image {
@@ -206,8 +240,8 @@
 }
 
 .music-player__title {
-  font-size: 1.1rem;
-  font-weight: 600;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
   color: var(--header-text-color);
   white-space: nowrap;
   overflow: hidden;
@@ -218,14 +252,14 @@
   width: 100%;
   height: 1px;
   background-color: var(--border-color);
-  margin: 4px 0;
+  margin: var(--space-1) 0;
 }
 
 .music-player__controls {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: var(--space-3);
   width: 100%;
 }
 
@@ -251,7 +285,7 @@
 
 .music-player__volume-wrapper {
   width: 100%;
-  padding: 4px 0 8px;
+  padding: var(--space-1) 0 var(--space-2);
   display: flex;
   align-items: center;
 }

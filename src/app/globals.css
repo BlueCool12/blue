@@ -36,10 +36,38 @@
   --theme-color-8: #328AA3;
   --theme-color-9: #145B6F;
 
-  --header-height-desktop: 80px;
-  --header-height-mobile: 64px;
+  --header-height-desktop: 68px;
+  --header-height-mobile: 56px;
   --footer-height-desktop: 24px;
   --footer-height-mobile: 16px;
+
+  /* 스페이싱 스케일 (4px 기준) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  /* 타이포그래피 스케일 */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.85rem;
+  --font-size-base: 1rem;
+  --font-size-md: 1.1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.5rem;
+  --font-size-2xl: 2rem;
+  --font-size-3xl: 2.5rem;
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
 }
 
 /* 다크 모드 */
