@@ -62,7 +62,7 @@ export const FeedbackModal = ({ onClose }: FeedbackModalProps) => {
 
   return (
     <Overlay onClick={onClose}>
-      <EditorBox onClick={e => {
+      <EditorBox onClick={(e: React.MouseEvent) => {
         e.stopPropagation();
         if (isDropdownOpen) setIsDropdownOpen(false);
       }}>
@@ -72,7 +72,7 @@ export const FeedbackModal = ({ onClose }: FeedbackModalProps) => {
 
         <Form onSubmit={handleSubmit}>
           <FormGroup>
-            <SelectContainer onClick={(e) => {
+            <SelectContainer onClick={(e: React.MouseEvent) => {
               e.stopPropagation();
               setIsDropdownOpen(!isDropdownOpen);
             }}>
@@ -103,7 +103,7 @@ export const FeedbackModal = ({ onClose }: FeedbackModalProps) => {
             <TextArea
               placeholder={t('contentPlaceholder')}
               value={content}
-              onChange={(e) => setContent(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setContent(e.target.value)}
             />
           </ContentWrapper>
 

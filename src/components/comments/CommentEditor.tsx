@@ -77,7 +77,7 @@ export const CommentEditor: React.FC<Props> = ({ postId }) => {
 
       {open && (
         <Overlay onClick={() => setOpen(false)}>
-          <EditorBox onClick={e => e.stopPropagation()}>
+          <EditorBox onClick={(e: React.MouseEvent) => e.stopPropagation()}>
             <Header>
               <Title>{t('writeTitle')}</Title>
             </Header>
