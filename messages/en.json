@@ -142,24 +142,22 @@
   },
   "GuestbookPage": {
     "metaTitle": "Guestbook",
-    "metaDescription": "Guestbook page of the BlueCool blog.",
-    "imageAlt": "Guestbook image",
-    "writeButton": "✍️ Leave a message"
+    "metaDescription": "Guestbook page of the BlueCool blog."
   },
   "AboutPage": {
     "metaTitle": "About",
     "metaDescription": "Introducing BlueCool12's career.",
-    "mascotAlt": "BlueCool12 mascot image",
-    "heroIntro": "Hello 👋",
-    "heroTitleLineA": "I'm <brand>BLUECOOL</brand>, a backend developer",
-    "heroTitleLineB": "Striving for continuous improvement and growth",
+    "profileAlt": "BLUECOOL profile photo",
+    "heroIntro": "Hello!",
+    "heroTitle": "Software Developer @BLUECOOL",
     "serviceVisitAria": "Visit {title}",
     "teamProjectLabel": "Team project"
   },
   "HomePage": {
-    "heroImageAlt": "Main page image",
     "heroVisitorText": "Hello, blog visitors",
-    "heroAboutToggleAria": "Toggle About Me",
+    "heroGithubAria": "GitHub",
+    "heroLinkedinAria": "LinkedIn",
+    "heroNotionAria": "Notion",
     "greetings": [
       "Welcome :D",
       "Nice to see you XD",
@@ -172,13 +170,13 @@
       "I appreciate you ^_^"
     ],
     "dailyPickSubtitle": "Three fresh topics every day",
-    "latestPostsTitle": "Latest posts 🌟",
+    "latestPostsTitle": "Latest posts",
     "latestPostsSubtitle": "Check out the newest posts!",
     "latestPostsAllAria": "See all posts",
-    "retrospectiveTitle": "Retrospective 📝",
+    "retrospectiveTitle": "Retrospective",
     "retrospectiveSubtitle": "Looking back to grow forward",
     "retrospectiveMoreAria": "See more retrospective posts",
-    "troubleshootingTitle": "Troubleshooting 🛠️",
+    "troubleshootingTitle": "Troubleshooting",
     "troubleshootingSubtitle": "Sharing real-world service issues I've faced and the experience gained from solving them",
     "troubleshootingMoreAria": "See more troubleshooting posts",
     "thumbnailAlt": "{title} thumbnail"
