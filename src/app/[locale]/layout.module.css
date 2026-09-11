@@ -1,14 +1,14 @@
 .content {
     flex: 1 0 auto;
     width: 100%;
-    max-width: 800px;    
+    max-width: 720px;
     margin: 0 auto;
-    padding: 80px 16px 0;
+    padding: var(--header-height-desktop) 16px 0;
 }
 
 @media (max-width: 768px) {
     .content {
-        max-width: 100%;                
-        padding-top: 64px;        
+        max-width: 100%;
+        padding-top: var(--header-height-mobile);
     }
 }
