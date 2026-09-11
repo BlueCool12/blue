@@ -6,14 +6,16 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: var(--header-bg);
+  background: var(--header-bg-translucent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border-color);
   z-index: 9999;
 }
 
 .header__inner {
   width: 100%;
-  max-width: 1440px;
+  max-width: 880px;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -68,20 +70,37 @@
 
 .desktop-nav__list {
   display: flex;
-  gap: 50px;
+  gap: var(--space-8);
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
 .desktop-nav__item {
+  position: relative;
   font-weight: var(--font-weight-semibold);
   color: var(--header-text-color);
   transition: color 0.2s;
 }
 
+.desktop-nav__item::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 2px;
+  background-color: var(--link-hover-color);
+  transform: scaleX(0);
+  transition: transform 0.25s ease;
+}
+
 .desktop-nav__item:hover {
   color: var(--link-hover-color);
+}
+
+.desktop-nav__item:hover::after {
+  transform: scaleX(1);
 }
 
 .desktop-nav__item--active {
