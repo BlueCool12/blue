@@ -2,8 +2,6 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useTheme } from 'next-themes';
-import { useTranslations } from 'next-intl';
-import Image from 'next/image';
 
 import styles from './Guestbook.module.css';
 
@@ -11,15 +9,10 @@ import { LoadingSpinner } from '@/components/common/LoadingSpinner';
 
 export default function GuestbookPage() {
 
-    const t = useTranslations('GuestbookPage');
     const ref = useRef<HTMLDivElement>(null);
     const { theme } = useTheme();
     const [mounted, setMounted] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
-
-    const scrollToComments = () => {
-        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-    };
 
     useEffect(() => {
         setMounted(true);
@@ -56,17 +49,7 @@ export default function GuestbookPage() {
     }, [theme, mounted]);
 
     return (
-        <div className={styles.container}>            
-            <Image
-                alt={t('imageAlt')}
-                src='/images/guestbooks.webp'
-                width={200}
-                height={200}
-                className={styles.image}
-                priority
-            />
-            <button className={styles.button} onClick={scrollToComments}>{t('writeButton')}</button>
-
+        <div className={styles.container}>
             {isLoading && (
                 <LoadingSpinner />
             )}
