@@ -5,6 +5,8 @@ import { getTranslations } from 'next-intl/server';
 import styles from '@/app/[locale]/page.module.css';
 
 import { MdOutlineChevronRight } from 'react-icons/md';
+import { FaLinkedin } from 'react-icons/fa';
+import { SiNotion } from 'react-icons/si';
 import HeroClient from '@/components/HeroClient';
 import HorizontalScrollSection from '@/components/common/HorizontalScrollSection';
 
@@ -50,19 +52,52 @@ export default async function Home() {
     <div className={styles.container}>
       {/* Hero Section */}
       <section className={styles.hero}>
-
         <div className={styles.hero__text}>
           <HeroClient />
-        </div>
 
-        <div className={styles.hero__image}>
-          <Image
-            src='/images/main.webp'
-            alt={t('heroImageAlt')}
-            priority
-            width={280}
-            height={280}
-          />
+          <div className={styles['hero__socials']}>
+            <a
+              className={styles['hero__social-link']}
+              href="https://github.com/BlueCool12"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={t('heroGithubAria')}
+            >
+              <svg
+                className={styles['hero__social-icon']}
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 98 96"
+                role="img"
+                aria-hidden="true"
+              >
+                <path
+                  fillRule="evenodd"
+                  clipRule="evenodd"
+                  d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z"
+                />
+              </svg>
+            </a>
+
+            <a
+              className={styles['hero__social-link']}
+              href="https://www.linkedin.com/in/bluecool/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={t('heroLinkedinAria')}
+            >
+              <FaLinkedin size={22} />
+            </a>
+
+            <a
+              className={styles['hero__social-link']}
+              href="https://www.notion.so/Backend-Developer-2e9381b7d1078089959de45d0f34014d?source=copy_link"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={t('heroNotionAria')}
+            >
+              <SiNotion size={20} />
+            </a>
+          </div>
         </div>
       </section>
       {/* Hero Section */}
@@ -72,7 +107,10 @@ export default async function Home() {
         <div className={styles['category-preview__heading']}>
           <div className={styles['category-preview__title-line']}>
             <hr />
-            <h2 className={styles['category-preview__title']}>Daily Pick 👀</h2>
+            <h2 className={styles['category-preview__title']}>
+              Daily Pick
+              <Image src='/images/emoji/eyes.png' alt='' width={24} height={24} className={styles['title-emoji']} />
+            </h2>
             <hr />
           </div>
 
@@ -92,8 +130,8 @@ export default async function Home() {
                   src={`/images/categories/svgrepo_${encodeURIComponent(category.slug)}.svg`}
                   className={styles['category-preview__image']}
                   alt={category.name}
-                  width={100}
-                  height={100}
+                  width={80}
+                  height={80}
                 />
                 <span className={styles['category-preview__alt']}>{category.name}</span>
               </Link>
@@ -112,6 +150,7 @@ export default async function Home() {
               className={styles['recent-posts__title']}
             >
               {t('latestPostsTitle')}
+              <Image src='/images/emoji/star.png' alt='' width={24} height={24} className={styles['title-emoji']} />
             </Link>
             <p className={styles['recent-posts__subtitle']}>
               {t('latestPostsSubtitle')}
@@ -149,7 +188,10 @@ export default async function Home() {
       <section className={styles['recent-posts']}>
         <div className={styles['recent-posts__header']}>
           <div className={styles['recent-posts__heading']}>
-            <Link href='/posts/category/retrospective' className={styles['recent-posts__title']}>{t('retrospectiveTitle')}</Link>
+            <Link href='/posts/category/retrospective' className={styles['recent-posts__title']}>
+              {t('retrospectiveTitle')}
+              <Image src='/images/emoji/memo.png' alt='' width={24} height={24} className={styles['title-emoji']} />
+            </Link>
             <p className={styles['recent-posts__subtitle']}>{t('retrospectiveSubtitle')}</p>
           </div>
 
@@ -191,7 +233,10 @@ export default async function Home() {
       <section className={styles['recent-posts']}>
         <div className={styles['recent-posts__header']}>
           <div className={styles['recent-posts__heading']}>
-            <Link href='/posts/category/troubleshooting' className={styles['recent-posts__title']}>{t('troubleshootingTitle')}</Link>
+            <Link href='/posts/category/troubleshooting' className={styles['recent-posts__title']}>
+              {t('troubleshootingTitle')}
+              <Image src='/images/emoji/tools.png' alt='' width={24} height={24} className={styles['title-emoji']} />
+            </Link>
             <p className={styles['recent-posts__subtitle']}>{t('troubleshootingSubtitle')}</p>
           </div>
 
