@@ -127,10 +127,10 @@ export function MusicPlayer() {
         <div className={styles['music-player__popover']}>
           <div className={styles['music-player__popover-content']}>
             <Image
-              src="/images/music.webp"
+              src="/images/logo/logo.webp"
               alt={t('nowPlayingAlt')}
-              width={140}
-              height={140}
+              width={80}
+              height={80}
               className={styles['music-player__popover-image']}
             />
 
