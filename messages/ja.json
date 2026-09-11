@@ -32,13 +32,11 @@
     "volume": "音量"
   },
   "ErrorPage": {
-    "imageAlt": "エラー画像",
     "defaultMessage": "予期しないエラーが発生しました。",
     "homeButton": "ホーム",
     "retryButton": "再試行"
   },
   "NotFoundPage": {
-    "imageAlt": "404ページのイラスト",
     "description": "ページが見つかりません",
     "homeButton": "ホーム",
     "backButton": "前のページ"
@@ -67,7 +65,6 @@
     "nextPageLink": "次のページ",
     "searchMetaTitle": "検索",
     "searchResultsMetaTitle": "「{keyword}」の検索結果",
-    "searchImageAlt": "検索イラスト",
     "searchHint": "キーワードを入力してください。",
     "searchEmptyMessage": "「{keyword}」に該当する結果はありません。",
     "previewCategoryPlaceholder": "プレビューカテゴリー"
