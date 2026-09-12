@@ -127,6 +127,9 @@
     "toastSuccess": "Thank you for your feedback!",
     "toastError": "A temporary error occurred. Please try again later."
   },
+  "Common": {
+    "scrollToTop": "Scroll to top"
+  },
   "Footer": {
     "rssAriaLabel": "Subscribe to RSS feed"
   },

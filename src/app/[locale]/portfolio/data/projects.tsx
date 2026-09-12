@@ -24,7 +24,7 @@ export interface Project {
     lastModified: string;
     link?: string;
     pdf?: string;
-    stack: { name: string; color: string }[];
+    stack: { name: string }[];
 }
 
 export const projects: Project[] = [
@@ -47,17 +47,17 @@ export const projects: Project[] = [
         lastModified: '2025-06-30T00:00:00.000Z',
         link: 'https://www.baroyeon.net/',
         stack: [
-            { name: 'JavaScript', color: '#f7df1e' },
-            { name: 'Node.js', color: '#339933' },
-            { name: 'Express.js', color: '#000000' },
-            { name: 'MS SQL', color: '#CC2927' },
-            { name: 'React', color: '#61DAFB' },
-            { name: 'CSS', color: '#663399' },
+            { name: 'JavaScript' },
+            { name: 'Node.js' },
+            { name: 'Express.js' },
+            { name: 'MS SQL' },
+            { name: 'React' },
+            { name: 'CSS' },
         ]
     },
     {
         slug: 'bluecool',
-        title: 'BlueCool',
+        title: 'BLUECOOL',
         subtitle: '개인 블로그 및 CMS 프로젝트',
         description: (
             <ul>
@@ -77,27 +77,26 @@ export const projects: Project[] = [
         images: [bluecoolImage1, bluecoolImage2, bluecoolImage3, bluecoolImage4, bluecoolImage5, bluecoolImage6],
         members: '1명',
         period: '2025.06 ~ 2025.08 (3개월)',
-        lastModified: '2026-04-12T15:41:00.000Z',
-        link: 'https://pyomin.com',
+        lastModified: '2026-04-12T15:41:00.000Z',        
         pdf: 'https://pyomin.com/pdfs/bluecool.pdf',
         stack: [
-            { name: 'Java', color: '#f89820' },
-            { name: 'TypeScript', color: '#3178c6' },
-            { name: 'Python', color: '#3776ab' },
-            { name: 'Spring Boot', color: '#6db33f' },
-            { name: 'NestJS', color: '#ea2845' },
-            { name: 'FastAPI', color: '#05998b' },
-            { name: 'JPA', color: '#59666c' },
-            { name: 'TypeORM', color: '#e535ab' },
-            { name: 'SQLAlchemy', color: '#d71f00' },
-            { name: 'LangChain', color: '#1c3c3c' },
-            { name: 'Postgresql', color: '#4169E1' },
-            { name: 'Redis', color: '#D82C20' },
-            { name: 'RabbitMQ', color: '#FF6600' },
-            { name: 'Qdrant', color: '#ff4d4d' },
-            { name: 'Next.js', color: '#000000' },
-            { name: 'React', color: '#61dafb' },
-            { name: 'MUI', color: '#007fff' },
+            { name: 'Java' },
+            { name: 'TypeScript' },
+            { name: 'Python' },
+            { name: 'Spring Boot' },
+            { name: 'NestJS' },
+            { name: 'FastAPI' },
+            { name: 'JPA' },
+            { name: 'TypeORM' },
+            { name: 'SQLAlchemy' },
+            { name: 'LangChain' },
+            { name: 'Postgresql' },
+            { name: 'Redis' },
+            { name: 'RabbitMQ' },
+            { name: 'Qdrant' },
+            { name: 'Next.js' },
+            { name: 'React' },
+            { name: 'MUI' },
         ]
     },
     {
@@ -115,17 +114,16 @@ export const projects: Project[] = [
         images: [tourstoryImage],
         members: '6명',
         period: '2024.07 ~ 2024.08 (2개월)',
-        lastModified: '2024-08-31T00:00:00.000Z',
-        link: 'https://tourstory.pyomin.com',
+        lastModified: '2024-08-31T00:00:00.000Z',        
         pdf: 'https://pyomin.com/pdfs/tourstory.pdf',
         stack: [
-            { name: 'Java', color: '#f89820' },
-            { name: 'Spring Boot', color: '#6db33f' },
-            { name: 'MyBatis', color: '#c70d2c' },
-            { name: 'MariaDB', color: '#003545' },
-            { name: 'JavaScript', color: '#f7df1e' },
-            { name: 'Thymeleaf', color: '#005F0F' },
-            { name: 'BootStrap', color: '#7952B3' },
+            { name: 'Java' },
+            { name: 'Spring Boot' },
+            { name: 'MyBatis' },
+            { name: 'MariaDB' },
+            { name: 'JavaScript' },
+            { name: 'Thymeleaf' },
+            { name: 'BootStrap' },
         ]
     }
 ];

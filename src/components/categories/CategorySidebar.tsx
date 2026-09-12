@@ -5,7 +5,6 @@ import { usePathname } from "@/i18n/navigation";
 import { useState, useEffect } from 'react';
 
 import styles from '@/components/categories/CategorySidebar.module.css';
-import { MdOutlineNumbers } from 'react-icons/md';
 
 import { Category } from '@/types/category';
 
@@ -39,7 +38,7 @@ export const CategorySidebar = ({ categories }: Props) => {
         <h3
           className={`${styles.title} ${currentSlug === null ? styles.active : ''}`}
         >
-          <Link href="/posts">ALL</Link>
+          <Link href="/posts"><span className={styles.label}>ALL</span></Link>
         </h3>
 
         <ul className={styles.list}>
@@ -56,7 +55,7 @@ export const CategorySidebar = ({ categories }: Props) => {
                     setOpenSlug(isOpen ? null : parent.slug);
                   }}
                 >
-                  {parent.name}
+                  <span className={styles.label}>{parent.name}</span>
                 </button>
 
                 {children.length > 0 && (
@@ -68,7 +67,7 @@ export const CategorySidebar = ({ categories }: Props) => {
                             className={`${styles.subLink} ${currentSlug === child.slug ? styles.active : ''}`}
                             href={`/posts/category/${child.slug}`}
                           >
-                            <MdOutlineNumbers />{child.name} <span className={styles.count}>({child.postCount})</span>
+                            <span className={styles.label}>{child.name}</span> <span className={styles.count}>({child.postCount})</span>
                           </Link>
                         </li>
                       ))}

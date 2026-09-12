@@ -5,12 +5,6 @@
   padding: 1.3rem 0 5rem;
 }
 
-@media(max-width: 768px) {
-  .container {
-    gap: var(--space-4);
-  }
-}
-
 .hero {
   display: flex;
   align-items: center;

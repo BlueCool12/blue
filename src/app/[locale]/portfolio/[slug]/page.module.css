@@ -266,18 +266,23 @@
 }
 
 .premium-tag {
+    display: flex;
+    align-items: center;
     font-size: 0.8rem;
-    font-weight: 800;
-    padding: 6px 14px;
+    font-weight: var(--font-weight-bold);
+    padding: 6px var(--space-4);
     letter-spacing: 0.05em;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background-color: var(--theme-color-1);
+    color: var(--theme-color-9);
+    border-radius: 8px;
+    border: 1px solid transparent;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .premium-tag:hover {
+    background-color: var(--theme-color-2);
     transform: translateY(-3px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    filter: brightness(1.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
 }
 
 /* Action Buttons */
@@ -305,9 +310,17 @@
     color: white;
 }
 
+.link-button--primary:hover {
+    color: white;
+}
+
 .link-button--secondary {
-    background-color: var(--card-bg);
-    color: var(--card-text);
+    background-color: var(--theme-color-1);
+    color: var(--theme-color-9);
+}
+
+.link-button--secondary:hover {
+    color: var(--theme-color-9);
 }
 
 .link-button:hover {

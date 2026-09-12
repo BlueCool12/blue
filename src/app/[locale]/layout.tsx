@@ -17,6 +17,7 @@ import { Suspense } from 'react';
 import { LoadingSpinner } from '@/components/common/LoadingSpinner';
 import { Footer } from '@/components/footer';
 import { FloatingFeedbackButton } from '@/components/common/FloatingFeedbackButton';
+import { ScrollToTopButton } from '@/components/common/ScrollToTopButton';
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -161,6 +162,7 @@ export default async function RootLayout({
             <Header />
             <PageViewLogger />
             <FloatingFeedbackButton />
+            <ScrollToTopButton />
             <main className={styles.content}>
               <Suspense fallback={<LoadingSpinner />}>
                 {children}

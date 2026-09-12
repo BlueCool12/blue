@@ -127,6 +127,9 @@
     "toastSuccess": "貴重なご意見ありがとうございます！",
     "toastError": "一時的なエラーが発生しました。しばらくしてから再度お試しください。"
   },
+  "Common": {
+    "scrollToTop": "トップへ戻る"
+  },
   "Footer": {
     "rssAriaLabel": "RSSフィードを購読"
   },

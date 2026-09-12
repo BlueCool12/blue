@@ -9,7 +9,7 @@ interface ProjectCardProps {
     title: string;
     subtitle: string;
     image: StaticImageData;
-    stack: { name: string; color: string }[];
+    stack: { name: string }[];
 }
 
 export default function ProjectCard({ slug, title, subtitle, image, stack }: ProjectCardProps) {

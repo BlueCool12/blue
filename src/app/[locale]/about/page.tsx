@@ -42,7 +42,7 @@ const activities = [
     date: '2024.03 ~ 2024.08',
     title: '중앙정보처리학원',
     subtitle: '자바(JAVA) 풀스택 개발자 취업캠프',
-    link: 'https://tourstory.pyomin.com',
+    link: 'https://pyomin.com/pdfs/tourstory.pdf',
     descriptions: [
       'Spring Boot 기반 풀스택 역량',
       '프로젝트 아키텍처 설계 주도 경험',

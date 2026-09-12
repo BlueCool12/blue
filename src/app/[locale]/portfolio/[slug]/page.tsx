@@ -92,7 +92,6 @@ export default async function ProjectDetailPage({ params }: Props) {
                                 <span
                                     key={item.name}
                                     className={styles['premium-tag']}
-                                    style={{ backgroundColor: item.color, color: 'white' }}
                                 >
                                     {item.name}
                                 </span>

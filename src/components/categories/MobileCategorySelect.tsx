@@ -3,6 +3,7 @@
 import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
+import { useState, useEffect, useRef } from "react";
 
 import styles from '@/components/categories/MobileCategorySelect.module.css';
 import { MdOutlineArrowDropDown } from "react-icons/md";
@@ -19,6 +20,31 @@ export default function MobileCategorySelect({ categories }: Props) {
   const router = useRouter();
   const params = useParams();
 
+  const [visible, setVisible] = useState(true);
+  const lastScrollY = useRef(0);
+
+  useEffect(() => {
+    lastScrollY.current = window.scrollY;
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      const delta = currentScrollY - lastScrollY.current;
+
+      if (currentScrollY < 240) {
+        setVisible(true);
+      } else if (delta > 4) {
+        setVisible(false);
+      } else if (delta < -4) {
+        setVisible(true);
+      }
+
+      lastScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const current = typeof params?.category === 'string'
     ? decodeURIComponent(params.category)
     : '';
@@ -30,7 +56,7 @@ export default function MobileCategorySelect({ categories }: Props) {
 
   return (
     <>
-      <div className={`${styles.wrapper}`}>
+      <div className={`${styles.wrapper} ${visible ? '' : styles.hidden}`}>
         <select
           className={styles.select}
           value={current}
