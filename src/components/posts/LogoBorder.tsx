@@ -9,11 +9,11 @@ export const LogoBorder = async () => {
             <Image
                 src='/images/border.webp'
                 alt={t('decorativeLogo')}
-                width={50}
-                height={50}
+                width={70}
+                height={70}
                 style={{
                     position: 'absolute',
-                    bottom: '-0.5rem',
+                    bottom: '-0.3rem',
                     left: '1rem',
                 }}
             />
