@@ -53,14 +53,14 @@ const ProgressBar = styled.div.attrs<{ width: number }>(props => ({
     },
 }))`
     position: fixed;
-    top: 79px;
-    left: 0;    
+    top: var(--header-height-desktop);
+    left: 0;
     height: 4px;
     background-color: var(--theme-color-9);
     z-index: 1000;
     transition: width 0.2s linear;
 
     @media (max-width:768px) {
-        top: 63px;
+        top: var(--header-height-mobile);
     }
 `;
