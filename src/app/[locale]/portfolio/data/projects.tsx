@@ -2,6 +2,9 @@ import React, { ReactNode } from 'react';
 import { StaticImageData } from 'next/image';
 
 // Images
+import e4comImage1 from '@/assets/images/projects/e4com1.webp';
+import e4comImage2 from '@/assets/images/projects/e4com2.webp';
+import e4comImage3 from '@/assets/images/projects/e4com3.webp';
 import baroyeonImage from '@/assets/images/projects/baroyeon.webp';
 import baroyeonImage2 from '@/assets/images/projects/baroyeon2.webp';
 import baroyeonImage3 from '@/assets/images/projects/baroyeon3.webp';
@@ -29,6 +32,33 @@ export interface Project {
 
 export const projects: Project[] = [
     {
+        slug: 'e4com',
+        title: '이포컴',
+        subtitle: '이포컴 웹사이트 외주 개발',
+        description: (
+            <ul>
+                <li>클라이언트 요구사항을 바탕으로 <strong>회사 소개 웹사이트</strong>를 외주 개발하였습니다.</li>
+                <li><strong>Next.js</strong> 정적 빌드 결과물을 <strong>S3</strong>와 <strong>CloudFront</strong>로 배포하였습니다.</li>
+                <li>별도 서버 없이 <strong>AWS Lambda</strong>로 API를 구성하여 서버리스 구조로 운영하였습니다.</li>
+                <li>팝업을 등록, 수정, 삭제하고 노출 여부를 제어할 수 있는 <strong>팝업 관리 기능</strong>을 구현하였습니다.</li>
+                <li>고객 문의 접수 시 <strong>AWS SES</strong>를 통해 담당자에게 메일이 발송되도록 구현하였습니다.</li>                
+            </ul>
+        ),
+        images: [e4comImage1, e4comImage2, e4comImage3],
+        members: '3명',
+        period: '2026.08 ~ 2026.09 (1개월)',
+        lastModified: '2026-09-27T00:00:00.000Z',
+        link: 'https://www.e4com.com/',
+        stack: [
+            { name: 'TypeScript' },
+            { name: 'Next.js' },            
+            { name: 'AWS S3' },
+            { name: 'AWS CloudFront' },
+            { name: 'AWS Lambda' },
+            { name: 'AWS SES' },
+        ]
+    },
+    {
         slug: 'baroyeon',
         title: 'Baroyeon',
         subtitle: '바로연 웹사이트 리뉴얼',
@@ -47,8 +77,7 @@ export const projects: Project[] = [
         lastModified: '2025-06-30T00:00:00.000Z',
         link: 'https://www.baroyeon.net/',
         stack: [
-            { name: 'JavaScript' },
-            { name: 'Node.js' },
+            { name: 'JavaScript' },            
             { name: 'Express.js' },
             { name: 'MS SQL' },
             { name: 'React' },
